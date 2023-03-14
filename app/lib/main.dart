@@ -1,6 +1,7 @@
+import 'package:book_reviews/my_app.dart';
 import 'package:flutter/material.dart';
-import 'package:core/app_core.dart';
 
-void main() {
-  runApp(AppCore.buildApplication());
+void main() async{
+  await MyApp.initConfig();
+  runApp(const MyApp());
 }
