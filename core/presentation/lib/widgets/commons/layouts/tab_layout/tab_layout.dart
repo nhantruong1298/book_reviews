@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:presentation/resources/app_colors.dart';
-import 'package:presentation/widgets/layouts/tab_layout/fab_bottom_app_bar.dart';
+import 'package:presentation/widgets/commons/layouts/tab_layout/fab_bottom_app_bar.dart';
 
 class TabLayout extends StatefulWidget {
   final ValueChanged<int>? onDoubleTap;

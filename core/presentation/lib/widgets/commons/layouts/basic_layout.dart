@@ -92,6 +92,7 @@ class BasicLayout extends StatelessWidget {
               systemOverlayStyle: darkMode
                   ? SystemUiOverlayStyle.light
                   : SystemUiOverlayStyle.dark,
+              elevation: 0,
             ),
         body: Container(
           color: appBackgroundColor,

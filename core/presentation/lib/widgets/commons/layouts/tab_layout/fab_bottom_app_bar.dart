@@ -4,7 +4,7 @@ import 'package:presentation/resources/app_colors.dart';
 import 'package:presentation/resources/app_dimensions.dart';
 import 'package:presentation/widgets/commons/typography/body_text.dart';
 
-import '../../Spacing.dart';
+import '../../../Spacing.dart';
 
 class FABBottomAppBarItem {
   FABBottomAppBarItem({

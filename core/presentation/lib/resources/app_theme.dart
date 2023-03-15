@@ -37,7 +37,9 @@ class AppThemeStyle {
         suffixIcon: suffixIcon,
         hintText: hintText,
         label: label,
-        hintStyle: hintStyle);
+        hintStyle: hintStyle,
+        border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(AppDimensions.defaultRadius)));
   }
 
   static InputDecoration get searchHeaderDecoration {
@@ -187,9 +189,9 @@ class AppThemeStyle {
       color: AppColors.primaryLightColor,
       elevation: 0,
       // systemOverlayStyle: SystemUiOverlayStyle.light,
-      iconTheme:  IconThemeData(color: AppColors.primaryDarkColor),
+      iconTheme: IconThemeData(color: AppColors.primaryDarkColor),
       titleTextStyle:
-           TextStyle(color: AppColors.primaryLightColor, fontSize: 18),
+          TextStyle(color: AppColors.primaryLightColor, fontSize: 18),
     );
   }
 
