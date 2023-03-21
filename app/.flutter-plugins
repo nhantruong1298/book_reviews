@@ -2,3 +2,5 @@
 core=/Users/nhantruong/book_reviews/core/
 data=/Users/nhantruong/book_reviews/core/data/
 domain=/Users/nhantruong/book_reviews/core/domain/
+firebase_core=/Users/nhantruong/.pub-cache/hosted/pub.dev/firebase_core-2.8.0/
+firebase_core_web=/Users/nhantruong/.pub-cache/hosted/pub.dev/firebase_core_web-2.2.2/
