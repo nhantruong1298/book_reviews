@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:presentation/resources/app_theme.dart';
 
 class PasswordInput extends StatefulWidget {
   final bool readOnly;
@@ -72,8 +73,9 @@ class _PasswordInputState extends State<PasswordInput> {
     final Widget assetIcon = isPasswordVisible
         ? const Icon(Icons.visibility_off)
         : const Icon(Icons.visibility);
-    final effectiveDecoration = const InputDecoration()
-        .applyDefaults(Theme.of(context).inputDecorationTheme);
+    final effectiveDecoration = AppThemeStyle.inputDecoration();
+    // const InputDecoration()
+    //     .applyDefaults(Theme.of(context).inputDecorationTheme);
 
     return TextField(
         readOnly: widget.readOnly,
@@ -105,3 +107,4 @@ class _PasswordInputState extends State<PasswordInput> {
             )));
   }
 }
+

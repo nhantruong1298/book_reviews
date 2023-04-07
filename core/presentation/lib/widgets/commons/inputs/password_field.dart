@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:presentation/widgets/input/password_input.dart';
+import 'package:presentation/widgets/commons/inputs/password_input.dart';
 
 import './types.dart';
 

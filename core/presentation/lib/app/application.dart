@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:presentation/app/routes.dart';
+import 'package:presentation/feature/authentication/cubit/authentication_cubit.dart';
+import 'package:presentation/generated/l10n.dart';
 
 class Application extends StatefulWidget {
   const Application({super.key});
@@ -32,16 +37,23 @@ class _ApplicationState extends State<Application> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
-      routerConfig: RouteBuilder.router,
-      localizationsDelegates: const [
-        // GlobalMaterialLocalizations.delegate,
-        // GlobalWidgetsLocalizations.delegate,
-        // GlobalCupertinoLocalizations.delegate,
-        // FormBuilderLocalizations.delegate
+    return MultiBlocProvider(
+      //* Only allow Global app state and Authenticate state here
+      providers: [
+        BlocProvider(create: (_) => AuthenticationCubit()),
       ],
-      //supportedLocales: S.delegate.supportedLocales,
+      child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
+        routerConfig: RouteBuilder.router,
+        localizationsDelegates: const [
+          S.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          FormBuilderLocalizations.delegate
+        ],
+        supportedLocales: const [Locale('vi')],
+      ),
     );
   }
 }
