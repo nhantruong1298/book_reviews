@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:presentation/resources/app_colors.dart';
 import 'package:presentation/resources/app_dimensions.dart';
+import 'package:presentation/widgets/commons/spacing.dart';
 import 'package:presentation/widgets/commons/typography/heading_text.dart';
-import 'package:presentation/widgets/spacing.dart';
 
 class DetailLayout extends StatefulWidget {
   final String titleString;

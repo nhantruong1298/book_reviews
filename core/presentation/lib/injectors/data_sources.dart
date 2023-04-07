@@ -1,3 +1,8 @@
+import 'package:data/data_source/data_storage.dart';
+import 'package:data/mapper/firebase_auth_data_mapper.dart';
+import 'package:data/networking/service_manager.dart';
+import 'package:data/repository/log_service_impl.dart';
+import 'package:domain/repository/log_service.dart';
 import 'package:get_it/get_it.dart';
 
 class DataSourceInjector {
@@ -9,13 +14,13 @@ class DataSourceInjector {
   static void _registerDataStore(
     GetIt getIt,
   ) {
-    // getIt.registerLazySingleton<LogService>(() => LogServiceImpl());
-    // getIt.registerLazySingleton<DataStorage>(() => DataStorage());
+    getIt.registerLazySingleton<LogService>(() => LogServiceImpl());
+    getIt.registerLazySingleton<DataStorage>(() => DataStorage());
 
-    // getIt.registerSingleton<ServiceManager>(ServiceManager(
-    //   getIt<DataStorage>(),
-    //   getIt<LogService>(),
-    // ));
+    getIt.registerSingleton<ServiceManager>(ServiceManager(
+      getIt<DataStorage>(),
+      getIt<LogService>(),
+    ));
   }
 
   static void _registerDataMapper(GetIt getIt) {
@@ -24,7 +29,7 @@ class DataSourceInjector {
 }
 
 class DataMapperInjector {
-  // TopicDataMapper get topicDataMapper => TopicDataMapper();
+   FirebaseAuthDataMapper get firebaseAuthDataMapper => FirebaseAuthDataMapper();
 
   // BlogDataMapper get blogDataMapper => BlogDataMapper();
 }

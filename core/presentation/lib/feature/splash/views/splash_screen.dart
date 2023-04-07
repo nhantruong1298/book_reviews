@@ -4,6 +4,7 @@ import 'package:presentation/base/base_screen.dart';
 import 'package:presentation/feature/sign_up/module.dart';
 import 'package:presentation/resources/app_colors.dart';
 import 'package:presentation/resources/app_dimensions.dart';
+import 'package:presentation/utils/size_config.dart';
 import 'package:presentation/widgets/commons/layouts/basic_layout.dart';
 import 'package:presentation/widgets/commons/loading_indicator/circular_loading.dart';
 
@@ -27,6 +28,7 @@ class _SplashScreenState extends BaseScreenState<SplashScreen> {
 
   @override
   Widget builder(BuildContext context) {
+    SizeConfig.init(context);
     return BasicLayout(
       color: AppColors.primaryColor500,
       automaticallyImplyLeading: false,

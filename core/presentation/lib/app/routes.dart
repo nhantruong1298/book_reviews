@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:presentation/feature/sign_up/module.dart';
+import 'package:presentation/feature/sign_up_success/module.dart';
 import 'package:presentation/feature/splash/module.dart';
 
 class RouteBuilder {
@@ -21,8 +22,10 @@ class RouteBuilder {
         return null;
       },
       routes: [
-       SplashModule.buildRoute(),
-       SignUpModule.buildRoute(),
+        SplashModule.buildRoute(),
+        SignUpModule.buildRoute(routes: [
+          SignUpSuccessModule.buildRoute(),
+        ]),
       ],
       initialLocation: SplashModule.routePath,
       debugLogDiagnostics: true,

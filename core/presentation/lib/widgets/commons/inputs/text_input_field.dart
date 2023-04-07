@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:presentation/resources/app_colors.dart';
 import 'package:presentation/resources/app_theme.dart';
-import 'package:presentation/widgets/input/types.dart';
+import 'package:presentation/widgets/commons/inputs/types.dart';
 
 
 class TextInputField extends StatefulWidget {

@@ -1,0 +1,24 @@
+{
+  "SIGN_UP__EMAIL":"Email",
+  "SIGN_UP__CAN_NOT_BE_LEFT_BLANK":"Required",
+  "SIGN_UP__EMAIL_INVALID":"Invalid email",
+  "SIGN_UP__PASSWORD":"Password",
+  "SIGN_UP__PASSWORD_DOES_NOT_MATCH":"Password does not match",
+  "SIGN_UP__RE_ENTER_PASSWORD":"Re-enter password",
+  "SIGN_UP_SUCCESS_DESCRIPTION":  "<p>We sent a verification email to <span>{{email}}</span>. Click the link inside to get started!</p>",
+  "@SIGN_UP_SUCCESS_DESCRIPTION": {
+    "placeholders": {
+      "email": {}
+    }
+  },
+  "SIGN_UP_SUCCESS__SIGN_UP_SUCCESS": "Register successfully",
+  "SIGN_UP___DID_NOT_GET_EMAIL":"Didn’t get the email? ",
+  "SIGN_UP_SUCCESS__BACK_TO_SIGN_IN": "Đăng nhập",
+  "SIGN_UP___RESEND":"Gửi lại ",
+  "SIGN_UP__VALIDATION_PASSWORD_INVALID_MIN_LENGTH": "Password must be {value} characters or more",
+  "@SIGN_UP__VALIDATION_PASSWORD_INVALID_MIN_LENGTH": {
+    "placeholders": {
+      "value": {}
+    }
+  }
+}
