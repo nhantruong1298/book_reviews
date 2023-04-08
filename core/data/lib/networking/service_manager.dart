@@ -23,7 +23,7 @@ class ServiceManager {
     _instance!._logService = logService;
     _instance!._fireBaseService = FireBaseService(
       FirebaseAuth.instance,
-      _instance!._logService,
+     // _instance!._logService,
     );
 
     return _instance!;
@@ -43,10 +43,4 @@ class ServiceManager {
         await _fireBaseService.signUpWithEmailAndPassword(userName, password);
     return response;
   }
-
-  Future<void> sendEmailVerification(UserCredential userCredential) async {
-    return _fireBaseService.sendEmailVerification(userCredential);
-  }
-
-  //Future<SignUpWithEmailResult>
 }

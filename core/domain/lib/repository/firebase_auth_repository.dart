@@ -1,6 +1,5 @@
 import 'package:domain/model/authentication/sign_in_with_email.dart';
 import 'package:domain/model/authentication/sign_up_with_email.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class FirebaseAuthRepository {
   Future<SignInWithEmailResult> signInWithEmailAndPassword(
@@ -11,5 +10,4 @@ abstract class FirebaseAuthRepository {
     String password,
   );
 
-  Future<void> sendEmailVerification(UserCredential userCredential);
 }

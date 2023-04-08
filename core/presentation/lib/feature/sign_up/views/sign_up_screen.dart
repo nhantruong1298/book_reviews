@@ -170,7 +170,7 @@ class _Footer extends StatelessWidget {
 
 class _SubmitButton extends StatelessWidget {
   final VoidCallback onTap;
-  const _SubmitButton({super.key, required this.onTap});
+  const _SubmitButton({required this.onTap});
 
   @override
   Widget build(BuildContext context) {
