@@ -6,8 +6,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 class FireBaseService {
   final FirebaseAuth _firebaseAuth;
   //final FirebaseFirestore _fireStore;
-  final LogService _logService;
-  FireBaseService(this._firebaseAuth, this._logService);
+  //final LogService _logService;
+  FireBaseService(this._firebaseAuth);
 
   Future<SignInWithEmailResponse> signInWithEmailAndPassword(
       String email, String password) async {
@@ -24,9 +24,5 @@ class FireBaseService {
         email: email, password: password);
 
     return SignUpWithEmailResponse(credential);
-  }
-
-  Future<void> sendEmailVerification(UserCredential userCredential) async {
-    return userCredential.user?.sendEmailVerification();
   }
 }

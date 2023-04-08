@@ -13,7 +13,7 @@
   },
   "SIGN_UP_SUCCESS__SIGN_UP_SUCCESS": "Register successfully",
   "SIGN_UP___DID_NOT_GET_EMAIL":"Didn’t get the email? ",
-  "SIGN_UP_SUCCESS__BACK_TO_SIGN_IN": "Đăng nhập",
+  "SIGN_UP_SUCCESS__BACK_TO_SIGN_IN": "Sign in",
   "SIGN_UP___RESEND":"Gửi lại ",
   "SIGN_UP__VALIDATION_PASSWORD_INVALID_MIN_LENGTH": "Password must be {value} characters or more",
   "@SIGN_UP__VALIDATION_PASSWORD_INVALID_MIN_LENGTH": {

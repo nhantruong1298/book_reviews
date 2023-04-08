@@ -27,13 +27,11 @@ class SignUpCubit extends Cubit<SignUpState> {
           await _signUpRepository.signUpWithEmail(userName!, password!);
 
       //** Update user credential
-      final authenticationState = AuthenticationState()
-        ..setUserCredential(signUpResult.userCredential);
-      _authenticationCubit.emit(authenticationState);
+      _authenticationCubit
+          .emit(AuthenticationFirebaseState(signUpResult.userCredential));
 
       //** Send email verification
-      await _signUpRepository
-          .sendEmailVerification(signUpResult.userCredential);
+      await _authenticationCubit.sendEmailVerification();
 
       emit(const SignUpSuccessState());
     } catch (error, stackTrace) {
