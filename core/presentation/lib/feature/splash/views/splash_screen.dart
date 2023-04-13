@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:presentation/app/route_builder.dart';
 import 'package:presentation/base/base_screen.dart';
-import 'package:presentation/feature/sign_up/module.dart';
 import 'package:presentation/resources/app_colors.dart';
 import 'package:presentation/resources/app_dimensions.dart';
 import 'package:presentation/utils/size_config.dart';
@@ -21,7 +20,9 @@ class _SplashScreenState extends BaseScreenState<SplashScreen> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       Future.delayed(const Duration(seconds: 2), () {
-        context.goNamed(SignUpModule.routeName);
+        //context.goNamed(SignUpModule.routeName);
+        SignUpRoute().go(context);
+       // DashboardRoute().go(context);
       });
     });
   }

@@ -37,6 +37,7 @@ dependencies:
   flutter_html_table: ^3.0.0-alpha.4
   flutter_html_svg: ^3.0.0-alpha.4
   timer_count_down: ^2.2.0
+  font_awesome_flutter: ^10.4.0
 
   
 
@@ -48,6 +49,7 @@ dev_dependencies:
   freezed: ^2.3.2
   json_serializable: ^6.6.1
   flutter_gen_runner: "5.0.2"
+  go_router_builder: ^1.2.1
 
 flutter_gen:
   null_safety: true # Optional (default: true)

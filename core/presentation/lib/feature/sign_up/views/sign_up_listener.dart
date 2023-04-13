@@ -11,9 +11,10 @@ extension SignUpListener on _SignUpScreenState {
                   as String? ??
               '';
 
-          context.goNamed(SignUpSuccessModule.routeName, params: {
-            'userName': userName,
-          });
+          // context.goNamed(SignUpSuccessModule.routeName, params: {
+          //   'userName': userName,
+          // });
+          SignUpSuccessRoute(userName).go(context);
         },
         orElse: () {});
   }
