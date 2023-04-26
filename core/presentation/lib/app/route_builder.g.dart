@@ -79,6 +79,12 @@ extension $SignUpSuccessRouteExtension on SignUpSuccessRoute {
 RouteBase get $dashboardRoute => GoRouteData.$route(
       path: '/dashboard',
       factory: $DashboardRouteExtension._fromState,
+      routes: [
+        GoRouteData.$route(
+          path: 'book-detail/:bookID',
+          factory: $BookDetailRouteExtension._fromState,
+        ),
+      ],
     );
 
 extension $DashboardRouteExtension on DashboardRoute {
@@ -86,6 +92,23 @@ extension $DashboardRouteExtension on DashboardRoute {
 
   String get location => GoRouteData.$location(
         '/dashboard',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  void push(BuildContext context) => context.push(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+}
+
+extension $BookDetailRouteExtension on BookDetailRoute {
+  static BookDetailRoute _fromState(GoRouterState state) => BookDetailRoute(
+        state.params['bookID']!,
+      );
+
+  String get location => GoRouteData.$location(
+        '/dashboard/book-detail/${Uri.encodeComponent(bookID)}',
       );
 
   void go(BuildContext context) => context.go(location);

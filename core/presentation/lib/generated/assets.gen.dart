@@ -5,7 +5,7 @@
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
-// ignore_for_file: directives_ordering,unnecessary_import,implicit_dynamic_list_literal
+// ignore_for_file: directives_ordering,unnecessary_import,implicit_dynamic_list_literal,deprecated_member_use
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -18,8 +18,22 @@ class $AssetsImagesGen {
   SvgGenImage get accountIcon =>
       const SvgGenImage('assets/images/account-icon.svg');
 
+  /// File path: assets/images/dac-nhan-tam.png
+  AssetGenImage get dacNhanTam =>
+      const AssetGenImage('assets/images/dac-nhan-tam.png');
+
   /// List of all assets
-  List<SvgGenImage> get values => [accountIcon];
+  List<dynamic> get values => [accountIcon, dacNhanTam];
+}
+
+class $AssetsMockDataGen {
+  const $AssetsMockDataGen();
+
+  /// File path: assets/mock_data/books_data.json
+  String get booksData => 'assets/mock_data/books_data.json';
+
+  /// List of all assets
+  List<String> get values => [booksData];
 }
 
 class $AssetsRawsGen {
@@ -36,6 +50,7 @@ class Assets {
   Assets._();
 
   static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const $AssetsMockDataGen mockData = $AssetsMockDataGen();
   static const $AssetsRawsGen raws = $AssetsRawsGen();
 }
 
@@ -64,7 +79,7 @@ class AssetGenImage {
     bool matchTextDirection = false,
     bool gaplessPlayback = false,
     bool isAntiAlias = false,
-    String? package,
+    String? package = 'presentation',
     FilterQuality filterQuality = FilterQuality.low,
     int? cacheWidth,
     int? cacheHeight,
@@ -101,7 +116,7 @@ class AssetGenImage {
 
   String get path => _assetName;
 
-  String get keyName => _assetName;
+  String get keyName => 'packages/presentation/$_assetName';
 }
 
 class SvgGenImage {
@@ -113,20 +128,21 @@ class SvgGenImage {
     Key? key,
     bool matchTextDirection = false,
     AssetBundle? bundle,
-    String? package,
+    String? package = 'presentation',
     double? width,
     double? height,
     BoxFit fit = BoxFit.contain,
     AlignmentGeometry alignment = Alignment.center,
     bool allowDrawingOutsideViewBox = false,
     WidgetBuilder? placeholderBuilder,
-    Color? color,
-    BlendMode colorBlendMode = BlendMode.srcIn,
     String? semanticsLabel,
     bool excludeFromSemantics = false,
-    Clip clipBehavior = Clip.hardEdge,
-    bool cacheColorFilter = false,
-    SvgTheme? theme,
+    SvgTheme theme = const SvgTheme(),
+    ColorFilter? colorFilter,
+    @deprecated Color? color,
+    @deprecated BlendMode colorBlendMode = BlendMode.srcIn,
+    @deprecated Clip? clipBehavior,
+    @deprecated bool cacheColorFilter = false,
   }) {
     return SvgPicture.asset(
       _assetName,
@@ -140,15 +156,18 @@ class SvgGenImage {
       alignment: alignment,
       allowDrawingOutsideViewBox: allowDrawingOutsideViewBox,
       placeholderBuilder: placeholderBuilder,
-      color: color,
-      colorBlendMode: colorBlendMode,
       semanticsLabel: semanticsLabel,
       excludeFromSemantics: excludeFromSemantics,
-      clipBehavior: clipBehavior,
-      cacheColorFilter: cacheColorFilter,
       theme: theme,
+      //colorFilter: colorFilter,
+      color: color,
+      colorBlendMode: colorBlendMode,
+      //clipBehavior: clipBehavior,
+      cacheColorFilter: cacheColorFilter,
     );
   }
 
   String get path => _assetName;
+
+  String get keyName => 'packages/presentation/$_assetName';
 }
