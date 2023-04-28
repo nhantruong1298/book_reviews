@@ -1,7 +1,7 @@
 name: book_reviews
-description: A new Flutter project.
+description: Book Review Application
 publish_to: 'none'
-version: 0.1.0
+version: 1.0.0+1
 
 environment:
   sdk: '>=2.19.2 <3.0.0'
@@ -14,9 +14,25 @@ dependencies:
   firebase_core: ^2.8.0
     
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
+  # flutter_test:
+  #   sdk: flutter
   flutter_lints: ^2.0.0
 
 flutter:
-  uses-material-design: true
+  # uses-material-design: true
+  fonts:
+    - family: Playfair
+      fonts:
+        - asset: fonts/play_fair/PlayfairDisplay-Regular.ttf
+        - asset: fonts/play_fair/PlayfairDisplay-Bold.ttf
+          weight: 700
+        - asset: fonts/play_fair/PlayfairDisplay-Medium.ttf
+          weight: 500
+        - asset: fonts/play_fair/PlayfairDisplay-Italic.ttf
+          style: italic
+        - asset: fonts/play_fair/PlayfairDisplay-MediumItalic.ttf
+          style: italic
+          weight: 500
+        - asset: fonts/play_fair/PlayfairDisplay-BoldItalic.ttf
+          style: italic
+          weight: 700

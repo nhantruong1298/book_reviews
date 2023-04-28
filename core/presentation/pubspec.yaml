@@ -65,32 +65,40 @@ flutter_gen:
       enable: true
       package_parameter_enabled: true
 
-flutter:
-  #uses-material-design: true
+flutter_intl:
+  enabled: true
+  class_name: S
+  main_locale: vi
+  arb_dir: lib/l10n
+  output_dir: lib/generated/
+  use_deferred_loading: false
 
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
     - assets/raws/
     - assets/mock_data/books_data.json
 
-  # To add assets to your package, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
-  #
-  # For details regarding assets in packages, see
-  # https://flutter.dev/assets-and-images/#from-packages
-  #
   # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.dev/assets-and-images/#resolution-aware.
+  # https://flutter.dev/assets-and-images/#resolution-aware
 
-  # To add custom fonts to your package, add a fonts section here,
+  # For details regarding adding assets from package dependencies, see
+  # https://flutter.dev/assets-and-images/#from-packages
+
+  # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: PlayfairDisplay
+    - family: Playfair
       fonts:
         - asset: assets/fonts/play_fair/PlayfairDisplay-Regular.ttf
         - asset: assets/fonts/play_fair/PlayfairDisplay-Bold.ttf
@@ -104,15 +112,4 @@ flutter:
           weight: 500
         - asset: assets/fonts/play_fair/PlayfairDisplay-BoldItalic.ttf
           style: italic
-          weight: 700  
-
-
-
-
-flutter_intl:
-  enabled: true
-  class_name: S
-  main_locale: vi
-  arb_dir: lib/l10n
-  output_dir: lib/generated/
-  use_deferred_loading: false
+          weight: 700

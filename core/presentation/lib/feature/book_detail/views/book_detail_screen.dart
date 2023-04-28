@@ -8,6 +8,7 @@ import 'package:presentation/feature/_global_app/cubit/global_app_cubit.dart';
 import 'package:presentation/feature/book_detail/cubit/book_detail_cubit.dart';
 import 'package:presentation/resources/app_colors.dart';
 import 'package:presentation/resources/app_dimensions.dart';
+import 'package:presentation/resources/app_fonts.dart';
 import 'package:presentation/utils/size_config.dart';
 import 'package:presentation/widgets/commons/layouts/basic_layout.dart';
 import 'package:presentation/widgets/commons/rating_stars.dart';
@@ -173,16 +174,15 @@ class _BookNameAndAuthor extends StatelessWidget {
         Heading1Text(
           bookName,
           textAlign: TextAlign.center,
-          //style: Heading1Text.defaultStyle.copyWith(fontFamily: 'Vidaloka'),
+          style:
+              Heading1Text.defaultStyle.copyWith(fontFamily: 'PlayfairDisplay'),
         ),
-        Text(
+        BodyXLText(
           'by $bookAuthor',
-          style: TextStyle(
+          style: BodyLText.defaultStyle.copyWith(
               fontWeight: FontWeight.w500,
-              fontSize: 25,
               color: AppColors.textGreyColor,
-              fontStyle: FontStyle.normal,
-              fontFamily: 'PlayfairDisplay'),
+              fontFamily: FontFamily.Playfair),
         ),
       ],
     );
