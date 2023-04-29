@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:presentation/feature/_global_app/cubit/global_app_cubit.dart';
 import 'package:presentation/feature/authentication/cubit/authentication_cubit.dart';
 import 'package:presentation/feature/book_detail/book_detail_repository.dart';
 import 'package:presentation/feature/book_detail/cubit/book_detail_cubit.dart';
 import 'package:presentation/feature/book_detail/views/book_detail_screen.dart';
+import 'package:presentation/feature/book_search/cubit/book_search_cubit.dart';
+import 'package:presentation/feature/book_search/views/book_search_screen.dart';
 import 'package:presentation/feature/dashboard/cubit/dashboard_cubit.dart';
 import 'package:presentation/feature/dashboard/views/dashboard_screen.dart';
 import 'package:presentation/feature/home/cubit/home_cubit.dart';
@@ -89,6 +92,9 @@ class SignUpSuccessRoute extends GoRouteData {
     routes: <TypedGoRoute<GoRouteData>>[
       TypedGoRoute<BookDetailRoute>(
         path: 'book-detail/:bookID',
+      ),
+       TypedGoRoute<BookSearchRoute>(
+        path: 'book-search',
       )
     ])
 class DashboardRoute extends GoRouteData {
@@ -125,10 +131,25 @@ class BookDetailRoute extends GoRouteData {
           bookID,
           context.read<BookDetailRepository>(),
         ),
-        child:  BookDetailScreen(
+        child: BookDetailScreen(
           bookID: bookID,
         ),
       ),
+    );
+  }
+}
+
+//********************** BOOK SEARCH ROUTE **********************
+class BookSearchRoute extends GoRouteData {
+  BookSearchRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return BlocProvider(
+      create: (context) => BookSearchCubit(
+        context.read<GlobalAppCubit>(),
+      ),
+      child: const BookSearchScreen(),
     );
   }
 }

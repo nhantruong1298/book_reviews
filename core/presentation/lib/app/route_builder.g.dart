@@ -84,6 +84,10 @@ RouteBase get $dashboardRoute => GoRouteData.$route(
           path: 'book-detail/:bookID',
           factory: $BookDetailRouteExtension._fromState,
         ),
+        GoRouteData.$route(
+          path: 'book-search',
+          factory: $BookSearchRouteExtension._fromState,
+        ),
       ],
     );
 
@@ -109,6 +113,21 @@ extension $BookDetailRouteExtension on BookDetailRoute {
 
   String get location => GoRouteData.$location(
         '/dashboard/book-detail/${Uri.encodeComponent(bookID)}',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  void push(BuildContext context) => context.push(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+}
+
+extension $BookSearchRouteExtension on BookSearchRoute {
+  static BookSearchRoute _fromState(GoRouterState state) => BookSearchRoute();
+
+  String get location => GoRouteData.$location(
+        '/dashboard/book-search',
       );
 
   void go(BuildContext context) => context.go(location);

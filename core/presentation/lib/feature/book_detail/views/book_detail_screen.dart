@@ -106,7 +106,7 @@ class _BookTags extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bookTags = BookTagExtension.findBookTags(tags);
+    final bookTags = BookTagExtension.findTags(tags);
 
     return SizedBox(
       width: double.infinity,
@@ -151,6 +151,7 @@ class _BookDescription extends StatelessWidget {
           style: BodyMText.defaultStyle.copyWith(
             color: AppColors.textGreyColor,
             fontWeight: FontWeight.w500,
+            fontFamily: FontFamily.Playfair,
           ),
         )
       ],
@@ -174,8 +175,9 @@ class _BookNameAndAuthor extends StatelessWidget {
         Heading1Text(
           bookName,
           textAlign: TextAlign.center,
-          style:
-              Heading1Text.defaultStyle.copyWith(fontFamily: 'PlayfairDisplay'),
+          style: Heading1Text.defaultStyle.copyWith(
+            fontFamily: FontFamily.Playfair,
+          ),
         ),
         BodyXLText(
           'by $bookAuthor',
@@ -198,7 +200,7 @@ class _BookImage extends StatelessWidget {
     return Container(
       width: SizeConfig.screenWidth * 0.3,
       height: SizeConfig.getProportionateScreenHeight(160),
-      padding: const EdgeInsets.all(4),
+      padding: const EdgeInsets.all(2),
       decoration: BoxDecoration(
           color: AppColors.backgroundColor,
           boxShadow: const [
@@ -213,12 +215,13 @@ class _BookImage extends StatelessWidget {
       child: ClipRRect(
           borderRadius: BorderRadius.circular(8),
           child: CachedNetworkImage(
-              imageUrl: imageUrl,
-              placeholder: (context, url) => const CircularProgressIndicator(),
-              errorWidget: (context, url, error) => const Icon(Icons.error),
-              width: SizeConfig.screenWidth * 0.3,
-              fit: BoxFit.cover,
-              height: SizeConfig.getProportionateScreenHeight(160))),
+            imageUrl: imageUrl,
+            placeholder: (context, url) => const CircularProgressIndicator(),
+            errorWidget: (context, url, error) => const Icon(Icons.error),
+            // width: SizeConfig.screenWidth * 0.3,
+            fit: BoxFit.cover,
+            //height: SizeConfig.getProportionateScreenHeight(160)
+          )),
     );
   }
 }

@@ -62,14 +62,15 @@ class BookTag {
 }
 
 extension BookTagExtension on BookTag {
-  static BookTag? findBookTag(String tag) {
+  static BookTag? findTag(String tag) {
     return BookTag.ITEMS.firstWhereOrNull((element) => element.value == tag);
   }
 
-  static List<BookTag> findBookTags(List<String> tags) {
+  static List<BookTag> findTags(List<String> tags) {
     final result = <BookTag>[];
     for (final tag in tags) {
-      final bookTag = BookTag.ITEMS.firstWhereOrNull((element) => element.value == tag);
+      final bookTag =
+          BookTag.ITEMS.firstWhereOrNull((element) => element.value == tag);
       if (bookTag == null) {
         continue;
       }

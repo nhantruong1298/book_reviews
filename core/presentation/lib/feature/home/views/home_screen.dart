@@ -32,7 +32,9 @@ class _HomeScreenState extends BaseScreenState<HomeScreen> {
       padding: EdgeInsets.zero,
       headerActions: [
         AppLinkButton(
-          onPressed: () {},
+          onPressed: () {
+            BookSearchRoute().push(context);
+          },
           child: const ButtonText('Tìm kiếm'),
         )
       ],
@@ -44,13 +46,12 @@ class _HomeScreenState extends BaseScreenState<HomeScreen> {
         itemBuilder: (context, index) {
           final data = mockData[index];
 
-          final bookTags = BookTagExtension.findBookTags(data.tags ?? []);
+          final bookTags = BookTagExtension.findTags(data.tags ?? []);
 
           return ListBookItem(
             authorName: data.bookAuthor,
             bookName: data.bookName,
             tags: bookTags,
-            
             onTap: () {
               BookDetailRoute(data.bookID ?? '').go(context);
             },

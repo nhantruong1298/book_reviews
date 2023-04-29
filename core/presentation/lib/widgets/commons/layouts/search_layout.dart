@@ -52,11 +52,11 @@ class _SearchLayoutState extends State<SearchLayout> {
       resizeToAvoidBottomInset: true,
       bottomNavigationBar: widget.bottomNavigationBar,
       appBar: AppBar(
+          backgroundColor: AppColors.backgroundColor,
           leading: widget.headerLeading ?? getDefaultLeading(context),
-          title: _SearchBar(
+          title: SearchBarView(
             autoFocus: widget.autoFocus,
-            placeHolder:
-                widget.searchHint ??"Search",
+            placeHolder: widget.searchHint ?? "Search",
             controller: widget.searchController,
             onSubmitted: widget.onSubmitted,
             debounceDuration: widget.debounceDuration,
@@ -123,11 +123,11 @@ class _SearchLayoutState extends State<SearchLayout> {
 
       if (canPop) {
         return IconButton(
-          icon:  const Icon(
-              Icons.arrow_back,
-              color: Colors.black,
-              size: 24,
-            ),
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.black,
+            size: 24,
+          ),
           tooltip: MaterialLocalizations.of(context).backButtonTooltip,
           onPressed: () {
             Navigator.of(context).pop();
@@ -139,14 +139,14 @@ class _SearchLayoutState extends State<SearchLayout> {
   }
 }
 
-class _SearchBar extends StatefulWidget {
+class SearchBarView extends StatefulWidget {
   final String? placeHolder;
   final TextEditingController? controller;
   final int? debounceDuration;
   final Function(String value)? onSubmitted;
   final FocusNode? focusNode;
   final bool autoFocus;
-  const _SearchBar({
+  const SearchBarView({
     Key? key,
     this.placeHolder,
     this.controller,
@@ -157,10 +157,10 @@ class _SearchBar extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  __SearchBarState createState() => __SearchBarState();
+  _SearchBarViewState createState() => _SearchBarViewState();
 }
 
-class __SearchBarState extends State<_SearchBar> {
+class _SearchBarViewState extends State<SearchBarView> {
   late Debouncer _debouncer;
 
   @override
