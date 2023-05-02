@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:data/entity/response/book_detail_response.dart';
+import 'package:data/entity/response/event_detail_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,29 +25,12 @@ class _SplashScreenState extends BaseScreenState<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    _loadMockData();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       Future.delayed(const Duration(seconds: 2), () {
-        //context.goNamed(SignUpModule.routeName);
-        //SignUpRoute().go(context);
-        _loadMockData();
         DashboardRoute().go(context);
       });
     });
-  }
-
-  void _loadMockData() async {
-    final jsonText = await rootBundle
-        .loadString('packages/presentation/assets/mock_data/books_data.json');
-
-    final List<dynamic> data = jsonDecode(jsonText);
-
-    final List<BookDetailResponse> mockData = [];
-
-    for (var item in data) {
-      mockData.add(BookDetailResponse.fromJson(item));
-    }
-
-    context.read<GlobalAppCubit>().updateMockData(mockData);
   }
 
   @override
@@ -54,6 +38,7 @@ class _SplashScreenState extends BaseScreenState<SplashScreen> {
     SizeConfig.init(context);
     return BasicLayout(
       color: AppColors.primaryColor500,
+      appBarColor: AppColors.primaryColor500,
       automaticallyImplyLeading: false,
       headerVisible: false,
       child: Column(
@@ -67,5 +52,35 @@ class _SplashScreenState extends BaseScreenState<SplashScreen> {
         ],
       ),
     );
+  }
+
+  void _loadMockData() async {
+    //**Load book data */
+    var jsonText = await rootBundle
+        .loadString('packages/presentation/assets/mock_data/books_data.json');
+
+    var jsonDecoded = jsonDecode(jsonText);
+
+    final List<BookDetailResponse> bookData = [];
+
+    for (var item in jsonDecoded) {
+      bookData.add(BookDetailResponse.fromJson(item));
+    }
+
+    context.read<GlobalAppCubit>().updateMockDataForBook(bookData);
+
+    //**Load event data */
+    jsonText = await rootBundle
+        .loadString('packages/presentation/assets/mock_data/events_data.json');
+
+    jsonDecoded = jsonDecode(jsonText);
+
+    final List<EventDetailResponse> eventData = [];
+
+    for (var item in jsonDecoded) {
+      eventData.add(EventDetailResponse.fromJson(item));
+    }
+
+    context.read<GlobalAppCubit>().updateMockDataForEvent(eventData);
   }
 }

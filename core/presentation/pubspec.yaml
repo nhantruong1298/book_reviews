@@ -84,7 +84,7 @@ flutter:
   assets:
     - assets/images/
     - assets/raws/
-    - assets/mock_data/books_data.json
+    - assets/mock_data/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

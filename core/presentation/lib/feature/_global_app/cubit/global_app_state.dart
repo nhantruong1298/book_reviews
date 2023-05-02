@@ -2,20 +2,27 @@ part of 'global_app_cubit.dart';
 
 // ignore: must_be_immutable
 class GlobalAppState extends Equatable {
-  List<BookDetailResponse>? mockData;
+  List<BookDetailResponse>? bookData;
+  List<EventDetailResponse>? eventData;
 
-  GlobalAppState({this.mockData});
+  GlobalAppState({
+    this.bookData,
+    this.eventData,
+  });
 
   GlobalAppState copyWith({
-    List<BookDetailResponse>? mockData,
+    List<BookDetailResponse>? bookData,
+    List<EventDetailResponse>? eventData,
   }) {
     return GlobalAppState(
-      mockData: mockData ?? this.mockData,
+      bookData: bookData ?? this.bookData,
+      eventData: eventData ?? this.eventData,
     );
   }
 
   @override
   List<Object?> get props => [
-        mockData,
+        bookData,
+        eventData,
       ];
 }

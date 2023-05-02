@@ -15,7 +15,7 @@ class BookSearchCubit extends Cubit<BookSearchState> {
   ) : super(BookSearchInitial(BookSearchData()));
 
   void _loadNewData(BookSearchData? searchData) {
-    final mockData = _globalAppCubit.state.mockData ?? [];
+    final mockData = _globalAppCubit.state.bookData ?? [];
 
     final List<BookDetailResponse> result = [];
 
@@ -44,7 +44,7 @@ class BookSearchCubit extends Cubit<BookSearchState> {
   }
 
   void onScreenInit() {
-    final mockData = _globalAppCubit.state.mockData ?? [];
+    final mockData = _globalAppCubit.state.bookData ?? [];
     emit(BookSearchLoadedState(state.searchData, mockData));
   }
 }

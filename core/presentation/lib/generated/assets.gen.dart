@@ -32,8 +32,11 @@ class $AssetsMockDataGen {
   /// File path: assets/mock_data/books_data.json
   String get booksData => 'assets/mock_data/books_data.json';
 
+  /// File path: assets/mock_data/events_data.json
+  String get eventsData => 'assets/mock_data/events_data.json';
+
   /// List of all assets
-  List<String> get values => [booksData];
+  List<String> get values => [booksData, eventsData];
 }
 
 class $AssetsRawsGen {
@@ -168,7 +171,7 @@ class SvgGenImage {
       semanticsLabel: semanticsLabel,
       excludeFromSemantics: excludeFromSemantics,
       theme: theme,
-      //colorFilter: colorFilter,
+     // colorFilter: colorFilter,
       color: color,
       colorBlendMode: colorBlendMode,
       clipBehavior: clipBehavior,

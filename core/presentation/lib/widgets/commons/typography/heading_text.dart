@@ -42,7 +42,7 @@ class Heading1Text extends BodyText {
 }
 
 class Heading2Text extends BodyText {
-  static get defaultStyle => const TextStyle(
+  static TextStyle get defaultStyle => const TextStyle(
       color: AppColors.textColor,
       fontSize: AppDimensions.heading2FontSize,
       fontWeight: FontWeight.w700,

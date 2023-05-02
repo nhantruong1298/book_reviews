@@ -6,6 +6,9 @@ import 'package:presentation/feature/authentication/cubit/authentication_cubit.d
 import 'package:presentation/feature/book_detail/book_detail_repository.dart';
 import 'package:presentation/feature/book_detail/cubit/book_detail_cubit.dart';
 import 'package:presentation/feature/book_detail/views/book_detail_screen.dart';
+import 'package:presentation/feature/book_event/cubit/book_event_cubit.dart';
+import 'package:presentation/feature/book_event/views/book_event_screen.dart';
+import 'package:presentation/feature/book_event_detail/views/book_event_detail_screen.dart';
 import 'package:presentation/feature/book_search/cubit/book_search_cubit.dart';
 import 'package:presentation/feature/book_search/views/book_search_screen.dart';
 import 'package:presentation/feature/dashboard/cubit/dashboard_cubit.dart';
@@ -93,9 +96,12 @@ class SignUpSuccessRoute extends GoRouteData {
       TypedGoRoute<BookDetailRoute>(
         path: 'book-detail/:bookID',
       ),
-       TypedGoRoute<BookSearchRoute>(
+      TypedGoRoute<BookSearchRoute>(
         path: 'book-search',
-      )
+      ),
+      TypedGoRoute<BookEventDetailRoute>(
+        path: 'book-event-detail/:bookEventID',
+      ),
     ])
 class DashboardRoute extends GoRouteData {
   @override
@@ -150,6 +156,29 @@ class BookSearchRoute extends GoRouteData {
         context.read<GlobalAppCubit>(),
       ),
       child: const BookSearchScreen(),
+    );
+  }
+}
+
+//********************** BOOK EVENT ROUTE **********************
+class BookEventRoute {
+  static Widget build() {
+    return BlocProvider(
+      create: (context) => BookEventCubit(),
+      child: const BookEventScreen(),
+    );
+  }
+}
+
+//********************** BOOK EVENT ROUTE **********************
+class BookEventDetailRoute extends GoRouteData {
+  final String bookEventID;
+  BookEventDetailRoute(this.bookEventID);
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return  BookEventDetailScreen(
+      bookEventID: bookEventID,
     );
   }
 }

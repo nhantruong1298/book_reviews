@@ -33,7 +33,7 @@ class _BookDetailScreenState extends BaseScreenState<BookDetailScreen> {
 
   @override
   Widget builder(BuildContext context) {
-    final mockData = context.read<GlobalAppCubit>().state.mockData;
+    final mockData = context.read<GlobalAppCubit>().state.bookData;
 
     final bookDetail =
         mockData?.firstWhereOrNull((item) => item.bookID == widget.bookID);
@@ -216,11 +216,9 @@ class _BookImage extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
           child: CachedNetworkImage(
             imageUrl: imageUrl,
-            placeholder: (context, url) => const CircularProgressIndicator(),
+            placeholder: (context, url) => const Center(child:  CircularProgressIndicator()),
             errorWidget: (context, url, error) => const Icon(Icons.error),
-            // width: SizeConfig.screenWidth * 0.3,
             fit: BoxFit.cover,
-            //height: SizeConfig.getProportionateScreenHeight(160)
           )),
     );
   }

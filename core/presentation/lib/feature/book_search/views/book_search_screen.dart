@@ -4,12 +4,10 @@ import 'package:presentation/app/route_builder.dart';
 import 'package:presentation/base/base_screen.dart';
 import 'package:presentation/constants/book_tag.dart';
 import 'package:presentation/feature/book_search/cubit/book_search_cubit.dart';
-import 'package:presentation/feature/home/views/list_book_item.dart';
+import 'package:presentation/feature/home/views/home_screen.dart';
 import 'package:presentation/resources/app_dimensions.dart';
 import 'package:presentation/widgets/commons/layouts/search_layout.dart';
 import 'package:presentation/widgets/commons/spacing.dart';
-// import 'package:presentation/widgets/commons/tag.dart';
-// import 'package:presentation/widgets/commons/typography/body_text.dart';
 
 class BookSearchScreen extends StatefulWidget {
   const BookSearchScreen({super.key});

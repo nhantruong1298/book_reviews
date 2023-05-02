@@ -51,7 +51,7 @@ class _DashboardScreenState extends BaseScreenState<DashboardScreen>
     super.initState();
     _screens = [
       HomeRoute.build(),
-      Container(),
+      BookEventRoute.build(),
     ];
 
     _controller = TabController(
