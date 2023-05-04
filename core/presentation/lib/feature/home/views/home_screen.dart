@@ -47,11 +47,10 @@ class _HomeScreenState extends BaseScreenState<HomeScreen> {
           child: const ButtonText('Tìm kiếm'),
         )
       ],
-      child: ListView.separated(
+      child: ListView.builder(
         physics: const BouncingScrollPhysics(),
         shrinkWrap: true,
         itemCount: mockData.length,
-        separatorBuilder: (_, __) => const Spacing(1),
         itemBuilder: (context, index) {
           final data = mockData[index];
 
