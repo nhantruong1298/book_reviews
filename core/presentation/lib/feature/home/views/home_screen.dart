@@ -95,12 +95,12 @@ class ListBookItem extends StatelessWidget {
       height: SizeConfig.screenHeight * 0.18,
       margin:
           const EdgeInsets.symmetric(horizontal: AppDimensions.defaultPadding),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(AppDimensions.defaultSRadius),
-        boxShadow: _boxShadow,
-      ),
+      // decoration: BoxDecoration(
+      //   borderRadius: BorderRadius.circular(AppDimensions.defaultSRadius),
+      //   boxShadow: _boxShadow,
+      // ),
       child: Material(
-        color: AppColors.greyColor400,
+        color: AppColors.backgroundColor,
         borderRadius: BorderRadius.circular(AppDimensions.defaultSRadius),
         child: InkWell(
           borderRadius: BorderRadius.circular(AppDimensions.defaultSRadius),

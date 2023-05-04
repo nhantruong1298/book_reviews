@@ -6,6 +6,7 @@ import 'package:presentation/base/base_screen.dart';
 import 'package:presentation/constants/book_tag.dart';
 import 'package:presentation/feature/_global_app/cubit/global_app_cubit.dart';
 import 'package:presentation/feature/book_detail/cubit/book_detail_cubit.dart';
+import 'package:presentation/generated/assets.gen.dart';
 import 'package:presentation/resources/app_colors.dart';
 import 'package:presentation/resources/app_dimensions.dart';
 import 'package:presentation/resources/app_fonts.dart';
@@ -15,6 +16,7 @@ import 'package:presentation/widgets/commons/rating_stars.dart';
 import 'package:presentation/widgets/commons/spacing.dart';
 import 'package:presentation/widgets/commons/tag.dart';
 import 'package:presentation/widgets/commons/typography/body_text.dart';
+import 'package:presentation/widgets/commons/typography/button_text.dart';
 import 'package:presentation/widgets/commons/typography/heading_text.dart';
 
 class BookDetailScreen extends StatefulWidget {
@@ -47,43 +49,132 @@ class _BookDetailScreenState extends BaseScreenState<BookDetailScreen> {
           1 * AppDimensions.defaultPadding,
         ),
         headerActions: _buildHeaderActions,
-        child: ListView(
-          children: [
-            Column(
-              children: [
-                const Spacing(1),
-                _BookImage(
-                  imageUrl: bookDetail?.linkImageBook ?? '',
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const Spacing(1),
+              _BookImage(
+                imageUrl: bookDetail?.linkImageBook ?? '',
+              ),
+              _BookNameAndAuthor(
+                bookAuthor: bookDetail?.bookAuthor ?? '',
+                bookName: bookDetail?.bookName ?? '',
+              ),
+              const Spacing(1),
+              RatingStars(
+                initValue: bookDetail?.ratingStars,
+                onChanged: (value) {},
+              ),
+              const Spacing(2),
+              const SizedBox(
+                height: 1,
+                width: double.infinity,
+                child: Divider(
+                  thickness: 1,
                 ),
-                _BookNameAndAuthor(
-                  bookAuthor: bookDetail?.bookAuthor ?? '',
-                  bookName: bookDetail?.bookName ?? '',
-                ),
-                const Spacing(1),
-                RatingStars(
-                  initValue: bookDetail?.ratingStars,
-                  onChanged: (value) {},
-                ),
-                const Spacing(2),
-                const SizedBox(
-                  height: 1,
-                  width: double.infinity,
-                  child: Divider(
-                    thickness: 1,
+              ),
+              const Spacing(2),
+              _BookDescription(
+                description: bookDetail?.description ?? '',
+              ),
+              const Spacing(2),
+              _BookTags(
+                tags: bookDetail?.tags ?? [],
+              ),
+              const Spacing(2),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  BodyXLText(
+                    'Nhận xét : ',
+                    style: BodyXLText.defaultStyle.copyWith(
+                      color: AppColors.textGreyColor,
+                      fontWeight: FontWeight.w700,
+                      fontFamily: FontFamily.Playfair,
+                    ),
                   ),
-                ),
-                const Spacing(2),
-                _BookDescription(
-                  description: bookDetail?.description ?? '',
-                ),
-                const Spacing(2),
-                _BookTags(
-                  tags: bookDetail?.tags ?? [],
-                ),
-              ],
-            ),
-          ],
+                  TextButton(
+                      onPressed: () {},
+                      child: BodyXLText(
+                        'Chi tiết',
+                        style: BodyXLText.defaultStyle.copyWith(
+                          color: AppColors.textGreyColor,
+                          fontWeight: FontWeight.w700,
+                          fontFamily: FontFamily.Playfair,
+                        ),
+                      ))
+                ],
+              ),
+              const Spacing(1),
+              _buildListReview()
+            ],
+          ),
         ));
+  }
+
+  Widget _buildListReview() {
+    return SizedBox(
+              width: double.infinity,
+              height: 200,
+              child: PageView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 3,
+                itemBuilder: (context, index) {
+                  return SizedBox(
+                    width: SizeConfig.screenWidth,
+                    child: Column(mainAxisSize: MainAxisSize.min, children: [
+                      Row(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(
+                                AppDimensions.roundedRadius),
+                            child: Assets.images.accountIcon.svg(
+                              width: 50,
+                              height: 50,
+                            ),
+                          ),
+                          const Spacing(1,
+                              direction: SpacingDirection.Horizontal),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              BodyLText(
+                                'Zander Rohan',
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: BodyLText.defaultStyle.copyWith(
+                                  color: AppColors.textGreyColor,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                              const RatingStars(
+                                initValue: 5,
+                                iconSize: 20.0,
+                                spacing: 0.0,
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                      const Spacing(1),
+                      BodyLText(
+                        'To add custom fonts to your application, add a fonts section here,in this "flutter" section. Each entry in this list should have afamily key with the font family name, and a "fonts" key with alist giving the asset and other descriptors for the font. For',
+                        maxLines: 4,
+                        overflow: TextOverflow.ellipsis,
+                        style: BodyLText.defaultStyle.copyWith(
+                          color: AppColors.textGreyColor,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: FontFamily.Playfair,
+                          fontStyle: FontStyle.italic,
+                        ),
+                      ),
+                    ]),
+                  );
+                },
+              ),
+            );
   }
 
   List<Widget> get _buildHeaderActions {
@@ -216,7 +307,8 @@ class _BookImage extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
           child: CachedNetworkImage(
             imageUrl: imageUrl,
-            placeholder: (context, url) => const Center(child:  CircularProgressIndicator()),
+            placeholder: (context, url) =>
+                const Center(child: CircularProgressIndicator()),
             errorWidget: (context, url, error) => const Icon(Icons.error),
             fit: BoxFit.cover,
           )),
