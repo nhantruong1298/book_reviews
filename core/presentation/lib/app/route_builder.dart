@@ -9,6 +9,8 @@ import 'package:presentation/feature/book_detail/views/book_detail_screen.dart';
 import 'package:presentation/feature/book_event/cubit/book_event_cubit.dart';
 import 'package:presentation/feature/book_event/views/book_event_screen.dart';
 import 'package:presentation/feature/book_event_detail/views/book_event_detail_screen.dart';
+import 'package:presentation/feature/book_review/cubit/book_review_cubit.dart';
+import 'package:presentation/feature/book_review/views/book_review_screen.dart';
 import 'package:presentation/feature/book_search/cubit/book_search_cubit.dart';
 import 'package:presentation/feature/book_search/views/book_search_screen.dart';
 import 'package:presentation/feature/dashboard/cubit/dashboard_cubit.dart';
@@ -94,8 +96,12 @@ class SignUpSuccessRoute extends GoRouteData {
     path: '/dashboard',
     routes: <TypedGoRoute<GoRouteData>>[
       TypedGoRoute<BookDetailRoute>(
-        path: 'book-detail/:bookID',
-      ),
+          path: 'book-detail/:bookID',
+          routes: <TypedGoRoute<GoRouteData>>[
+            TypedGoRoute<BookReviewRoute>(
+              path: 'book-review',
+            ),
+          ]),
       TypedGoRoute<BookSearchRoute>(
         path: 'book-search',
       ),
@@ -170,15 +176,31 @@ class BookEventRoute {
   }
 }
 
-//********************** BOOK EVENT ROUTE **********************
+//********************** BOOK EVENT DETAIL ROUTE **********************
 class BookEventDetailRoute extends GoRouteData {
   final String bookEventID;
   BookEventDetailRoute(this.bookEventID);
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return  BookEventDetailScreen(
+    return BookEventDetailScreen(
       bookEventID: bookEventID,
+    );
+  }
+}
+
+//********************** BOOK EVENT ROUTE **********************
+class BookReviewRoute extends GoRouteData {
+  final String bookID;
+  BookReviewRoute(this.bookID);
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return BlocProvider(
+      create: (context) => BookReviewCubit(),
+      child: BookReviewScreen(
+        bookID: bookID,
+      ),
     );
   }
 }

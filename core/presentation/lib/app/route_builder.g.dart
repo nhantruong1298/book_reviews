@@ -26,7 +26,7 @@ extension $SplashRouteExtension on SplashRoute {
 
   void go(BuildContext context) => context.go(location);
 
-  void push(BuildContext context) => context.push(location);
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
@@ -52,7 +52,7 @@ extension $SignUpRouteExtension on SignUpRoute {
 
   void go(BuildContext context) => context.go(location);
 
-  void push(BuildContext context) => context.push(location);
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
@@ -70,7 +70,7 @@ extension $SignUpSuccessRouteExtension on SignUpSuccessRoute {
 
   void go(BuildContext context) => context.go(location);
 
-  void push(BuildContext context) => context.push(location);
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
@@ -83,6 +83,12 @@ RouteBase get $dashboardRoute => GoRouteData.$route(
         GoRouteData.$route(
           path: 'book-detail/:bookID',
           factory: $BookDetailRouteExtension._fromState,
+          routes: [
+            GoRouteData.$route(
+              path: 'book-review',
+              factory: $BookReviewRouteExtension._fromState,
+            ),
+          ],
         ),
         GoRouteData.$route(
           path: 'book-search',
@@ -104,7 +110,7 @@ extension $DashboardRouteExtension on DashboardRoute {
 
   void go(BuildContext context) => context.go(location);
 
-  void push(BuildContext context) => context.push(location);
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
@@ -121,7 +127,24 @@ extension $BookDetailRouteExtension on BookDetailRoute {
 
   void go(BuildContext context) => context.go(location);
 
-  void push(BuildContext context) => context.push(location);
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+}
+
+extension $BookReviewRouteExtension on BookReviewRoute {
+  static BookReviewRoute _fromState(GoRouterState state) => BookReviewRoute(
+        state.params['bookID']!,
+      );
+
+  String get location => GoRouteData.$location(
+        '/dashboard/book-detail/${Uri.encodeComponent(bookID)}/book-review',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
@@ -136,7 +159,7 @@ extension $BookSearchRouteExtension on BookSearchRoute {
 
   void go(BuildContext context) => context.go(location);
 
-  void push(BuildContext context) => context.push(location);
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
@@ -154,7 +177,7 @@ extension $BookEventDetailRouteExtension on BookEventDetailRoute {
 
   void go(BuildContext context) => context.go(location);
 
-  void push(BuildContext context) => context.push(location);
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
