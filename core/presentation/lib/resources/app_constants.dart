@@ -7,5 +7,6 @@ class AppConstants {
   static const shortDateFormat = 'MMM dd';
   static const dateTimeFormat = 'dd MMM hh:mm';
   static const fullDateTimeFormat = 'dd MMM yyyy - HH:mm';
+  static const dateAndMonthFormat = 'dd MMM';
   static const int defaultAsyncValidatorsDebounceTime = 500;
 }

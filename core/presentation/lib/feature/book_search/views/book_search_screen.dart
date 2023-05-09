@@ -5,7 +5,6 @@ import 'package:presentation/base/base_screen.dart';
 import 'package:presentation/constants/book_tag.dart';
 import 'package:presentation/feature/book_search/cubit/book_search_cubit.dart';
 import 'package:presentation/feature/home/views/home_screen.dart';
-import 'package:presentation/resources/app_dimensions.dart';
 import 'package:presentation/widgets/commons/layouts/search_layout.dart';
 import 'package:presentation/widgets/commons/spacing.dart';
 
@@ -35,18 +34,16 @@ class _BookSearchScreenState extends BaseScreenState<BookSearchScreen> {
       onSubmitted: (value) {
         bookSearchCubit.onSearchTextChanged(value);
       },
-      //contentPadding: EdgeInsets.all(AppDimensions.defaultPadding),
       child: BlocBuilder<BookSearchCubit, BookSearchState>(
         builder: (context, state) {
           if (state is BookSearchLoadedState) {
             final mockData = state.data;
 
-            return ListView.builder(
-              // padding: const EdgeInsets.only(top: AppDimensions.defaultPadding),
+            return ListView.separated(
               physics: const BouncingScrollPhysics(),
               shrinkWrap: true,
               itemCount: mockData.length,
-              // separatorBuilder: (_, __) => const Spacing(1),
+              separatorBuilder: (_, __) => const Spacing(2.5),
               itemBuilder: (context, index) {
                 final data = mockData[index];
 

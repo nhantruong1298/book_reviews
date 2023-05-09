@@ -4,6 +4,7 @@ import 'package:presentation/resources/app_dimensions.dart';
 import 'package:presentation/resources/app_theme.dart';
 import 'package:presentation/utils/debouncer.dart';
 import 'package:presentation/widgets/commons/spacing.dart';
+import 'package:presentation/widgets/commons/typography/body_text.dart';
 
 class SearchLayout extends StatefulWidget {
   final Widget? child;
@@ -56,16 +57,17 @@ class _SearchLayoutState extends State<SearchLayout> {
       backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
           backgroundColor: AppColors.backgroundColor,
-          leading: widget.headerLeading ?? getDefaultLeading(context),
+          leadingWidth: 0,
           elevation: 0.0,
-          // title: SearchBarView(
-          //   autoFocus: widget.autoFocus,
-          //   placeHolder: widget.searchHint ?? "Tìm kiếm",
-          //   controller: widget.searchController,
-          //   onSubmitted: widget.onSubmitted,
-          //   debounceDuration: widget.debounceDuration,
-          //   focusNode: widget.focusNode,
-          // ),
+          title: SearchBarView(
+            autoFocus: widget.autoFocus,
+            placeHolder: widget.searchHint ?? "Tìm kiếm",
+            controller: widget.searchController,
+            onSubmitted: widget.onSubmitted,
+            debounceDuration: widget.debounceDuration,
+            focusNode: widget.focusNode,
+          ),
+          actions: [_buildBackButton()],
           automaticallyImplyLeading: widget.automaticallyImplyLeading),
       body: Container(
         width: double.infinity,
@@ -77,15 +79,6 @@ class _SearchLayoutState extends State<SearchLayout> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildFilters(),
-            SearchBarView(
-              autoFocus: widget.autoFocus,
-              placeHolder: widget.searchHint ?? "Tìm kiếm",
-              controller: widget.searchController,
-              onSubmitted: widget.onSubmitted,
-              debounceDuration: widget.debounceDuration,
-              focusNode: widget.focusNode,
-            ),
-            //   const Spacing(1),
             Expanded(
                 child: Container(
                     padding: widget.contentPadding, child: _getBuildMethod())),
@@ -113,7 +106,6 @@ class _SearchLayoutState extends State<SearchLayout> {
     return Container(
         height: 56,
         width: double.infinity,
-        // padding: EdgeInsets.all(padding),
         decoration: BoxDecoration(
           border: const Border(
               top: BorderSide(width: 1, color: AppColors.greyColor400)),
@@ -130,26 +122,21 @@ class _SearchLayoutState extends State<SearchLayout> {
             )));
   }
 
-  Widget? getDefaultLeading(BuildContext context) {
-    if (widget.automaticallyImplyLeading == true) {
-      final ModalRoute<dynamic>? parentRoute = ModalRoute.of(context);
-      final bool canPop = parentRoute?.canPop ?? false;
-
-      if (canPop) {
-        return IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.black,
-            size: 24,
-          ),
-          tooltip: MaterialLocalizations.of(context).backButtonTooltip,
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        );
-      }
-    }
-    return null;
+  Widget _buildBackButton() {
+    return InkWell(
+      onTap: () {
+        if (Navigator.of(context).canPop()) {
+          Navigator.of(context).pop();
+        }
+      },
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      child: Container(
+        alignment: Alignment.center,
+        margin: const EdgeInsets.only(right: AppDimensions.defaultPadding),
+        child: BodyLText('Hủy'),
+      ),
+    );
   }
 }
 
@@ -191,7 +178,7 @@ class _SearchBarViewState extends State<SearchBarView> {
         focusNode: widget.focusNode,
         controller: widget.controller,
         textAlignVertical: TextAlignVertical.bottom,
-        style: TextStyle(
+        style: const TextStyle(
           color: AppColors.greyColor900,
         ),
         decoration: InputDecoration(

@@ -47,10 +47,11 @@ class _HomeScreenState extends BaseScreenState<HomeScreen> {
           child: const ButtonText('Tìm kiếm'),
         )
       ],
-      child: ListView.builder(
+      child: ListView.separated(
         physics: const BouncingScrollPhysics(),
         shrinkWrap: true,
         itemCount: mockData.length,
+        separatorBuilder: (_, __) => const Spacing(2.5),
         itemBuilder: (context, index) {
           final data = mockData[index];
 
@@ -89,29 +90,19 @@ class ListBookItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: SizeConfig.screenWidth,
-      height: SizeConfig.screenHeight * 0.18,
-      // margin:
-      //     const EdgeInsets.symmetric(horizontal: AppDimensions.defaultPadding),
-      // decoration: BoxDecoration(
-      //   borderRadius: BorderRadius.circular(AppDimensions.defaultSRadius),
-      //   boxShadow: _boxShadow,
-      // ),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(AppDimensions.defaultSRadius),
-        onTap: onTap,
-        child: Row(
-          children: [
-            _BookImage(bookImage: bookImage),
-            const Spacing(1, direction: SpacingDirection.Horizontal),
-            _BookInfo(
-              authorName: authorName,
-              bookName: bookName,
-              tags: tags,
-            )
-          ],
-        ),
+    return InkWell(
+      borderRadius: BorderRadius.circular(AppDimensions.defaultSRadius),
+      onTap: onTap,
+      child: Row(
+        children: [
+          _BookImage(bookImage: bookImage),
+          const Spacing(1, direction: SpacingDirection.Horizontal),
+          _BookInfo(
+            authorName: authorName,
+            bookName: bookName,
+            tags: tags,
+          )
+        ],
       ),
     );
   }

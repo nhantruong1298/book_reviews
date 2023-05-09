@@ -88,6 +88,10 @@ class _BookEventDetailScreenState
               ),
             ),
           ),
+          // SliverPadding(
+          //   padding: const EdgeInsets.all(AppDimensions.defaultPadding),
+          //   sliver:
+          // ),
         ],
       ),
     );
@@ -99,6 +103,7 @@ class _BookEventDetailScreenState
       stretch: true,
       floating: true,
       automaticallyImplyLeading: true,
+      elevation: 0,
       leading: IconButton(
         icon: const Icon(Icons.arrow_back),
         color: AppColors.primaryDarkColor,
@@ -108,14 +113,27 @@ class _BookEventDetailScreenState
       expandedHeight: SizeConfig.getProportionateScreenHeight(150),
       backgroundColor: AppColors.backgroundColor,
       flexibleSpace: FlexibleSpaceBar(
-        background: CachedNetworkImage(
-          imageUrl: event?.imageUrl ?? '',
-          placeholder: (context, url) =>
-              const Center(child: CircularProgressIndicator()),
-          errorWidget: (context, url, error) => const Icon(Icons.error),
-          fit: BoxFit.cover,
-          width: double.infinity,
-          height: SizeConfig.getProportionateScreenHeight(150),
+        background: ClipRRect(
+          borderRadius: BorderRadius.circular(AppDimensions.defaultXLRadius),
+          child: Stack(
+            children: [
+              Positioned.fill(
+                child: CachedNetworkImage(
+                  imageUrl: event?.imageUrl ?? '',
+                  placeholder: (context, url) =>
+                      const Center(child: CircularProgressIndicator()),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                  height: SizeConfig.getProportionateScreenHeight(150),
+                ),
+              ),
+              Positioned.fill(
+                  child: Container(
+                color: Colors.grey.withOpacity(0.3),
+              ))
+            ],
+          ),
         ),
       ),
     );

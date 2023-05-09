@@ -17,4 +17,16 @@ class DateFormatter {
       return formatter.format(toLocalDate(date, toLocal));
     }
   }
+
+  static String toDateAndMonthFormat(DateTime? date,
+      {bool toLocal = true, bool showGMT = true}) {
+    if (date == null) return '';
+
+    final DateFormat formatter = DateFormat(AppConstants.dateAndMonthFormat);
+    if (showGMT) {
+      return formatter.format(toLocalDate(date, toLocal));
+    } else {
+      return formatter.format(toLocalDate(date, toLocal));
+    }
+  }
 }

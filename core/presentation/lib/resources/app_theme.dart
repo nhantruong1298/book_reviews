@@ -232,4 +232,23 @@ class AppThemeStyle {
   //         ),
   //         hintText: hintText,
   //         hintStyle: hintStyle);
+
+    static BoxShadow defaultBoxShadow(
+      {Offset? offSet, double? blurRadius, Color? color}) {
+    return BoxShadow(
+        offset: offSet ?? const Offset(0, 16),
+        blurRadius: blurRadius ?? 48,
+        color: color ?? const Color.fromRGBO(46, 52, 121, 0.08));
+  }
+
+  static List<BoxShadow> get appListTileBoxShadow => const [
+        BoxShadow(
+            offset: Offset(0, 1),
+            blurRadius: 4,
+            color: Color.fromRGBO(46, 52, 121, 0.04)),
+        BoxShadow(
+            offset: Offset(0, 8),
+            blurRadius: 24,
+            color: Color.fromRGBO(46, 52, 121, 0.04))
+      ];
 }

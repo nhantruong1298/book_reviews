@@ -6,9 +6,11 @@ import 'package:presentation/base/base_screen.dart';
 import 'package:presentation/feature/_global_app/cubit/global_app_cubit.dart';
 import 'package:presentation/resources/app_colors.dart';
 import 'package:presentation/resources/app_dimensions.dart';
+import 'package:presentation/resources/app_theme.dart';
 import 'package:presentation/utils/date_formatter.dart';
 import 'package:presentation/utils/size_config.dart';
 import 'package:presentation/widgets/commons/layouts/basic_layout.dart';
+import 'package:presentation/widgets/commons/spacing.dart';
 import 'package:presentation/widgets/commons/typography/body_text.dart';
 
 class BookEventScreen extends StatefulWidget {
@@ -27,6 +29,7 @@ class _BookEventScreenState extends BaseScreenState<BookEventScreen> {
     final eventData = context.read<GlobalAppCubit>().state.eventData ?? [];
 
     return BasicLayout(
+      padding: EdgeInsets.zero,
       title: BodyXLText(
         'Sự kiện sách 2023',
         style: BodyXLText.defaultStyle.copyWith(
@@ -34,31 +37,24 @@ class _BookEventScreenState extends BaseScreenState<BookEventScreen> {
         ),
       ),
       centerTitle: false,
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppDimensions.defaultPadding,
-      ),
-      child: SingleChildScrollView(
-          child: Column(
-              children: List.generate(
-        eventData.length,
-        (index) {
+      child: ListView.separated(
+        physics: const BouncingScrollPhysics(),
+        shrinkWrap: true,
+        itemCount: eventData.length,
+        separatorBuilder: (_, __) => const Spacing(1),
+        itemBuilder: (_, index) {
           final event = eventData[index];
 
-          return Padding(
-            padding: const EdgeInsets.only(
-              bottom: AppDimensions.defaultLPadding,
-            ),
-            child: _BookEventCardView(
-              dateStart: event.dateStart,
-              eventName: event.eventName,
-              imageUrl: event.imageUrl,
-              onTap: () {
-                BookEventDetailRoute(event.id ?? '').go(context);
-              },
-            ),
+          return _BookEventCardView(
+            dateStart: event.dateStart,
+            eventName: event.eventName,
+            imageUrl: event.imageUrl,
+            onTap: () {
+              BookEventDetailRoute(event.id ?? '').go(context);
+            },
           );
         },
-      ))),
+      ),
     );
   }
 }
@@ -76,64 +72,191 @@ class _BookEventCardView extends StatelessWidget {
   final DateTime? dateStart;
   final VoidCallback? onTap;
 
+  Widget get _divider => Container(
+        height: 30,
+        child: VerticalDivider(
+          thickness: .75,
+          color: AppColors.greyColor600,
+        ),
+      );
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(AppDimensions.defaultRadius),
-        child: Stack(
-          children: [
-            CachedNetworkImage(
-              imageUrl: imageUrl ?? '',
-              placeholder: (context, url) =>
-                  const Center(child: CircularProgressIndicator()),
-              errorWidget: (context, url, error) => const Icon(Icons.error),
-              fit: BoxFit.cover,
-              width: double.infinity,
-              height: SizeConfig.getProportionateScreenHeight(150),
-            ),
-            Positioned.fill(
-              child: Container(
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                  colors: [
-                    Colors.black.withOpacity(.2),
-                    Colors.white.withOpacity(.3),
-                  ],
-                  begin: Alignment.bottomCenter,
-                  end: Alignment.topCenter,
-                )),
-              ),
-            ),
-            Positioned(
-                bottom: AppDimensions.defaultPadding,
-                left: AppDimensions.defaultPadding,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    BodyLText(
-                      eventName,
-                      maxLines: 1,
-                      style: BodyLText.defaultStyle.copyWith(
-                        color: AppColors.textLightColor,
-                        fontWeight: FontWeight.bold,
-                      ),
+      child: Container(
+          margin: const EdgeInsets.symmetric(
+              horizontal: AppDimensions.defaultPadding),
+          padding: const EdgeInsets.all(AppDimensions.defaultPadding),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(AppDimensions.defaultRadius),
+              color: AppColors.backgroundColor,
+              boxShadow: [AppThemeStyle.defaultBoxShadow()]),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  ClipRRect(
+                    borderRadius:
+                        BorderRadius.circular(AppDimensions.defaultRadius),
+                    child: CachedNetworkImage(
+                      imageUrl: imageUrl ?? '',
+                      placeholder: (context, url) =>
+                          const Center(child: CircularProgressIndicator()),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
+                      fit: BoxFit.fill,
+                      width: SizeConfig.getProportionateScreenHeight(70),
+                      height: SizeConfig.getProportionateScreenHeight(70),
                     ),
-                    BodyLText(
-                      DateFormatter.toFullDateTimeFormat(dateStart),
-                      maxLines: 1,
-                      style: BodyLText.defaultStyle.copyWith(
-                        color: AppColors.textLightColor,
-                        fontWeight: FontWeight.bold,
+                  ),
+                  const Spacing(
+                    1,
+                    direction: SpacingDirection.Horizontal,
+                  ),
+                  Expanded(
+                      child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      BodyText(
+                        'SỰ KIỆN',
+                        color: AppColors.primaryColor500,
+                        style: BodyText.defaultStyle.copyWith(
+                          fontSize: AppDimensions.bodyXXSFontSize,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
-                    )
-                  ],
-                ))
-          ],
-        ),
-      ),
+                      BodyXLText(
+                        eventName,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: BodyXLText.defaultStyle
+                            .copyWith(fontWeight: FontWeight.bold),
+                      ),
+                      const Spacing(.5),
+                      BodyText(
+                        'TP.HCM',
+                        style: BodyText.defaultStyle.copyWith(
+                          color: AppColors.textGreyColor,
+                          fontSize: AppDimensions.bodyXXSFontSize,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      )
+                    ],
+                  )),
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      InkWell(
+                        onTap: () {},
+                        child: Container(
+                            padding: EdgeInsets.all(
+                              AppDimensions.defaultXXSPadding / 2,
+                            ),
+                            decoration: BoxDecoration(
+                                color: AppColors.greyColor300,
+                                borderRadius: BorderRadius.circular(
+                                    AppDimensions.defaultXSRadius)),
+                            child: Icon(
+                              Icons.more_vert,
+                              size: AppDimensions.defaultIconSizeSmall,
+                            )),
+                      ),
+                      InkWell(
+                        onTap: () {},
+                        child: Container(
+                            padding: EdgeInsets.all(
+                              AppDimensions.defaultXXSPadding / 2,
+                            ),
+                            decoration: BoxDecoration(
+                                color: AppColors.greyColor300,
+                                borderRadius: BorderRadius.circular(
+                                    AppDimensions.defaultXSRadius)),
+                            child: Icon(
+                              Icons.favorite_border,
+                              color: AppColors.primaryColor500,
+                              size: AppDimensions.defaultIconSizeSmall,
+                            )),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+              const Spacing(1.5),
+              Row(
+                children: [
+                  Flexible(
+                    flex: 2,
+                    fit: FlexFit.tight,
+                    child: Column(
+                      children: [
+                        BodyLText(
+                          '14',
+                          style: BodyLText.defaultStyle.copyWith(
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        BodyText(
+                          'Lượt thích',
+                          style: BodyText.defaultStyle.copyWith(
+                            color: AppColors.textGreyColor,
+                            fontSize: AppDimensions.bodyXXSFontSize,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  _divider,
+                  Flexible(
+                    flex: 2,
+                    fit: FlexFit.tight,
+                    child: Column(
+                      children: [
+                        BodyLText(
+                          '${DateFormatter.toDateAndMonthFormat(dateStart)}',
+                          style: BodyLText.defaultStyle.copyWith(
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        BodyText(
+                          'Ngày',
+                          style: BodyText.defaultStyle.copyWith(
+                            color: AppColors.textGreyColor,
+                            fontSize: AppDimensions.bodyXXSFontSize,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  _divider,
+                  Flexible(
+                    fit: FlexFit.tight,
+                    flex: 3,
+                    child: Column(
+                      children: [
+                        BodyLText(
+                          '9:00 AM',
+                          style: BodyLText.defaultStyle.copyWith(
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        BodyText(
+                          'Thời gian',
+                          style: BodyText.defaultStyle.copyWith(
+                            color: AppColors.textGreyColor,
+                            fontSize: AppDimensions.bodyXXSFontSize,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              )
+            ],
+          )),
     );
   }
 }
