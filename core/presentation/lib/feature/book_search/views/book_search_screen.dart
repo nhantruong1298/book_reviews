@@ -35,17 +35,18 @@ class _BookSearchScreenState extends BaseScreenState<BookSearchScreen> {
       onSubmitted: (value) {
         bookSearchCubit.onSearchTextChanged(value);
       },
+      //contentPadding: EdgeInsets.all(AppDimensions.defaultPadding),
       child: BlocBuilder<BookSearchCubit, BookSearchState>(
         builder: (context, state) {
           if (state is BookSearchLoadedState) {
             final mockData = state.data;
 
-            return ListView.separated(
-              padding: const EdgeInsets.only(top: AppDimensions.defaultPadding),
+            return ListView.builder(
+              // padding: const EdgeInsets.only(top: AppDimensions.defaultPadding),
               physics: const BouncingScrollPhysics(),
               shrinkWrap: true,
               itemCount: mockData.length,
-              separatorBuilder: (_, __) => const Spacing(1),
+              // separatorBuilder: (_, __) => const Spacing(1),
               itemBuilder: (context, index) {
                 final data = mockData[index];
 

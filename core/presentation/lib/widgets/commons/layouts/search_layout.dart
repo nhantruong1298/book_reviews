@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:presentation/resources/app_colors.dart';
+import 'package:presentation/resources/app_dimensions.dart';
 import 'package:presentation/resources/app_theme.dart';
 import 'package:presentation/utils/debouncer.dart';
+import 'package:presentation/widgets/commons/spacing.dart';
 
 class SearchLayout extends StatefulWidget {
   final Widget? child;
@@ -51,27 +53,39 @@ class _SearchLayoutState extends State<SearchLayout> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       bottomNavigationBar: widget.bottomNavigationBar,
+      backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
           backgroundColor: AppColors.backgroundColor,
           leading: widget.headerLeading ?? getDefaultLeading(context),
-          title: SearchBarView(
-            autoFocus: widget.autoFocus,
-            placeHolder: widget.searchHint ?? "Search",
-            controller: widget.searchController,
-            onSubmitted: widget.onSubmitted,
-            debounceDuration: widget.debounceDuration,
-            focusNode: widget.focusNode,
-          ),
+          elevation: 0.0,
+          // title: SearchBarView(
+          //   autoFocus: widget.autoFocus,
+          //   placeHolder: widget.searchHint ?? "Tìm kiếm",
+          //   controller: widget.searchController,
+          //   onSubmitted: widget.onSubmitted,
+          //   debounceDuration: widget.debounceDuration,
+          //   focusNode: widget.focusNode,
+          // ),
           automaticallyImplyLeading: widget.automaticallyImplyLeading),
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        color: widget.color ?? AppColors.backgroundGreyColor,
+        padding: const EdgeInsets.all(AppDimensions.defaultPadding),
+        color: widget.color ?? AppColors.backgroundColor,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildFilters(),
+            SearchBarView(
+              autoFocus: widget.autoFocus,
+              placeHolder: widget.searchHint ?? "Tìm kiếm",
+              controller: widget.searchController,
+              onSubmitted: widget.onSubmitted,
+              debounceDuration: widget.debounceDuration,
+              focusNode: widget.focusNode,
+            ),
+            //   const Spacing(1),
             Expanded(
                 child: Container(
                     padding: widget.contentPadding, child: _getBuildMethod())),
@@ -171,16 +185,38 @@ class _SearchBarViewState extends State<SearchBarView> {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      focusNode: widget.focusNode,
-      controller: widget.controller,
-      decoration: AppThemeStyle.searchHeaderDecoration
-          .copyWith(hintText: widget.placeHolder),
-      autofocus: widget.autoFocus,
-      keyboardType: TextInputType.text,
-      textInputAction: TextInputAction.search,
-      onChanged: onSearchTextChanged,
-      onSubmitted: onSearchTextChanged,
+    return SizedBox(
+      height: AppDimensions.buttonHeight,
+      child: TextField(
+        focusNode: widget.focusNode,
+        controller: widget.controller,
+        textAlignVertical: TextAlignVertical.bottom,
+        style: TextStyle(
+          color: AppColors.greyColor900,
+        ),
+        decoration: InputDecoration(
+          prefixIcon: const Icon(
+            Icons.search,
+            color: AppColors.greyColor600,
+          ),
+          hintText: widget.placeHolder,
+          filled: true,
+          fillColor: const Color(0xffF6F6F6),
+          focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: AppColors.greyColor600),
+            borderRadius: BorderRadius.circular(AppDimensions.defaultSRadius),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: AppColors.greyColor600),
+            borderRadius: BorderRadius.circular(AppDimensions.defaultSRadius),
+          ),
+        ),
+        autofocus: widget.autoFocus,
+        keyboardType: TextInputType.text,
+        textInputAction: TextInputAction.search,
+        onChanged: onSearchTextChanged,
+        onSubmitted: onSearchTextChanged,
+      ),
     );
   }
 
