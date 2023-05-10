@@ -4,7 +4,7 @@ import 'package:presentation/resources/app_dimensions.dart';
 import 'package:presentation/widgets/commons/typography/body_text.dart';
 
 class HeadingText extends BodyText {
-  static get defaultStyle => const TextStyle(
+  static TextStyle get defaultStyle => const TextStyle(
       color: AppColors.textColor,
       fontSize: AppDimensions.headingFontSize,
       fontWeight: FontWeight.w700,
@@ -110,7 +110,7 @@ class Heading2Text extends BodyText {
 }
 
 class Heading3Text extends BodyText {
-  static get defaultStyle => const TextStyle(
+  static TextStyle get defaultStyle => const TextStyle(
       color: AppColors.textColor,
       fontSize: AppDimensions.heading3FontSize,
       fontWeight: FontWeight.w700,
