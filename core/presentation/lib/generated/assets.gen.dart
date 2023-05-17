@@ -22,18 +22,46 @@ class $AssetsImagesGen {
   AssetGenImage get dacNhanTam =>
       const AssetGenImage('assets/images/dac-nhan-tam.png');
 
+  /// File path: assets/images/email-icon.svg
+  SvgGenImage get emailIcon =>
+      const SvgGenImage('assets/images/email-icon.svg');
+
+  /// File path: assets/images/moon-icon.svg
+  SvgGenImage get moonIcon => const SvgGenImage('assets/images/moon-icon.svg');
+
+  /// File path: assets/images/notification-icon.svg
+  SvgGenImage get notificationIcon =>
+      const SvgGenImage('assets/images/notification-icon.svg');
+
+  /// File path: assets/images/setting-icon.svg
+  SvgGenImage get settingIcon =>
+      const SvgGenImage('assets/images/setting-icon.svg');
+
+  /// File path: assets/images/user-icon.svg
+  SvgGenImage get userIcon => const SvgGenImage('assets/images/user-icon.svg');
+
   /// List of all assets
-  List<dynamic> get values => [accountIcon, dacNhanTam];
+  List<dynamic> get values => [
+        accountIcon,
+        dacNhanTam,
+        emailIcon,
+        moonIcon,
+        notificationIcon,
+        settingIcon,
+        userIcon
+      ];
 }
 
 class $AssetsMockDataGen {
   const $AssetsMockDataGen();
 
   /// File path: assets/mock_data/books_data.json
-  String get booksData => 'assets/mock_data/books_data.json';
+  String get booksData =>
+      'packages/presentation/assets/mock_data/books_data.json';
 
   /// File path: assets/mock_data/events_data.json
-  String get eventsData => 'assets/mock_data/events_data.json';
+  String get eventsData =>
+      'packages/presentation/assets/mock_data/events_data.json';
 
   /// List of all assets
   List<String> get values => [booksData, eventsData];
@@ -43,7 +71,8 @@ class $AssetsRawsGen {
   const $AssetsRawsGen();
 
   /// File path: assets/raws/success_animation.json
-  String get successAnimation => 'assets/raws/success_animation.json';
+  String get successAnimation =>
+      'packages/presentation/assets/raws/success_animation.json';
 
   /// List of all assets
   List<String> get values => [successAnimation];

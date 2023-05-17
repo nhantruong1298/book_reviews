@@ -7,7 +7,6 @@ import 'package:presentation/constants/book_tag.dart';
 import 'package:presentation/feature/_global_app/cubit/global_app_cubit.dart';
 import 'package:presentation/resources/app_colors.dart';
 import 'package:presentation/resources/app_dimensions.dart';
-import 'package:presentation/utils/size_config.dart';
 import 'package:presentation/widgets/commons/Spacing.dart';
 import 'package:presentation/widgets/commons/button/button.dart';
 import 'package:presentation/widgets/commons/layouts/basic_layout.dart';

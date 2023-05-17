@@ -58,6 +58,7 @@ class _BookReviewScreenState extends BaseScreenState<BookReviewScreen> {
 class _AddReviewButton extends StatelessWidget {
   final VoidCallback? onTap;
   const _AddReviewButton({
+    // ignore: unused_element
     this.onTap,
   });
 

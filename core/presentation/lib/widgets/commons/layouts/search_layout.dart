@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:presentation/resources/app_colors.dart';
 import 'package:presentation/resources/app_dimensions.dart';
-import 'package:presentation/resources/app_theme.dart';
 import 'package:presentation/utils/debouncer.dart';
-import 'package:presentation/widgets/commons/spacing.dart';
 import 'package:presentation/widgets/commons/typography/body_text.dart';
 
 class SearchLayout extends StatefulWidget {

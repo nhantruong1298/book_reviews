@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:presentation/app/route_builder.dart';
 import 'package:presentation/base/base_screen.dart';
 import 'package:presentation/feature/dashboard/cubit/dashboard_cubit.dart';
+import 'package:presentation/feature/menu/views/menu_screen.dart';
+import 'package:presentation/feature/profile/views/profile_screen.dart';
 import 'package:presentation/resources/app_colors.dart';
 import 'package:presentation/utils/size_config.dart';
 import 'package:presentation/widgets/commons/layouts/tab_layout/tab_layout.dart';
@@ -20,7 +22,6 @@ class _DashboardScreenState extends BaseScreenState<DashboardScreen>
   late final List<Widget> _screens;
   DateTime? currentBackPressTime;
   late final TabController _controller;
-
 
   @override
   get willPop => false;
@@ -51,7 +52,9 @@ class _DashboardScreenState extends BaseScreenState<DashboardScreen>
     super.initState();
     _screens = [
       HomeRoute.build(),
+      const ProfileScreen(),
       BookEventRoute.build(),
+      const MenuScreen(),
     ];
 
     _controller = TabController(
@@ -85,6 +88,21 @@ class _DashboardScreenState extends BaseScreenState<DashboardScreen>
       ),
       FABBottomAppBarItem(
         icon: const Icon(
+          Icons.person_2_outlined,
+          size: inActiveIconSize,
+          weight: 0.5,
+          color: AppColors.primaryColor500,
+        ),
+        activeIcon: const Icon(
+          Icons.person,
+          size: activeIconSize,
+          weight: 1,
+          color: AppColors.primaryColor500,
+        ),
+        title: 'Profile',
+      ),
+      FABBottomAppBarItem(
+        icon: const Icon(
           Icons.event,
           size: inActiveIconSize,
           weight: 0.5,
@@ -98,13 +116,28 @@ class _DashboardScreenState extends BaseScreenState<DashboardScreen>
         ),
         title: 'Event',
       ),
+      FABBottomAppBarItem(
+        icon: const Icon(
+          Icons.menu,
+          size: inActiveIconSize,
+          weight: 0.5,
+          color: AppColors.primaryColor500,
+        ),
+        activeIcon: const Icon(
+          Icons.menu,
+          size: activeIconSize,
+          weight: 1,
+          color: AppColors.primaryColor500,
+        ),
+        title: 'Menu',
+      ),
     ];
   }
 
   @override
   Widget builder(BuildContext context) {
     SizeConfig.init(context);
-    
+
     return BlocListener<DashboardCubit, DashboardState>(
       listener: listener,
       child: TabLayout(
