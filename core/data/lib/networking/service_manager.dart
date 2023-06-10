@@ -1,13 +1,15 @@
-import 'package:data/entity/response/sign_up_with_email_response.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:data/data_source/data_storage.dart';
 import 'package:data/entity/response/sign_in_with_email_response.dart';
+import 'package:data/entity/response/sign_up_with_email_response.dart';
 import 'package:data/networking/firebase_service/firebase_service.dart';
 import 'package:domain/repository/log_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ServiceManager {
   late final FireBaseService _fireBaseService;
+  // ignore: unused_field
   late final DataStorage _dataStorage;
+  // ignore: unused_field
   late final LogService _logService;
 
   static ServiceManager? _instance;
