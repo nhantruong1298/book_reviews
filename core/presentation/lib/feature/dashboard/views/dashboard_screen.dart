@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:presentation/app/route_builder.dart';
 import 'package:presentation/base/base_screen.dart';
 import 'package:presentation/feature/dashboard/cubit/dashboard_cubit.dart';
 import 'package:presentation/feature/menu/views/menu_screen.dart';
 import 'package:presentation/feature/profile/views/profile_screen.dart';
+import 'package:presentation/generated/assets.gen.dart';
+import 'package:presentation/generated/extension.dart';
 import 'package:presentation/resources/app_colors.dart';
 import 'package:presentation/utils/size_config.dart';
 import 'package:presentation/widgets/commons/layouts/tab_layout/tab_layout.dart';
@@ -72,62 +75,58 @@ class _DashboardScreenState extends BaseScreenState<DashboardScreen>
 
     return [
       FABBottomAppBarItem(
-        icon: const Icon(
-          Icons.home,
-          size: inActiveIconSize,
-          weight: 0.5,
-          color: AppColors.primaryColor500,
+        icon: SvgPicture.asset(
+          AssetsGen.getRawString(Assets.images.homeIcon.path),
+          width: inActiveIconSize,
+          height: inActiveIconSize,
+          color: AppColors.textGreyColor,
         ),
-        activeIcon: const Icon(
-          Icons.home,
-          size: activeIconSize,
-          weight: 1,
-          color: AppColors.primaryColor500,
+        activeIcon: SvgPicture.asset(
+          AssetsGen.getRawString(Assets.images.homeIcon.path),
+          width: activeIconSize,
+          height: activeIconSize,
         ),
         title: 'Home',
       ),
       FABBottomAppBarItem(
-        icon: const Icon(
-          Icons.person_2_outlined,
-          size: inActiveIconSize,
-          weight: 0.5,
-          color: AppColors.primaryColor500,
+        icon: SvgPicture.asset(
+          AssetsGen.getRawString(Assets.images.profileIcon.path),
+          width: inActiveIconSize,
+          height: inActiveIconSize,
+          color: AppColors.textGreyColor,
         ),
-        activeIcon: const Icon(
-          Icons.person,
-          size: activeIconSize,
-          weight: 1,
-          color: AppColors.primaryColor500,
+        activeIcon: SvgPicture.asset(
+          AssetsGen.getRawString(Assets.images.profileIcon.path),
+          width: activeIconSize,
+          height: activeIconSize,
         ),
         title: 'Profile',
       ),
       FABBottomAppBarItem(
-        icon: const Icon(
-          Icons.event,
-          size: inActiveIconSize,
-          weight: 0.5,
-          color: AppColors.primaryColor500,
+        icon: SvgPicture.asset(
+          AssetsGen.getRawString(Assets.images.eventIcon.path),
+          width: inActiveIconSize,
+          height: inActiveIconSize,
+          color: AppColors.textGreyColor,
         ),
-        activeIcon: const Icon(
-          Icons.event,
-          size: activeIconSize,
-          weight: 1,
-          color: AppColors.primaryColor500,
+        activeIcon: SvgPicture.asset(
+          AssetsGen.getRawString(Assets.images.eventIcon.path),
+          width: activeIconSize,
+          height: activeIconSize,
         ),
         title: 'Event',
       ),
       FABBottomAppBarItem(
-        icon: const Icon(
-          Icons.menu,
-          size: inActiveIconSize,
-          weight: 0.5,
-          color: AppColors.primaryColor500,
+        icon: SvgPicture.asset(
+          AssetsGen.getRawString(Assets.images.menuIcon.path),
+          width: inActiveIconSize,
+          height: inActiveIconSize,
+          color: AppColors.textGreyColor,
         ),
-        activeIcon: const Icon(
-          Icons.menu,
-          size: activeIconSize,
-          weight: 1,
-          color: AppColors.primaryColor500,
+        activeIcon: SvgPicture.asset(
+          AssetsGen.getRawString(Assets.images.menuIcon.path),
+          width: activeIconSize,
+          height: activeIconSize,
         ),
         title: 'Menu',
       ),

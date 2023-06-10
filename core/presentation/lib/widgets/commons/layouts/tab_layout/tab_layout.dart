@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:presentation/resources/app_colors.dart';
 
 import 'fab_bottom_app_bar.dart';
 export 'fab_bottom_app_bar.dart';
@@ -117,8 +118,8 @@ class _TabLayoutState extends State<TabLayout>
           return FABBottomAppBar(
             index: snapshot.data ?? 0,
             centerItemText: widget.centerButtonText,
-            color: widget.bottomAppBarColor,
-            selectedColor: widget.bottomAppBarActiveColor,
+            color: AppColors.textGreyColor,
+            selectedColor: AppColors.primaryDarkColor,
             notchedShape: const CircularNotchedRectangle(),
             onTabSelected: (int? index) {
               if (_tabController!.index != index) _onTabSelected(index!);
@@ -154,5 +155,4 @@ class _TabLayoutState extends State<TabLayout>
   // _buildFab(AsyncSnapshot<int> snapshot, BuildContext context) {
   //   return widget.centerButton;
   // }
-
 }

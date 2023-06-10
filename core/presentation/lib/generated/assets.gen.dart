@@ -26,12 +26,26 @@ class $AssetsImagesGen {
   SvgGenImage get emailIcon =>
       const SvgGenImage('assets/images/email-icon.svg');
 
+  /// File path: assets/images/event-icon.svg
+  SvgGenImage get eventIcon =>
+      const SvgGenImage('assets/images/event-icon.svg');
+
+  /// File path: assets/images/home-icon.svg
+  SvgGenImage get homeIcon => const SvgGenImage('assets/images/home-icon.svg');
+
+  /// File path: assets/images/menu-icon.svg
+  SvgGenImage get menuIcon => const SvgGenImage('assets/images/menu-icon.svg');
+
   /// File path: assets/images/moon-icon.svg
   SvgGenImage get moonIcon => const SvgGenImage('assets/images/moon-icon.svg');
 
   /// File path: assets/images/notification-icon.svg
   SvgGenImage get notificationIcon =>
       const SvgGenImage('assets/images/notification-icon.svg');
+
+  /// File path: assets/images/profile-icon.svg
+  SvgGenImage get profileIcon =>
+      const SvgGenImage('assets/images/profile-icon.svg');
 
   /// File path: assets/images/setting-icon.svg
   SvgGenImage get settingIcon =>
@@ -45,8 +59,12 @@ class $AssetsImagesGen {
         accountIcon,
         dacNhanTam,
         emailIcon,
+        eventIcon,
+        homeIcon,
+        menuIcon,
         moonIcon,
         notificationIcon,
+        profileIcon,
         settingIcon,
         userIcon
       ];
@@ -56,12 +74,10 @@ class $AssetsMockDataGen {
   const $AssetsMockDataGen();
 
   /// File path: assets/mock_data/books_data.json
-  String get booksData =>
-      'packages/presentation/assets/mock_data/books_data.json';
+  String get booksData => 'assets/mock_data/books_data.json';
 
   /// File path: assets/mock_data/events_data.json
-  String get eventsData =>
-      'packages/presentation/assets/mock_data/events_data.json';
+  String get eventsData => 'assets/mock_data/events_data.json';
 
   /// List of all assets
   List<String> get values => [booksData, eventsData];
@@ -71,8 +87,7 @@ class $AssetsRawsGen {
   const $AssetsRawsGen();
 
   /// File path: assets/raws/success_animation.json
-  String get successAnimation =>
-      'packages/presentation/assets/raws/success_animation.json';
+  String get successAnimation => 'assets/raws/success_animation.json';
 
   /// List of all assets
   List<String> get values => [successAnimation];

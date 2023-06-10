@@ -73,7 +73,7 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: items,
       ),
-      color: widget.backgroundColor,
+      elevation: 0.0,
     );
   }
 
@@ -102,7 +102,7 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
     ValueChanged<int?>? onPressed,
   }) {
     final isSelected = widget.index == index;
-    Color? color = isSelected ? widget.selectedColor : widget.color;
+    Color? titleColor = isSelected ? widget.selectedColor : widget.color;
     final currentIcon = isSelected ? item.activeIcon! : item.icon!;
 
     return Expanded(
@@ -125,9 +125,9 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
                       duration: AppConstants.defaultDuration,
                       height: isSelected ? 4 : 0,
                       width: double.infinity,
-                      decoration:const BoxDecoration(
-                          color: AppColors.primaryColor500,
-                          borderRadius:  BorderRadius.only(
+                      decoration: const BoxDecoration(
+                          color: AppColors.primaryDarkColor,
+                          borderRadius: BorderRadius.only(
                             bottomLeft: Radius.circular(4),
                             bottomRight: Radius.circular(4),
                           )),
@@ -141,7 +141,7 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
                     Flexible(
                       child: BodyXXSText(
                         item.title ?? '',
-                        color: color,
+                        color: titleColor,
                         textAlign: TextAlign.center,
                         maxLines: 1,
                         overflow: TextOverflow.visible,
