@@ -2,20 +2,17 @@ import 'package:bloc/bloc.dart';
 import 'package:data/entity/response/book_detail_response.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:presentation/exception/app_exception.dart';
-import 'package:presentation/feature/_global_app/cubit/global_app_cubit.dart';
 import 'package:presentation/feature/book_search/book_search_data.dart';
+import 'package:presentation/feature/mock_data/mock_data.dart';
 
 part 'book_search_state.dart';
 part 'book_search_cubit.freezed.dart';
 
 class BookSearchCubit extends Cubit<BookSearchState> {
-  final GlobalAppCubit _globalAppCubit;
-  BookSearchCubit(
-    this._globalAppCubit,
-  ) : super(BookSearchInitial(BookSearchData()));
+  BookSearchCubit() : super(BookSearchInitial(BookSearchData()));
 
   void _loadNewData(BookSearchData? searchData) {
-    final mockData = _globalAppCubit.state.bookData ?? [];
+    final mockData = MockData.shared.bookData ?? [];
 
     final List<BookDetailResponse> result = [];
 
@@ -44,7 +41,7 @@ class BookSearchCubit extends Cubit<BookSearchState> {
   }
 
   void onScreenInit() {
-    final mockData = _globalAppCubit.state.bookData ?? [];
+    final mockData = MockData.shared.bookData ?? [];
     emit(BookSearchLoadedState(state.searchData, mockData));
   }
 }

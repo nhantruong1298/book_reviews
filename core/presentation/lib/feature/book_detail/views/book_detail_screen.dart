@@ -5,8 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:presentation/app/route_builder.dart';
 import 'package:presentation/base/base_screen.dart';
 import 'package:presentation/constants/book_tag.dart';
-import 'package:presentation/feature/_global_app/cubit/global_app_cubit.dart';
 import 'package:presentation/feature/book_detail/cubit/book_detail_cubit.dart';
+import 'package:presentation/feature/mock_data/mock_data.dart';
 import 'package:presentation/generated/assets.gen.dart';
 import 'package:presentation/resources/app_colors.dart';
 import 'package:presentation/resources/app_dimensions.dart';
@@ -35,10 +35,10 @@ class _BookDetailScreenState extends BaseScreenState<BookDetailScreen> {
 
   @override
   Widget builder(BuildContext context) {
-    final mockData = context.read<GlobalAppCubit>().state.bookData;
+    final mockData = MockData.shared.bookData ?? [];
 
     final bookDetail =
-        mockData?.firstWhereOrNull((item) => item.bookID == widget.bookID);
+        mockData.firstWhereOrNull((item) => item.bookID == widget.bookID);
 
     return BasicLayout(
         automaticallyImplyLeading: true,

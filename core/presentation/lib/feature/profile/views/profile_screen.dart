@@ -12,9 +12,9 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends BaseScreenState<ProfileScreen> {
   @override
   Widget builder(BuildContext context) {
-    return BasicLayout(
+    return const BasicLayout(
       child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start, children: const []),
+          crossAxisAlignment: CrossAxisAlignment.start, children: []),
     );
   }
 }

@@ -6,7 +6,6 @@ import 'package:presentation/constants/book_tag.dart';
 import 'package:presentation/feature/book_search/cubit/book_search_cubit.dart';
 import 'package:presentation/feature/home/views/home_screen.dart';
 import 'package:presentation/widgets/commons/layouts/search_layout.dart';
-import 'package:presentation/widgets/commons/spacing.dart';
 
 class BookSearchScreen extends StatefulWidget {
   const BookSearchScreen({super.key});
@@ -43,7 +42,11 @@ class _BookSearchScreenState extends BaseScreenState<BookSearchScreen> {
               physics: const BouncingScrollPhysics(),
               shrinkWrap: true,
               itemCount: mockData.length,
-              separatorBuilder: (_, __) => const Spacing(2.5),
+              separatorBuilder: (_, __) => Container(
+                width: 10,
+                height: 10,
+                color: Colors.amber,
+              ),
               itemBuilder: (context, index) {
                 final data = mockData[index];
 

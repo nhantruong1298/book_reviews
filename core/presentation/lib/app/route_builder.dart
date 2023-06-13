@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:presentation/feature/_global_app/cubit/global_app_cubit.dart';
 import 'package:presentation/feature/authentication/cubit/authentication_cubit.dart';
 import 'package:presentation/feature/book_detail/book_detail_repository.dart';
 import 'package:presentation/feature/book_detail/cubit/book_detail_cubit.dart';
@@ -158,9 +157,7 @@ class BookSearchRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return BlocProvider(
-      create: (context) => BookSearchCubit(
-        context.read<GlobalAppCubit>(),
-      ),
+      create: (context) => BookSearchCubit(),
       child: const BookSearchScreen(),
     );
   }

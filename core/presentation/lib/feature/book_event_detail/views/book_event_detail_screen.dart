@@ -2,9 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:collection/collection.dart';
 import 'package:data/entity/response/event_detail_response.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:presentation/base/base_screen.dart';
-import 'package:presentation/feature/_global_app/cubit/global_app_cubit.dart';
+import 'package:presentation/feature/mock_data/mock_data.dart';
 import 'package:presentation/resources/app_colors.dart';
 import 'package:presentation/resources/app_dimensions.dart';
 import 'package:presentation/utils/date_formatter.dart';
@@ -32,7 +31,7 @@ class _BookEventDetailScreenState
     extends BaseScreenState<BookEventDetailScreen> {
   @override
   Widget builder(BuildContext context) {
-    final eventData = context.read<GlobalAppCubit>().state.eventData;
+    final eventData = MockData.shared.eventData;
 
     final event =
         eventData?.firstWhereOrNull((item) => item.id == widget.bookEventID);

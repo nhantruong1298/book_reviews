@@ -47,6 +47,10 @@ class $AssetsImagesGen {
   SvgGenImage get profileIcon =>
       const SvgGenImage('assets/images/profile-icon.svg');
 
+  /// File path: assets/images/search-icon.svg
+  SvgGenImage get searchIcon =>
+      const SvgGenImage('assets/images/search-icon.svg');
+
   /// File path: assets/images/setting-icon.svg
   SvgGenImage get settingIcon =>
       const SvgGenImage('assets/images/setting-icon.svg');
@@ -65,6 +69,7 @@ class $AssetsImagesGen {
         moonIcon,
         notificationIcon,
         profileIcon,
+        searchIcon,
         settingIcon,
         userIcon
       ];
@@ -74,10 +79,12 @@ class $AssetsMockDataGen {
   const $AssetsMockDataGen();
 
   /// File path: assets/mock_data/books_data.json
-  String get booksData => 'assets/mock_data/books_data.json';
+  String get booksData =>
+      'packages/presentation/assets/mock_data/books_data.json';
 
   /// File path: assets/mock_data/events_data.json
-  String get eventsData => 'assets/mock_data/events_data.json';
+  String get eventsData =>
+      'packages/presentation/assets/mock_data/events_data.json';
 
   /// List of all assets
   List<String> get values => [booksData, eventsData];
@@ -87,7 +94,8 @@ class $AssetsRawsGen {
   const $AssetsRawsGen();
 
   /// File path: assets/raws/success_animation.json
-  String get successAnimation => 'assets/raws/success_animation.json';
+  String get successAnimation =>
+      'packages/presentation/assets/raws/success_animation.json';
 
   /// List of all assets
   List<String> get values => [successAnimation];
