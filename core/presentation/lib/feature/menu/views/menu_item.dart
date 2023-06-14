@@ -32,12 +32,12 @@ class MenuItem extends StatelessWidget {
           borderRadius: BorderRadius.circular(AppDimensions.defaultSRadius),
           child: Padding(
             padding: const EdgeInsets.symmetric(
-                vertical: AppDimensions.defaultSPadding,
+                vertical: AppDimensions.defaultPadding,
                 horizontal: AppDimensions.defaultXSPadding),
             child: Row(
               children: [
                 SvgPicture.asset(AssetsGen.getRawString(icon ?? ''),
-                    color: AppColors.greyColor700,
+                    //color: AppColors.greyColor700,
                     width: AppDimensions.defaultIconSizeSmall,
                     height: AppDimensions.defaultIconSizeSmall),
                 const Spacing(1, direction: SpacingDirection.Horizontal),

@@ -4,7 +4,6 @@ import 'package:presentation/feature/menu/views/menu_item.dart';
 import 'package:presentation/generated/assets.gen.dart';
 import 'package:presentation/resources/app_colors.dart';
 import 'package:presentation/resources/app_dimensions.dart';
-import 'package:presentation/resources/app_theme.dart';
 import 'package:presentation/widgets/commons/layouts/basic_layout.dart';
 import 'package:presentation/widgets/commons/spacing.dart';
 import 'package:presentation/widgets/commons/typography/body_text.dart';
@@ -18,12 +17,9 @@ class MenuScreen extends StatefulWidget {
 }
 
 class MenuScreenState extends BaseScreenState<MenuScreen> {
-  bool _darkMode = false;
-
   @override
   Widget builder(BuildContext context) {
     return BasicLayout(
-      bottomNavigationBar: const _LogoutButton(),
       title: HeadingText('Menu'),
       padding: EdgeInsets.zero,
       centerTitle: false,
@@ -34,14 +30,14 @@ class MenuScreenState extends BaseScreenState<MenuScreen> {
         const Spacing(1),
         MenuItem(
           onTap: () {},
-          icon: Assets.images.emailIcon.path,
-          name: 'Email',
+          icon: Assets.images.orderIcon.path,
+          name: 'Nhận xét của bạn',
         ),
         const Spacing(1),
         MenuItem(
           onTap: () {},
-          icon: Assets.images.notificationIcon.path,
-          name: 'Thông báo',
+          icon: Assets.images.emailIcon.path,
+          name: 'Email',
         ),
         const Spacing(1),
         MenuItem(
@@ -54,72 +50,31 @@ class MenuScreenState extends BaseScreenState<MenuScreen> {
         const Spacing(1),
         MenuItem(
           onTap: () {},
-          icon: Assets.images.userIcon.path,
-          name: 'Cập nhật thông tin',
+          icon: Assets.images.informationIcon.path,
+          name: 'Thông tin ',
         ),
         const Spacing(1),
-        _divider,
         MenuItem(
-          icon: Assets.images.moonIcon.path,
-          name: 'Dark mode',
-          type: MenuToggleType(_darkMode, (newValue) {
-            setState(() {
-              _darkMode = newValue;
-            });
-          }),
+          onTap: () {},
+          icon: Assets.images.logoutIcon.path,
+          name: 'Đăng xuất',
         ),
+        const Spacing(1),
       ]),
     );
   }
 
-  Widget get _divider => const SizedBox(
-        height: 1.0,
-        width: double.infinity,
-        child: Divider(
-          thickness: 1.5,
-          color: AppColors.greyColor500,
+  Widget get _divider => const Padding(
+        padding: EdgeInsets.symmetric(horizontal: AppDimensions.defaultPadding),
+        child: SizedBox(
+          height: 1.0,
+          width: double.infinity,
+          child: Divider(
+            thickness: 1.5,
+            color: AppColors.greyColor500,
+          ),
         ),
       );
-}
-
-class _LogoutButton extends StatelessWidget {
-  final VoidCallback? onTap;
-  // ignore: unused_element
-  const _LogoutButton({this.onTap});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: AppDimensions.buttonHeight,
-      margin: const EdgeInsets.only(
-        bottom: AppDimensions.defaultPadding,
-        left: AppDimensions.defaultPadding,
-        right: AppDimensions.defaultPadding,
-      ),
-      decoration: BoxDecoration(
-          border: Border.all(
-            color: AppColors.greyColor500,
-            width: 1.5,
-          ),
-          boxShadow: AppThemeStyle.appListTileBoxShadow,
-          borderRadius: BorderRadius.circular(AppDimensions.defaultRadius)),
-      child: Material(
-        color: AppColors.backgroundColor,
-        borderRadius: BorderRadius.circular(AppDimensions.defaultRadius),
-        child: InkWell(
-          borderRadius: BorderRadius.circular(AppDimensions.defaultRadius),
-          onTap: onTap,
-          child: Center(
-              child: BodyLText(
-            'Log out',
-            style: BodyLText.defaultStyle.copyWith(
-              fontWeight: FontWeight.w700,
-            ),
-          )),
-        ),
-      ),
-    );
-  }
 }
 
 class _ShowProfileButton extends StatelessWidget {

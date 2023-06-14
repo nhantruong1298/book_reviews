@@ -33,6 +33,14 @@ class $AssetsImagesGen {
   /// File path: assets/images/home-icon.svg
   SvgGenImage get homeIcon => const SvgGenImage('assets/images/home-icon.svg');
 
+  /// File path: assets/images/information-icon.svg
+  SvgGenImage get informationIcon =>
+      const SvgGenImage('assets/images/information-icon.svg');
+
+  /// File path: assets/images/logout-icon.svg
+  SvgGenImage get logoutIcon =>
+      const SvgGenImage('assets/images/logout-icon.svg');
+
   /// File path: assets/images/menu-icon.svg
   SvgGenImage get menuIcon => const SvgGenImage('assets/images/menu-icon.svg');
 
@@ -42,6 +50,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/notification-icon.svg
   SvgGenImage get notificationIcon =>
       const SvgGenImage('assets/images/notification-icon.svg');
+
+  /// File path: assets/images/order-icon.svg
+  SvgGenImage get orderIcon =>
+      const SvgGenImage('assets/images/order-icon.svg');
 
   /// File path: assets/images/profile-icon.svg
   SvgGenImage get profileIcon =>
@@ -65,9 +77,12 @@ class $AssetsImagesGen {
         emailIcon,
         eventIcon,
         homeIcon,
+        informationIcon,
+        logoutIcon,
         menuIcon,
         moonIcon,
         notificationIcon,
+        orderIcon,
         profileIcon,
         searchIcon,
         settingIcon,

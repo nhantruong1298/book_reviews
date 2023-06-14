@@ -79,7 +79,9 @@ class _DashboardScreenState extends BaseScreenState<DashboardScreen>
           AssetsGen.getRawString(Assets.images.homeIcon.path),
           width: inActiveIconSize,
           height: inActiveIconSize,
-          color: AppColors.textGreyColor,
+          
+         // color: AppColors.textGreyColor,
+
         ),
         activeIcon: SvgPicture.asset(
           AssetsGen.getRawString(Assets.images.homeIcon.path),
@@ -93,7 +95,7 @@ class _DashboardScreenState extends BaseScreenState<DashboardScreen>
           AssetsGen.getRawString(Assets.images.profileIcon.path),
           width: inActiveIconSize,
           height: inActiveIconSize,
-          color: AppColors.textGreyColor,
+         // color: AppColors.textGreyColor,
         ),
         activeIcon: SvgPicture.asset(
           AssetsGen.getRawString(Assets.images.profileIcon.path),
@@ -107,7 +109,7 @@ class _DashboardScreenState extends BaseScreenState<DashboardScreen>
           AssetsGen.getRawString(Assets.images.eventIcon.path),
           width: inActiveIconSize,
           height: inActiveIconSize,
-          color: AppColors.textGreyColor,
+        //  color: AppColors.textGreyColor,
         ),
         activeIcon: SvgPicture.asset(
           AssetsGen.getRawString(Assets.images.eventIcon.path),
@@ -121,7 +123,7 @@ class _DashboardScreenState extends BaseScreenState<DashboardScreen>
           AssetsGen.getRawString(Assets.images.menuIcon.path),
           width: inActiveIconSize,
           height: inActiveIconSize,
-          color: AppColors.textGreyColor,
+        //  color: AppColors.textGreyColor,
         ),
         activeIcon: SvgPicture.asset(
           AssetsGen.getRawString(Assets.images.menuIcon.path),
