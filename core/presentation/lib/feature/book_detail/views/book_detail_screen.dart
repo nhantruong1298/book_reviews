@@ -7,11 +7,11 @@ import 'package:presentation/base/base_screen.dart';
 import 'package:presentation/constants/book_tag.dart';
 import 'package:presentation/feature/book_detail/cubit/book_detail_cubit.dart';
 import 'package:presentation/feature/mock_data/mock_data.dart';
-import 'package:presentation/generated/assets.gen.dart';
 import 'package:presentation/resources/app_colors.dart';
 import 'package:presentation/resources/app_dimensions.dart';
 import 'package:presentation/resources/app_fonts.dart';
 import 'package:presentation/utils/size_config.dart';
+import 'package:presentation/widgets/commons/comment_view.dart';
 import 'package:presentation/widgets/commons/layouts/basic_layout.dart';
 import 'package:presentation/widgets/commons/rating_stars.dart';
 import 'package:presentation/widgets/commons/spacing.dart';
@@ -127,54 +127,13 @@ class _BookDetailScreenState extends BaseScreenState<BookDetailScreen> {
             itemBuilder: (context, index) {
               return SizedBox(
                 width: SizeConfig.screenWidth,
-                child: Column(mainAxisSize: MainAxisSize.min, children: [
-                  Row(
-                    children: [
-                      ClipRRect(
-                        borderRadius:
-                            BorderRadius.circular(AppDimensions.roundedRadius),
-                        child: Assets.images.accountIcon.svg(
-                          width: 50,
-                          height: 50,
-                        ),
-                      ),
-                      const Spacing(1, direction: SpacingDirection.Horizontal),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          BodyLText(
-                            'Zander Rohan',
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: BodyLText.defaultStyle.copyWith(
-                              color: AppColors.textGreyColor,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                          const RatingStars(
-                            initValue: 5,
-                            iconSize: 20.0,
-                            spacing: 0.0,
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                  const Spacing(1),
-                  BodyLText(
-                    'To add custom fonts to your application, add a fonts section here,in this "flutter" section. Each entry in this list should have afamily key with the font family name, and a "fonts" key with alist giving the asset and other descriptors for the font. For',
-                    maxLines: 4,
-                    overflow: TextOverflow.ellipsis,
-                    style: BodyLText.defaultStyle.copyWith(
-                      color: AppColors.textGreyColor,
-                      fontWeight: FontWeight.w500,
-                      fontFamily: FontFamily.Playfair,
-                      fontStyle: FontStyle.italic,
-                    ),
-                  ),
-                ]),
+                child: const CommentView(
+                  authorName: 'Zander Rohan',
+                  comment:
+                      'To add custom fonts to your application, add a fonts section here,in this "flutter" section. Each entry in this list should have afamily key with the font family name, and a "fonts" key with alist giving the asset and other descriptors for the font. For',
+                  stars: 5,
+                  timeLine: '3 minutes ago',
+                ),
               );
             },
           ),

@@ -30,12 +30,23 @@ class $AssetsImagesGen {
   SvgGenImage get eventIcon =>
       const SvgGenImage('assets/images/event-icon.svg');
 
+  /// File path: assets/images/facebook-icon.svg
+  SvgGenImage get facebookIcon =>
+      const SvgGenImage('assets/images/facebook-icon.svg');
+
   /// File path: assets/images/home-icon.svg
   SvgGenImage get homeIcon => const SvgGenImage('assets/images/home-icon.svg');
 
   /// File path: assets/images/information-icon.svg
   SvgGenImage get informationIcon =>
       const SvgGenImage('assets/images/information-icon.svg');
+
+  /// File path: assets/images/link-icon.svg
+  SvgGenImage get linkIcon => const SvgGenImage('assets/images/link-icon.svg');
+
+  /// File path: assets/images/linked-in-icon.svg
+  SvgGenImage get linkedInIcon =>
+      const SvgGenImage('assets/images/linked-in-icon.svg');
 
   /// File path: assets/images/logout-icon.svg
   SvgGenImage get logoutIcon =>
@@ -67,6 +78,10 @@ class $AssetsImagesGen {
   SvgGenImage get settingIcon =>
       const SvgGenImage('assets/images/setting-icon.svg');
 
+  /// File path: assets/images/twitter-icon.svg
+  SvgGenImage get twitterIcon =>
+      const SvgGenImage('assets/images/twitter-icon.svg');
+
   /// File path: assets/images/user-icon.svg
   SvgGenImage get userIcon => const SvgGenImage('assets/images/user-icon.svg');
 
@@ -76,8 +91,11 @@ class $AssetsImagesGen {
         dacNhanTam,
         emailIcon,
         eventIcon,
+        facebookIcon,
         homeIcon,
         informationIcon,
+        linkIcon,
+        linkedInIcon,
         logoutIcon,
         menuIcon,
         moonIcon,
@@ -86,6 +104,7 @@ class $AssetsImagesGen {
         profileIcon,
         searchIcon,
         settingIcon,
+        twitterIcon,
         userIcon
       ];
 }
@@ -94,12 +113,10 @@ class $AssetsMockDataGen {
   const $AssetsMockDataGen();
 
   /// File path: assets/mock_data/books_data.json
-  String get booksData =>
-      'packages/presentation/assets/mock_data/books_data.json';
+  String get booksData => 'assets/mock_data/books_data.json';
 
   /// File path: assets/mock_data/events_data.json
-  String get eventsData =>
-      'packages/presentation/assets/mock_data/events_data.json';
+  String get eventsData => 'assets/mock_data/events_data.json';
 
   /// List of all assets
   List<String> get values => [booksData, eventsData];
@@ -109,8 +126,7 @@ class $AssetsRawsGen {
   const $AssetsRawsGen();
 
   /// File path: assets/raws/success_animation.json
-  String get successAnimation =>
-      'packages/presentation/assets/raws/success_animation.json';
+  String get successAnimation => 'assets/raws/success_animation.json';
 
   /// List of all assets
   List<String> get values => [successAnimation];
