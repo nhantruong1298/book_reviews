@@ -55,7 +55,7 @@ workflows:
         notify:
           success: true
           failure: false
-    app_store_connect:
-      submit_to_testflight: false
-      submit_to_app_store: false
+      app_store_connect:
+        submit_to_testflight: false
+        submit_to_app_store: false
 
