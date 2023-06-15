@@ -1,0 +1,61 @@
+workflows:
+  android-workflow-id:
+    name: Android Workflow
+    environment:
+      flutter: 3.10.4
+      vars:
+        PACKAGE_NAME: "com.example.book_reviews"
+    scripts:
+      - name: Build APK with Flutter
+        script: | 
+          BUILD_NUMBER=2     
+          flutter build appbundle --release \
+            --build-name=1.0.$BUILD_NUMBER \
+            --build-number=$BUILD_NUMBER
+      - name: Get Flutter packages
+        script: | 
+          flutter packages pub get
+    artifacts:
+      - build/**/outputs/**/*.apk
+    publishing:
+      email:
+      recipients:
+        - nhantruong1298@gmail.com
+      notify:
+        success: true
+        failure: false
+  ios-workflow-id:
+    name: iOS Workflow
+    environment:
+      flutter: 3.10.4
+      vars:
+        APP_ID: com.example.bookReviews
+    scripts:
+      - name: Set up code signing settings on Xcode project
+        script: | 
+          xcode-project use-profiles
+      - name: Get Flutter packages
+        script: | 
+          flutter packages pub get
+      - name: Install pods
+        script: | 
+          find . -name "Podfile" -execdir pod install \;
+      - name: Flutter build ipa
+        script: | 
+          flutter build ipa --release \
+            --build-name=1.0.0 \
+            --build-number=$(($(app-store-connect get-latest-app-store-build-number "$APP_ID") + 1)) \
+            --export-options-plist=/Users/builder/export_options.plist
+    artifacts:
+      - build/ios/ipa/*.ipa
+    publishing:
+      email:
+      recipients:
+        - nhantruong1298@gmail.com
+      notify:
+        success: true
+        failure: false
+    app_store_connect:
+      submit_to_testflight: false
+      submit_to_app_store: false
+
