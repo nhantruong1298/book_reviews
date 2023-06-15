@@ -19,8 +19,8 @@ workflows:
       - build/**/outputs/**/*.apk
     publishing:
       email:
-      recipients:
-        - nhantruong1298@gmail.com
+        recipients:
+          - nhantruong1298@gmail.com
       notify:
         success: true
         failure: false
@@ -50,8 +50,8 @@ workflows:
       - build/ios/ipa/*.ipa
     publishing:
       email:
-      recipients:
-        - nhantruong1298@gmail.com
+        recipients:
+          - nhantruong1298@gmail.com
       notify:
         success: true
         failure: false
