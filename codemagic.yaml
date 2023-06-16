@@ -11,14 +11,16 @@ workflows:
           cd app && flutter packages pub get
       - name: Build APK with Flutter
         script: | 
-          BUILD_NUMBER=2     
-          cd app && flutter build appbundle --release \
-            --build-name=1.0.$BUILD_NUMBER \
-            --build-number=$BUILD_NUMBER
+          # BUILD_NUMBER=2     
+          # cd app && flutter build appbundle --release \
+          #   --build-name=1.0.$BUILD_NUMBER \
+          #   --build-number=$BUILD_NUMBER
+          cd app && flutter build apk --split-per-abi
     artifacts:
-      - app/build/**/outputs/**/*.apk
-      - app/build/**/outputs/**/mapping.txt
-      - app/flutter_drive.log
+      # - app/build/**/outputs/**/*.apk
+      - build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk
+      - build/app/outputs/flutter-apk/app-arm64-v8a-release.apk
+      - build/app/outputs/flutter-apk/app-x86_64-release.apk
     publishing:
       email:
         recipients:
