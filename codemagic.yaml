@@ -16,7 +16,9 @@ workflows:
             --build-name=1.0.$BUILD_NUMBER \
             --build-number=$BUILD_NUMBER
     artifacts:
-      - build/**/outputs/**/*.apk
+      - app/build/**/outputs/**/*.apk
+      - app/build/**/outputs/**/mapping.txt
+      - app/flutter_drive.log
     publishing:
       email:
         recipients:
