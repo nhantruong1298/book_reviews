@@ -17,7 +17,6 @@ import 'package:presentation/widgets/commons/rating_stars.dart';
 import 'package:presentation/widgets/commons/spacing.dart';
 import 'package:presentation/widgets/commons/tag.dart';
 import 'package:presentation/widgets/commons/typography/body_text.dart';
-import 'package:presentation/widgets/commons/typography/heading_text.dart';
 
 class BookDetailScreen extends StatefulWidget {
   final String bookID;
@@ -56,6 +55,7 @@ class _BookDetailScreenState extends BaseScreenState<BookDetailScreen> {
               _BookImage(
                 imageUrl: bookDetail?.linkImageBook ?? '',
               ),
+              const Spacing(1),
               _BookNameAndAuthor(
                 bookAuthor: bookDetail?.bookAuthor ?? '',
                 bookName: bookDetail?.bookName ?? '',
@@ -205,7 +205,7 @@ class _BookDescription extends StatelessWidget {
         BodyMText(
           description,
           style: BodyMText.defaultStyle.copyWith(
-            color: AppColors.textGreyColor,
+            color: AppColors.textColor,
             fontWeight: FontWeight.w500,
             fontFamily: FontFamily.Playfair,
           ),
@@ -228,11 +228,12 @@ class _BookNameAndAuthor extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Heading1Text(
+        Text(
           bookName,
           textAlign: TextAlign.center,
-          style: Heading1Text.defaultStyle.copyWith(
+          style: const TextStyle(
             fontFamily: FontFamily.Playfair,
+            fontSize: AppDimensions.heading2FontSize * 1.25,
           ),
         ),
         BodyXLText(

@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:presentation/generated/extension.dart';
 import 'package:presentation/resources/app_colors.dart';
 import 'package:presentation/resources/app_dimensions.dart';
+import 'package:presentation/resources/app_fonts.dart';
 import 'package:presentation/widgets/commons/spacing.dart';
 import 'package:presentation/widgets/commons/typography/body_text.dart';
 
@@ -37,13 +38,16 @@ class MenuItem extends StatelessWidget {
             child: Row(
               children: [
                 SvgPicture.asset(AssetsGen.getRawString(icon ?? ''),
-                    //color: AppColors.greyColor700,
                     width: AppDimensions.defaultIconSizeSmall,
                     height: AppDimensions.defaultIconSizeSmall),
                 const Spacing(1, direction: SpacingDirection.Horizontal),
                 BodyLText(
                   name,
-                  color: AppColors.greyColor700,
+                  color: AppColors.textColor,
+                  style: BodyLText.defaultStyle.copyWith(
+                    fontWeight: FontWeight.w500,
+                    fontFamily: FontFamily.Playfair,
+                  ),
                 ),
                 const Spacer(),
                 trailing

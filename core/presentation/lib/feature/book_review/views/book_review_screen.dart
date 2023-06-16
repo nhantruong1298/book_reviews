@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:presentation/base/base_screen.dart';
-import 'package:presentation/generated/assets.gen.dart';
 import 'package:presentation/resources/app_colors.dart';
 import 'package:presentation/resources/app_dimensions.dart';
 import 'package:presentation/resources/app_fonts.dart';
@@ -9,6 +8,8 @@ import 'package:presentation/widgets/commons/layouts/basic_layout.dart';
 import 'package:presentation/widgets/commons/rating_stars.dart';
 import 'package:presentation/widgets/commons/spacing.dart';
 import 'package:presentation/widgets/commons/typography/body_text.dart';
+
+import '../../../widgets/commons/comment_view.dart';
 
 class BookReviewScreen extends StatefulWidget {
   final String? bookID;
@@ -28,7 +29,10 @@ class _BookReviewScreenState extends BaseScreenState<BookReviewScreen> {
       automaticallyImplyLeading: true,
       centerTitle: true,
       title: BodyLText('Nhận xét',
-          style: BodyLText.defaultStyle.copyWith(fontWeight: FontWeight.w700)),
+          style: BodyLText.defaultStyle.copyWith(
+            fontWeight: FontWeight.w700,
+            fontFamily: FontFamily.Playfair,
+          )),
       child: SingleChildScrollView(
         child: Column(children: [
           const _ReviewData(),
@@ -84,6 +88,7 @@ class _AddReviewButton extends StatelessWidget {
               'Thêm nhận xét',
               style: BodyLText.defaultStyle.copyWith(
                 fontWeight: FontWeight.w700,
+                fontFamily: FontFamily.Playfair,
               ),
             ),
             const Spacer(),
@@ -111,6 +116,7 @@ class _ReviewFilter extends StatelessWidget {
           'Nhận xét',
           style: BodyLText.defaultStyle.copyWith(
             fontWeight: FontWeight.w700,
+            fontFamily: FontFamily.Playfair,
           ),
         ),
         const Spacer(),
@@ -122,6 +128,7 @@ class _ReviewFilter extends StatelessWidget {
           ' Gần đây ',
           style: BodyLText.defaultStyle.copyWith(
             fontWeight: FontWeight.w700,
+            fontFamily: FontFamily.Playfair,
           ),
         ),
         const Icon(
@@ -143,53 +150,17 @@ class _ReviewList extends StatelessWidget {
       padding: const EdgeInsets.all(AppDimensions.defaultXSPadding),
       shrinkWrap: true,
       itemCount: 5,
-      separatorBuilder: (context, index) => const Spacing(1),
+      separatorBuilder: (context, index) => const Spacing(1.5),
       itemBuilder: (context, index) {
         return SizedBox(
           width: SizeConfig.screenWidth,
-          child: Column(mainAxisSize: MainAxisSize.min, children: [
-            Row(
-              children: [
-                ClipRRect(
-                  borderRadius:
-                      BorderRadius.circular(AppDimensions.roundedRadius),
-                  child: Assets.images.accountIcon.svg(
-                    width: 50,
-                    height: 50,
-                  ),
-                ),
-                const Spacing(1, direction: SpacingDirection.Horizontal),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    BodyMText(
-                      'Zander Rohan',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: BodyMText.defaultStyle.copyWith(
-                        color: AppColors.textGreyColor,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    const RatingStars(
-                        initValue: 5, iconSize: 15.0, spacing: 0.0)
-                  ],
-                )
-              ],
-            ),
-            const Spacing(1),
-            BodyMText(
-              'To add custom fonts to your application, add a fonts section here,in this "flutter" section. Each entry in this list should have afamily key with the font family name, and a "fonts" key with alist giving the asset and other descriptors for the font. For',
-              style: BodyMText.defaultStyle.copyWith(
-                color: AppColors.textGreyColor,
-                fontWeight: FontWeight.w500,
-                fontFamily: FontFamily.Playfair,
-                fontStyle: FontStyle.italic,
-              ),
-            ),
-          ]),
+          child: const CommentView(
+            authorName: 'Zander Rohan',
+            comment:
+                'To add custom fonts to your application, add a fonts section here,in this "flutter" section. Each entry in this list should have afamily key with the font family name, and a "fonts" key with alist giving the asset and other descriptors for the font. For',
+            stars: 5,
+            timeLine: '3 minutes ago',
+          ),
         );
       },
     );

@@ -29,8 +29,8 @@ class CommentView extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(AppDimensions.roundedRadius),
             child: Assets.images.accountIcon.svg(
-              width: 50,
-              height: 50,
+              width: 40,
+              height: 40,
             ),
           ),
           const Spacing(1, direction: SpacingDirection.Horizontal),
@@ -40,13 +40,13 @@ class CommentView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
-                BodyLText(
+                BodySText(
                   authorName,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: BodyLText.defaultStyle.copyWith(
-                    color: AppColors.textGreyColor,
-                    fontWeight: FontWeight.w700,
+                  style: BodySText.defaultStyle.copyWith(
+                    color: AppColors.textColor,
+                    fontFamily: FontFamily.Playfair,
                   ),
                 ),
                 RatingStars(
@@ -63,16 +63,13 @@ class CommentView extends StatelessWidget {
           )
         ],
       ),
-      const Spacing(1),
+      const Spacing(0.5),
       BodyLText(
         comment,
         maxLines: 4,
         overflow: TextOverflow.ellipsis,
         style: BodyLText.defaultStyle.copyWith(
-          color: AppColors.textGreyColor,
-          fontWeight: FontWeight.w500,
-          fontFamily: FontFamily.Playfair,
-          fontStyle: FontStyle.italic,
+          color: AppColors.textColor,
         ),
       ),
     ]);

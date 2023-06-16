@@ -4,10 +4,10 @@ import 'package:presentation/feature/menu/views/menu_item.dart';
 import 'package:presentation/generated/assets.gen.dart';
 import 'package:presentation/resources/app_colors.dart';
 import 'package:presentation/resources/app_dimensions.dart';
+import 'package:presentation/resources/app_fonts.dart';
 import 'package:presentation/widgets/commons/layouts/basic_layout.dart';
 import 'package:presentation/widgets/commons/spacing.dart';
 import 'package:presentation/widgets/commons/typography/body_text.dart';
-import 'package:presentation/widgets/commons/typography/heading_text.dart';
 
 class MenuScreen extends StatefulWidget {
   const MenuScreen({super.key});
@@ -20,7 +20,12 @@ class MenuScreenState extends BaseScreenState<MenuScreen> {
   @override
   Widget builder(BuildContext context) {
     return BasicLayout(
-      title: HeadingText('Menu'),
+      title: BodyXLText(
+        'Menu',
+        style: BodyXLText.defaultStyle.copyWith(
+          fontFamily: FontFamily.Playfair,
+        ),
+      ),
       padding: EdgeInsets.zero,
       centerTitle: false,
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -101,12 +106,14 @@ class _ShowProfileButton extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               BodyLText(
-                'Straw Hat',
+                'Maya Maya',
                 style: BodyLText.defaultStyle.copyWith(
                   fontWeight: FontWeight.bold,
                   height: 1,
+                  fontFamily: FontFamily.Playfair,
                 ),
               ),
+              const Spacing(0.25),
               BodySText(
                 'Xem thông tin của bạn',
                 style: BodySText.defaultStyle.copyWith(

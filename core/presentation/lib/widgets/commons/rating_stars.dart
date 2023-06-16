@@ -46,7 +46,7 @@ class _RatingStarsState extends State<RatingStars> {
               },
               child: Icon(
                 (_value >= (index + 1)) ? Icons.star : Icons.star_border,
-                color: Colors.orangeAccent,
+                color: const Color(0xFFFFC433),
                 size: widget.iconSize,
               )),
         );

@@ -287,13 +287,13 @@ class _BookInfo extends StatelessWidget {
 //       }).toList(),
 //     );
 //   }
- }
+}
 
 List<BoxShadow> get _boxShadow => const [
       BoxShadow(
         color: Colors.black26,
         blurRadius: 3,
         spreadRadius: 0.1,
-        offset: Offset(4, 2),
+        offset: Offset(2, 1),
       ),
     ];

@@ -37,7 +37,12 @@ class _ProfileScreenState extends BaseScreenState<ProfileScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                HeadingText("Maya Maya"),
+                HeadingText(
+                  "Maya Maya",
+                  style: HeadingText.defaultStyle.copyWith(
+                    fontFamily: FontFamily.Playfair,
+                  ),
+                ),
                 const Spacing(.25),
                 BodyLText(
                   "@Mayamaya",
@@ -47,7 +52,9 @@ class _ProfileScreenState extends BaseScreenState<ProfileScreen> {
                 ),
                 const Spacing(1),
                 BodyLText(
-                    "I’m a freelance writer specializing in small business content. I’ve worked with companies in a variety of industries like home care to fine leather goods."),
+                  "I’m a freelance writer specializing in small business content. I’ve worked with companies in a variety of industries like home care to fine leather goods.",
+                  style: BodyLText.defaultStyle.copyWith(),
+                ),
                 const Spacing(1),
                 _divider,
                 const Spacing(1),
@@ -186,6 +193,7 @@ class _Avarta extends StatelessWidget {
             child: Container(
               width: SizeConfig.getProportionateScreenWidth(120),
               height: SizeConfig.getProportionateScreenWidth(120),
+              padding: const EdgeInsets.all(AppDimensions.defaultPadding),
               decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: Colors.cyan.shade100,
@@ -195,7 +203,24 @@ class _Avarta extends StatelessWidget {
                   )),
               child: CachedNetworkImage(
                 imageUrl: dummyData,
+                fit: BoxFit.fill,
               ),
+            ),
+          ),
+          Positioned(
+            bottom: 0,
+            left: AppDimensions.defaultPadding,
+            child: Container(
+              width: SizeConfig.getProportionateScreenWidth(120),
+              height: SizeConfig.getProportionateScreenWidth(120),
+              padding: const EdgeInsets.all(AppDimensions.defaultPadding),
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.transparent,
+                  border: Border.all(
+                    width: 5,
+                    color: Colors.white,
+                  )),
             ),
           )
         ],

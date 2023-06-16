@@ -31,7 +31,14 @@ class _BookEventCardView extends StatelessWidget {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(AppDimensions.defaultRadius),
               color: AppColors.backgroundColor,
-              boxShadow: [AppThemeStyle.defaultBoxShadow()]),
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black26,
+                  blurRadius: 3,
+                  spreadRadius: 0.1,
+                  offset: Offset(2, 1),
+                ),
+              ]),
           child: Column(
             children: [
               Row(
@@ -39,7 +46,6 @@ class _BookEventCardView extends StatelessWidget {
                   _buildEventImage(),
                   const Spacing(1, direction: SpacingDirection.Horizontal),
                   _buildEventNameAndLocation(),
-
                   Column(
                     children: [
                       _buildEditButton(),
@@ -65,77 +71,80 @@ class _BookEventCardView extends StatelessWidget {
 
   Flexible _buildTimeEvent() {
     return Flexible(
-                  fit: FlexFit.tight,
-                  flex: 3,
-                  child: Column(
-                    children: [
-                      BodyLText(
-                        '9:00 AM',
-                        style: BodyLText.defaultStyle.copyWith(
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      BodyText(
-                        'Thời gian',
-                        style: BodyText.defaultStyle.copyWith(
-                          color: AppColors.textGreyColor,
-                          fontSize: AppDimensions.bodyXXSFontSize,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      )
-                    ],
-                  ),
-                );
+      fit: FlexFit.tight,
+      flex: 3,
+      child: Column(
+        children: [
+          BodyLText(
+            '9:00 AM',
+            style: BodyLText.defaultStyle.copyWith(
+              fontWeight: FontWeight.w600,
+              fontFamily: FontFamily.Playfair,
+            ),
+          ),
+          BodyText(
+            'Thời gian',
+            style: BodyText.defaultStyle.copyWith(
+              color: AppColors.textGreyColor,
+              fontSize: AppDimensions.bodyXXSFontSize,
+              fontWeight: FontWeight.w500,
+            ),
+          )
+        ],
+      ),
+    );
   }
 
   Flexible _buildDateEvent() {
     return Flexible(
-                  flex: 2,
-                  fit: FlexFit.tight,
-                  child: Column(
-                    children: [
-                      BodyLText(
-                        DateFormatter.toDateAndMonthFormat(dateStart),
-                        style: BodyLText.defaultStyle.copyWith(
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      BodyText(
-                        'Ngày',
-                        style: BodyText.defaultStyle.copyWith(
-                          color: AppColors.textGreyColor,
-                          fontSize: AppDimensions.bodyXXSFontSize,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      )
-                    ],
-                  ),
-                );
+      flex: 2,
+      fit: FlexFit.tight,
+      child: Column(
+        children: [
+          BodyLText(
+            DateFormatter.toDateAndMonthFormat(dateStart),
+            style: BodyLText.defaultStyle.copyWith(
+              fontWeight: FontWeight.w600,
+              fontFamily: FontFamily.Playfair,
+            ),
+          ),
+          BodyText(
+            'Ngày',
+            style: BodyText.defaultStyle.copyWith(
+              color: AppColors.textGreyColor,
+              fontSize: AppDimensions.bodyXXSFontSize,
+              fontWeight: FontWeight.w500,
+            ),
+          )
+        ],
+      ),
+    );
   }
 
   Flexible _buildLikesNumber() {
     return Flexible(
-                  flex: 2,
-                  fit: FlexFit.tight,
-                  child: Column(
-                    children: [
-                      BodyLText(
-                        '14',
-                        style: BodyLText.defaultStyle.copyWith(
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      BodyText(
-                        'Lượt thích',
-                        style: BodyText.defaultStyle.copyWith(
-                          color: AppColors.textGreyColor,
-                          fontSize: AppDimensions.bodyXXSFontSize,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      )
-                    ],
-                  ),
-                );
+      flex: 2,
+      fit: FlexFit.tight,
+      child: Column(
+        children: [
+          BodyLText(
+            '14',
+            style: BodyLText.defaultStyle.copyWith(
+              fontWeight: FontWeight.w600,
+              fontFamily: FontFamily.Playfair,
+            ),
+          ),
+          BodyText(
+            'Lượt thích',
+            style: BodyText.defaultStyle.copyWith(
+              color: AppColors.textGreyColor,
+              fontSize: AppDimensions.bodyXXSFontSize,
+              fontWeight: FontWeight.w500,
+            ),
+          )
+        ],
+      ),
+    );
   }
 
   Expanded _buildEventNameAndLocation() {
@@ -155,7 +164,10 @@ class _BookEventCardView extends StatelessWidget {
           eventName,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: BodyXLText.defaultStyle.copyWith(fontWeight: FontWeight.bold),
+          style: BodyXLText.defaultStyle.copyWith(
+            fontWeight: FontWeight.bold,
+            fontFamily: FontFamily.Playfair,
+          ),
         ),
         const Spacing(.5),
         BodyText(
