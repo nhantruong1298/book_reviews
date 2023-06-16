@@ -14,10 +14,10 @@ class _BookEventCardView extends StatelessWidget {
   final VoidCallback? onTap;
 
   Widget get _divider => const SizedBox(
-        height: 30,
+        height: 50,
         child: VerticalDivider(
-          thickness: .75,
-          color: AppColors.greyColor600,
+          thickness: 1,
+          color: AppColors.primaryDarkColor,
         ),
       );
   @override
@@ -27,42 +27,65 @@ class _BookEventCardView extends StatelessWidget {
       child: Container(
           margin: const EdgeInsets.symmetric(
               horizontal: AppDimensions.defaultPadding),
-          padding: const EdgeInsets.all(AppDimensions.defaultPadding),
+          padding: const EdgeInsets.symmetric(
+              vertical: AppDimensions.defaultPadding),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(AppDimensions.defaultRadius),
               color: AppColors.backgroundColor,
-              boxShadow: const [
-                BoxShadow(
-                  color: Colors.black26,
-                  blurRadius: 3,
-                  spreadRadius: 0.1,
-                  offset: Offset(2, 1),
-                ),
-              ]),
+              border: Border.all(
+                color: AppColors.primaryDarkColor,
+                width: 1,
+              )
+              // boxShadow: const [
+              //   BoxShadow(
+              //     color: Colors.black26,
+              //     blurRadius: 3,
+              //     spreadRadius: 0.1,
+              //     offset: Offset(2, 1),
+              //   ),
+              // ]
+              ),
           child: Column(
             children: [
-              Row(
-                children: [
-                  _buildEventImage(),
-                  const Spacing(1, direction: SpacingDirection.Horizontal),
-                  _buildEventNameAndLocation(),
-                  Column(
-                    children: [
-                      _buildEditButton(),
-                      _buildLikeButton(),
-                    ],
-                  )
-                ],
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppDimensions.defaultPadding,
+                ),
+                child: Row(
+                  children: [
+                    _buildEventImage(),
+                    const Spacing(1, direction: SpacingDirection.Horizontal),
+                    _buildEventNameAndLocation(),
+                    Column(
+                      children: [
+                        _buildEditButton(),
+                        _buildLikeButton(),
+                      ],
+                    )
+                  ],
+                ),
               ),
-              const Spacing(1.5),
-              Row(
-                children: [
-                  _buildLikesNumber(),
-                  _divider,
-                  _buildDateEvent(),
-                  _divider,
-                  _buildTimeEvent(),
-                ],
+              const Padding(
+                padding: EdgeInsets.symmetric(
+                    vertical: AppDimensions.defaultPadding),
+                child: SizedBox(
+                  width: double.infinity,
+                  child:
+                      Divider(color: AppColors.primaryDarkColor, thickness: 1),
+                ),
+              ),
+              SizedBox(
+                width: double.infinity,
+                height: 50,
+                child: Row(
+                  children: [
+                    _buildLikesNumber(),
+                    _divider,
+                    _buildDateEvent(),
+                    _divider,
+                    _buildTimeEvent(),
+                  ],
+                ),
               )
             ],
           )),
@@ -198,11 +221,11 @@ class _BookEventCardView extends StatelessWidget {
   }
 
   Widget _buildLikeButton() {
-    return InkWell(
-      onTap: () {},
-      child: Container(
+    return IconButton(
+      onPressed: () {},
+      icon: Container(
           padding: const EdgeInsets.all(
-            AppDimensions.defaultXXSPadding / 2,
+            AppDimensions.defaultXSPadding / 2,
           ),
           decoration: BoxDecoration(
               color: AppColors.greyColor300,
@@ -217,11 +240,11 @@ class _BookEventCardView extends StatelessWidget {
   }
 
   Widget _buildEditButton() {
-    return InkWell(
-      onTap: () {},
-      child: Container(
+    return IconButton(
+      onPressed: () {},
+      icon: Container(
           padding: const EdgeInsets.all(
-            AppDimensions.defaultXXSPadding / 2,
+            AppDimensions.defaultXSPadding,
           ),
           decoration: BoxDecoration(
               color: AppColors.greyColor300,

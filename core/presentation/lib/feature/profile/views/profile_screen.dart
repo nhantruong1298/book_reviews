@@ -150,6 +150,7 @@ class _ProfileScreenState extends BaseScreenState<ProfileScreen> {
 class _SocialIconButton extends StatelessWidget {
   final String? icon;
   final Color? color;
+  // ignore: unused_element
   const _SocialIconButton({this.icon, this.color});
 
   @override
