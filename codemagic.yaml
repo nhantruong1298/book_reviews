@@ -6,15 +6,18 @@ workflows:
       vars:
         PACKAGE_NAME: "com.example.book_reviews"
     scripts:
+      - name: Go to App folder
+        script: | 
+          cd app
+      - name: Get Flutter packages
+        script: | 
+          flutter packages pub get
       - name: Build APK with Flutter
         script: | 
           BUILD_NUMBER=2     
           flutter build appbundle --release \
             --build-name=1.0.$BUILD_NUMBER \
             --build-number=$BUILD_NUMBER
-      - name: Get Flutter packages
-        script: | 
-          flutter packages pub get
     artifacts:
       - build/**/outputs/**/*.apk
     publishing:
