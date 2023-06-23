@@ -16,6 +16,8 @@ import 'package:presentation/feature/dashboard/cubit/dashboard_cubit.dart';
 import 'package:presentation/feature/dashboard/views/dashboard_screen.dart';
 import 'package:presentation/feature/home/cubit/home_cubit.dart';
 import 'package:presentation/feature/home/views/home_screen.dart';
+import 'package:presentation/feature/sign_in/cubit/sign_in_cubit.dart';
+import 'package:presentation/feature/sign_in/view/sign_in_screen.dart';
 import 'package:presentation/feature/sign_up/cubit/sign_up_cubit.dart';
 import 'package:presentation/feature/sign_up/sign_up_repository.dart';
 import 'package:presentation/feature/sign_up/views/sign_up_screen.dart';
@@ -51,6 +53,21 @@ class SplashRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) =>
       const SplashScreen();
+}
+
+//********************** SIGN IN ROUTE **********************
+
+@TypedGoRoute<SignInRoute>(
+  path: '/sign-in',
+)
+class SignInRoute extends GoRouteData {
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return BlocProvider(
+      create: (context) => SignInCubit(),
+      child: const SignInScreen(),
+    );
+  }
 }
 
 //********************** SIGN UP ROUTE **********************
