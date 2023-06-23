@@ -15,6 +15,7 @@ import 'package:presentation/feature/book_search/views/book_search_screen.dart';
 import 'package:presentation/feature/dashboard/cubit/dashboard_cubit.dart';
 import 'package:presentation/feature/dashboard/views/dashboard_screen.dart';
 import 'package:presentation/feature/home/cubit/home_cubit.dart';
+import 'package:presentation/feature/home/home_repository.dart';
 import 'package:presentation/feature/home/views/home_screen.dart';
 import 'package:presentation/feature/sign_in/cubit/sign_in_cubit.dart';
 import 'package:presentation/feature/sign_in/view/sign_in_screen.dart';
@@ -139,7 +140,9 @@ class DashboardRoute extends GoRouteData {
 class HomeRoute {
   static Widget build() {
     return BlocProvider(
-      create: (context) => HomeCubit(),
+      create: (context) => HomeCubit(
+        HomeRepository(),
+      ),
       child: const HomeScreen(),
     );
   }

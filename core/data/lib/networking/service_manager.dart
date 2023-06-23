@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:data/data_source/data_storage.dart';
+import 'package:data/entity/response/load_book_response.dart';
 import 'package:data/entity/response/sign_in_with_email_response.dart';
 import 'package:data/entity/response/sign_up_with_email_response.dart';
 import 'package:data/networking/firebase_service/firebase_service.dart';
@@ -11,6 +13,7 @@ class ServiceManager {
   late final DataStorage _dataStorage;
   // ignore: unused_field
   late final LogService _logService;
+
 
   static ServiceManager? _instance;
   ServiceManager._internal();
@@ -25,6 +28,7 @@ class ServiceManager {
     _instance!._logService = logService;
     _instance!._fireBaseService = FireBaseService(
       FirebaseAuth.instance,
+      FirebaseFirestore.instance,
      // _instance!._logService,
     );
 
@@ -44,5 +48,9 @@ class ServiceManager {
     final response =
         await _fireBaseService.signUpWithEmailAndPassword(userName, password);
     return response;
+  }
+
+  Future<List<LoadBookResponse>> loadTrendingBooks() {
+    return _fireBaseService.loadTrendingBooks();
   }
 }

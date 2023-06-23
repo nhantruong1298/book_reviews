@@ -1,9 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:presentation/app/route_builder.dart';
 import 'package:presentation/base/base_screen.dart';
 import 'package:presentation/constants/book_tag.dart';
-import 'package:presentation/feature/mock_data/mock_data.dart';
+import 'package:presentation/feature/home/cubit/home_cubit.dart';
 import 'package:presentation/generated/assets.gen.dart';
 import 'package:presentation/resources/app_colors.dart';
 import 'package:presentation/resources/app_dimensions.dart';
@@ -24,9 +25,18 @@ class _HomeScreenState extends BaseScreenState<HomeScreen> {
   @override
   bool get wantKeepAlive => true;
 
+  HomeCubit get homeCubit => BlocProvider.of<HomeCubit>(context);
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      homeCubit.onScreenInit();
+    });
+  }
+
   @override
   Widget builder(BuildContext context) {
-    final mockData = MockData.shared.bookData ?? [];
 
     return BasicLayout(
         headerActions: [
@@ -57,47 +67,32 @@ class _HomeScreenState extends BaseScreenState<HomeScreen> {
           ],
         ),
         centerTitle: false,
-        child: SingleChildScrollView(
+        child: const SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Spacing(1),
-              BodyMText(
-                "Gần đây",
-                style: BodyMText.defaultStyle.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const Spacing(1),
-              SizedBox(
-                width: double.infinity,
-                height: SizeConfig.screenHeight * 0.3,
-                child: ListView.separated(
-                  physics: const BouncingScrollPhysics(),
-                  separatorBuilder: (context, index) => const Spacing(
-                    .75,
-                    direction: SpacingDirection.Horizontal,
-                  ),
-                  scrollDirection: Axis.horizontal,
-                  itemCount: mockData.length,
-                  itemBuilder: (context, index) {
-                    final data = mockData[index];
+              Spacing(1),
+              _TrendingBooksView(),
+              Spacing(1),
+              _PopularBooksView()
+            ],
+          ),
+        ));
+  }
+}
 
-                    final bookTags = BookTagExtension.findTags(data.tags ?? []);
+class _PopularBooksView extends StatelessWidget {
+  const _PopularBooksView();
 
-                    return ListBookItem(
-                      authorName: data.bookAuthor,
-                      bookName: data.bookName,
-                      tags: bookTags,
-                      onTap: () {
-                        BookDetailRoute(data.bookID ?? '').go(context);
-                      },
-                      bookImage: data.linkImageBook,
-                    );
-                  },
-                ),
-              ),
-              const Spacing(1),
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<HomeCubit, HomeState>(
+      builder: (context, state) {
+        if (state is HomeLoadedState) {
+          final popularBooks = state.popularBooks;
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
               BodyMText(
                 "Thông dụng",
                 style: BodyMText.defaultStyle.copyWith(
@@ -115,27 +110,86 @@ class _HomeScreenState extends BaseScreenState<HomeScreen> {
                     direction: SpacingDirection.Horizontal,
                   ),
                   scrollDirection: Axis.horizontal,
-                  itemCount: mockData.length,
-                  itemBuilder: (context, index) {
-                    final data = mockData[index];
+                  itemCount: popularBooks.length,
+                  itemBuilder: (_, index) {
+                    final book = popularBooks[index];
 
-                    final bookTags = BookTagExtension.findTags(data.tags ?? []);
+                    final bookTags = BookTagExtension.findTags(book.tag ?? []);
 
                     return ListBookItem(
-                      authorName: data.bookAuthor,
-                      bookName: data.bookName,
+                      authorName: book.author,
+                      bookName: book.name,
                       tags: bookTags,
                       onTap: () {
-                        BookDetailRoute(data.bookID ?? '').go(context);
+                        BookDetailRoute(book.id ?? '').go(context);
                       },
-                      bookImage: data.linkImageBook,
+                      bookImage: book.image,
                     );
                   },
                 ),
               ),
             ],
+          );
+        }
+        return const SizedBox.shrink();
+      },
+    );
+  }
+}
+
+class _TrendingBooksView extends StatelessWidget {
+  const _TrendingBooksView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        BodyMText(
+          "Trending",
+          style: BodyMText.defaultStyle.copyWith(
+            fontWeight: FontWeight.bold,
           ),
-        ));
+        ),
+        const Spacing(1),
+        BlocBuilder<HomeCubit, HomeState>(
+          builder: (context, state) {
+            if (state is HomeLoadedState) {
+              final trendingBooks = state.trendingBooks;
+              return SizedBox(
+                width: double.infinity,
+                height: SizeConfig.screenHeight * 0.3,
+                child: ListView.separated(
+                  physics: const BouncingScrollPhysics(),
+                  separatorBuilder: (context, index) => const Spacing(
+                    .75,
+                    direction: SpacingDirection.Horizontal,
+                  ),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: trendingBooks.length,
+                  itemBuilder: (_, index) {
+                    final book = trendingBooks[index];
+
+                    final bookTags = BookTagExtension.findTags(book.tag ?? []);
+
+                    return ListBookItem(
+                      authorName: book.author,
+                      bookName: book.name,
+                      tags: bookTags,
+                      onTap: () {
+                        BookDetailRoute(book.id ?? '').go(context);
+                      },
+                      bookImage: book.image,
+                    );
+                  },
+                ),
+              );
+            }
+            return const SizedBox.shrink();
+          },
+        )
+      ],
+    );
   }
 }
 
