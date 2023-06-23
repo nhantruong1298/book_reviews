@@ -1,6 +1,12 @@
+import 'dart:convert';
+
+import 'package:data/entity/response/book_detail_response.dart';
+import 'package:data/entity/response/event_detail_response.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:presentation/app/route_builder.dart';
 import 'package:presentation/base/base_screen.dart';
+import 'package:presentation/feature/mock_data/mock_data.dart';
 import 'package:presentation/resources/app_colors.dart';
 import 'package:presentation/resources/app_dimensions.dart';
 import 'package:presentation/utils/size_config.dart';
@@ -18,11 +24,10 @@ class _SplashScreenState extends BaseScreenState<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    _loadMockData();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       Future.delayed(const Duration(seconds: 2), () {
-        //context.goNamed(SignUpModule.routeName);
-        SignUpRoute().go(context);
-       // DashboardRoute().go(context);
+        DashboardRoute().go(context);
       });
     });
   }
@@ -32,6 +37,7 @@ class _SplashScreenState extends BaseScreenState<SplashScreen> {
     SizeConfig.init(context);
     return BasicLayout(
       color: AppColors.primaryColor500,
+      appBarColor: AppColors.primaryColor500,
       automaticallyImplyLeading: false,
       headerVisible: false,
       child: Column(
@@ -45,5 +51,33 @@ class _SplashScreenState extends BaseScreenState<SplashScreen> {
         ],
       ),
     );
+  }
+
+  void _loadMockData() async {
+    //**Load book data */
+    var jsonText = await rootBundle
+        .loadString('packages/presentation/assets/mock_data/books_data.json');
+
+    var jsonDecoded = jsonDecode(jsonText);
+
+    final List<BookDetailResponse> bookData = [];
+
+    for (var item in jsonDecoded) {
+      bookData.add(BookDetailResponse.fromJson(item));
+    }
+
+    //**Load event data */
+    jsonText = await rootBundle
+        .loadString('packages/presentation/assets/mock_data/events_data.json');
+
+    jsonDecoded = jsonDecode(jsonText);
+
+    final List<EventDetailResponse> eventData = [];
+
+    for (var item in jsonDecoded) {
+      eventData.add(EventDetailResponse.fromJson(item));
+    }
+
+    MockData.configureData(bookData, eventData);
   }
 }

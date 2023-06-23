@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:flutter_html_svg/flutter_html_svg.dart';
-import 'package:flutter_html_table/flutter_html_table.dart';
 
 export 'package:flutter_html/flutter_html.dart';
 
@@ -23,13 +21,13 @@ class HtmlView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Html(
       data: data,
-      customRenders: {
-        tableMatcher(): tableRender(),
-        svgTagMatcher(): svgTagRender(),
-        svgDataUriMatcher(): svgDataImageRender(),
-        svgAssetUriMatcher(): svgAssetImageRender(),
-        svgNetworkSourceMatcher(): svgNetworkImageRender(),
-      },
+      // customRenders: {
+      //   tableMatcher(): tableRender(),
+      //   svgTagMatcher(): svgTagRender(),
+      //   svgDataUriMatcher(): svgDataImageRender(),
+      //   svgAssetUriMatcher(): svgAssetImageRender(),
+      //   svgNetworkSourceMatcher(): svgNetworkImageRender(),
+      // },
       onLinkTap: onLinkTap,
       onAnchorTap: onAnchorTap,
       style: style,

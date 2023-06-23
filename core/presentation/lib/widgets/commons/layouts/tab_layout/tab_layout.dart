@@ -1,21 +1,19 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:presentation/resources/app_colors.dart';
-import 'package:presentation/widgets/commons/layouts/tab_layout/fab_bottom_app_bar.dart';
+
+import 'fab_bottom_app_bar.dart';
+export 'fab_bottom_app_bar.dart';
 
 class TabLayout extends StatefulWidget {
-  final ValueChanged<int>? onDoubleTap;
-
-  final ValueChanged<int>? onTabSelected;
-
-  TabLayout({
-    Key? key,
-    this.screens,
-    this.items,
+  const TabLayout({
+    super.key,
+    this.screens = const [],
+    this.items = const [],
     this.onWillPop,
     this.color,
     this.swipeable = true,
-    this.appBarColor = AppColors.backgroundColor,
+    this.appBarColor,
     this.headerVisible = true,
     this.centerButton,
     this.centerButtonText,
@@ -24,21 +22,17 @@ class TabLayout extends StatefulWidget {
     this.bottomAppBarActiveColor,
     this.darkMode = false,
     this.controller,
-    this.onDoubleTap,
-    this.onTabSelected,
-  }) : super(key: key) {
-    assert(items!.length == screens!.length);
-  }
+  }) : assert(items.length == screens.length);
 
   final TabController? controller;
   final bool swipeable;
   final Color? color;
-  final Color appBarColor;
+  final Color? appBarColor;
   final Color? bottomAppBarColor;
   final Color? bottomAppBarActiveColor;
   final bool headerVisible;
-  final List<FABBottomAppBarItem>? items;
-  final List<Widget>? screens;
+  final List<FABBottomAppBarItem> items;
+  final List<Widget> screens;
   final Widget? centerButton;
   final String? centerButtonText;
   final bool darkMode;
@@ -54,11 +48,14 @@ class _TabLayoutState extends State<TabLayout>
     with SingleTickerProviderStateMixin {
   final StreamController<int> _indexStream = StreamController();
   TabController? _tabController;
+
+  bool get hasOwnController => widget.controller != null;
+
   @override
   void initState() {
     super.initState();
     _tabController = widget.controller ??
-        TabController(vsync: this, length: widget.screens!.length);
+        TabController(vsync: this, length: widget.screens.length);
     _indexStream.add(0);
 
     _tabController!.addListener(onTabIndexUpdated);
@@ -74,8 +71,10 @@ class _TabLayoutState extends State<TabLayout>
   @override
   void dispose() {
     _indexStream.close();
-    _tabController!.removeListener(onTabIndexUpdated);
-    _tabController!.dispose();
+    _tabController?.removeListener(onTabIndexUpdated);
+    if (!hasOwnController) {
+      _tabController?.dispose();
+    }
     super.dispose();
   }
 
@@ -92,7 +91,7 @@ class _TabLayoutState extends State<TabLayout>
             // maintainBottomViewPadding: false,
             child: TabBarView(
               controller: _tabController,
-              children: widget.screens!,
+              children: widget.screens,
               physics: widget.swipeable
                   ? const PageScrollPhysics()
                   : const NeverScrollableScrollPhysics(),
@@ -109,7 +108,6 @@ class _TabLayoutState extends State<TabLayout>
 
   _onTabSelected(int index) {
     _tabController!.animateTo(index);
-    widget.onTabSelected?.call(index);
     // _indexStream.add(index);
   }
 
@@ -120,15 +118,11 @@ class _TabLayoutState extends State<TabLayout>
           return FABBottomAppBar(
             index: snapshot.data ?? 0,
             centerItemText: widget.centerButtonText,
-            color: widget.bottomAppBarColor,
-            selectedColor: widget.bottomAppBarActiveColor,
+            color: AppColors.textGreyColor,
+            selectedColor: AppColors.primaryDarkColor,
             notchedShape: const CircularNotchedRectangle(),
             onTabSelected: (int? index) {
-              if (_tabController!.index != index) {
-                _onTabSelected(index!);
-              } else {
-                widget.onDoubleTap?.call(index!);
-              }
+              if (_tabController!.index != index) _onTabSelected(index!);
             },
             items: widget.items,
           );
@@ -161,5 +155,4 @@ class _TabLayoutState extends State<TabLayout>
   // _buildFab(AsyncSnapshot<int> snapshot, BuildContext context) {
   //   return widget.centerButton;
   // }
-
 }

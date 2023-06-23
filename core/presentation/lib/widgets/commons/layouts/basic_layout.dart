@@ -59,6 +59,7 @@ class BasicLayout extends StatelessWidget {
       if (canPop) {
         return IconButton(
           icon: const Icon(Icons.arrow_back),
+          color: Colors.black,
           tooltip: MaterialLocalizations.of(context).backButtonTooltip,
           onPressed: () {
             Navigator.of(context).pop();

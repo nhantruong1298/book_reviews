@@ -1,0 +1,128 @@
+[
+    {
+      "id":"1",
+      "bookName": "Đắc nhân tâm",
+      "bookAuthor": "Dale Carnegie",
+      "bookLanguage": "tiếng Anh",
+      "ratingStars": 4,
+      "description": "Quyển sách đưa ra các lời khuyên về cách thức cư xử,&nbsp;ứng xử&nbsp;và&nbsp;giao tiếp&nbsp;với mọi người để đạt được thành công trong cuộc sống",
+      "tags": [
+        "behave",
+        "communicate",
+        "success",
+        "communicate",
+        "success",
+        "communicate"
+      ],
+      "linkImageBook": "https://salt.tikicdn.com/cache/w1200/ts/product/df/7d/da/d340edda2b0eacb7ddc47537cddb5e08.jpg"
+    },
+    {
+      "id":"2",
+      "bookName": "Hành Tinh Của Một Kẻ Nghĩ Nhiều",
+      "bookAuthor": "&nbsp;Nguyễn Đoàn Minh Thư",
+      "bookLanguage": "tiếng Việt",
+      "ratingStars": 4,
+      "description": "“Sự cô đơn không nằm ở việc không có bạn bè hay người thân mà ngay cả trong sự sum vầy ta vẫn cảm thấy không có ai có thể hiểu mình tường tận từ sâu tâm hồn. Là sự cô đơn như thể chỉ có một mình mình trên một hành tinh đơn độc trong đầu, một hành tinh không bao giờ có khách viếng thăm”.",
+      "tags": [
+        "mentality"
+      ],
+      "linkImageBook": "https://salt.tikicdn.com/cache/750x750/ts/product/65/78/e7/2eacb9f887fc28779b15cf9ab6d0bf79.jpg.webp"
+    },
+    {
+      "id":"3",
+      "bookName": "Clean code",
+      "bookAuthor": "Robert Cecil Martin",
+      "bookLanguage": "tiếng Anh",
+      "ratingStars": 5,
+      "description": "Clean Code - Mã Sạch Và Con Đường Trở Thành Lập Trình Viên Giỏi - Cuốn sách hướng dẫn cách để viết những đoạn mã có thể hoạt động tốt, cũng như truyền tải được ý định của người viết nên chúng.",
+      "tags": [
+        "IT",
+        "program"
+      ],
+      "linkImageBook": "https://salt.tikicdn.com/cache/750x750/ts/product/5f/d7/35/d6a086d2450d364198cd07ebef63d8a7.jpg.webp"
+    },
+    {
+      "id":"4",
+      "bookName": "Hành Trang Lập Trình",
+      "bookAuthor": "Vũ Công Tấn Tài",
+      "bookLanguage": "tiếng Việt",
+      "ratingStars": 5,
+      "description": "Những Kỹ Năng Lập Trình Viên Chuyên Nghiệp Cần Có",
+      "tags": [
+        "IT",
+        "program"
+      ],
+      "linkImageBook": "https://salt.tikicdn.com/cache/750x750/ts/product/0e/46/3d/58ebd6b8e068836372a55a24ada07a26.jpg.webp"
+    },
+    {
+      "id":"5",
+      "bookName": "Thay Đổi Hay Là Chết",
+      "bookAuthor": "Alexi Panos,&nbsp;Preston Smiles",
+      "bookLanguage": "tiếng Anh",
+      "ratingStars": 4,
+      "description": "Bạn luôn sống và có sự lựa chọn. Dù cuộc sống có tồi tệ đến đâu, dù bạn cảm thấy thê thảm thế nào thì trong từng khoảnh khắc, bạn vẫn có thể lựa chọn điều gì đó khác đi. Chúng ta không thể can thiệp vào một thế giới mà chúng ta không chứng kiến tận mắt, và mỗi cá nhân lại là một thế giới rất riêng. Vấn đề là, hầu hết mọi người đều thiếu sự tự nhận thức",
+      "tags": [
+        "behave",
+        "communicate",
+        "success"
+      ],
+      "linkImageBook": "https://salt.tikicdn.com/cache/750x750/ts/product/50/a5/29/26f8b4406c1d25d17965f175be9f5596.jpg.webp"
+    },
+    {
+      "id":"6",
+      "bookName": "Cảm xúc là kẻ thù số một của thành công phiên bản 2021",
+      "bookAuthor": "TS Lê Thẩm Dương",
+      "bookLanguage": "tiếng Việt",
+      "ratingStars": 3,
+      "description": "\"Cảm xúc là kẻ thù số một của thành công\"&nbsp;là tựa sách được đông đảo độc giả yêu thích&nbsp;của TS Lê Thẩm Dương.&nbsp;Cuốn sách&nbsp;gồm những bài nói chuyện, bài viết của tác giả về chủ đề hướng nghiệp, tài chính&nbsp;nghiên cứu, lao động, chọn vợ chồng, thái độ sống tích cực… có tác động lớn đến đông đảo độc giả ở nhiều lứa tuổi.&nbsp;",
+      "tags": [
+        "behave",
+        "communicate",
+        "success"
+      ],
+      "linkImageBook": "https://salt.tikicdn.com/cache/750x750/ts/product/73/03/8d/3a71ee39ff8b604feb8ef383ada9f6fe.jpg.webp"
+    },
+    {
+      "id":"7",
+      "bookName": "Think And Grow Rich",
+      "bookAuthor": "Napoleon Hill",
+      "bookLanguage": "tiếng Anh",
+      "ratingStars": 4,
+      "description": "Think and Grow Rich - Nghĩ giàu và làm giàu&nbsp;là một trong những cuốn sách bán chạy nhất mọi thời đại. Đã hơn 60 triệu bản được phát hành với gần trăm ngôn ngữ trên toàn thế giới và được công nhận là cuốn sách tạo ra nhiều triệu phú, một cuốn sách truyền cảm hứng thành công nhiều hơn bất cứ cuốn sách kinh doanh nào trong lịch sử.",
+      "tags": [
+        "life-skills",
+        "psychology"
+      ],
+      "linkImageBook": "https://salt.tikicdn.com/cache/750x750/ts/product/e3/47/7c/f66124cc7ec7dd3ac9072e05615a9701.jpg.webp"
+    },
+    {
+      "id":"8",
+      "bookName": "The 7 Habits of Highly Effective People",
+      "bookAuthor": "Stephen Richards Covey",
+      "bookLanguage": "tiếng Anh",
+      "ratingStars": 5,
+      "description": "7 Thói Quen Hiệu Quả của tác giả Stephen R. Covey là cuốn sách giúp bạn cải thiện bản thân. Được biên soạn dựa trên niềm tin của tác giả rằng cách chúng ta nhìn thế giới hoàn toàn dựa trên nhận thức cá nhân. Để thay đổi tầm nhìn về cuộc sống, chúng ta phải thay đổi bản thân. Và để thay đổi bản thân, chúng ta phải thay đổi tư duy và nhận thức của mình.",
+      "tags": ["self-help"],
+      "linkImageBook": "https://salt.tikicdn.com/cache/750x750/ts/product/a4/8f/fa/76e934125d14188a066324f18de458a0.jpg.webp"
+    },
+    {
+      "id":"9",
+      "bookName": "The 4‑Hour Workweek",
+      "bookAuthor": "Timothy Ferriss",
+      "bookLanguage": "tiếng Anh",
+      "ratingStars": 3,
+      "description": "Tuần làm việc 4 giờ: Thoát 9–5, Sống ở bất kỳ đâu và Tham gia làm giàu mới là một cuốn sách tự lực của Timothy Ferriss, một nhà văn, nhà hoạt động giáo dục và doanh nhân người Mỹ.",
+      "tags": ["self-help"],
+      "linkImageBook": "https://salt.tikicdn.com/cache/750x750/ts/product/e0/fa/63/44c0cd795dcde2ba8447e8b051654f2e.jpg.webp"
+    },
+    {
+      "id":"10",
+      "bookName": "Bí mật tư duy triệu phú",
+      "bookAuthor": "T. Harv Eker",
+      "bookLanguage": "tiếng Anh",
+      "ratingStars": 4,
+      "description": "Trong cuốn sách này T. Harv Eker sẽ tiết lộ những bí mật tại sao một số người lại đạt được những thành công vượt bậc, được số phận ban cho cuộc sống sung túc, giàu có, trong khi một số người khác phải chật vật, vất vả mới có một cuộc sống qua ngày. Bạn sẽ hiểu được nguồn gốc sự thật và những yếu tố quyết định thành công, thất bại để rồi áp dụng, thay đổi cách suy nghĩ, lên kế hoạch rồi tìm ra cách làm việc, đầu tư, sử dụng nguồn tài chính của bạn theo hướng hiệu quả nhất.",
+      "tags": ["self-help"],
+      "linkImageBook": "https://salt.tikicdn.com/cache/750x750/ts/product/7d/3e/bb/f49394142b5bccff11f64677d01b66a4.png.webp"
+    }
+  ]

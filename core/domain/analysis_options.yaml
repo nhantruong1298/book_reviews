@@ -2,3 +2,14 @@ include: package:flutter_lints/flutter.yaml
 
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options
+linter:
+  rules:
+      depend_on_referenced_packages : false
+      constant_identifier_names: false
+      library_prefixes: false
+      directives_ordering: true
+      no_leading_underscores_for_local_identifiers: false
+      library_private_types_in_public_api: false
+      sort_child_properties_last: false
+      use_build_context_synchronously: false
+      prefer_interpolation_to_compose_strings: false
