@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart' hide ModalBottomSheetRoute;
 import 'package:flutter/services.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:presentation/exception/app.exception_handler.dart';
+import 'package:presentation/exception/app_exception_handler.dart';
 import 'package:presentation/exception/app_exception.dart';
 import 'package:presentation/injectors/all.dart';
 import 'package:presentation/resources/app_colors.dart';

@@ -37,7 +37,6 @@ class _HomeScreenState extends BaseScreenState<HomeScreen> {
 
   @override
   Widget builder(BuildContext context) {
-
     return BasicLayout(
         headerActions: [
           IconButton(

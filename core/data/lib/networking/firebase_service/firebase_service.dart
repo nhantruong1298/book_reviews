@@ -2,13 +2,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:data/entity/response/load_book_response.dart';
 import 'package:data/entity/response/sign_in_with_email_response.dart';
 import 'package:data/entity/response/sign_up_with_email_response.dart';
+import 'package:domain/firestore_path/firestore_path.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FireBaseService {
   final FirebaseAuth _firebaseAuth;
   final FirebaseFirestore _firestore;
+
+  late final FirestorePath _firestorePath;
   //final LogService _logService;
-  FireBaseService(this._firebaseAuth,this._firestore);
+  FireBaseService(this._firebaseAuth, this._firestore) {
+    _firestorePath = FirestorePath();
+  }
 
   Future<SignInWithEmailResponse> signInWithEmailAndPassword(
       String email, String password) async {
@@ -27,32 +32,46 @@ class FireBaseService {
     return SignUpWithEmailResponse(credential);
   }
 
-  Future<void> loadBooks({
-    required List<String> bookIDs,
-  }) async {}
+  Future<List<LoadBookResponse>> loadBooks({required List<String> ids}) async {
+    final result = <LoadBookResponse>[];
+    for (final id in ids) {
+      final snapshot = await _firestore
+          .collection(_firestorePath.collectionPath.books)
+          .where(_firestorePath.bookPath.id, isEqualTo: id)
+          .get();
 
-  Future<List<String>> _loadTrendingBookIds() async {
-    final ids = <String>[];
-
-    final snapshot = await _firestore.collection("trending-books").get();
-    for (final doc in snapshot.docs) {
-      ids.add(doc.id);
+      if (snapshot.docs.isNotEmpty) {
+        result.add(LoadBookResponse.fromJson(snapshot.docs.first.data()));
+      }
     }
-    return ids;
+    return result;
   }
 
   Future<List<LoadBookResponse>> loadTrendingBooks() async {
     final result = <LoadBookResponse>[];
-    final ids = await _loadTrendingBookIds();
+    final snapshot = await _firestore
+        .collection(_firestorePath.collectionPath.books)
+        .where(_firestorePath.bookPath.trending, isEqualTo: true)
+        .get();
 
-    for (final id in ids) {
-      final snapshot =
-          await _firestore.collection("books").where('id', isEqualTo: id).get();
-
-      if(snapshot.docs.isNotEmpty){
-        result.add(LoadBookResponse.fromJson(snapshot.docs.first.data()));
-      }
+     for (final doc in snapshot.docs) {
+      result.add(LoadBookResponse.fromJson(doc.data()));
     }
+
+    return result;
+  }
+
+  Future<List<LoadBookResponse>> loadPopularBooks() async {
+    final result = <LoadBookResponse>[];
+    final snapshot = await _firestore
+        .collection(_firestorePath.collectionPath.books)
+        .where(_firestorePath.bookPath.popular, isEqualTo: true)
+        .get();
+
+    for (final doc in snapshot.docs) {
+      result.add(LoadBookResponse.fromJson(doc.data()));
+    }
+
     return result;
   }
 }

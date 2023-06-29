@@ -13,4 +13,10 @@ class BookRepositoryImpl extends BookRepository {
     final listResponse = await _serviceManager.loadTrendingBooks();
     return _dataMapper.mapListBookResponse(listResponse);
   }
+  
+  @override
+  Future<List<LoadBookResult>> loadPopularBooks() async{
+     final listResponse = await _serviceManager.loadPopularBooks();
+    return _dataMapper.mapListBookResponse(listResponse);
+  }
 }

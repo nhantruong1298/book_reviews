@@ -53,4 +53,8 @@ class ServiceManager {
   Future<List<LoadBookResponse>> loadTrendingBooks() {
     return _fireBaseService.loadTrendingBooks();
   }
+
+  Future<List<LoadBookResponse>> loadPopularBooks() {
+    return _fireBaseService.loadPopularBooks();
+  }
 }
