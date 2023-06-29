@@ -4,7 +4,7 @@ class LoadBookResult {
   final String? author;
   final String? image;
   final String? description;
-  final List<String>? tag;
+  final List<String>? tags;
   final List<String>? reviewIDs;
 
   LoadBookResult({
@@ -13,7 +13,7 @@ class LoadBookResult {
     this.author,
     this.image,
     this.description,
-    this.tag,
+    this.tags,
     this.reviewIDs,
   });
 }

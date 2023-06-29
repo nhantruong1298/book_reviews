@@ -12,7 +12,7 @@ class BookDataMapper {
         id: item.id,
         name: item.name,
         reviewIDs: item.reviewIds,
-        tag: item.tags,
+        tags: item.tags,
       ));
     }
     return result;

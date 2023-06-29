@@ -13,12 +13,18 @@ part 'home_cubit.freezed.dart';
 class HomeCubit extends Cubit<HomeState> {
   late final BookRepository _bookRepository;
   late final AppExceptionHandler _appExceptionHandler;
+
   HomeCubit() : super(const HomeInitial()) {
     _bookRepository = getIt<BookRepository>();
     _appExceptionHandler = getIt<AppExceptionHandler>();
   }
 
+  Future<void> onScreenRefresh() async {
+    await onScreenInit();
+  }
+
   Future<void> onScreenInit() async {
+    emit(const HomeState.loading());
     try {
       final trendingBooksResult = await _bookRepository.loadTrendingBooks();
       final popularBooksResult = await _bookRepository.loadPopularBooks();

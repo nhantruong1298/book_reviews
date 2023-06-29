@@ -102,4 +102,9 @@ class AppColors {
   static const iconLightColor = Color(0xFFFFFFFF);
   static const disabledOpacity = 0.66;
   static const inactiveOpacity = 0.66;
+
+  static Gradient get loadingGradient => LinearGradient(colors: [
+        Colors.grey.shade300,
+        Colors.grey.shade100,
+      ]);
 }

@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:presentation/app/route_builder.dart';
 import 'package:presentation/base/base_screen.dart';
-import 'package:presentation/constants/book_tag.dart';
 import 'package:presentation/feature/book_search/cubit/book_search_cubit.dart';
-import 'package:presentation/feature/home/views/home_screen.dart';
+import 'package:presentation/feature/home/views/list_book_item.dart';
 import 'package:presentation/widgets/commons/layouts/search_layout.dart';
 
 class BookSearchScreen extends StatefulWidget {
@@ -50,12 +49,12 @@ class _BookSearchScreenState extends BaseScreenState<BookSearchScreen> {
               itemBuilder: (context, index) {
                 final data = mockData[index];
 
-                final bookTags = BookTagExtension.findTags(data.tags ?? []);
+                //final bookTags = BookTagExtension.findTags(data.tags ?? []);
 
                 return ListBookItem(
                   authorName: data.bookAuthor,
                   bookName: data.bookName,
-                  tags: bookTags,
+                  tags: const [],
                   onTap: () {
                     BookDetailRoute(data.bookID ?? '').push(context);
                   },

@@ -19,7 +19,7 @@ mixin _$HomeState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(bool isLoading) loading,
+    required TResult Function() loading,
     required TResult Function(List<LoadBookResult> trendingBooks,
             List<LoadBookResult> popularBooks)
         loaded,
@@ -29,7 +29,7 @@ mixin _$HomeState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
-    TResult? Function(bool isLoading)? loading,
+    TResult? Function()? loading,
     TResult? Function(List<LoadBookResult> trendingBooks,
             List<LoadBookResult> popularBooks)?
         loaded,
@@ -39,7 +39,7 @@ mixin _$HomeState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(bool isLoading)? loading,
+    TResult Function()? loading,
     TResult Function(List<LoadBookResult> trendingBooks,
             List<LoadBookResult> popularBooks)?
         loaded,
@@ -130,7 +130,7 @@ class _$HomeInitial implements HomeInitial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(bool isLoading) loading,
+    required TResult Function() loading,
     required TResult Function(List<LoadBookResult> trendingBooks,
             List<LoadBookResult> popularBooks)
         loaded,
@@ -143,7 +143,7 @@ class _$HomeInitial implements HomeInitial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
-    TResult? Function(bool isLoading)? loading,
+    TResult? Function()? loading,
     TResult? Function(List<LoadBookResult> trendingBooks,
             List<LoadBookResult> popularBooks)?
         loaded,
@@ -156,7 +156,7 @@ class _$HomeInitial implements HomeInitial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(bool isLoading)? loading,
+    TResult Function()? loading,
     TResult Function(List<LoadBookResult> trendingBooks,
             List<LoadBookResult> popularBooks)?
         loaded,
@@ -216,8 +216,6 @@ abstract class _$$HomeLoadingStateCopyWith<$Res> {
   factory _$$HomeLoadingStateCopyWith(
           _$HomeLoadingState value, $Res Function(_$HomeLoadingState) then) =
       __$$HomeLoadingStateCopyWithImpl<$Res>;
-  @useResult
-  $Res call({bool isLoading});
 }
 
 /// @nodoc
@@ -227,83 +225,58 @@ class __$$HomeLoadingStateCopyWithImpl<$Res>
   __$$HomeLoadingStateCopyWithImpl(
       _$HomeLoadingState _value, $Res Function(_$HomeLoadingState) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? isLoading = null,
-  }) {
-    return _then(_$HomeLoadingState(
-      null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$HomeLoadingState implements HomeLoadingState {
-  const _$HomeLoadingState(this.isLoading);
-
-  @override
-  final bool isLoading;
+  const _$HomeLoadingState();
 
   @override
   String toString() {
-    return 'HomeState.loading(isLoading: $isLoading)';
+    return 'HomeState.loading()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$HomeLoadingState &&
-            (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading));
+        (other.runtimeType == runtimeType && other is _$HomeLoadingState);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$HomeLoadingStateCopyWith<_$HomeLoadingState> get copyWith =>
-      __$$HomeLoadingStateCopyWithImpl<_$HomeLoadingState>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(bool isLoading) loading,
+    required TResult Function() loading,
     required TResult Function(List<LoadBookResult> trendingBooks,
             List<LoadBookResult> popularBooks)
         loaded,
     required TResult Function(AppException appException) exception,
   }) {
-    return loading(isLoading);
+    return loading();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
-    TResult? Function(bool isLoading)? loading,
+    TResult? Function()? loading,
     TResult? Function(List<LoadBookResult> trendingBooks,
             List<LoadBookResult> popularBooks)?
         loaded,
     TResult? Function(AppException appException)? exception,
   }) {
-    return loading?.call(isLoading);
+    return loading?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(bool isLoading)? loading,
+    TResult Function()? loading,
     TResult Function(List<LoadBookResult> trendingBooks,
             List<LoadBookResult> popularBooks)?
         loaded,
@@ -311,7 +284,7 @@ class _$HomeLoadingState implements HomeLoadingState {
     required TResult orElse(),
   }) {
     if (loading != null) {
-      return loading(isLoading);
+      return loading();
     }
     return orElse();
   }
@@ -355,12 +328,7 @@ class _$HomeLoadingState implements HomeLoadingState {
 }
 
 abstract class HomeLoadingState implements HomeState {
-  const factory HomeLoadingState(final bool isLoading) = _$HomeLoadingState;
-
-  bool get isLoading;
-  @JsonKey(ignore: true)
-  _$$HomeLoadingStateCopyWith<_$HomeLoadingState> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory HomeLoadingState() = _$HomeLoadingState;
 }
 
 /// @nodoc
@@ -456,7 +424,7 @@ class _$HomeLoadedState implements HomeLoadedState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(bool isLoading) loading,
+    required TResult Function() loading,
     required TResult Function(List<LoadBookResult> trendingBooks,
             List<LoadBookResult> popularBooks)
         loaded,
@@ -469,7 +437,7 @@ class _$HomeLoadedState implements HomeLoadedState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
-    TResult? Function(bool isLoading)? loading,
+    TResult? Function()? loading,
     TResult? Function(List<LoadBookResult> trendingBooks,
             List<LoadBookResult> popularBooks)?
         loaded,
@@ -482,7 +450,7 @@ class _$HomeLoadedState implements HomeLoadedState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(bool isLoading)? loading,
+    TResult Function()? loading,
     TResult Function(List<LoadBookResult> trendingBooks,
             List<LoadBookResult> popularBooks)?
         loaded,
@@ -611,7 +579,7 @@ class _$HomeExceptionState implements HomeExceptionState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(bool isLoading) loading,
+    required TResult Function() loading,
     required TResult Function(List<LoadBookResult> trendingBooks,
             List<LoadBookResult> popularBooks)
         loaded,
@@ -624,7 +592,7 @@ class _$HomeExceptionState implements HomeExceptionState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
-    TResult? Function(bool isLoading)? loading,
+    TResult? Function()? loading,
     TResult? Function(List<LoadBookResult> trendingBooks,
             List<LoadBookResult> popularBooks)?
         loaded,
@@ -637,7 +605,7 @@ class _$HomeExceptionState implements HomeExceptionState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(bool isLoading)? loading,
+    TResult Function()? loading,
     TResult Function(List<LoadBookResult> trendingBooks,
             List<LoadBookResult> popularBooks)?
         loaded,
