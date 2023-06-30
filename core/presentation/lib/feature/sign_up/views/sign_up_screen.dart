@@ -51,8 +51,7 @@ class _SignUpScreenState extends BaseScreenState<SignUpScreen> {
         automaticallyImplyLeading: true,
         child: FormBuilder(
           key: _formKey,
-          child:
-              Column(children: [
+          child: Column(children: [
             const _Title(),
             const Spacing(2.5),
             _signUpWithEmailForm(),
@@ -83,49 +82,47 @@ class _SignUpScreenState extends BaseScreenState<SignUpScreen> {
   Widget _signUpWithEmailForm() {
     return Column(children: [
       TextInputField(
-              name: USER_NAME_FIELD,
-              labelText: S.current.SIGN_UP__EMAIL,
-              validator: FormBuilderValidators.compose([
-                FormBuilderValidators.required(
-                    errorText: S.current.SIGN_UP__CAN_NOT_BE_LEFT_BLANK),
-                FormBuilderValidators.email(
-                    errorText: S.of(context).SIGN_UP__EMAIL_INVALID),
-              ]),
-            ),
-            const Spacing(2),
-            PasswordInputField(
-              name: PASSWORD_FIELD,
-              labelText: S.of(context).SIGN_UP__PASSWORD,
+        name: USER_NAME_FIELD,
+        labelText: S.current.SIGN_UP__EMAIL,
+        validator: FormBuilderValidators.compose([
+          FormBuilderValidators.required(
+              errorText: S.current.SIGN_UP__CAN_NOT_BE_LEFT_BLANK),
+          FormBuilderValidators.email(
+              errorText: S.of(context).SIGN_UP__EMAIL_INVALID),
+        ]),
+      ),
+      const Spacing(2),
+      PasswordInputField(
+        name: PASSWORD_FIELD,
+        labelText: S.of(context).SIGN_UP__PASSWORD,
+        validator: FormBuilderValidators.compose([
+          FormBuilderValidators.required(errorText: 'Không được để trống'),
+          FormBuilderValidators.minLength(MIN_LENGTH_PASSWORD,
+              errorText: S
+                  .of(context)
+                  .SIGN_UP__VALIDATION_PASSWORD_INVALID_MIN_LENGTH(
+                      MIN_LENGTH_PASSWORD)),
+        ]),
+        onChanged: (text) {
+          passwordValue.value = text ?? '';
+        },
+      ),
+      const Spacing(2),
+      ValueListenableBuilder(
+        valueListenable: passwordValue,
+        builder: (_, password, __) {
+          return PasswordInputField(
+              name: RE_PASSWORD_FIELD,
+              initialValue: '',
+              labelText: S.current.SIGN_UP__RE_ENTER_PASSWORD,
               validator: FormBuilderValidators.compose([
                 FormBuilderValidators.required(
                     errorText: 'Không được để trống'),
-                FormBuilderValidators.minLength(MIN_LENGTH_PASSWORD,
-                    errorText: S
-                        .of(context)
-                        .SIGN_UP__VALIDATION_PASSWORD_INVALID_MIN_LENGTH(
-                            MIN_LENGTH_PASSWORD)),
-              ]),
-              onChanged: (text) {
-                passwordValue.value = text;
-              },
-            ),
-            const Spacing(2),
-            ValueListenableBuilder(
-              valueListenable: passwordValue,
-              builder: (_, password, __) {
-                return PasswordInputField(
-                    name: RE_PASSWORD_FIELD,
-                    initialValue: '',
-                    labelText: S.current.SIGN_UP__RE_ENTER_PASSWORD,
-                    validator: FormBuilderValidators.compose([
-                      FormBuilderValidators.required(
-                          errorText: 'Không được để trống'),
-                      FormBuilderValidators.equal(password,
-                          errorText:
-                              S.current.SIGN_UP__PASSWORD_DOES_NOT_MATCH),
-                    ]));
-              },
-            ),
+                FormBuilderValidators.equal(password,
+                    errorText: S.current.SIGN_UP__PASSWORD_DOES_NOT_MATCH),
+              ]));
+        },
+      ),
     ]);
   }
 }

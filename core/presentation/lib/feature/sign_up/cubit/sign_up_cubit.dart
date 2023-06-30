@@ -1,13 +1,13 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:presentation/exception/app_exception_handler.dart';
 import 'package:presentation/exception/app_exception.dart';
+import 'package:presentation/exception/app_exception_handler.dart';
 import 'package:presentation/feature/authentication/cubit/authentication_cubit.dart';
 import 'package:presentation/feature/sign_up/sign_up_repository.dart';
 import 'package:presentation/injectors/all.dart';
 
-part 'sign_up_state.dart';
 part 'sign_up_cubit.freezed.dart';
+part 'sign_up_state.dart';
 
 class SignUpCubit extends Cubit<SignUpState> {
   final SignUpRepository _signUpRepository;

@@ -21,7 +21,9 @@ class FireBaseService {
         email: email, password: password);
 
     return SignInWithEmailResponse(
-        userName: result.user?.email ?? '', userId: result.user?.uid ?? '');
+      userName: result.user?.email ?? '',
+      userId: result.user?.uid ?? '',
+    );
   }
 
   Future<SignUpWithEmailResponse> signUpWithEmailAndPassword(
