@@ -14,7 +14,6 @@ class ServiceManager {
   // ignore: unused_field
   late final LogService _logService;
 
-
   static ServiceManager? _instance;
   ServiceManager._internal();
 
@@ -29,7 +28,7 @@ class ServiceManager {
     _instance!._fireBaseService = FireBaseService(
       FirebaseAuth.instance,
       FirebaseFirestore.instance,
-     // _instance!._logService,
+      // _instance!._logService,
     );
 
     return _instance!;
@@ -56,5 +55,9 @@ class ServiceManager {
 
   Future<List<LoadBookResponse>> loadPopularBooks() {
     return _fireBaseService.loadPopularBooks();
+  }
+
+  Future<LoadBookResponse?> loadBook(String id) {
+    return _fireBaseService.loadBook(id);
   }
 }

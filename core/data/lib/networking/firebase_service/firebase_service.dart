@@ -54,7 +54,7 @@ class FireBaseService {
         .where(_firestorePath.bookPath.trending, isEqualTo: true)
         .get();
 
-     for (final doc in snapshot.docs) {
+    for (final doc in snapshot.docs) {
       result.add(LoadBookResponse.fromJson(doc.data()));
     }
 
@@ -73,5 +73,17 @@ class FireBaseService {
     }
 
     return result;
+  }
+
+  Future<LoadBookResponse?> loadBook(String id) async {
+    final snapshot = await _firestore
+        .collection(_firestorePath.collectionPath.books)
+        .where(_firestorePath.bookPath.id, isEqualTo: id)
+        .get();
+
+    if (snapshot.docs.isNotEmpty) {
+      return LoadBookResponse.fromJson(snapshot.docs.first.data());
+    }
+    return null;
   }
 }

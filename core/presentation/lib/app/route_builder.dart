@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:presentation/feature/authentication/cubit/authentication_cubit.dart';
-import 'package:presentation/feature/book_detail/book_detail_repository.dart';
 import 'package:presentation/feature/book_detail/cubit/book_detail_cubit.dart';
 import 'package:presentation/feature/book_detail/views/book_detail_screen.dart';
 import 'package:presentation/feature/book_event/cubit/book_event_cubit.dart';
@@ -152,16 +151,10 @@ class BookDetailRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return RepositoryProvider(
-      create: (_) => BookDetailRepository(),
-      child: BlocProvider(
-        create: (context) => BookDetailCubit(
-          bookID,
-          context.read<BookDetailRepository>(),
-        ),
-        child: BookDetailScreen(
-          bookID: bookID,
-        ),
+    return BlocProvider(
+      create: (context) => BookDetailCubit(bookID),
+      child: BookDetailScreen(
+        bookID: bookID,
       ),
     );
   }

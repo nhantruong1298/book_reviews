@@ -45,35 +45,33 @@ class _HomeScreenState extends BaseScreenState<HomeScreen> {
         headerActions: _buildAppBarActions(),
         title: _buildAppBarTitle(),
         centerTitle: false,
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            BlocBuilder<HomeCubit, HomeState>(builder: (context, state) {
-              return state.maybeWhen(
-                  loaded: (trendingBooks, popularBooks) {
-                    return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _ListBooksView(
-                            title: "Thịnh hành",
-                            data: trendingBooks,
-                          ),
-                          _ListBooksView(
-                            title: "Đề xuất",
-                            data: popularBooks,
-                          ),
-                        ]);
-                  },
-                  loading: () => Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _ListBooksLoadingView(),
-                          _ListBooksLoadingView(),
-                        ],
-                      ),
-                  orElse: () => const SizedBox());
-            })
-          ],
+        child: SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          child: BlocBuilder<HomeCubit, HomeState>(builder: (_, state) {
+            return state.maybeWhen(
+                loaded: (trendingBooks, popularBooks) {
+                  return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _ListBooksView(
+                          title: "Thịnh hành",
+                          data: trendingBooks,
+                        ),
+                        _ListBooksView(
+                          title: "Đề xuất",
+                          data: popularBooks,
+                        ),
+                      ]);
+                },
+                loading: () => Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _ListBooksLoadingView(),
+                        _ListBooksLoadingView(),
+                      ],
+                    ),
+                orElse: () => const SizedBox());
+          }),
         ));
   }
 
@@ -164,7 +162,7 @@ class _ListBooksLoadingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: AppDimensions.defaultLPadding * 2),
+      padding: const EdgeInsets.only(top: AppDimensions.defaultLPadding * 2.5),
       child: SizedBox(
         width: double.infinity,
         height: SizeConfig.screenHeight * 0.25,
@@ -210,7 +208,7 @@ class _ListBooksLoadingView extends StatelessWidget {
                   borderRadius:
                       BorderRadius.circular(AppDimensions.defaultSRadius),
                 ),
-                width: SizeConfig.screenWidth * 0.25,
+                width: SizeConfig.screenWidth * 0.2,
                 height: SizeConfig.screenWidth * 0.03,
               ),
             ),

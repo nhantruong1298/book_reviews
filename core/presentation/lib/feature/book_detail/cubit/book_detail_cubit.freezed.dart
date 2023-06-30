@@ -19,24 +19,24 @@ mixin _$BookDetailState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(bool isLoading) loading,
-    required TResult Function(BookDetailResponse? response) loaded,
+    required TResult Function() loading,
+    required TResult Function(LoadBookResult? loadBookResult) loaded,
     required TResult Function(AppException appException) exception,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
-    TResult? Function(bool isLoading)? loading,
-    TResult? Function(BookDetailResponse? response)? loaded,
+    TResult? Function()? loading,
+    TResult? Function(LoadBookResult? loadBookResult)? loaded,
     TResult? Function(AppException appException)? exception,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(bool isLoading)? loading,
-    TResult Function(BookDetailResponse? response)? loaded,
+    TResult Function()? loading,
+    TResult Function(LoadBookResult? loadBookResult)? loaded,
     TResult Function(AppException appException)? exception,
     required TResult orElse(),
   }) =>
@@ -125,8 +125,8 @@ class _$BookDetailInitial implements BookDetailInitial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(bool isLoading) loading,
-    required TResult Function(BookDetailResponse? response) loaded,
+    required TResult Function() loading,
+    required TResult Function(LoadBookResult? loadBookResult) loaded,
     required TResult Function(AppException appException) exception,
   }) {
     return init();
@@ -136,8 +136,8 @@ class _$BookDetailInitial implements BookDetailInitial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
-    TResult? Function(bool isLoading)? loading,
-    TResult? Function(BookDetailResponse? response)? loaded,
+    TResult? Function()? loading,
+    TResult? Function(LoadBookResult? loadBookResult)? loaded,
     TResult? Function(AppException appException)? exception,
   }) {
     return init?.call();
@@ -147,8 +147,8 @@ class _$BookDetailInitial implements BookDetailInitial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(bool isLoading)? loading,
-    TResult Function(BookDetailResponse? response)? loaded,
+    TResult Function()? loading,
+    TResult Function(LoadBookResult? loadBookResult)? loaded,
     TResult Function(AppException appException)? exception,
     required TResult orElse(),
   }) {
@@ -205,8 +205,6 @@ abstract class _$$LoadingStateCopyWith<$Res> {
   factory _$$LoadingStateCopyWith(
           _$LoadingState value, $Res Function(_$LoadingState) then) =
       __$$LoadingStateCopyWithImpl<$Res>;
-  @useResult
-  $Res call({bool isLoading});
 }
 
 /// @nodoc
@@ -216,85 +214,60 @@ class __$$LoadingStateCopyWithImpl<$Res>
   __$$LoadingStateCopyWithImpl(
       _$LoadingState _value, $Res Function(_$LoadingState) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? isLoading = null,
-  }) {
-    return _then(_$LoadingState(
-      null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$LoadingState implements LoadingState {
-  const _$LoadingState(this.isLoading);
-
-  @override
-  final bool isLoading;
+  const _$LoadingState();
 
   @override
   String toString() {
-    return 'BookDetailState.loading(isLoading: $isLoading)';
+    return 'BookDetailState.loading()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$LoadingState &&
-            (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading));
+        (other.runtimeType == runtimeType && other is _$LoadingState);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$LoadingStateCopyWith<_$LoadingState> get copyWith =>
-      __$$LoadingStateCopyWithImpl<_$LoadingState>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(bool isLoading) loading,
-    required TResult Function(BookDetailResponse? response) loaded,
+    required TResult Function() loading,
+    required TResult Function(LoadBookResult? loadBookResult) loaded,
     required TResult Function(AppException appException) exception,
   }) {
-    return loading(isLoading);
+    return loading();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
-    TResult? Function(bool isLoading)? loading,
-    TResult? Function(BookDetailResponse? response)? loaded,
+    TResult? Function()? loading,
+    TResult? Function(LoadBookResult? loadBookResult)? loaded,
     TResult? Function(AppException appException)? exception,
   }) {
-    return loading?.call(isLoading);
+    return loading?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(bool isLoading)? loading,
-    TResult Function(BookDetailResponse? response)? loaded,
+    TResult Function()? loading,
+    TResult Function(LoadBookResult? loadBookResult)? loaded,
     TResult Function(AppException appException)? exception,
     required TResult orElse(),
   }) {
     if (loading != null) {
-      return loading(isLoading);
+      return loading();
     }
     return orElse();
   }
@@ -338,12 +311,7 @@ class _$LoadingState implements LoadingState {
 }
 
 abstract class LoadingState implements BookDetailState {
-  const factory LoadingState(final bool isLoading) = _$LoadingState;
-
-  bool get isLoading;
-  @JsonKey(ignore: true)
-  _$$LoadingStateCopyWith<_$LoadingState> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory LoadingState() = _$LoadingState;
 }
 
 /// @nodoc
@@ -352,7 +320,7 @@ abstract class _$$BookDetailLoadedStateCopyWith<$Res> {
           $Res Function(_$BookDetailLoadedState) then) =
       __$$BookDetailLoadedStateCopyWithImpl<$Res>;
   @useResult
-  $Res call({BookDetailResponse? response});
+  $Res call({LoadBookResult? loadBookResult});
 }
 
 /// @nodoc
@@ -366,13 +334,13 @@ class __$$BookDetailLoadedStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? response = freezed,
+    Object? loadBookResult = freezed,
   }) {
     return _then(_$BookDetailLoadedState(
-      freezed == response
-          ? _value.response
-          : response // ignore: cast_nullable_to_non_nullable
-              as BookDetailResponse?,
+      freezed == loadBookResult
+          ? _value.loadBookResult
+          : loadBookResult // ignore: cast_nullable_to_non_nullable
+              as LoadBookResult?,
     ));
   }
 }
@@ -380,14 +348,14 @@ class __$$BookDetailLoadedStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$BookDetailLoadedState implements BookDetailLoadedState {
-  const _$BookDetailLoadedState(this.response);
+  const _$BookDetailLoadedState(this.loadBookResult);
 
   @override
-  final BookDetailResponse? response;
+  final LoadBookResult? loadBookResult;
 
   @override
   String toString() {
-    return 'BookDetailState.loaded(response: $response)';
+    return 'BookDetailState.loaded(loadBookResult: $loadBookResult)';
   }
 
   @override
@@ -395,12 +363,12 @@ class _$BookDetailLoadedState implements BookDetailLoadedState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$BookDetailLoadedState &&
-            (identical(other.response, response) ||
-                other.response == response));
+            (identical(other.loadBookResult, loadBookResult) ||
+                other.loadBookResult == loadBookResult));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, response);
+  int get hashCode => Object.hash(runtimeType, loadBookResult);
 
   @JsonKey(ignore: true)
   @override
@@ -413,35 +381,35 @@ class _$BookDetailLoadedState implements BookDetailLoadedState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(bool isLoading) loading,
-    required TResult Function(BookDetailResponse? response) loaded,
+    required TResult Function() loading,
+    required TResult Function(LoadBookResult? loadBookResult) loaded,
     required TResult Function(AppException appException) exception,
   }) {
-    return loaded(response);
+    return loaded(loadBookResult);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
-    TResult? Function(bool isLoading)? loading,
-    TResult? Function(BookDetailResponse? response)? loaded,
+    TResult? Function()? loading,
+    TResult? Function(LoadBookResult? loadBookResult)? loaded,
     TResult? Function(AppException appException)? exception,
   }) {
-    return loaded?.call(response);
+    return loaded?.call(loadBookResult);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(bool isLoading)? loading,
-    TResult Function(BookDetailResponse? response)? loaded,
+    TResult Function()? loading,
+    TResult Function(LoadBookResult? loadBookResult)? loaded,
     TResult Function(AppException appException)? exception,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(response);
+      return loaded(loadBookResult);
     }
     return orElse();
   }
@@ -485,10 +453,10 @@ class _$BookDetailLoadedState implements BookDetailLoadedState {
 }
 
 abstract class BookDetailLoadedState implements BookDetailState {
-  const factory BookDetailLoadedState(final BookDetailResponse? response) =
+  const factory BookDetailLoadedState(final LoadBookResult? loadBookResult) =
       _$BookDetailLoadedState;
 
-  BookDetailResponse? get response;
+  LoadBookResult? get loadBookResult;
   @JsonKey(ignore: true)
   _$$BookDetailLoadedStateCopyWith<_$BookDetailLoadedState> get copyWith =>
       throw _privateConstructorUsedError;
@@ -562,8 +530,8 @@ class _$BookDetailExceptionState implements BookDetailExceptionState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(bool isLoading) loading,
-    required TResult Function(BookDetailResponse? response) loaded,
+    required TResult Function() loading,
+    required TResult Function(LoadBookResult? loadBookResult) loaded,
     required TResult Function(AppException appException) exception,
   }) {
     return exception(appException);
@@ -573,8 +541,8 @@ class _$BookDetailExceptionState implements BookDetailExceptionState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
-    TResult? Function(bool isLoading)? loading,
-    TResult? Function(BookDetailResponse? response)? loaded,
+    TResult? Function()? loading,
+    TResult? Function(LoadBookResult? loadBookResult)? loaded,
     TResult? Function(AppException appException)? exception,
   }) {
     return exception?.call(appException);
@@ -584,8 +552,8 @@ class _$BookDetailExceptionState implements BookDetailExceptionState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(bool isLoading)? loading,
-    TResult Function(BookDetailResponse? response)? loaded,
+    TResult Function()? loading,
+    TResult Function(LoadBookResult? loadBookResult)? loaded,
     TResult Function(AppException appException)? exception,
     required TResult orElse(),
   }) {

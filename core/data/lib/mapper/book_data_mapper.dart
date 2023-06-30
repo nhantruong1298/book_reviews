@@ -17,4 +17,18 @@ class BookDataMapper {
     }
     return result;
   }
+
+  LoadBookResult? mapBookResponse(LoadBookResponse? response) {
+    if (response == null) return null;
+   
+    return LoadBookResult(
+      author: response.author,
+      image: response.image,
+      description: response.description,
+      id: response.id,
+      name: response.name,
+      reviewIDs: response.reviewIds,
+      tags: response.tags,
+    );
+  }
 }

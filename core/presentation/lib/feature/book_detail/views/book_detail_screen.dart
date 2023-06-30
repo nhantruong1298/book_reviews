@@ -1,12 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:presentation/app/route_builder.dart';
 import 'package:presentation/base/base_screen.dart';
 import 'package:presentation/constants/book_tag.dart';
 import 'package:presentation/feature/book_detail/cubit/book_detail_cubit.dart';
-import 'package:presentation/feature/mock_data/mock_data.dart';
 import 'package:presentation/resources/app_colors.dart';
 import 'package:presentation/resources/app_dimensions.dart';
 import 'package:presentation/resources/app_fonts.dart';
@@ -17,6 +15,7 @@ import 'package:presentation/widgets/commons/rating_stars.dart';
 import 'package:presentation/widgets/commons/spacing.dart';
 import 'package:presentation/widgets/commons/tag.dart';
 import 'package:presentation/widgets/commons/typography/body_text.dart';
+import 'package:shimmer/shimmer.dart';
 
 class BookDetailScreen extends StatefulWidget {
   final String bookID;
@@ -33,12 +32,18 @@ class _BookDetailScreenState extends BaseScreenState<BookDetailScreen> {
   BookDetailCubit get bookDetailCubit => context.read<BookDetailCubit>();
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      bookDetailCubit.onScreenInit();
+    });
+  }
+
+  @override
+  RefreshCallback? get onScreenRefresh => bookDetailCubit.onScreenRefresh;
+
+  @override
   Widget builder(BuildContext context) {
-    final mockData = MockData.shared.bookData ?? [];
-
-    final bookDetail =
-        mockData.firstWhereOrNull((item) => item.bookID == widget.bookID);
-
     return BasicLayout(
         automaticallyImplyLeading: true,
         padding: const EdgeInsets.fromLTRB(
@@ -49,41 +54,42 @@ class _BookDetailScreenState extends BaseScreenState<BookDetailScreen> {
         ),
         headerActions: _buildHeaderActions,
         child: SingleChildScrollView(
-          child: Column(
-            children: [
-              const Spacing(1),
-              _BookImage(
-                imageUrl: bookDetail?.linkImageBook ?? '',
-              ),
-              const Spacing(1),
-              _BookNameAndAuthor(
-                bookAuthor: bookDetail?.bookAuthor ?? '',
-                bookName: bookDetail?.bookName ?? '',
-              ),
-              const Spacing(1),
-              RatingStars(
-                initValue: bookDetail?.ratingStars,
-                onChanged: (value) {},
-              ),
-              const Spacing(2),
-              const SizedBox(
-                height: 1,
-                width: double.infinity,
-                child: Divider(
-                  thickness: 1,
-                ),
-              ),
-              const Spacing(2),
-              _BookDescription(
-                description: bookDetail?.description ?? '',
-              ),
-              const Spacing(2),
-              _BookTags(
-                tags: bookDetail?.tags ?? [],
-              ),
-              const Spacing(2),
-              _buildListReview()
-            ],
+          physics: const AlwaysScrollableScrollPhysics(),
+          child: BlocBuilder<BookDetailCubit, BookDetailState>(
+            builder: (_, state) {
+              return state.maybeWhen(
+                  loaded: (loadBookResult) {
+                    return Column(
+                      children: [
+                        const Spacing(1),
+                        _BookImage(imageUrl: loadBookResult?.image ?? ''),
+                        const Spacing(1),
+                        _BookNameAndAuthor(
+                            bookAuthor: loadBookResult?.author ?? '',
+                            bookName: loadBookResult?.name ?? ''),
+                        const Spacing(1),
+                        RatingStars(
+                          initValue: null,
+                          onChanged: (value) {},
+                        ),
+                        const Spacing(2),
+                        const SizedBox(
+                            height: 1,
+                            width: double.infinity,
+                            child: Divider(thickness: 1)),
+                        const Spacing(2),
+                        _BookDescription(
+                            description: loadBookResult?.description ?? ''),
+                        const Spacing(2),
+                        _BookTags(tags: loadBookResult?.tags ?? []),
+                        const Spacing(2),
+                        _buildListReview()
+                      ],
+                    );
+                  },
+                  loading: () => const _BookDetailLoadingView(),
+                  orElse: () => const SizedBox());
+            },
           ),
         ));
   }
@@ -279,5 +285,100 @@ class _BookImage extends StatelessWidget {
             fit: BoxFit.cover,
           )),
     );
+  }
+}
+
+class _BookDetailLoadingView extends StatelessWidget {
+  const _BookDetailLoadingView();
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(children: [
+      const Spacing(1),
+      Shimmer(
+        gradient: AppColors.loadingGradient,
+        child: Container(
+          width: SizeConfig.screenWidth * 0.3,
+          height: SizeConfig.getProportionateScreenHeight(160),
+          decoration: BoxDecoration(
+              color: AppColors.backgroundColor,
+              borderRadius:
+                  BorderRadius.circular(AppDimensions.defaultSRadius)),
+        ),
+      ),
+      const Spacing(1),
+      Shimmer(
+          gradient: AppColors.loadingGradient,
+          child: Container(
+              width: SizeConfig.screenWidth * 0.8,
+              height: SizeConfig.getProportionateScreenHeight(30),
+              decoration: BoxDecoration(
+                  color: AppColors.backgroundColor,
+                  borderRadius:
+                      BorderRadius.circular(AppDimensions.defaultSRadius)))),
+      const Spacing(.75),
+      Shimmer(
+          gradient: AppColors.loadingGradient,
+          child: Container(
+              width: SizeConfig.screenWidth * 0.4,
+              height: SizeConfig.getProportionateScreenHeight(30),
+              decoration: BoxDecoration(
+                  color: AppColors.backgroundColor,
+                  borderRadius:
+                      BorderRadius.circular(AppDimensions.defaultSRadius)))),
+      const Spacing(.75),
+      Shimmer(
+          gradient: AppColors.loadingGradient,
+          child: Container(
+              width: SizeConfig.screenWidth * 0.6,
+              height: SizeConfig.getProportionateScreenHeight(30),
+              decoration: BoxDecoration(
+                  color: AppColors.backgroundColor,
+                  borderRadius:
+                      BorderRadius.circular(AppDimensions.defaultSRadius)))),
+      const Spacing(3),
+      const SizedBox(
+        height: 1,
+        width: double.infinity,
+        child: Divider(
+          thickness: 1,
+        ),
+      ),
+      const Spacing(3),
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Shimmer(
+              gradient: AppColors.loadingGradient,
+              child: Container(
+                  width: SizeConfig.screenWidth,
+                  height: SizeConfig.getProportionateScreenHeight(20),
+                  decoration: BoxDecoration(
+                      color: AppColors.backgroundColor,
+                      borderRadius: BorderRadius.circular(
+                          AppDimensions.defaultSRadius)))),
+          const Spacing(0.75),
+          Shimmer(
+              gradient: AppColors.loadingGradient,
+              child: Container(
+                  width: SizeConfig.screenWidth * 0.6,
+                  height: SizeConfig.getProportionateScreenHeight(20),
+                  decoration: BoxDecoration(
+                      color: AppColors.backgroundColor,
+                      borderRadius: BorderRadius.circular(
+                          AppDimensions.defaultSRadius)))),
+          const Spacing(0.75),
+          Shimmer(
+              gradient: AppColors.loadingGradient,
+              child: Container(
+                  width: SizeConfig.screenWidth * 0.4,
+                  height: SizeConfig.getProportionateScreenHeight(20),
+                  decoration: BoxDecoration(
+                      color: AppColors.backgroundColor,
+                      borderRadius: BorderRadius.circular(
+                          AppDimensions.defaultSRadius)))),
+        ],
+      ),
+    ]);
   }
 }
