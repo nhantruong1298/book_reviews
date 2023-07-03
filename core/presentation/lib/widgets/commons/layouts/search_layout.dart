@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:presentation/resources/app_colors.dart';
 import 'package:presentation/resources/app_dimensions.dart';
 import 'package:presentation/utils/debouncer.dart';
-import 'package:presentation/widgets/commons/typography/body_text.dart';
 
 class SearchLayout extends StatefulWidget {
   final Widget? child;
@@ -31,7 +30,7 @@ class SearchLayout extends StatefulWidget {
       this.color,
       this.headerColor,
       this.automaticallyImplyLeading = false,
-      this.debounceDuration = 300,
+      this.debounceDuration = 1000,
       this.focusNode,
       this.headerLeading,
       this.darkMode = false,
@@ -132,7 +131,10 @@ class _SearchLayoutState extends State<SearchLayout> {
       child: Container(
         alignment: Alignment.center,
         margin: const EdgeInsets.only(right: AppDimensions.defaultPadding),
-        child: BodyLText('Hủy'),
+        child: const Icon(
+          Icons.cancel_sharp,
+          color: AppColors.textGreyColor,
+        ),
       ),
     );
   }
@@ -171,7 +173,7 @@ class _SearchBarViewState extends State<SearchBarView> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: AppDimensions.buttonHeight,
+      height: AppDimensions.defaultIconSizeLarge,
       child: TextField(
         focusNode: widget.focusNode,
         controller: widget.controller,
@@ -182,7 +184,7 @@ class _SearchBarViewState extends State<SearchBarView> {
         decoration: InputDecoration(
           prefixIcon: const Icon(
             Icons.search,
-            color: AppColors.greyColor600,
+            color: AppColors.greyColor700,
           ),
           hintText: widget.placeHolder,
           filled: true,

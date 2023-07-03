@@ -1,8 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:presentation/feature/authentication/cubit/authentication_cubit.dart';
 import 'package:presentation/feature/book_detail/cubit/book_detail_cubit.dart';
 import 'package:presentation/feature/book_detail/views/book_detail_screen.dart';
 import 'package:presentation/feature/book_event/cubit/book_event_cubit.dart';
@@ -88,7 +86,7 @@ class SignUpRoute extends GoRouteData {
 }
 
 class SignUpSuccessRoute extends GoRouteData {
-  final SignUpSuccessParams $extra;
+  final SignUpSuccessScreenExtra $extra;
   SignUpSuccessRoute(this.$extra);
 
   @override

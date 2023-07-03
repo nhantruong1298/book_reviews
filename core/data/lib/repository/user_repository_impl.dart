@@ -10,4 +10,9 @@ class UserRepositoryImpl extends UserRepository {
   Future<void> updateUserInfo(UpdateUserInfoParams params) {
     return _serviceManager.updateUserInfo(params);
   }
+
+  @override
+  Future<void> loadUserInfo(String userId) {
+    return _serviceManager.loadUserInfo(userId);
+  }
 }

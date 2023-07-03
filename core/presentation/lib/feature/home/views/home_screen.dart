@@ -8,7 +8,6 @@ import 'package:presentation/feature/home/views/list_book_item.dart';
 import 'package:presentation/generated/assets.gen.dart';
 import 'package:presentation/resources/app_colors.dart';
 import 'package:presentation/resources/app_dimensions.dart';
-import 'package:presentation/resources/app_fonts.dart';
 import 'package:presentation/utils/size_config.dart';
 import 'package:presentation/widgets/commons/Spacing.dart';
 import 'package:presentation/widgets/commons/layouts/basic_layout.dart';
@@ -92,14 +91,14 @@ class _HomeScreenState extends BaseScreenState<HomeScreen> {
         BodyLText(
           'Welcome, ',
           style: BodyLText.defaultStyle.copyWith(
-            fontFamily: FontFamily.Playfair,
+            //fontFamily: FontFamily.Playfair,
             fontWeight: FontWeight.bold,
           ),
         ),
         BodyLText(
           'User name',
           style: BodyLText.defaultStyle.copyWith(
-            fontFamily: FontFamily.Playfair,
+            //fontFamily: FontFamily.Playfair,
             fontWeight: FontWeight.bold,
           ),
         ),

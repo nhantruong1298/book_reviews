@@ -6,4 +6,6 @@ abstract class BookRepository {
   Future<List<LoadBookResult>> loadPopularBooks();
 
   Future<LoadBookResult?> loadBook(String id);
+
+  Future<List<LoadBookResult>> searchBooks(String searchText);
 }

@@ -211,7 +211,6 @@ class _SignInButton extends StatelessWidget {
     return Material(
       borderRadius: BorderRadius.circular(AppDimensions.roundedRadius),
       elevation: 5,
-      color: AppColors.primaryColor500,
       child: InkWell(
         borderRadius: BorderRadius.circular(AppDimensions.roundedRadius),
         onTap: onTap,
@@ -220,8 +219,11 @@ class _SignInButton extends StatelessWidget {
           width: double.infinity,
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(AppDimensions.roundedRadius),
-          ),
+              borderRadius: BorderRadius.circular(AppDimensions.roundedRadius),
+              gradient: LinearGradient(colors: [
+                const Color(0xFF1877F2),
+                const Color(0xFF1877F2).withOpacity(.5)
+              ])),
           child: BodyLText("Đăng nhập",
               color: AppColors.textLightColor,
               style: BodyLText.defaultStyle.copyWith(

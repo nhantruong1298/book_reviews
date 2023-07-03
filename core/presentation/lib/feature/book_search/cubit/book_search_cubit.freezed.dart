@@ -20,10 +20,9 @@ mixin _$BookSearchState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(BookSearchData? searchData) init,
-    required TResult Function(BookSearchData? searchData, bool isLoading)
-        loading,
+    required TResult Function(BookSearchData? searchData) loading,
     required TResult Function(
-            BookSearchData? searchData, List<BookDetailResponse> data)
+            BookSearchData? searchData, List<LoadBookResult> data)
         loaded,
     required TResult Function(
             BookSearchData? searchData, AppException appException)
@@ -33,9 +32,8 @@ mixin _$BookSearchState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(BookSearchData? searchData)? init,
-    TResult? Function(BookSearchData? searchData, bool isLoading)? loading,
-    TResult? Function(
-            BookSearchData? searchData, List<BookDetailResponse> data)?
+    TResult? Function(BookSearchData? searchData)? loading,
+    TResult? Function(BookSearchData? searchData, List<LoadBookResult> data)?
         loaded,
     TResult? Function(BookSearchData? searchData, AppException appException)?
         exception,
@@ -44,8 +42,8 @@ mixin _$BookSearchState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(BookSearchData? searchData)? init,
-    TResult Function(BookSearchData? searchData, bool isLoading)? loading,
-    TResult Function(BookSearchData? searchData, List<BookDetailResponse> data)?
+    TResult Function(BookSearchData? searchData)? loading,
+    TResult Function(BookSearchData? searchData, List<LoadBookResult> data)?
         loaded,
     TResult Function(BookSearchData? searchData, AppException appException)?
         exception,
@@ -184,10 +182,9 @@ class _$BookSearchInitial implements BookSearchInitial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(BookSearchData? searchData) init,
-    required TResult Function(BookSearchData? searchData, bool isLoading)
-        loading,
+    required TResult Function(BookSearchData? searchData) loading,
     required TResult Function(
-            BookSearchData? searchData, List<BookDetailResponse> data)
+            BookSearchData? searchData, List<LoadBookResult> data)
         loaded,
     required TResult Function(
             BookSearchData? searchData, AppException appException)
@@ -200,9 +197,8 @@ class _$BookSearchInitial implements BookSearchInitial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(BookSearchData? searchData)? init,
-    TResult? Function(BookSearchData? searchData, bool isLoading)? loading,
-    TResult? Function(
-            BookSearchData? searchData, List<BookDetailResponse> data)?
+    TResult? Function(BookSearchData? searchData)? loading,
+    TResult? Function(BookSearchData? searchData, List<LoadBookResult> data)?
         loaded,
     TResult? Function(BookSearchData? searchData, AppException appException)?
         exception,
@@ -214,8 +210,8 @@ class _$BookSearchInitial implements BookSearchInitial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(BookSearchData? searchData)? init,
-    TResult Function(BookSearchData? searchData, bool isLoading)? loading,
-    TResult Function(BookSearchData? searchData, List<BookDetailResponse> data)?
+    TResult Function(BookSearchData? searchData)? loading,
+    TResult Function(BookSearchData? searchData, List<LoadBookResult> data)?
         loaded,
     TResult Function(BookSearchData? searchData, AppException appException)?
         exception,
@@ -285,7 +281,7 @@ abstract class _$$LoadingStateCopyWith<$Res>
       __$$LoadingStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({BookSearchData? searchData, bool isLoading});
+  $Res call({BookSearchData? searchData});
 }
 
 /// @nodoc
@@ -300,17 +296,12 @@ class __$$LoadingStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? searchData = freezed,
-    Object? isLoading = null,
   }) {
     return _then(_$LoadingState(
       freezed == searchData
           ? _value.searchData
           : searchData // ignore: cast_nullable_to_non_nullable
               as BookSearchData?,
-      null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
@@ -318,16 +309,14 @@ class __$$LoadingStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$LoadingState implements LoadingState {
-  const _$LoadingState(this.searchData, this.isLoading);
+  const _$LoadingState(this.searchData);
 
   @override
   final BookSearchData? searchData;
-  @override
-  final bool isLoading;
 
   @override
   String toString() {
-    return 'BookSearchState.loading(searchData: $searchData, isLoading: $isLoading)';
+    return 'BookSearchState.loading(searchData: $searchData)';
   }
 
   @override
@@ -336,13 +325,11 @@ class _$LoadingState implements LoadingState {
         (other.runtimeType == runtimeType &&
             other is _$LoadingState &&
             (identical(other.searchData, searchData) ||
-                other.searchData == searchData) &&
-            (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading));
+                other.searchData == searchData));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, searchData, isLoading);
+  int get hashCode => Object.hash(runtimeType, searchData);
 
   @JsonKey(ignore: true)
   @override
@@ -354,45 +341,43 @@ class _$LoadingState implements LoadingState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(BookSearchData? searchData) init,
-    required TResult Function(BookSearchData? searchData, bool isLoading)
-        loading,
+    required TResult Function(BookSearchData? searchData) loading,
     required TResult Function(
-            BookSearchData? searchData, List<BookDetailResponse> data)
+            BookSearchData? searchData, List<LoadBookResult> data)
         loaded,
     required TResult Function(
             BookSearchData? searchData, AppException appException)
         exception,
   }) {
-    return loading(searchData, isLoading);
+    return loading(searchData);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(BookSearchData? searchData)? init,
-    TResult? Function(BookSearchData? searchData, bool isLoading)? loading,
-    TResult? Function(
-            BookSearchData? searchData, List<BookDetailResponse> data)?
+    TResult? Function(BookSearchData? searchData)? loading,
+    TResult? Function(BookSearchData? searchData, List<LoadBookResult> data)?
         loaded,
     TResult? Function(BookSearchData? searchData, AppException appException)?
         exception,
   }) {
-    return loading?.call(searchData, isLoading);
+    return loading?.call(searchData);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(BookSearchData? searchData)? init,
-    TResult Function(BookSearchData? searchData, bool isLoading)? loading,
-    TResult Function(BookSearchData? searchData, List<BookDetailResponse> data)?
+    TResult Function(BookSearchData? searchData)? loading,
+    TResult Function(BookSearchData? searchData, List<LoadBookResult> data)?
         loaded,
     TResult Function(BookSearchData? searchData, AppException appException)?
         exception,
     required TResult orElse(),
   }) {
     if (loading != null) {
-      return loading(searchData, isLoading);
+      return loading(searchData);
     }
     return orElse();
   }
@@ -436,12 +421,10 @@ class _$LoadingState implements LoadingState {
 }
 
 abstract class LoadingState implements BookSearchState {
-  const factory LoadingState(
-      final BookSearchData? searchData, final bool isLoading) = _$LoadingState;
+  const factory LoadingState(final BookSearchData? searchData) = _$LoadingState;
 
   @override
   BookSearchData? get searchData;
-  bool get isLoading;
   @override
   @JsonKey(ignore: true)
   _$$LoadingStateCopyWith<_$LoadingState> get copyWith =>
@@ -456,7 +439,7 @@ abstract class _$$BookSearchLoadedStateCopyWith<$Res>
       __$$BookSearchLoadedStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({BookSearchData? searchData, List<BookDetailResponse> data});
+  $Res call({BookSearchData? searchData, List<LoadBookResult> data});
 }
 
 /// @nodoc
@@ -481,7 +464,7 @@ class __$$BookSearchLoadedStateCopyWithImpl<$Res>
       null == data
           ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
-              as List<BookDetailResponse>,
+              as List<LoadBookResult>,
     ));
   }
 }
@@ -490,14 +473,14 @@ class __$$BookSearchLoadedStateCopyWithImpl<$Res>
 
 class _$BookSearchLoadedState implements BookSearchLoadedState {
   const _$BookSearchLoadedState(
-      this.searchData, final List<BookDetailResponse> data)
+      this.searchData, final List<LoadBookResult> data)
       : _data = data;
 
   @override
   final BookSearchData? searchData;
-  final List<BookDetailResponse> _data;
+  final List<LoadBookResult> _data;
   @override
-  List<BookDetailResponse> get data {
+  List<LoadBookResult> get data {
     if (_data is EqualUnmodifiableListView) return _data;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_data);
@@ -533,10 +516,9 @@ class _$BookSearchLoadedState implements BookSearchLoadedState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(BookSearchData? searchData) init,
-    required TResult Function(BookSearchData? searchData, bool isLoading)
-        loading,
+    required TResult Function(BookSearchData? searchData) loading,
     required TResult Function(
-            BookSearchData? searchData, List<BookDetailResponse> data)
+            BookSearchData? searchData, List<LoadBookResult> data)
         loaded,
     required TResult Function(
             BookSearchData? searchData, AppException appException)
@@ -549,9 +531,8 @@ class _$BookSearchLoadedState implements BookSearchLoadedState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(BookSearchData? searchData)? init,
-    TResult? Function(BookSearchData? searchData, bool isLoading)? loading,
-    TResult? Function(
-            BookSearchData? searchData, List<BookDetailResponse> data)?
+    TResult? Function(BookSearchData? searchData)? loading,
+    TResult? Function(BookSearchData? searchData, List<LoadBookResult> data)?
         loaded,
     TResult? Function(BookSearchData? searchData, AppException appException)?
         exception,
@@ -563,8 +544,8 @@ class _$BookSearchLoadedState implements BookSearchLoadedState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(BookSearchData? searchData)? init,
-    TResult Function(BookSearchData? searchData, bool isLoading)? loading,
-    TResult Function(BookSearchData? searchData, List<BookDetailResponse> data)?
+    TResult Function(BookSearchData? searchData)? loading,
+    TResult Function(BookSearchData? searchData, List<LoadBookResult> data)?
         loaded,
     TResult Function(BookSearchData? searchData, AppException appException)?
         exception,
@@ -615,12 +596,13 @@ class _$BookSearchLoadedState implements BookSearchLoadedState {
 }
 
 abstract class BookSearchLoadedState implements BookSearchState {
-  const factory BookSearchLoadedState(final BookSearchData? searchData,
-      final List<BookDetailResponse> data) = _$BookSearchLoadedState;
+  const factory BookSearchLoadedState(
+          final BookSearchData? searchData, final List<LoadBookResult> data) =
+      _$BookSearchLoadedState;
 
   @override
   BookSearchData? get searchData;
-  List<BookDetailResponse> get data;
+  List<LoadBookResult> get data;
   @override
   @JsonKey(ignore: true)
   _$$BookSearchLoadedStateCopyWith<_$BookSearchLoadedState> get copyWith =>
@@ -706,10 +688,9 @@ class _$BookSearchExceptionState implements BookSearchExceptionState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(BookSearchData? searchData) init,
-    required TResult Function(BookSearchData? searchData, bool isLoading)
-        loading,
+    required TResult Function(BookSearchData? searchData) loading,
     required TResult Function(
-            BookSearchData? searchData, List<BookDetailResponse> data)
+            BookSearchData? searchData, List<LoadBookResult> data)
         loaded,
     required TResult Function(
             BookSearchData? searchData, AppException appException)
@@ -722,9 +703,8 @@ class _$BookSearchExceptionState implements BookSearchExceptionState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(BookSearchData? searchData)? init,
-    TResult? Function(BookSearchData? searchData, bool isLoading)? loading,
-    TResult? Function(
-            BookSearchData? searchData, List<BookDetailResponse> data)?
+    TResult? Function(BookSearchData? searchData)? loading,
+    TResult? Function(BookSearchData? searchData, List<LoadBookResult> data)?
         loaded,
     TResult? Function(BookSearchData? searchData, AppException appException)?
         exception,
@@ -736,8 +716,8 @@ class _$BookSearchExceptionState implements BookSearchExceptionState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(BookSearchData? searchData)? init,
-    TResult Function(BookSearchData? searchData, bool isLoading)? loading,
-    TResult Function(BookSearchData? searchData, List<BookDetailResponse> data)?
+    TResult Function(BookSearchData? searchData)? loading,
+    TResult Function(BookSearchData? searchData, List<LoadBookResult> data)?
         loaded,
     TResult Function(BookSearchData? searchData, AppException appException)?
         exception,

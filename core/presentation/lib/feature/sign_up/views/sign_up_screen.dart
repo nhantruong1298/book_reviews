@@ -31,6 +31,8 @@ class _SignUpScreenState extends BaseScreenState<SignUpScreen> {
   final String USER_NAME_FIELD = 'userName';
   final String PASSWORD_FIELD = 'password';
   final String RE_PASSWORD_FIELD = 're-password';
+  final String SURNAME_FIELD = 'surname';
+  final String NAME_FIELD = 'name';
 
   final _formKey = GlobalKey<FormBuilderState>();
 
@@ -52,9 +54,13 @@ class _SignUpScreenState extends BaseScreenState<SignUpScreen> {
         automaticallyImplyLeading: true,
         child: FormBuilder(
           key: _formKey,
-          child: Column(children: [
-            const _Title(),
-            const Spacing(2.5),
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Heading1Text(
+              "Đăng ký",
+              color: AppColors.primaryColor500,
+            ),
+            const Spacing(2),
             _signUpWithEmailForm(),
             const Spacing(2),
             _SubmitButton(
@@ -68,12 +74,28 @@ class _SignUpScreenState extends BaseScreenState<SignUpScreen> {
                   final password = _formKey
                       .currentState?.fields[PASSWORD_FIELD]?.value as String?;
 
-                  signUpCubit.onSubmit(userName, password);
+                  final surname = _formKey
+                      .currentState?.fields[SURNAME_FIELD]?.value as String?;
+
+                  final name = _formKey.currentState?.fields[NAME_FIELD]?.value
+                      as String?;
+
+                  signUpCubit.onSubmit(userName!, password!, surname!, name!);
                 }
               },
             ),
             const Spacing(1),
-            const _Footer()
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                BodyLText("Bạn đã có tài khoản?",
+                    color: AppColors.textGreyColor),
+                TextButton(
+                    onPressed: () => SignInRoute().go(context),
+                    child: BodyLText("Đăng nhập",
+                        color: AppColors.primaryColor500))
+              ],
+            )
           ]),
         ),
       ),
@@ -82,6 +104,32 @@ class _SignUpScreenState extends BaseScreenState<SignUpScreen> {
 
   Widget _signUpWithEmailForm() {
     return Column(children: [
+      Row(
+        children: [
+          Expanded(
+            child: TextInputField(
+              name: SURNAME_FIELD,
+              labelText: "Họ",
+              validator: FormBuilderValidators.compose([
+                FormBuilderValidators.required(
+                    errorText: S.current.SIGN_UP__CAN_NOT_BE_LEFT_BLANK),
+              ]),
+            ),
+          ),
+          const Spacing(1, direction: SpacingDirection.Horizontal),
+          Expanded(
+            child: TextInputField(
+              name: NAME_FIELD,
+              labelText: "Tên",
+              validator: FormBuilderValidators.compose([
+                FormBuilderValidators.required(
+                    errorText: S.current.SIGN_UP__CAN_NOT_BE_LEFT_BLANK),
+              ]),
+            ),
+          ),
+        ],
+      ),
+      const Spacing(1),
       TextInputField(
         name: USER_NAME_FIELD,
         labelText: S.current.SIGN_UP__EMAIL,
@@ -92,7 +140,7 @@ class _SignUpScreenState extends BaseScreenState<SignUpScreen> {
               errorText: S.of(context).SIGN_UP__EMAIL_INVALID),
         ]),
       ),
-      const Spacing(2),
+      const Spacing(1),
       PasswordInputField(
         name: PASSWORD_FIELD,
         labelText: S.of(context).SIGN_UP__PASSWORD,
@@ -108,7 +156,7 @@ class _SignUpScreenState extends BaseScreenState<SignUpScreen> {
           passwordValue.value = text ?? '';
         },
       ),
-      const Spacing(2),
+      const Spacing(1),
       ValueListenableBuilder(
         valueListenable: passwordValue,
         builder: (_, password, __) {
@@ -125,43 +173,6 @@ class _SignUpScreenState extends BaseScreenState<SignUpScreen> {
         },
       ),
     ]);
-  }
-}
-
-class _Title extends StatelessWidget {
-  const _Title();
-
-  @override
-  Widget build(BuildContext context) {
-    return Heading1Text(
-      "Đăng ký",
-      color: AppColors.primaryColor500,
-    );
-  }
-}
-
-class _Footer extends StatelessWidget {
-  const _Footer();
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        BodyLText(
-          "Bạn đã có tài khoản?",
-          color: AppColors.textGreyColor,
-        ),
-        TextButton(
-            onPressed: () {
-              //TODO: Go to sign in after implement sign in module
-            },
-            child: BodyLText(
-              "Đăng nhập",
-              color: AppColors.primaryColor500,
-            ))
-      ],
-    );
   }
 }
 

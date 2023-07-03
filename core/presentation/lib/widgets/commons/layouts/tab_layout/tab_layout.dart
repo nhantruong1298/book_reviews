@@ -118,8 +118,8 @@ class _TabLayoutState extends State<TabLayout>
           return FABBottomAppBar(
             index: snapshot.data ?? 0,
             centerItemText: widget.centerButtonText,
-            color: AppColors.textGreyColor,
-            selectedColor: AppColors.primaryDarkColor,
+            color: AppColors.greyColor700,
+            selectedColor: AppColors.primaryColor500,
             notchedShape: const CircularNotchedRectangle(),
             onTabSelected: (int? index) {
               if (_tabController!.index != index) _onTabSelected(index!);
@@ -128,31 +128,4 @@ class _TabLayoutState extends State<TabLayout>
           );
         });
   }
-
-  ///* Example for overlay here:
-  /// final icons = [Icons.sms, Icons.mail, Icons.phone];
-  ///* AnchoredOverlay(
-  ///   showOverlay: true,
-  ///   overlayBuilder: (context, offset) {
-  ///     return CenterAbout(
-  ///       position: Offset(offset.dx, offset.dy - icons.length * 35.0),
-  ///       child: FabWithIcons(
-  ///         icons: icons,
-  ///         onIconTapped: (int index) {
-  ///           if (snapshot.data != index) _onTabSelected(index);
-  ///         },
-  ///       ),
-  ///     );
-  ///   },
-  ///   child: FloatingActionButton(
-  ///     onPressed: () {},
-  ///     tooltip: 'Increment',
-  ///     child: Icon(Icons.add),
-  ///     elevation: 2.0,
-  ///   ),
-  /// );
-  ///
-  // _buildFab(AsyncSnapshot<int> snapshot, BuildContext context) {
-  //   return widget.centerButton;
-  // }
 }

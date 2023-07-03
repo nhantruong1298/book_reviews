@@ -16,25 +16,26 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AuthenticationState {
+  LoadUserInfoResult? get userInfo => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() init,
-    required TResult Function() unauthorized,
-    required TResult Function(LoadUserInfoResult userInfo) authorized,
+    required TResult Function(LoadUserInfoResult? userInfo) init,
+    required TResult Function(LoadUserInfoResult? userInfo) unauthorized,
+    required TResult Function(LoadUserInfoResult? userInfo) authorized,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? init,
-    TResult? Function()? unauthorized,
-    TResult? Function(LoadUserInfoResult userInfo)? authorized,
+    TResult? Function(LoadUserInfoResult? userInfo)? init,
+    TResult? Function(LoadUserInfoResult? userInfo)? unauthorized,
+    TResult? Function(LoadUserInfoResult? userInfo)? authorized,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? init,
-    TResult Function()? unauthorized,
-    TResult Function(LoadUserInfoResult userInfo)? authorized,
+    TResult Function(LoadUserInfoResult? userInfo)? init,
+    TResult Function(LoadUserInfoResult? userInfo)? unauthorized,
+    TResult Function(LoadUserInfoResult? userInfo)? authorized,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -60,6 +61,10 @@ mixin _$AuthenticationState {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $AuthenticationStateCopyWith<AuthenticationState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -67,6 +72,8 @@ abstract class $AuthenticationStateCopyWith<$Res> {
   factory $AuthenticationStateCopyWith(
           AuthenticationState value, $Res Function(AuthenticationState) then) =
       _$AuthenticationStateCopyWithImpl<$Res, AuthenticationState>;
+  @useResult
+  $Res call({LoadUserInfoResult? userInfo});
 }
 
 /// @nodoc
@@ -78,13 +85,30 @@ class _$AuthenticationStateCopyWithImpl<$Res, $Val extends AuthenticationState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? userInfo = freezed,
+  }) {
+    return _then(_value.copyWith(
+      userInfo: freezed == userInfo
+          ? _value.userInfo
+          : userInfo // ignore: cast_nullable_to_non_nullable
+              as LoadUserInfoResult?,
+    ) as $Val);
+  }
 }
 
 /// @nodoc
-abstract class _$$AuthenticationInitialCopyWith<$Res> {
+abstract class _$$AuthenticationInitialCopyWith<$Res>
+    implements $AuthenticationStateCopyWith<$Res> {
   factory _$$AuthenticationInitialCopyWith(_$AuthenticationInitial value,
           $Res Function(_$AuthenticationInitial) then) =
       __$$AuthenticationInitialCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({LoadUserInfoResult? userInfo});
 }
 
 /// @nodoc
@@ -94,57 +118,83 @@ class __$$AuthenticationInitialCopyWithImpl<$Res>
   __$$AuthenticationInitialCopyWithImpl(_$AuthenticationInitial _value,
       $Res Function(_$AuthenticationInitial) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? userInfo = freezed,
+  }) {
+    return _then(_$AuthenticationInitial(
+      freezed == userInfo
+          ? _value.userInfo
+          : userInfo // ignore: cast_nullable_to_non_nullable
+              as LoadUserInfoResult?,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$AuthenticationInitial implements AuthenticationInitial {
-  const _$AuthenticationInitial();
+  const _$AuthenticationInitial(this.userInfo);
+
+  @override
+  final LoadUserInfoResult? userInfo;
 
   @override
   String toString() {
-    return 'AuthenticationState.init()';
+    return 'AuthenticationState.init(userInfo: $userInfo)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$AuthenticationInitial);
+        (other.runtimeType == runtimeType &&
+            other is _$AuthenticationInitial &&
+            (identical(other.userInfo, userInfo) ||
+                other.userInfo == userInfo));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, userInfo);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$AuthenticationInitialCopyWith<_$AuthenticationInitial> get copyWith =>
+      __$$AuthenticationInitialCopyWithImpl<_$AuthenticationInitial>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() init,
-    required TResult Function() unauthorized,
-    required TResult Function(LoadUserInfoResult userInfo) authorized,
+    required TResult Function(LoadUserInfoResult? userInfo) init,
+    required TResult Function(LoadUserInfoResult? userInfo) unauthorized,
+    required TResult Function(LoadUserInfoResult? userInfo) authorized,
   }) {
-    return init();
+    return init(userInfo);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? init,
-    TResult? Function()? unauthorized,
-    TResult? Function(LoadUserInfoResult userInfo)? authorized,
+    TResult? Function(LoadUserInfoResult? userInfo)? init,
+    TResult? Function(LoadUserInfoResult? userInfo)? unauthorized,
+    TResult? Function(LoadUserInfoResult? userInfo)? authorized,
   }) {
-    return init?.call();
+    return init?.call(userInfo);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? init,
-    TResult Function()? unauthorized,
-    TResult Function(LoadUserInfoResult userInfo)? authorized,
+    TResult Function(LoadUserInfoResult? userInfo)? init,
+    TResult Function(LoadUserInfoResult? userInfo)? unauthorized,
+    TResult Function(LoadUserInfoResult? userInfo)? authorized,
     required TResult orElse(),
   }) {
     if (init != null) {
-      return init();
+      return init(userInfo);
     }
     return orElse();
   }
@@ -185,14 +235,26 @@ class _$AuthenticationInitial implements AuthenticationInitial {
 }
 
 abstract class AuthenticationInitial implements AuthenticationState {
-  const factory AuthenticationInitial() = _$AuthenticationInitial;
+  const factory AuthenticationInitial(final LoadUserInfoResult? userInfo) =
+      _$AuthenticationInitial;
+
+  @override
+  LoadUserInfoResult? get userInfo;
+  @override
+  @JsonKey(ignore: true)
+  _$$AuthenticationInitialCopyWith<_$AuthenticationInitial> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$UnauthorizedStateCopyWith<$Res> {
+abstract class _$$UnauthorizedStateCopyWith<$Res>
+    implements $AuthenticationStateCopyWith<$Res> {
   factory _$$UnauthorizedStateCopyWith(
           _$UnauthorizedState value, $Res Function(_$UnauthorizedState) then) =
       __$$UnauthorizedStateCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({LoadUserInfoResult? userInfo});
 }
 
 /// @nodoc
@@ -202,57 +264,82 @@ class __$$UnauthorizedStateCopyWithImpl<$Res>
   __$$UnauthorizedStateCopyWithImpl(
       _$UnauthorizedState _value, $Res Function(_$UnauthorizedState) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? userInfo = freezed,
+  }) {
+    return _then(_$UnauthorizedState(
+      freezed == userInfo
+          ? _value.userInfo
+          : userInfo // ignore: cast_nullable_to_non_nullable
+              as LoadUserInfoResult?,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$UnauthorizedState implements UnauthorizedState {
-  const _$UnauthorizedState();
+  const _$UnauthorizedState(this.userInfo);
+
+  @override
+  final LoadUserInfoResult? userInfo;
 
   @override
   String toString() {
-    return 'AuthenticationState.unauthorized()';
+    return 'AuthenticationState.unauthorized(userInfo: $userInfo)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$UnauthorizedState);
+        (other.runtimeType == runtimeType &&
+            other is _$UnauthorizedState &&
+            (identical(other.userInfo, userInfo) ||
+                other.userInfo == userInfo));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, userInfo);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UnauthorizedStateCopyWith<_$UnauthorizedState> get copyWith =>
+      __$$UnauthorizedStateCopyWithImpl<_$UnauthorizedState>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() init,
-    required TResult Function() unauthorized,
-    required TResult Function(LoadUserInfoResult userInfo) authorized,
+    required TResult Function(LoadUserInfoResult? userInfo) init,
+    required TResult Function(LoadUserInfoResult? userInfo) unauthorized,
+    required TResult Function(LoadUserInfoResult? userInfo) authorized,
   }) {
-    return unauthorized();
+    return unauthorized(userInfo);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? init,
-    TResult? Function()? unauthorized,
-    TResult? Function(LoadUserInfoResult userInfo)? authorized,
+    TResult? Function(LoadUserInfoResult? userInfo)? init,
+    TResult? Function(LoadUserInfoResult? userInfo)? unauthorized,
+    TResult? Function(LoadUserInfoResult? userInfo)? authorized,
   }) {
-    return unauthorized?.call();
+    return unauthorized?.call(userInfo);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? init,
-    TResult Function()? unauthorized,
-    TResult Function(LoadUserInfoResult userInfo)? authorized,
+    TResult Function(LoadUserInfoResult? userInfo)? init,
+    TResult Function(LoadUserInfoResult? userInfo)? unauthorized,
+    TResult Function(LoadUserInfoResult? userInfo)? authorized,
     required TResult orElse(),
   }) {
     if (unauthorized != null) {
-      return unauthorized();
+      return unauthorized(userInfo);
     }
     return orElse();
   }
@@ -293,16 +380,26 @@ class _$UnauthorizedState implements UnauthorizedState {
 }
 
 abstract class UnauthorizedState implements AuthenticationState {
-  const factory UnauthorizedState() = _$UnauthorizedState;
+  const factory UnauthorizedState(final LoadUserInfoResult? userInfo) =
+      _$UnauthorizedState;
+
+  @override
+  LoadUserInfoResult? get userInfo;
+  @override
+  @JsonKey(ignore: true)
+  _$$UnauthorizedStateCopyWith<_$UnauthorizedState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$AuthorizedStateCopyWith<$Res> {
+abstract class _$$AuthorizedStateCopyWith<$Res>
+    implements $AuthenticationStateCopyWith<$Res> {
   factory _$$AuthorizedStateCopyWith(
           _$AuthorizedState value, $Res Function(_$AuthorizedState) then) =
       __$$AuthorizedStateCopyWithImpl<$Res>;
+  @override
   @useResult
-  $Res call({LoadUserInfoResult userInfo});
+  $Res call({LoadUserInfoResult? userInfo});
 }
 
 /// @nodoc
@@ -316,13 +413,13 @@ class __$$AuthorizedStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? userInfo = null,
+    Object? userInfo = freezed,
   }) {
     return _then(_$AuthorizedState(
-      null == userInfo
+      freezed == userInfo
           ? _value.userInfo
           : userInfo // ignore: cast_nullable_to_non_nullable
-              as LoadUserInfoResult,
+              as LoadUserInfoResult?,
     ));
   }
 }
@@ -333,7 +430,7 @@ class _$AuthorizedState implements AuthorizedState {
   const _$AuthorizedState(this.userInfo);
 
   @override
-  final LoadUserInfoResult userInfo;
+  final LoadUserInfoResult? userInfo;
 
   @override
   String toString() {
@@ -361,9 +458,9 @@ class _$AuthorizedState implements AuthorizedState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() init,
-    required TResult Function() unauthorized,
-    required TResult Function(LoadUserInfoResult userInfo) authorized,
+    required TResult Function(LoadUserInfoResult? userInfo) init,
+    required TResult Function(LoadUserInfoResult? userInfo) unauthorized,
+    required TResult Function(LoadUserInfoResult? userInfo) authorized,
   }) {
     return authorized(userInfo);
   }
@@ -371,9 +468,9 @@ class _$AuthorizedState implements AuthorizedState {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? init,
-    TResult? Function()? unauthorized,
-    TResult? Function(LoadUserInfoResult userInfo)? authorized,
+    TResult? Function(LoadUserInfoResult? userInfo)? init,
+    TResult? Function(LoadUserInfoResult? userInfo)? unauthorized,
+    TResult? Function(LoadUserInfoResult? userInfo)? authorized,
   }) {
     return authorized?.call(userInfo);
   }
@@ -381,9 +478,9 @@ class _$AuthorizedState implements AuthorizedState {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? init,
-    TResult Function()? unauthorized,
-    TResult Function(LoadUserInfoResult userInfo)? authorized,
+    TResult Function(LoadUserInfoResult? userInfo)? init,
+    TResult Function(LoadUserInfoResult? userInfo)? unauthorized,
+    TResult Function(LoadUserInfoResult? userInfo)? authorized,
     required TResult orElse(),
   }) {
     if (authorized != null) {
@@ -428,10 +525,12 @@ class _$AuthorizedState implements AuthorizedState {
 }
 
 abstract class AuthorizedState implements AuthenticationState {
-  const factory AuthorizedState(final LoadUserInfoResult userInfo) =
+  const factory AuthorizedState(final LoadUserInfoResult? userInfo) =
       _$AuthorizedState;
 
-  LoadUserInfoResult get userInfo;
+  @override
+  LoadUserInfoResult? get userInfo;
+  @override
   @JsonKey(ignore: true)
   _$$AuthorizedStateCopyWith<_$AuthorizedState> get copyWith =>
       throw _privateConstructorUsedError;

@@ -20,7 +20,7 @@ mixin _$SignUpState {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(String email, String userId) success,
     required TResult Function(AppException appException) exception,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +28,7 @@ mixin _$SignUpState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(String email, String userId)? success,
     TResult? Function(AppException appException)? exception,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ mixin _$SignUpState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(String email, String userId)? success,
     TResult Function(AppException appException)? exception,
     required TResult orElse(),
   }) =>
@@ -126,7 +126,7 @@ class _$SignUpInitial implements SignUpInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(String email, String userId) success,
     required TResult Function(AppException appException) exception,
   }) {
     return init();
@@ -137,7 +137,7 @@ class _$SignUpInitial implements SignUpInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(String email, String userId)? success,
     TResult? Function(AppException appException)? exception,
   }) {
     return init?.call();
@@ -148,7 +148,7 @@ class _$SignUpInitial implements SignUpInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(String email, String userId)? success,
     TResult Function(AppException appException)? exception,
     required TResult orElse(),
   }) {
@@ -240,7 +240,7 @@ class _$LoadingState implements LoadingState {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(String email, String userId) success,
     required TResult Function(AppException appException) exception,
   }) {
     return loading();
@@ -251,7 +251,7 @@ class _$LoadingState implements LoadingState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(String email, String userId)? success,
     TResult? Function(AppException appException)? exception,
   }) {
     return loading?.call();
@@ -262,7 +262,7 @@ class _$LoadingState implements LoadingState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(String email, String userId)? success,
     TResult Function(AppException appException)? exception,
     required TResult orElse(),
   }) {
@@ -319,6 +319,8 @@ abstract class _$$SignUpSuccessStateCopyWith<$Res> {
   factory _$$SignUpSuccessStateCopyWith(_$SignUpSuccessState value,
           $Res Function(_$SignUpSuccessState) then) =
       __$$SignUpSuccessStateCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String email, String userId});
 }
 
 /// @nodoc
@@ -328,36 +330,69 @@ class __$$SignUpSuccessStateCopyWithImpl<$Res>
   __$$SignUpSuccessStateCopyWithImpl(
       _$SignUpSuccessState _value, $Res Function(_$SignUpSuccessState) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? email = null,
+    Object? userId = null,
+  }) {
+    return _then(_$SignUpSuccessState(
+      null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$SignUpSuccessState implements SignUpSuccessState {
-  const _$SignUpSuccessState();
+  const _$SignUpSuccessState(this.email, this.userId);
+
+  @override
+  final String email;
+  @override
+  final String userId;
 
   @override
   String toString() {
-    return 'SignUpState.success()';
+    return 'SignUpState.success(email: $email, userId: $userId)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$SignUpSuccessState);
+        (other.runtimeType == runtimeType &&
+            other is _$SignUpSuccessState &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.userId, userId) || other.userId == userId));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, email, userId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SignUpSuccessStateCopyWith<_$SignUpSuccessState> get copyWith =>
+      __$$SignUpSuccessStateCopyWithImpl<_$SignUpSuccessState>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(String email, String userId) success,
     required TResult Function(AppException appException) exception,
   }) {
-    return success();
+    return success(email, userId);
   }
 
   @override
@@ -365,10 +400,10 @@ class _$SignUpSuccessState implements SignUpSuccessState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(String email, String userId)? success,
     TResult? Function(AppException appException)? exception,
   }) {
-    return success?.call();
+    return success?.call(email, userId);
   }
 
   @override
@@ -376,12 +411,12 @@ class _$SignUpSuccessState implements SignUpSuccessState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(String email, String userId)? success,
     TResult Function(AppException appException)? exception,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success();
+      return success(email, userId);
     }
     return orElse();
   }
@@ -425,7 +460,14 @@ class _$SignUpSuccessState implements SignUpSuccessState {
 }
 
 abstract class SignUpSuccessState implements SignUpState {
-  const factory SignUpSuccessState() = _$SignUpSuccessState;
+  const factory SignUpSuccessState(final String email, final String userId) =
+      _$SignUpSuccessState;
+
+  String get email;
+  String get userId;
+  @JsonKey(ignore: true)
+  _$$SignUpSuccessStateCopyWith<_$SignUpSuccessState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -496,7 +538,7 @@ class _$SignUpExceptionState implements SignUpExceptionState {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(String email, String userId) success,
     required TResult Function(AppException appException) exception,
   }) {
     return exception(appException);
@@ -507,7 +549,7 @@ class _$SignUpExceptionState implements SignUpExceptionState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(String email, String userId)? success,
     TResult? Function(AppException appException)? exception,
   }) {
     return exception?.call(appException);
@@ -518,7 +560,7 @@ class _$SignUpExceptionState implements SignUpExceptionState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(String email, String userId)? success,
     TResult Function(AppException appException)? exception,
     required TResult orElse(),
   }) {

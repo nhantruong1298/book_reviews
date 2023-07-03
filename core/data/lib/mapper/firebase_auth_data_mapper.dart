@@ -9,7 +9,9 @@ class FirebaseAuthDataMapper {
     return SignInWithEmailResult(userId: response.userId);
   }
 
-  SignUpWithEmailResult mapSignUpWithEmailResponse(SignUpWithEmailResponse response) {
-    return SignUpWithEmailResult(response.userCredential);
+  SignUpWithEmailResult mapSignUpWithEmailResponse(
+      SignUpWithEmailResponse response) {
+    return SignUpWithEmailResult(
+        userId: response.userId, email: response.email);
   }
 }

@@ -7,14 +7,13 @@ extension SignUpListener on _SignUpSuccessScreenState {
         exception: (appException) =>
             showErrorDialogByAppException(appException),
         resendEmailSuccess: () {
-           _resendButtonValue.value = false;
+          toggleLoading(false);
+          _resendButtonValue.value = false;
           _timerValue.value = true;
           _countDownController.start();
         },
         orElse: () {});
   }
 
-   void onButtonBackPressed() {
-    //TODO: Go to sign in screen after implement SignInModule 
-  }
+  
 }

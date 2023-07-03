@@ -69,4 +69,12 @@ class ServiceManager {
   Future<void> sendEmailVerification(String userId) {
     return _fireBaseService.sendEmailVerification(userId);
   }
+
+  Future<void> loadUserInfo(String userId) {
+    return _fireBaseService.loadUserInfo(userId);
+  }
+
+  Future<List<LoadBookResponse>> searchBooks(String searchText) {
+    return _fireBaseService.searchBooks(searchText);
+  }
 }

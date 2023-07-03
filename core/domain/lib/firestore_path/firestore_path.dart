@@ -1,6 +1,6 @@
 class FirestorePath {
-  final collectionPath = _CollectionPath();
-  final bookPath = _BookPath();
+  final collection = _CollectionPath();
+  final book = _BookPath();
 }
 
 class _CollectionPath {
@@ -12,4 +12,5 @@ class _BookPath {
   final String id = 'id';
   final String trending = 'isTrending';
   final String popular = 'isPopular';
+  final String name = 'name';
 }

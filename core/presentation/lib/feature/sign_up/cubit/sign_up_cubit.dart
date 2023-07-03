@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:domain/model/user/update_user_info.dart';
 import 'package:domain/repository/firebase_auth_repository.dart';
+import 'package:domain/repository/user_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:presentation/exception/app_exception.dart';
 import 'package:presentation/exception/app_exception_handler.dart';
@@ -10,19 +12,31 @@ part 'sign_up_state.dart';
 
 class SignUpCubit extends Cubit<SignUpState> {
   late final FirebaseAuthRepository _firebaseAuthRepository;
+  late final UserRepository _userRepository;
   late final AppExceptionHandler _appExceptionHandler;
   SignUpCubit() : super(const SignUpInitial()) {
     _appExceptionHandler = getIt<AppExceptionHandler>();
     _firebaseAuthRepository = getIt<FirebaseAuthRepository>();
+    _userRepository = getIt<UserRepository>();
   }
 
-  void onSubmit(String? userName, String? password) async {
+  void onSubmit(
+      String userName, String password, String surname, String name) async {
     emit(const LoadingState());
     try {
-      await _firebaseAuthRepository.signUpWithEmailAndPassword(
-          userName!, password!);
+      final signUpResult = await _firebaseAuthRepository
+          .signUpWithEmailAndPassword(userName, password);
 
-      emit(const SignUpSuccessState());
+      await _userRepository.updateUserInfo(UpdateUserInfoParams(
+        id: signUpResult.userId,
+        displayName: '',
+        email: signUpResult.email,
+        photoURL: '',
+        surname: surname,
+        name: name,
+      ));
+
+      emit(SignUpSuccessState(signUpResult.email, signUpResult.userId));
     } catch (error, stackTrace) {
       final appException =
           _appExceptionHandler.map(error, stackTrace: stackTrace);

@@ -59,9 +59,7 @@ class MenuScreenState extends BaseScreenState<MenuScreen> {
           ),
           const Spacing(1),
           MenuItem(
-            onTap: () {
-              
-            },
+            onTap: _showSignOutDialog,
             icon: Assets.images.logoutIcon.path,
             name: 'Đăng xuất',
           ),
@@ -82,11 +80,29 @@ class MenuScreenState extends BaseScreenState<MenuScreen> {
           ),
         ),
       );
+
+  void _showSignOutDialog() async {
+    final result = await showConfirmDialog(
+        title: "Đăng xuất",
+        oKText: "OK",
+        cancelText: "Hủy",
+        content: SizedBox(
+          width: double.infinity,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              BodyLText("Bạn muốn đăng xuất?"),
+            ],
+          ),
+        ));
+    if (result) {}
+  }
 }
 
 class _ShowProfileButton extends StatelessWidget {
   final VoidCallback? onTap;
-  // ignore: unused_elementx  
+  // ignore: unused_elementx
   const _ShowProfileButton({this.onTap});
 
   @override

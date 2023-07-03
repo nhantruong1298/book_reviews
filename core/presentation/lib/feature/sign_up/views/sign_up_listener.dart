@@ -4,19 +4,13 @@ extension SignUpListener on _SignUpScreenState {
   void listener(BuildContext context, SignUpState state) {
     state.maybeWhen(
         loading: () => toggleLoading(true, showSpinner: true),
-        exception: (appException) =>
-            showErrorDialogByAppException(appException),
-        success: () {
-          final userName = _formKey.currentState?.fields[USER_NAME_FIELD]?.value
-                  as String? ??
-              '';
-
-          // context.goNamed(SignUpSuccessModule.routeName, params: {
-          //   'userName': userName,
-          // });
-          // SignUpSuccessRoute(SignUpSuccessParams(
-          //   userName,
-          // )).go(context);
+        exception: (appException) {
+          showErrorDialogByAppException(appException);
+        },
+        success: (email, userId) {
+          toggleLoading(false);
+          SignUpSuccessRoute(SignUpSuccessScreenExtra(userId, email))
+              .go(context);
         },
         orElse: () {});
   }
