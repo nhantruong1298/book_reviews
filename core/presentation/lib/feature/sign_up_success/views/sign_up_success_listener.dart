@@ -3,10 +3,10 @@ part of 'sign_up_success_screen.dart';
 extension SignUpListener on _SignUpSuccessScreenState {
   void listener(BuildContext context, SignUpSuccessState state) {
     state.maybeWhen(
-        loading: (isLoading) => toggleLoading(isLoading, showSpinner: true),
+        loading: () => toggleLoading(true, showSpinner: true),
         exception: (appException) =>
             showErrorDialogByAppException(appException),
-        ready: () {
+        resendEmailSuccess: () {
            _resendButtonValue.value = false;
           _timerValue.value = true;
           _countDownController.start();

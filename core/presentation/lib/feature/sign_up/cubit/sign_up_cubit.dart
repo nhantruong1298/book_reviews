@@ -1,45 +1,32 @@
 import 'package:bloc/bloc.dart';
+import 'package:domain/repository/firebase_auth_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:presentation/exception/app_exception.dart';
 import 'package:presentation/exception/app_exception_handler.dart';
-import 'package:presentation/feature/authentication/cubit/authentication_cubit.dart';
-import 'package:presentation/feature/sign_up/sign_up_repository.dart';
 import 'package:presentation/injectors/all.dart';
 
 part 'sign_up_cubit.freezed.dart';
 part 'sign_up_state.dart';
 
 class SignUpCubit extends Cubit<SignUpState> {
-  final SignUpRepository _signUpRepository;
+  late final FirebaseAuthRepository _firebaseAuthRepository;
   late final AppExceptionHandler _appExceptionHandler;
-  final AuthenticationCubit _authenticationCubit;
-  SignUpCubit(
-    this._signUpRepository,
-    this._authenticationCubit,
-  ) : super(const SignUpInitial()) {
+  SignUpCubit() : super(const SignUpInitial()) {
     _appExceptionHandler = getIt<AppExceptionHandler>();
+    _firebaseAuthRepository = getIt<FirebaseAuthRepository>();
   }
 
   void onSubmit(String? userName, String? password) async {
-    emit(const LoadingState(true));
+    emit(const LoadingState());
     try {
-      final signUpResult =
-          await _signUpRepository.signUpWithEmail(userName!, password!);
-
-      //** Update user credential
-      _authenticationCubit
-          .emit(AuthenticationFirebaseState(signUpResult.userCredential));
-
-      //** Send email verification
-      await _authenticationCubit.sendEmailVerification();
+      await _firebaseAuthRepository.signUpWithEmailAndPassword(
+          userName!, password!);
 
       emit(const SignUpSuccessState());
     } catch (error, stackTrace) {
       final appException =
           _appExceptionHandler.map(error, stackTrace: stackTrace);
       emit(SignUpExceptionState(appException));
-    } finally {
-      emit(const LoadingState(false));
     }
   }
 }

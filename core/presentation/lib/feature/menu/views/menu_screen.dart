@@ -5,7 +5,6 @@ import 'package:presentation/generated/assets.gen.dart';
 import 'package:presentation/resources/app_colors.dart';
 import 'package:presentation/resources/app_dimensions.dart';
 import 'package:presentation/resources/app_fonts.dart';
-import 'package:presentation/widgets/commons/layouts/basic_layout.dart';
 import 'package:presentation/widgets/commons/spacing.dart';
 import 'package:presentation/widgets/commons/typography/body_text.dart';
 
@@ -19,53 +18,56 @@ class MenuScreen extends StatefulWidget {
 class MenuScreenState extends BaseScreenState<MenuScreen> {
   @override
   Widget builder(BuildContext context) {
-    return BasicLayout(
-      title: BodyXLText(
-        'Menu',
-        style: BodyXLText.defaultStyle.copyWith(
-          fontFamily: FontFamily.Playfair,
+    return Scaffold(
+      backgroundColor: AppColors.backgroundColor,
+      appBar: AppBar(
+        leadingWidth: double.infinity,
+        centerTitle: false,
+        elevation: 0,
+        backgroundColor: AppColors.backgroundColor,
+        leading: _ShowProfileButton(
+          onTap: () {},
         ),
       ),
-      padding: EdgeInsets.zero,
-      centerTitle: false,
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        const _ShowProfileButton(),
-        const Spacing(1),
-        _divider,
-        const Spacing(1),
-        MenuItem(
-          onTap: () {},
-          icon: Assets.images.orderIcon.path,
-          name: 'Nhận xét của bạn',
-        ),
-        const Spacing(1),
-        MenuItem(
-          onTap: () {},
-          icon: Assets.images.emailIcon.path,
-          name: 'Email',
-        ),
-        const Spacing(1),
-        MenuItem(
-          onTap: () {},
-          icon: Assets.images.settingIcon.path,
-          name: 'Cài đặt',
-        ),
-        const Spacing(1),
-        _divider,
-        const Spacing(1),
-        MenuItem(
-          onTap: () {},
-          icon: Assets.images.informationIcon.path,
-          name: 'Thông tin ',
-        ),
-        const Spacing(1),
-        MenuItem(
-          onTap: () {},
-          icon: Assets.images.logoutIcon.path,
-          name: 'Đăng xuất',
-        ),
-        const Spacing(1),
-      ]),
+      body: SafeArea(
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          const Spacing(.5),
+          MenuItem(
+            onTap: () {},
+            icon: Assets.images.orderIcon.path,
+            name: 'Nhận xét của bạn',
+          ),
+          const Spacing(1),
+          MenuItem(
+            onTap: () {},
+            icon: Assets.images.emailIcon.path,
+            name: 'Email',
+          ),
+          const Spacing(1),
+          MenuItem(
+            onTap: () {},
+            icon: Assets.images.settingIcon.path,
+            name: 'Cài đặt',
+          ),
+          const Spacing(1),
+          _divider,
+          const Spacing(1),
+          MenuItem(
+            onTap: () {},
+            icon: Assets.images.informationIcon.path,
+            name: 'Thông tin ',
+          ),
+          const Spacing(1),
+          MenuItem(
+            onTap: () {
+              
+            },
+            icon: Assets.images.logoutIcon.path,
+            name: 'Đăng xuất',
+          ),
+          const Spacing(1),
+        ]),
+      ),
     );
   }
 
@@ -84,13 +86,13 @@ class MenuScreenState extends BaseScreenState<MenuScreen> {
 
 class _ShowProfileButton extends StatelessWidget {
   final VoidCallback? onTap;
-  // ignore: unused_element
+  // ignore: unused_elementx  
   const _ShowProfileButton({this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
-      padding: const EdgeInsets.only(left: AppDimensions.defaultPadding),
+      padding: const EdgeInsets.only(left: AppDimensions.defaultXSPadding),
       onPressed: onTap,
       child: Row(
         children: [
@@ -104,6 +106,7 @@ class _ShowProfileButton extends StatelessWidget {
           const Spacing(0.5, direction: SpacingDirection.Horizontal),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               BodyLText(
                 'Maya Maya',

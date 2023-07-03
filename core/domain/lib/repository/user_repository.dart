@@ -1,4 +1,5 @@
+import 'package:domain/model/user/update_user_info.dart';
 
 abstract class UserRepository {
-  //Future<FireBaseAuthResult> signInWithFirebaseAuth(String email,String password);
+  Future<void> updateUserInfo(UpdateUserInfoParams params);
 }

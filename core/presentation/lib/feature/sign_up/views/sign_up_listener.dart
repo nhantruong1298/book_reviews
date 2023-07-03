@@ -3,7 +3,7 @@ part of '../../sign_up/views/sign_up_screen.dart';
 extension SignUpListener on _SignUpScreenState {
   void listener(BuildContext context, SignUpState state) {
     state.maybeWhen(
-        loading: (isLoading) => toggleLoading(isLoading, showSpinner: true),
+        loading: () => toggleLoading(true, showSpinner: true),
         exception: (appException) =>
             showErrorDialogByAppException(appException),
         success: () {
@@ -14,7 +14,9 @@ extension SignUpListener on _SignUpScreenState {
           // context.goNamed(SignUpSuccessModule.routeName, params: {
           //   'userName': userName,
           // });
-          SignUpSuccessRoute(userName).go(context);
+          // SignUpSuccessRoute(SignUpSuccessParams(
+          //   userName,
+          // )).go(context);
         },
         orElse: () {});
   }

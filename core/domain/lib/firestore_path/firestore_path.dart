@@ -5,6 +5,7 @@ class FirestorePath {
 
 class _CollectionPath {
   final books = 'books';
+  final userInfo = 'user-info';
 }
 
 class _BookPath {

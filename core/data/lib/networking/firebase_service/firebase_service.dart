@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:data/entity/request/update_user_info_request.dart';
 import 'package:data/entity/response/load_book_response.dart';
 import 'package:data/entity/response/sign_in_with_email_response.dart';
 import 'package:data/entity/response/sign_up_with_email_response.dart';
 import 'package:domain/firestore_path/firestore_path.dart';
+import 'package:domain/model/user/update_user_info.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FireBaseService {
@@ -17,12 +19,12 @@ class FireBaseService {
 
   Future<SignInWithEmailResponse> signInWithEmailAndPassword(
       String email, String password) async {
-    final result = await _firebaseAuth.signInWithEmailAndPassword(
+    final credential = await _firebaseAuth.signInWithEmailAndPassword(
         email: email, password: password);
 
     return SignInWithEmailResponse(
-      userName: result.user?.email ?? '',
-      userId: result.user?.uid ?? '',
+      userName: credential.user?.email ?? '',
+      userId: credential.user?.uid ?? '',
     );
   }
 
@@ -87,5 +89,22 @@ class FireBaseService {
       return LoadBookResponse.fromJson(snapshot.docs.first.data());
     }
     return null;
+  }
+
+  Future<void> updateUserInfo(UpdateUserInfoParams params) async {
+    await _firestore
+        .collection(_firestorePath.collectionPath.userInfo)
+        .doc(params.id)
+        .set(UpdateUserInfoRequest(
+          id: params.id,
+          displayName: params.displayName,
+          email: params.email,
+          photoURL: params.photoURL,
+        ).toJson());
+  }
+
+  Future<void> sendEmailVerification(String userId) async {
+    // final user = userCredential.user;
+    // await user?.sendEmailVerification();
   }
 }

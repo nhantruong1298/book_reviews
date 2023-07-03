@@ -19,38 +19,44 @@ mixin _$AuthenticationState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(UserCredential userCredential) firebase,
+    required TResult Function() unauthorized,
+    required TResult Function(LoadUserInfoResult userInfo) authorized,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
-    TResult? Function(UserCredential userCredential)? firebase,
+    TResult? Function()? unauthorized,
+    TResult? Function(LoadUserInfoResult userInfo)? authorized,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(UserCredential userCredential)? firebase,
+    TResult Function()? unauthorized,
+    TResult Function(LoadUserInfoResult userInfo)? authorized,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(AuthenticationInitial value) init,
-    required TResult Function(AuthenticationFirebaseState value) firebase,
+    required TResult Function(UnauthorizedState value) unauthorized,
+    required TResult Function(AuthorizedState value) authorized,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AuthenticationInitial value)? init,
-    TResult? Function(AuthenticationFirebaseState value)? firebase,
+    TResult? Function(UnauthorizedState value)? unauthorized,
+    TResult? Function(AuthorizedState value)? authorized,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AuthenticationInitial value)? init,
-    TResult Function(AuthenticationFirebaseState value)? firebase,
+    TResult Function(UnauthorizedState value)? unauthorized,
+    TResult Function(AuthorizedState value)? authorized,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -113,7 +119,8 @@ class _$AuthenticationInitial implements AuthenticationInitial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(UserCredential userCredential) firebase,
+    required TResult Function() unauthorized,
+    required TResult Function(LoadUserInfoResult userInfo) authorized,
   }) {
     return init();
   }
@@ -122,7 +129,8 @@ class _$AuthenticationInitial implements AuthenticationInitial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
-    TResult? Function(UserCredential userCredential)? firebase,
+    TResult? Function()? unauthorized,
+    TResult? Function(LoadUserInfoResult userInfo)? authorized,
   }) {
     return init?.call();
   }
@@ -131,7 +139,8 @@ class _$AuthenticationInitial implements AuthenticationInitial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(UserCredential userCredential)? firebase,
+    TResult Function()? unauthorized,
+    TResult Function(LoadUserInfoResult userInfo)? authorized,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -144,7 +153,8 @@ class _$AuthenticationInitial implements AuthenticationInitial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(AuthenticationInitial value) init,
-    required TResult Function(AuthenticationFirebaseState value) firebase,
+    required TResult Function(UnauthorizedState value) unauthorized,
+    required TResult Function(AuthorizedState value) authorized,
   }) {
     return init(this);
   }
@@ -153,7 +163,8 @@ class _$AuthenticationInitial implements AuthenticationInitial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AuthenticationInitial value)? init,
-    TResult? Function(AuthenticationFirebaseState value)? firebase,
+    TResult? Function(UnauthorizedState value)? unauthorized,
+    TResult? Function(AuthorizedState value)? authorized,
   }) {
     return init?.call(this);
   }
@@ -162,7 +173,8 @@ class _$AuthenticationInitial implements AuthenticationInitial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AuthenticationInitial value)? init,
-    TResult Function(AuthenticationFirebaseState value)? firebase,
+    TResult Function(UnauthorizedState value)? unauthorized,
+    TResult Function(AuthorizedState value)? authorized,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -177,98 +189,70 @@ abstract class AuthenticationInitial implements AuthenticationState {
 }
 
 /// @nodoc
-abstract class _$$AuthenticationFirebaseStateCopyWith<$Res> {
-  factory _$$AuthenticationFirebaseStateCopyWith(
-          _$AuthenticationFirebaseState value,
-          $Res Function(_$AuthenticationFirebaseState) then) =
-      __$$AuthenticationFirebaseStateCopyWithImpl<$Res>;
-  @useResult
-  $Res call({UserCredential userCredential});
+abstract class _$$UnauthorizedStateCopyWith<$Res> {
+  factory _$$UnauthorizedStateCopyWith(
+          _$UnauthorizedState value, $Res Function(_$UnauthorizedState) then) =
+      __$$UnauthorizedStateCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$AuthenticationFirebaseStateCopyWithImpl<$Res>
-    extends _$AuthenticationStateCopyWithImpl<$Res,
-        _$AuthenticationFirebaseState>
-    implements _$$AuthenticationFirebaseStateCopyWith<$Res> {
-  __$$AuthenticationFirebaseStateCopyWithImpl(
-      _$AuthenticationFirebaseState _value,
-      $Res Function(_$AuthenticationFirebaseState) _then)
+class __$$UnauthorizedStateCopyWithImpl<$Res>
+    extends _$AuthenticationStateCopyWithImpl<$Res, _$UnauthorizedState>
+    implements _$$UnauthorizedStateCopyWith<$Res> {
+  __$$UnauthorizedStateCopyWithImpl(
+      _$UnauthorizedState _value, $Res Function(_$UnauthorizedState) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? userCredential = null,
-  }) {
-    return _then(_$AuthenticationFirebaseState(
-      null == userCredential
-          ? _value.userCredential
-          : userCredential // ignore: cast_nullable_to_non_nullable
-              as UserCredential,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$AuthenticationFirebaseState implements AuthenticationFirebaseState {
-  const _$AuthenticationFirebaseState(this.userCredential);
-
-  @override
-  final UserCredential userCredential;
+class _$UnauthorizedState implements UnauthorizedState {
+  const _$UnauthorizedState();
 
   @override
   String toString() {
-    return 'AuthenticationState.firebase(userCredential: $userCredential)';
+    return 'AuthenticationState.unauthorized()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$AuthenticationFirebaseState &&
-            (identical(other.userCredential, userCredential) ||
-                other.userCredential == userCredential));
+        (other.runtimeType == runtimeType && other is _$UnauthorizedState);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, userCredential);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$AuthenticationFirebaseStateCopyWith<_$AuthenticationFirebaseState>
-      get copyWith => __$$AuthenticationFirebaseStateCopyWithImpl<
-          _$AuthenticationFirebaseState>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(UserCredential userCredential) firebase,
+    required TResult Function() unauthorized,
+    required TResult Function(LoadUserInfoResult userInfo) authorized,
   }) {
-    return firebase(userCredential);
+    return unauthorized();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
-    TResult? Function(UserCredential userCredential)? firebase,
+    TResult? Function()? unauthorized,
+    TResult? Function(LoadUserInfoResult userInfo)? authorized,
   }) {
-    return firebase?.call(userCredential);
+    return unauthorized?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(UserCredential userCredential)? firebase,
+    TResult Function()? unauthorized,
+    TResult Function(LoadUserInfoResult userInfo)? authorized,
     required TResult orElse(),
   }) {
-    if (firebase != null) {
-      return firebase(userCredential);
+    if (unauthorized != null) {
+      return unauthorized();
     }
     return orElse();
   }
@@ -277,40 +261,178 @@ class _$AuthenticationFirebaseState implements AuthenticationFirebaseState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(AuthenticationInitial value) init,
-    required TResult Function(AuthenticationFirebaseState value) firebase,
+    required TResult Function(UnauthorizedState value) unauthorized,
+    required TResult Function(AuthorizedState value) authorized,
   }) {
-    return firebase(this);
+    return unauthorized(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AuthenticationInitial value)? init,
-    TResult? Function(AuthenticationFirebaseState value)? firebase,
+    TResult? Function(UnauthorizedState value)? unauthorized,
+    TResult? Function(AuthorizedState value)? authorized,
   }) {
-    return firebase?.call(this);
+    return unauthorized?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AuthenticationInitial value)? init,
-    TResult Function(AuthenticationFirebaseState value)? firebase,
+    TResult Function(UnauthorizedState value)? unauthorized,
+    TResult Function(AuthorizedState value)? authorized,
     required TResult orElse(),
   }) {
-    if (firebase != null) {
-      return firebase(this);
+    if (unauthorized != null) {
+      return unauthorized(this);
     }
     return orElse();
   }
 }
 
-abstract class AuthenticationFirebaseState implements AuthenticationState {
-  const factory AuthenticationFirebaseState(
-      final UserCredential userCredential) = _$AuthenticationFirebaseState;
+abstract class UnauthorizedState implements AuthenticationState {
+  const factory UnauthorizedState() = _$UnauthorizedState;
+}
 
-  UserCredential get userCredential;
+/// @nodoc
+abstract class _$$AuthorizedStateCopyWith<$Res> {
+  factory _$$AuthorizedStateCopyWith(
+          _$AuthorizedState value, $Res Function(_$AuthorizedState) then) =
+      __$$AuthorizedStateCopyWithImpl<$Res>;
+  @useResult
+  $Res call({LoadUserInfoResult userInfo});
+}
+
+/// @nodoc
+class __$$AuthorizedStateCopyWithImpl<$Res>
+    extends _$AuthenticationStateCopyWithImpl<$Res, _$AuthorizedState>
+    implements _$$AuthorizedStateCopyWith<$Res> {
+  __$$AuthorizedStateCopyWithImpl(
+      _$AuthorizedState _value, $Res Function(_$AuthorizedState) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? userInfo = null,
+  }) {
+    return _then(_$AuthorizedState(
+      null == userInfo
+          ? _value.userInfo
+          : userInfo // ignore: cast_nullable_to_non_nullable
+              as LoadUserInfoResult,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$AuthorizedState implements AuthorizedState {
+  const _$AuthorizedState(this.userInfo);
+
+  @override
+  final LoadUserInfoResult userInfo;
+
+  @override
+  String toString() {
+    return 'AuthenticationState.authorized(userInfo: $userInfo)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$AuthorizedState &&
+            (identical(other.userInfo, userInfo) ||
+                other.userInfo == userInfo));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, userInfo);
+
   @JsonKey(ignore: true)
-  _$$AuthenticationFirebaseStateCopyWith<_$AuthenticationFirebaseState>
-      get copyWith => throw _privateConstructorUsedError;
+  @override
+  @pragma('vm:prefer-inline')
+  _$$AuthorizedStateCopyWith<_$AuthorizedState> get copyWith =>
+      __$$AuthorizedStateCopyWithImpl<_$AuthorizedState>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function() unauthorized,
+    required TResult Function(LoadUserInfoResult userInfo) authorized,
+  }) {
+    return authorized(userInfo);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? init,
+    TResult? Function()? unauthorized,
+    TResult? Function(LoadUserInfoResult userInfo)? authorized,
+  }) {
+    return authorized?.call(userInfo);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? unauthorized,
+    TResult Function(LoadUserInfoResult userInfo)? authorized,
+    required TResult orElse(),
+  }) {
+    if (authorized != null) {
+      return authorized(userInfo);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(AuthenticationInitial value) init,
+    required TResult Function(UnauthorizedState value) unauthorized,
+    required TResult Function(AuthorizedState value) authorized,
+  }) {
+    return authorized(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(AuthenticationInitial value)? init,
+    TResult? Function(UnauthorizedState value)? unauthorized,
+    TResult? Function(AuthorizedState value)? authorized,
+  }) {
+    return authorized?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(AuthenticationInitial value)? init,
+    TResult Function(UnauthorizedState value)? unauthorized,
+    TResult Function(AuthorizedState value)? authorized,
+    required TResult orElse(),
+  }) {
+    if (authorized != null) {
+      return authorized(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class AuthorizedState implements AuthenticationState {
+  const factory AuthorizedState(final LoadUserInfoResult userInfo) =
+      _$AuthorizedState;
+
+  LoadUserInfoResult get userInfo;
+  @JsonKey(ignore: true)
+  _$$AuthorizedStateCopyWith<_$AuthorizedState> get copyWith =>
+      throw _privateConstructorUsedError;
 }

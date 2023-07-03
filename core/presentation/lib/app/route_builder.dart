@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -18,7 +19,6 @@ import 'package:presentation/feature/home/views/home_screen.dart';
 import 'package:presentation/feature/sign_in/cubit/sign_in_cubit.dart';
 import 'package:presentation/feature/sign_in/view/sign_in_screen.dart';
 import 'package:presentation/feature/sign_up/cubit/sign_up_cubit.dart';
-import 'package:presentation/feature/sign_up/sign_up_repository.dart';
 import 'package:presentation/feature/sign_up/views/sign_up_screen.dart';
 import 'package:presentation/feature/sign_up_success/cubit/sign_up_success_cubit.dart';
 import 'package:presentation/feature/sign_up_success/views/sign_up_success_screen.dart';
@@ -69,39 +69,33 @@ class SignInRoute extends GoRouteData {
   }
 }
 
-//********************** SIGN UP ROUTE **********************
+//********************** SIGN UP ROUTES **********************
 @TypedGoRoute<SignUpRoute>(
     path: '/sign-up',
     routes: <TypedGoRoute<GoRouteData>>[
       TypedGoRoute<SignUpSuccessRoute>(
-        path: 'sign-up-success/:userName',
+        path: 'sign-up-success',
       )
     ])
 class SignUpRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return RepositoryProvider(
-        create: (_) => SignUpRepository(),
-        child: BlocProvider(
-          create: (context) => SignUpCubit(
-            context.read<SignUpRepository>(),
-            context.read<AuthenticationCubit>(),
-          ),
-          child: const SignUpScreen(),
-        ));
+    return BlocProvider(
+      create: (context) => SignUpCubit(),
+      child: const SignUpScreen(),
+    );
   }
 }
 
 class SignUpSuccessRoute extends GoRouteData {
-  final String userName;
-  SignUpSuccessRoute(this.userName);
+  final SignUpSuccessParams $extra;
+  SignUpSuccessRoute(this.$extra);
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return BlocProvider(
-      create: (context) =>
-          SignUpSuccessCubit(context.read<AuthenticationCubit>()),
-      child: SignUpSuccessScreen(userName: userName),
+      create: (context) => SignUpSuccessCubit(),
+      child: SignUpSuccessScreen(extra: $extra),
     );
   }
 }

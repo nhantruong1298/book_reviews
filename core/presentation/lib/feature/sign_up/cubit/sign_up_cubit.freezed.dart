@@ -19,7 +19,7 @@ mixin _$SignUpState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(bool isLoading) loading,
+    required TResult Function() loading,
     required TResult Function() success,
     required TResult Function(AppException appException) exception,
   }) =>
@@ -27,7 +27,7 @@ mixin _$SignUpState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
-    TResult? Function(bool isLoading)? loading,
+    TResult? Function()? loading,
     TResult? Function()? success,
     TResult? Function(AppException appException)? exception,
   }) =>
@@ -35,7 +35,7 @@ mixin _$SignUpState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(bool isLoading)? loading,
+    TResult Function()? loading,
     TResult Function()? success,
     TResult Function(AppException appException)? exception,
     required TResult orElse(),
@@ -125,7 +125,7 @@ class _$SignUpInitial implements SignUpInitial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(bool isLoading) loading,
+    required TResult Function() loading,
     required TResult Function() success,
     required TResult Function(AppException appException) exception,
   }) {
@@ -136,7 +136,7 @@ class _$SignUpInitial implements SignUpInitial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
-    TResult? Function(bool isLoading)? loading,
+    TResult? Function()? loading,
     TResult? Function()? success,
     TResult? Function(AppException appException)? exception,
   }) {
@@ -147,7 +147,7 @@ class _$SignUpInitial implements SignUpInitial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(bool isLoading)? loading,
+    TResult Function()? loading,
     TResult Function()? success,
     TResult Function(AppException appException)? exception,
     required TResult orElse(),
@@ -205,8 +205,6 @@ abstract class _$$LoadingStateCopyWith<$Res> {
   factory _$$LoadingStateCopyWith(
           _$LoadingState value, $Res Function(_$LoadingState) then) =
       __$$LoadingStateCopyWithImpl<$Res>;
-  @useResult
-  $Res call({bool isLoading});
 }
 
 /// @nodoc
@@ -216,85 +214,60 @@ class __$$LoadingStateCopyWithImpl<$Res>
   __$$LoadingStateCopyWithImpl(
       _$LoadingState _value, $Res Function(_$LoadingState) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? isLoading = null,
-  }) {
-    return _then(_$LoadingState(
-      null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$LoadingState implements LoadingState {
-  const _$LoadingState(this.isLoading);
-
-  @override
-  final bool isLoading;
+  const _$LoadingState();
 
   @override
   String toString() {
-    return 'SignUpState.loading(isLoading: $isLoading)';
+    return 'SignUpState.loading()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$LoadingState &&
-            (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading));
+        (other.runtimeType == runtimeType && other is _$LoadingState);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$LoadingStateCopyWith<_$LoadingState> get copyWith =>
-      __$$LoadingStateCopyWithImpl<_$LoadingState>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(bool isLoading) loading,
+    required TResult Function() loading,
     required TResult Function() success,
     required TResult Function(AppException appException) exception,
   }) {
-    return loading(isLoading);
+    return loading();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
-    TResult? Function(bool isLoading)? loading,
+    TResult? Function()? loading,
     TResult? Function()? success,
     TResult? Function(AppException appException)? exception,
   }) {
-    return loading?.call(isLoading);
+    return loading?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(bool isLoading)? loading,
+    TResult Function()? loading,
     TResult Function()? success,
     TResult Function(AppException appException)? exception,
     required TResult orElse(),
   }) {
     if (loading != null) {
-      return loading(isLoading);
+      return loading();
     }
     return orElse();
   }
@@ -338,12 +311,7 @@ class _$LoadingState implements LoadingState {
 }
 
 abstract class LoadingState implements SignUpState {
-  const factory LoadingState(final bool isLoading) = _$LoadingState;
-
-  bool get isLoading;
-  @JsonKey(ignore: true)
-  _$$LoadingStateCopyWith<_$LoadingState> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory LoadingState() = _$LoadingState;
 }
 
 /// @nodoc
@@ -385,7 +353,7 @@ class _$SignUpSuccessState implements SignUpSuccessState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(bool isLoading) loading,
+    required TResult Function() loading,
     required TResult Function() success,
     required TResult Function(AppException appException) exception,
   }) {
@@ -396,7 +364,7 @@ class _$SignUpSuccessState implements SignUpSuccessState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
-    TResult? Function(bool isLoading)? loading,
+    TResult? Function()? loading,
     TResult? Function()? success,
     TResult? Function(AppException appException)? exception,
   }) {
@@ -407,7 +375,7 @@ class _$SignUpSuccessState implements SignUpSuccessState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(bool isLoading)? loading,
+    TResult Function()? loading,
     TResult Function()? success,
     TResult Function(AppException appException)? exception,
     required TResult orElse(),
@@ -527,7 +495,7 @@ class _$SignUpExceptionState implements SignUpExceptionState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(bool isLoading) loading,
+    required TResult Function() loading,
     required TResult Function() success,
     required TResult Function(AppException appException) exception,
   }) {
@@ -538,7 +506,7 @@ class _$SignUpExceptionState implements SignUpExceptionState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
-    TResult? Function(bool isLoading)? loading,
+    TResult? Function()? loading,
     TResult? Function()? success,
     TResult? Function(AppException appException)? exception,
   }) {
@@ -549,7 +517,7 @@ class _$SignUpExceptionState implements SignUpExceptionState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(bool isLoading)? loading,
+    TResult Function()? loading,
     TResult Function()? success,
     TResult Function(AppException appException)? exception,
     required TResult orElse(),

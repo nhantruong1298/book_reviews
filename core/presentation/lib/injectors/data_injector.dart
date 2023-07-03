@@ -5,9 +5,11 @@ import 'package:data/networking/service_manager.dart';
 import 'package:data/repository/book_repository_impl.dart';
 import 'package:data/repository/firebase_auth_repository_impl.dart';
 import 'package:data/repository/log_service_impl.dart';
+import 'package:data/repository/user_repository_impl.dart';
 import 'package:domain/repository/book_repository.dart';
 import 'package:domain/repository/firebase_auth_repository.dart';
 import 'package:domain/repository/log_service.dart';
+import 'package:domain/repository/user_repository.dart';
 import 'package:get_it/get_it.dart';
 
 class DataInjector {
@@ -35,15 +37,17 @@ class DataInjector {
   }
 
   static void _configureRepository(GetIt getIt) {
-    getIt.registerLazySingleton<FirebaseAuthRepository>(
-        () => FirebaseAuthRepositoryImpl(
-              getIt<ServiceManager>(),
-              getIt<FirebaseAuthDataMapper>()
-            ));
+    getIt.registerLazySingleton<FirebaseAuthRepository>(() =>
+        FirebaseAuthRepositoryImpl(
+            getIt<ServiceManager>(), getIt<FirebaseAuthDataMapper>()));
 
     getIt.registerLazySingleton<BookRepository>(() => BookRepositoryImpl(
           getIt<ServiceManager>(),
           getIt<BookDataMapper>(),
+        ));
+
+    getIt.registerLazySingleton<UserRepository>(() => UserRepositoryImpl(
+          getIt<ServiceManager>(),
         ));
   }
 }

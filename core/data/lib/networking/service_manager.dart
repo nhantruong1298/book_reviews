@@ -5,6 +5,7 @@ import 'package:data/entity/response/sign_in_with_email_response.dart';
 import 'package:data/entity/response/sign_up_with_email_response.dart';
 import 'package:data/networking/firebase_service/firebase_service.dart';
 import 'package:domain/repository/log_service.dart';
+import 'package:domain/model/user/update_user_info.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class ServiceManager {
@@ -59,5 +60,13 @@ class ServiceManager {
 
   Future<LoadBookResponse?> loadBook(String id) {
     return _fireBaseService.loadBook(id);
+  }
+
+  Future<void> updateUserInfo(UpdateUserInfoParams params) {
+    return _fireBaseService.updateUserInfo(params);
+  }
+
+  Future<void> sendEmailVerification(String userId) {
+    return _fireBaseService.sendEmailVerification(userId);
   }
 }

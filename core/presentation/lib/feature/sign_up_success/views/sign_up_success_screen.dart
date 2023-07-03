@@ -20,11 +20,18 @@ import 'package:timer_count_down/timer_controller.dart';
 
 part 'sign_up_success_listener.dart';
 
+class SignUpSuccessParams {
+  final String email;
+  final String userId;
+  SignUpSuccessParams(this.userId, this.email);
+}
+
 class SignUpSuccessScreen extends StatefulWidget {
-  final String userName;
+  //final UserCredential userCredential;
+  final SignUpSuccessParams extra;
   const SignUpSuccessScreen({
     super.key,
-    required this.userName,
+    required this.extra,
   });
 
   @override
@@ -41,6 +48,14 @@ class _SignUpSuccessScreenState extends BaseScreenState<SignUpSuccessScreen> {
   SignUpSuccessCubit get cubit => context.read<SignUpSuccessCubit>();
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      //cubit.onScreenInit(widget.userCredential);
+    });
+  }
+
+  @override
   Future<bool> onWillPop() {
     return Future.value(false);
   }
@@ -54,6 +69,7 @@ class _SignUpSuccessScreenState extends BaseScreenState<SignUpSuccessScreen> {
 
   @override
   Widget builder(BuildContext context) {
+    final userName = widget.extra.email;
     return BlocListener<SignUpSuccessCubit, SignUpSuccessState>(
       listener: listener,
       child: BasicLayout(
@@ -75,7 +91,7 @@ class _SignUpSuccessScreenState extends BaseScreenState<SignUpSuccessScreen> {
                   BodyXLText.defaultStyle.copyWith(fontWeight: FontWeight.w700),
             ),
             const Spacing(.5),
-            _buildDescription(widget.userName),
+            _buildDescription(userName),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -119,7 +135,7 @@ class _SignUpSuccessScreenState extends BaseScreenState<SignUpSuccessScreen> {
           return TextButton(
               onPressed: value
                   ? () {
-                      cubit.onResendPressed(widget.userName);
+                      cubit.onResendPressed();
                     }
                   : null,
               child: BodyMText(
