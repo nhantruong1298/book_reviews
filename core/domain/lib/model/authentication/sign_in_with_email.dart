@@ -1,5 +1,5 @@
 class SignInWithEmailResult {
-  final String? userName;
-  final String? userId;
-  SignInWithEmailResult({this.userName,required this.userId});
+  final String? email;
+  final String? password;
+  SignInWithEmailResult({this.email,required this.password});
 }

@@ -113,10 +113,12 @@ class $AssetsMockDataGen {
   const $AssetsMockDataGen();
 
   /// File path: assets/mock_data/books_data.json
-  String get booksData => 'assets/mock_data/books_data.json';
+  String get booksData =>
+      'packages/presentation/assets/mock_data/books_data.json';
 
   /// File path: assets/mock_data/events_data.json
-  String get eventsData => 'assets/mock_data/events_data.json';
+  String get eventsData =>
+      'packages/presentation/assets/mock_data/events_data.json';
 
   /// List of all assets
   List<String> get values => [booksData, eventsData];
@@ -126,7 +128,8 @@ class $AssetsRawsGen {
   const $AssetsRawsGen();
 
   /// File path: assets/raws/success_animation.json
-  String get successAnimation => 'assets/raws/success_animation.json';
+  String get successAnimation =>
+      'packages/presentation/assets/raws/success_animation.json';
 
   /// List of all assets
   List<String> get values => [successAnimation];
@@ -254,7 +257,7 @@ class SvgGenImage {
       semanticsLabel: semanticsLabel,
       excludeFromSemantics: excludeFromSemantics,
       theme: theme,
-      //colorFilter: colorFilter,
+      // colorFilter: colorFilter,
       color: color,
       colorBlendMode: colorBlendMode,
       clipBehavior: clipBehavior,
