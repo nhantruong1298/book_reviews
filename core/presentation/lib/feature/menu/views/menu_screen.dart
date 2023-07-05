@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:presentation/app/route_builder.dart';
 import 'package:presentation/base/base_screen.dart';
+import 'package:presentation/feature/menu/cubit/menu_cubit.dart';
 import 'package:presentation/feature/menu/views/menu_item.dart';
 import 'package:presentation/generated/assets.gen.dart';
 import 'package:presentation/resources/app_colors.dart';
@@ -16,6 +19,8 @@ class MenuScreen extends StatefulWidget {
 }
 
 class MenuScreenState extends BaseScreenState<MenuScreen> {
+  MenuCubit get menuCubit => BlocProvider.of<MenuCubit>(context);
+
   @override
   Widget builder(BuildContext context) {
     return Scaffold(
@@ -96,7 +101,9 @@ class MenuScreenState extends BaseScreenState<MenuScreen> {
             ],
           ),
         ));
-    if (result) {}
+    if (result) {
+      SignInRoute().go(context);
+    }
   }
 }
 

@@ -83,23 +83,23 @@ class _ProfileScreenState extends BaseScreenState<ProfileScreen> {
                     _SocialIconButton(
                       icon: Assets.images.linkIcon.path,
                     ),
-                    const Spacing(0.5, direction: SpacingDirection.Horizontal),
+                    const Spacing(.75, direction: SpacingDirection.Horizontal),
                     _SocialIconButton(
                       icon: Assets.images.facebookIcon.path,
                     ),
-                    const Spacing(0.5, direction: SpacingDirection.Horizontal),
+                    const Spacing(.75, direction: SpacingDirection.Horizontal),
                     _SocialIconButton(
                       icon: Assets.images.twitterIcon.path,
                     ),
-                    const Spacing(0.5, direction: SpacingDirection.Horizontal),
+                    const Spacing(.75, direction: SpacingDirection.Horizontal),
                     _SocialIconButton(
                       icon: Assets.images.linkedInIcon.path,
                     )
                   ],
                 ),
-                const Spacing(1),
+                const Spacing(1.5),
                 _divider,
-                const Spacing(1),
+                const Spacing(1.5),
                 BodyXLText(
                   'Nhận xét gần đây: ',
                   style: BodyXLText.defaultStyle.copyWith(

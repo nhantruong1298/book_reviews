@@ -1,10 +1,14 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:presentation/feature/authentication/cubit/authentication_cubit.dart';
 
 part 'menu_state.dart';
 
 class MenuCubit extends Cubit<MenuState> {
-  MenuCubit() : super(MenuInitial());
+  final AuthenticationCubit _authenticationCubit;
+  MenuCubit(this._authenticationCubit) : super(MenuInitial());
 
-  void onSignOutPressed(){}
+  void onSignOutButtonPressed() {
+    _authenticationCubit.onSignOut();
+  }
 }
