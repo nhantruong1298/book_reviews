@@ -5,6 +5,9 @@ extension AssetsGen on Assets {
   //static const imagesFolder = '$packageName/assets/images';
 
   static String getRawString(String assetName) {
+    if (assetName.contains(packageName)) {
+      return assetName;
+    }
     return '$packageName/$assetName';
   }
 }

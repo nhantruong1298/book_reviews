@@ -62,6 +62,7 @@ flutter_gen:
   output: lib/generated/ # Optional (default: lib/gen/)
   integrations:
     flutter_svg: true
+  synthetic-package: false
   assets:
     outputs:
       enable: true
