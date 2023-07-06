@@ -13,6 +13,9 @@ import 'package:presentation/widgets/commons/inputs/text_input_field.dart';
 import 'package:presentation/widgets/commons/layouts/basic_layout.dart';
 import 'package:presentation/widgets/commons/typography/body_text.dart';
 import 'package:presentation/widgets/commons/typography/heading_text.dart';
+import 'package:presentation/base/base_screen.dart';
+
+part 'sign_in_listener.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({
@@ -20,15 +23,13 @@ class SignInScreen extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State createState() {
-    return _SignInScreenState();
-  }
+  State<SignInScreen> createState() => _SignInScreenState();
 }
 
-class _SignInScreenState extends State<SignInScreen> {
+class _SignInScreenState extends BaseScreenState<SignInScreen> {
   final int MIN_LENGTH_PASSWORD = 8;
   final _formKey = GlobalKey<FormBuilderState>();
-  String USER_NAME_FIELD = 'username';
+  String EMAIL_FIELD = 'email';
   String PASSWORD_FIELD = 'password';
   //bool? _isChecked = false;
 
@@ -40,74 +41,77 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return BasicLayout(
-      automaticallyImplyLeading: true,
-      child: SingleChildScrollView(
-        child: FormBuilder(
-          key: _formKey,
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Heading1Text(
-              "Đăng nhập",
-              color: AppColors.primaryColor500,
-              style: Heading1Text.defaultStyle
-                  .copyWith(color: AppColors.primaryColor500),
-            ),
-            const Spacing(2),
-            _buildUserNameField(),
-            const Spacing(1),
-            _buildTextPasswordField(),
-            const Spacing(2),
-            // _buildCheckRBPW(),
-            // const Spacing(3),
-            _SignInButton(
-              onTap: () {
-                _formKey.currentState!.validate();
+  Widget builder(BuildContext context) {
+    return BlocListener<SignInCubit, SignInState>(
+      listener: listener,
+      child: BasicLayout(
+        automaticallyImplyLeading: true,
+        child: SingleChildScrollView(
+          child: FormBuilder(
+            key: _formKey,
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Heading1Text(
+                "Đăng nhập",
+                color: AppColors.primaryColor500,
+                style: Heading1Text.defaultStyle
+                    .copyWith(color: AppColors.primaryColor500),
+              ),
+              const Spacing(2),
+              _buildEmailField(),
+              const Spacing(1),
+              _buildTextPasswordField(),
+              const Spacing(2),
+              // _buildCheckRBPW(),
+              // const Spacing(3),
+              _SignInButton(
+                onTap: () {
+                  _formKey.currentState!.validate();
 
-                if (_formKey.currentState?.isValid == true) {
-                  final username = _formKey
-                      .currentState?.fields[USER_NAME_FIELD]?.value as String?;
+                  if (_formKey.currentState?.isValid == true) {
+                    final email = _formKey
+                        .currentState?.fields[EMAIL_FIELD]?.value as String?;
 
-                  final password = _formKey
-                      .currentState?.fields[PASSWORD_FIELD]?.value as String?;
+                    final password = _formKey
+                        .currentState?.fields[PASSWORD_FIELD]?.value as String?;
 
-                  signInCubit.onSignIn(username ?? '', password ?? '');
-                }
-              },
-            ),
-            // const Spacing(3),
-            // Row(children: <Widget>[
-            //   const Expanded(child: Divider()),
-            //   BodyText(
-            //     " Or, login with... ",
-            //     style: BodyText.defaultStyle.copyWith(
-            //       color: Color(0xff9A9B9C),
-            //       fontWeight: FontWeight.w400,
-            //     ),
-            //   ),
-            //   const Expanded(child: Divider()),
-            // ]),
-            const Spacing(3),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                BodyLText(
-                  'Bạn chưa có tài khoản ? ',
-                  color: Colors.black,
-                ),
-                TextButton(
-                    onPressed: () {
-                      SignUpRoute().go(context);
-                    },
-                    child: BodyLText(
-                      'Đăng ký',
-                      color: AppColors.primaryColor500,
-                    ))
-              ],
-            ),
-          ]),
+                    signInCubit.onSignIn(email ?? '', password ?? '');
+                  }
+                },
+              ),
+              // const Spacing(3),
+              // Row(children: <Widget>[
+              //   const Expanded(child: Divider()),
+              //   BodyText(
+              //     " Or, login with... ",
+              //     style: BodyText.defaultStyle.copyWith(
+              //       color: Color(0xff9A9B9C),
+              //       fontWeight: FontWeight.w400,
+              //     ),
+              //   ),
+              //   const Expanded(child: Divider()),
+              // ]),
+              const Spacing(3),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  BodyLText(
+                    'Bạn chưa có tài khoản ? ',
+                    color: Colors.black,
+                  ),
+                  TextButton(
+                      onPressed: () {
+                        SignUpRoute().go(context);
+                      },
+                      child: BodyLText(
+                        'Đăng ký',
+                        color: AppColors.primaryColor500,
+                      ))
+                ],
+              ),
+            ]),
+          ),
         ),
       ),
     );
@@ -185,9 +189,9 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 
-  Widget _buildUserNameField() {
+  Widget _buildEmailField() {
     return TextInputField(
-      name: USER_NAME_FIELD,
+      name: EMAIL_FIELD,
       labelText: S.current.SIGN_UP__EMAIL,
       initialValue: 'test@yopmail.com',
       validator: FormBuilderValidators.compose([
