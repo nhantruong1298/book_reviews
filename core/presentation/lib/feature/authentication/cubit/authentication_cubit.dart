@@ -7,4 +7,12 @@ part 'authentication_state.dart';
 
 class AuthenticationCubit extends Cubit<AuthenticationState> {
   AuthenticationCubit() : super(const AuthenticationInitial(null));
+
+  void onSignOut() {
+    emit(const UnauthorizedState(null));
+  }
+
+  void onSignIn(LoadUserInfoResult userInfo) {
+    emit(AuthorizedState(userInfo));
+  }
 }
