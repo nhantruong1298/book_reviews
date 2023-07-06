@@ -1,6 +1,7 @@
 // import 'package:flutter/foundation.dart';
 import 'package:data/mapper/error_data_mapper.dart';
 import 'package:domain/exception/business_exception.dart';
+import 'package:domain/exception/business_exception_code.dart';
 import 'package:domain/repository/log_service.dart';
 import 'package:presentation/exception/app_global_exception_handler.dart';
 
@@ -62,6 +63,21 @@ class AppExceptionHandler {
     return AppException(displayMessage,
         exceptionCode: businessException.businessExceptionCode,
         originalException: businessException);
+  }
+
+  AppException mapFirebaseException(dynamic error,
+      {StackTrace? stackTrace, bool showErrorDetail = false}) {
+    BusinessExceptionCode businessExceptionCode = BusinessExceptionCode.UNEXPECTED_ERROR;
+
+   
+    String displayMessage;
+
+    displayMessage = "Unexpected exception";
+
+    _logService.error(displayMessage, error, stackTrace);
+    return AppException(displayMessage,
+        exceptionCode: businessExceptionCode,
+        originalException: error);
   }
 
   void handleGlobalExceptionIfNeed(

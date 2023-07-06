@@ -1,8 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:presentation/feature/authentication/cubit/authentication_cubit.dart';
-import 'package:presentation/feature/book_detail/book_detail_repository.dart';
 import 'package:presentation/feature/book_detail/cubit/book_detail_cubit.dart';
 import 'package:presentation/feature/book_detail/views/book_detail_screen.dart';
 import 'package:presentation/feature/book_event/cubit/book_event_cubit.dart';
@@ -16,10 +17,11 @@ import 'package:presentation/feature/dashboard/cubit/dashboard_cubit.dart';
 import 'package:presentation/feature/dashboard/views/dashboard_screen.dart';
 import 'package:presentation/feature/home/cubit/home_cubit.dart';
 import 'package:presentation/feature/home/views/home_screen.dart';
+import 'package:presentation/feature/menu/cubit/menu_cubit.dart';
+import 'package:presentation/feature/menu/views/menu_screen.dart';
 import 'package:presentation/feature/sign_in/cubit/sign_in_cubit.dart';
 import 'package:presentation/feature/sign_in/view/sign_in_screen.dart';
 import 'package:presentation/feature/sign_up/cubit/sign_up_cubit.dart';
-import 'package:presentation/feature/sign_up/sign_up_repository.dart';
 import 'package:presentation/feature/sign_up/views/sign_up_screen.dart';
 import 'package:presentation/feature/sign_up_success/cubit/sign_up_success_cubit.dart';
 import 'package:presentation/feature/sign_up_success/views/sign_up_success_screen.dart';
@@ -70,39 +72,33 @@ class SignInRoute extends GoRouteData {
   }
 }
 
-//********************** SIGN UP ROUTE **********************
+//********************** SIGN UP ROUTES **********************
 @TypedGoRoute<SignUpRoute>(
     path: '/sign-up',
     routes: <TypedGoRoute<GoRouteData>>[
       TypedGoRoute<SignUpSuccessRoute>(
-        path: 'sign-up-success/:userName',
+        path: 'sign-up-success',
       )
     ])
 class SignUpRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return RepositoryProvider(
-        create: (_) => SignUpRepository(),
-        child: BlocProvider(
-          create: (context) => SignUpCubit(
-            context.read<SignUpRepository>(),
-            context.read<AuthenticationCubit>(),
-          ),
-          child: const SignUpScreen(),
-        ));
+    return BlocProvider(
+      create: (context) => SignUpCubit(),
+      child: const SignUpScreen(),
+    );
   }
 }
 
 class SignUpSuccessRoute extends GoRouteData {
-  final String userName;
-  SignUpSuccessRoute(this.userName);
+  final SignUpSuccessScreenExtra $extra;
+  SignUpSuccessRoute(this.$extra);
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return BlocProvider(
-      create: (context) =>
-          SignUpSuccessCubit(context.read<AuthenticationCubit>()),
-      child: SignUpSuccessScreen(userName: userName),
+      create: (context) => SignUpSuccessCubit(),
+      child: SignUpSuccessScreen(extra: $extra),
     );
   }
 }
@@ -133,6 +129,15 @@ class DashboardRoute extends GoRouteData {
       child: const DashboardScreen(),
     );
   }
+
+  // @override
+  // FutureOr<String?> redirect(BuildContext context, GoRouterState state) {
+  //   if (BlocProvider.of<AuthenticationCubit>(context).state
+  //       is! AuthorizedState) {
+  //     return '/sign-in';
+  //   }
+  //   return null;
+  // }
 }
 
 //********************** HOME ROUTE **********************
@@ -152,16 +157,10 @@ class BookDetailRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return RepositoryProvider(
-      create: (_) => BookDetailRepository(),
-      child: BlocProvider(
-        create: (context) => BookDetailCubit(
-          bookID,
-          context.read<BookDetailRepository>(),
-        ),
-        child: BookDetailScreen(
-          bookID: bookID,
-        ),
+    return BlocProvider(
+      create: (context) => BookDetailCubit(bookID),
+      child: BookDetailScreen(
+        bookID: bookID,
       ),
     );
   }
@@ -215,6 +214,18 @@ class BookReviewRoute extends GoRouteData {
       child: BookReviewScreen(
         bookID: bookID,
       ),
+    );
+  }
+}
+
+//********************** MENU ROUTE **********************
+class MenuRoute {
+  static Widget build() {
+    return BlocProvider(
+      create: (context) => MenuCubit(
+        BlocProvider.of<AuthenticationCubit>(context),
+      ),
+      child: const MenuScreen(),
     );
   }
 }

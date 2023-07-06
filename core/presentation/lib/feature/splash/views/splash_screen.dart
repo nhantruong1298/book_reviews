@@ -27,7 +27,7 @@ class _SplashScreenState extends BaseScreenState<SplashScreen> {
     _loadMockData();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Future.delayed(const Duration(seconds: 2), () {
-        DashboardRoute().go(context);
+        SignInRoute().go(context);
       });
     });
   }

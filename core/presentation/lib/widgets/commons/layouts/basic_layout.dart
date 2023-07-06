@@ -24,6 +24,7 @@ class BasicLayout extends StatelessWidget {
     this.safeTopPadding = true,
     this.builder,
     this.resizeToAvoidBottomInset = false,
+    this.leadingWidth,
   }) : super(key: key);
   final Widget Function(BuildContext scaffoldContext)? builder;
 
@@ -50,6 +51,7 @@ class BasicLayout extends StatelessWidget {
   final bool darkMode;
   final FloatingActionButtonLocation? floatingActionButtonLocation;
   final bool resizeToAvoidBottomInset;
+  final double? leadingWidth;
 
   Widget? getDefaultLeading(BuildContext context) {
     if (automaticallyImplyLeading == true) {
@@ -88,6 +90,7 @@ class BasicLayout extends StatelessWidget {
               leading: headerLeading ?? getDefaultLeading(context),
               actions: headerActions,
               toolbarHeight: headerVisible ? kToolbarHeight : 0,
+              leadingWidth: leadingWidth,
               title: title,
               centerTitle: centerTitle,
               systemOverlayStyle: darkMode

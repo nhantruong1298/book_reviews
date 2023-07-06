@@ -4,7 +4,6 @@ import 'package:presentation/resources/app_dimensions.dart';
 import '../app_dialog_manager.dart';
 import 'app_dialog_widget.dart';
 
-
 class ConfirmDialogBuilder extends AppDialogBuilder {
   final VoidCallback? onCancel;
   final VoidCallback? onConfirm;
@@ -44,7 +43,7 @@ class ConfirmDialogBuilder extends AppDialogBuilder {
         customWidget: contentBuilder,
         buttonDirection: DialogButtonDirection.HORIZONTAL,
         negativeButton: DialogButton(
-            buttonText: negativeText ?? "Confirm",
+            buttonText: negativeText ?? "Cancel",
             minWidth: buttonWidth ?? AppDimensions.buttonMinimalWidth,
             onButtonClick: () {
               if (onCancel != null) onCancel!();

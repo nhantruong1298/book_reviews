@@ -1,32 +1,18 @@
+import 'package:data/networking/service_manager.dart';
+import 'package:domain/model/user/update_user_info.dart';
 import 'package:domain/repository/user_repository.dart';
 
 class UserRepositoryImpl extends UserRepository {
-  UserRepositoryImpl();
-  //late final FirebaseAuth _firebaseAuth;
-  // @override
-  // Future<FireBaseAuthResult> signInWithFirebaseAuth(
-  //     String email, String password) async {
-  //   final userCredential = await _firebaseAuth.signInWithEmailAndPassword(
-  //       email: email, password: password);
+  final ServiceManager _serviceManager;
+  UserRepositoryImpl(this._serviceManager);
 
-  //   return FireBaseAuthResult(userName: userCredential.user?.displayName);
-  // }
+  @override
+  Future<void> updateUserInfo(UpdateUserInfoParams params) {
+    return _serviceManager.updateUserInfo(params);
+  }
 
-  // final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-
-  //   // Obtain the auth details from the request
-  //   final GoogleSignInAuthentication? googleAuth =
-  //       await googleUser?.authentication;
-
-  //   // Create a new credential
-  //   final credential = GoogleAuthProvider.credential(
-  //     accessToken: googleAuth?.accessToken,
-  //     idToken: googleAuth?.idToken,
-  //   );
-
-  //   // Once signed in, return the UserCredential
-  //   final userCredential =
-  //       await FirebaseAuth.instance.signInWithCredential(credential);
-
-  //   return GoogleSignInResult();
+  @override
+  Future<void> loadUserInfo(String userId) {
+    return _serviceManager.loadUserInfo(userId);
+  }
 }

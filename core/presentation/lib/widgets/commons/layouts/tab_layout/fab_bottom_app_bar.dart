@@ -126,7 +126,7 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
                       height: isSelected ? 4 : 0,
                       width: double.infinity,
                       decoration: const BoxDecoration(
-                          color: AppColors.primaryDarkColor,
+                          color: AppColors.primaryColor500,
                           borderRadius: BorderRadius.only(
                             bottomLeft: Radius.circular(4),
                             bottomRight: Radius.circular(4),

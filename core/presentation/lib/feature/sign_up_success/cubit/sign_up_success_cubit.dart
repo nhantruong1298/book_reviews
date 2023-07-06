@@ -1,31 +1,41 @@
 import 'package:bloc/bloc.dart';
+import 'package:domain/repository/firebase_auth_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:presentation/exception/app.exception_handler.dart';
 import 'package:presentation/exception/app_exception.dart';
-import 'package:presentation/feature/authentication/cubit/authentication_cubit.dart';
+import 'package:presentation/exception/app_exception_handler.dart';
+import 'package:presentation/feature/sign_up_success/views/sign_up_success_screen.dart';
 import 'package:presentation/injectors/all.dart';
 
-part 'sign_up_success_state.dart';
 part 'sign_up_success_cubit.freezed.dart';
+part 'sign_up_success_state.dart';
 
 class SignUpSuccessCubit extends Cubit<SignUpSuccessState> {
   late final AppExceptionHandler _appExceptionHandler;
-  final AuthenticationCubit _authenticationCubit;
-  SignUpSuccessCubit(this._authenticationCubit)
-      : super(const SignUpSuccessInitial()) {
+  late final FirebaseAuthRepository _firebaseAuthRepository;
+  late final SignUpSuccessScreenExtra _extra;
+
+  SignUpSuccessCubit() : super(const SignUpSuccessInitial()) {
     _appExceptionHandler = getIt<AppExceptionHandler>();
+    _firebaseAuthRepository = getIt<FirebaseAuthRepository>();
   }
 
-  void onResendPressed(String email) async{
-    emit(const LoadingState(true));
+  void onResendPressed() async {
+    await _sendEmailVerification();
+  }
+
+  Future<void> onScreenInit(SignUpSuccessScreenExtra extra) async {
+    _extra = extra;
+    await _sendEmailVerification();
+  }
+
+  Future<void> _sendEmailVerification() async {
+    emit(const LoadingState());
     try {
-      await _authenticationCubit.sendEmailVerification();
-      emit(const SignUpSuccessReadyState());
+      await _firebaseAuthRepository.sendEmailVerification(_extra.userId);
+      emit(const ResendEmailSuccess());
     } catch (e, stackTrace) {
       final appException = _appExceptionHandler.map(e, stackTrace: stackTrace);
       emit(SignUpSuccessExceptionState(appException));
-    } finally {
-      emit(const LoadingState(false));
     }
   }
 }

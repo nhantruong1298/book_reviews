@@ -32,14 +32,15 @@ class AppThemeStyle {
       Widget? label,
       TextStyle? hintStyle}) {
     return InputDecoration(
-        contentPadding: contentPadding,
-        floatingLabelBehavior: FloatingLabelBehavior.auto,
-        suffixIcon: suffixIcon,
-        hintText: hintText,
-        label: label,
-        hintStyle: hintStyle,
-        border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(AppDimensions.defaultRadius)));
+      contentPadding: contentPadding,
+      floatingLabelBehavior: FloatingLabelBehavior.auto,
+      suffixIcon: suffixIcon,
+      hintText: hintText,
+      label: label,
+      hintStyle: hintStyle,
+      // border: OutlineInputBorder(
+      //     borderRadius: BorderRadius.circular(AppDimensions.defaultRadius))
+    );
   }
 
   static InputDecoration get searchHeaderDecoration {
@@ -233,7 +234,7 @@ class AppThemeStyle {
   //         hintText: hintText,
   //         hintStyle: hintStyle);
 
-    static BoxShadow defaultBoxShadow(
+  static BoxShadow defaultBoxShadow(
       {Offset? offSet, double? blurRadius, Color? color}) {
     return BoxShadow(
         offset: offSet ?? const Offset(0, 16),

@@ -4,7 +4,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:presentation/app/route_builder.dart';
 import 'package:presentation/base/base_screen.dart';
 import 'package:presentation/feature/dashboard/cubit/dashboard_cubit.dart';
-import 'package:presentation/feature/menu/views/menu_screen.dart';
 import 'package:presentation/feature/profile/views/profile_screen.dart';
 import 'package:presentation/generated/assets.gen.dart';
 import 'package:presentation/generated/extension.dart';
@@ -57,7 +56,7 @@ class _DashboardScreenState extends BaseScreenState<DashboardScreen>
       HomeRoute.build(),
       const ProfileScreen(),
       BookEventRoute.build(),
-      const MenuScreen(),
+      MenuRoute.build(),
     ];
 
     _controller = TabController(
@@ -73,66 +72,32 @@ class _DashboardScreenState extends BaseScreenState<DashboardScreen>
     const double inActiveIconSize = 22;
     const double activeIconSize = 24;
 
-    return [
-      FABBottomAppBarItem(
-        icon: SvgPicture.asset(
-          AssetsGen.getRawString(Assets.images.homeIcon.path),
-          width: inActiveIconSize,
-          height: inActiveIconSize,
-          
-         // color: AppColors.textGreyColor,
+    final navBarsItems = <FABBottomAppBarItem>[];
+    final Map<String, String> titlesAndIcons = {
+      'Home': Assets.images.homeIcon.path,
+      'Profile': Assets.images.profileIcon.path,
+      'Event': Assets.images.eventIcon.path,
+      'Menu': Assets.images.menuIcon.path,
+    };
 
-        ),
-        activeIcon: SvgPicture.asset(
-          AssetsGen.getRawString(Assets.images.homeIcon.path),
-          width: activeIconSize,
-          height: activeIconSize,
-        ),
-        title: 'Home',
-      ),
-      FABBottomAppBarItem(
-        icon: SvgPicture.asset(
-          AssetsGen.getRawString(Assets.images.profileIcon.path),
-          width: inActiveIconSize,
-          height: inActiveIconSize,
-         // color: AppColors.textGreyColor,
-        ),
-        activeIcon: SvgPicture.asset(
-          AssetsGen.getRawString(Assets.images.profileIcon.path),
-          width: activeIconSize,
-          height: activeIconSize,
-        ),
-        title: 'Profile',
-      ),
-      FABBottomAppBarItem(
-        icon: SvgPicture.asset(
-          AssetsGen.getRawString(Assets.images.eventIcon.path),
-          width: inActiveIconSize,
-          height: inActiveIconSize,
-        //  color: AppColors.textGreyColor,
-        ),
-        activeIcon: SvgPicture.asset(
-          AssetsGen.getRawString(Assets.images.eventIcon.path),
-          width: activeIconSize,
-          height: activeIconSize,
-        ),
-        title: 'Event',
-      ),
-      FABBottomAppBarItem(
-        icon: SvgPicture.asset(
-          AssetsGen.getRawString(Assets.images.menuIcon.path),
-          width: inActiveIconSize,
-          height: inActiveIconSize,
-        //  color: AppColors.textGreyColor,
-        ),
-        activeIcon: SvgPicture.asset(
-          AssetsGen.getRawString(Assets.images.menuIcon.path),
-          width: activeIconSize,
-          height: activeIconSize,
-        ),
-        title: 'Menu',
-      ),
-    ];
+    titlesAndIcons
+        .forEach((title, icon) => navBarsItems.add(FABBottomAppBarItem(
+              icon: SvgPicture.asset(
+                AssetsGen.getRawString(icon),
+                width: inActiveIconSize,
+                height: inActiveIconSize,
+                color: AppColors.greyColor700,
+              ),
+              activeIcon: SvgPicture.asset(
+                AssetsGen.getRawString(icon),
+                width: activeIconSize,
+                height: activeIconSize,
+                color: AppColors.primaryColor500,
+              ),
+              title: title,
+            )));
+
+    return navBarsItems;
   }
 
   @override

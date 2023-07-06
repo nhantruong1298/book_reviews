@@ -7,12 +7,11 @@ class BookSearchState with _$BookSearchState {
 
   const factory BookSearchState.loading(
     BookSearchData? searchData,
-    bool isLoading,
   ) = LoadingState;
 
   const factory BookSearchState.loaded(
     BookSearchData? searchData,
-    List<BookDetailResponse> data,
+    List<LoadBookResult> data,
   ) = BookSearchLoadedState;
 
   const factory BookSearchState.exception(

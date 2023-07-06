@@ -13,45 +13,33 @@ class _BookEventCardView extends StatelessWidget {
   final DateTime? dateStart;
   final VoidCallback? onTap;
 
-  Widget get _divider => const SizedBox(
-        height: 50,
-        child: VerticalDivider(
-          thickness: 1,
-          color: AppColors.primaryDarkColor,
-        ),
-      );
+  Widget get _verticalDivider => const SizedBox(
+      height: 50,
+      child: VerticalDivider(
+        thickness: 1,
+        color: AppColors.greyColor500,
+      ));
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
       child: Container(
-          margin: const EdgeInsets.symmetric(
-              horizontal: AppDimensions.defaultPadding),
           padding: const EdgeInsets.symmetric(
               vertical: AppDimensions.defaultPadding),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(AppDimensions.defaultRadius),
-              color: AppColors.backgroundColor,
               border: Border.all(
-                color: AppColors.primaryDarkColor,
+                color: AppColors.greyColor500,
                 width: 1,
-              )
-              // boxShadow: const [
-              //   BoxShadow(
-              //     color: Colors.black26,
-              //     blurRadius: 3,
-              //     spreadRadius: 0.1,
-              //     offset: Offset(2, 1),
-              //   ),
-              // ]
-              ),
+              )),
           child: Column(
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: AppDimensions.defaultPadding,
-                ),
+                    horizontal: AppDimensions.defaultPadding),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     _buildEventImage(),
                     const Spacing(1, direction: SpacingDirection.Horizontal),
@@ -65,24 +53,20 @@ class _BookEventCardView extends StatelessWidget {
                   ],
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(
-                    vertical: AppDimensions.defaultPadding),
-                child: SizedBox(
-                  width: double.infinity,
-                  child:
-                      Divider(color: AppColors.primaryDarkColor, thickness: 1),
-                ),
+              const SizedBox(
+                width: double.infinity,
+                height: AppDimensions.defaultLPadding,
+                child: Divider(color: AppColors.greyColor500, thickness: 1),
               ),
               SizedBox(
                 width: double.infinity,
-                height: 50,
+                height: SizeConfig.getProportionateScreenHeight(50),
                 child: Row(
                   children: [
                     _buildLikesNumber(),
-                    _divider,
+                    _verticalDivider,
                     _buildDateEvent(),
-                    _divider,
+                    _verticalDivider,
                     _buildTimeEvent(),
                   ],
                 ),

@@ -26,4 +26,9 @@ class FirebaseAuthRepositoryImpl extends FirebaseAuthRepository {
 
     return _dataMapper.mapSignUpWithEmailResponse(response);
   }
+
+  @override
+  Future<void> sendEmailVerification(String userId) {
+    return _serviceManager.sendEmailVerification(userId);
+  }
 }

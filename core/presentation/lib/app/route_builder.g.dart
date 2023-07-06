@@ -58,7 +58,7 @@ RouteBase get $signUpRoute => GoRouteData.$route(
       factory: $SignUpRouteExtension._fromState,
       routes: [
         GoRouteData.$route(
-          path: 'sign-up-success/:userName',
+          path: 'sign-up-success',
           factory: $SignUpSuccessRouteExtension._fromState,
         ),
       ],
@@ -82,19 +82,20 @@ extension $SignUpRouteExtension on SignUpRoute {
 extension $SignUpSuccessRouteExtension on SignUpSuccessRoute {
   static SignUpSuccessRoute _fromState(GoRouterState state) =>
       SignUpSuccessRoute(
-        state.params['userName']!,
+        state.extra as SignUpSuccessScreenExtra,
       );
 
   String get location => GoRouteData.$location(
-        '/sign-up/sign-up-success/${Uri.encodeComponent(userName)}',
+        '/sign-up/sign-up-success',
       );
 
-  void go(BuildContext context) => context.go(location);
+  void go(BuildContext context) => context.go(location, extra: $extra);
 
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+  Future<T?> push<T>(BuildContext context) =>
+      context.push<T>(location, extra: $extra);
 
   void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
+      context.pushReplacement(location, extra: $extra);
 }
 
 RouteBase get $dashboardRoute => GoRouteData.$route(

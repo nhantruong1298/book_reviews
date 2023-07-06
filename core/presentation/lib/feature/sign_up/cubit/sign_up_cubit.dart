@@ -1,45 +1,46 @@
 import 'package:bloc/bloc.dart';
+import 'package:domain/model/user/update_user_info.dart';
+import 'package:domain/repository/firebase_auth_repository.dart';
+import 'package:domain/repository/user_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:presentation/exception/app.exception_handler.dart';
 import 'package:presentation/exception/app_exception.dart';
-import 'package:presentation/feature/authentication/cubit/authentication_cubit.dart';
-import 'package:presentation/feature/sign_up/sign_up_repository.dart';
+import 'package:presentation/exception/app_exception_handler.dart';
 import 'package:presentation/injectors/all.dart';
 
-part 'sign_up_state.dart';
 part 'sign_up_cubit.freezed.dart';
+part 'sign_up_state.dart';
 
 class SignUpCubit extends Cubit<SignUpState> {
-  final SignUpRepository _signUpRepository;
+  late final FirebaseAuthRepository _firebaseAuthRepository;
+  late final UserRepository _userRepository;
   late final AppExceptionHandler _appExceptionHandler;
-  final AuthenticationCubit _authenticationCubit;
-  SignUpCubit(
-    this._signUpRepository,
-    this._authenticationCubit,
-  ) : super(const SignUpInitial()) {
+  SignUpCubit() : super(const SignUpInitial()) {
     _appExceptionHandler = getIt<AppExceptionHandler>();
+    _firebaseAuthRepository = getIt<FirebaseAuthRepository>();
+    _userRepository = getIt<UserRepository>();
   }
 
-  void onSubmit(String? userName, String? password) async {
-    emit(const LoadingState(true));
+  void onSubmit(
+      String userName, String password, String surname, String name) async {
+    emit(const LoadingState());
     try {
-      final signUpResult =
-          await _signUpRepository.signUpWithEmail(userName!, password!);
+      final signUpResult = await _firebaseAuthRepository
+          .signUpWithEmailAndPassword(userName, password);
 
-      //** Update user credential
-      _authenticationCubit
-          .emit(AuthenticationFirebaseState(signUpResult.userCredential));
+      await _userRepository.updateUserInfo(UpdateUserInfoParams(
+        id: signUpResult.userId,
+        displayName: '',
+        email: signUpResult.email,
+        photoURL: '',
+        surname: surname,
+        name: name,
+      ));
 
-      //** Send email verification
-      await _authenticationCubit.sendEmailVerification();
-
-      emit(const SignUpSuccessState());
+      emit(SignUpSuccessState(signUpResult.email, signUpResult.userId));
     } catch (error, stackTrace) {
       final appException =
           _appExceptionHandler.map(error, stackTrace: stackTrace);
       emit(SignUpExceptionState(appException));
-    } finally {
-      emit(const LoadingState(false));
     }
   }
 }

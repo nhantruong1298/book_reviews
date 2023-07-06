@@ -19,24 +19,24 @@ mixin _$SignUpSuccessState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(bool isLoading) loading,
-    required TResult Function() ready,
+    required TResult Function() loading,
+    required TResult Function() resendEmailSuccess,
     required TResult Function(AppException appException) exception,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
-    TResult? Function(bool isLoading)? loading,
-    TResult? Function()? ready,
+    TResult? Function()? loading,
+    TResult? Function()? resendEmailSuccess,
     TResult? Function(AppException appException)? exception,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(bool isLoading)? loading,
-    TResult Function()? ready,
+    TResult Function()? loading,
+    TResult Function()? resendEmailSuccess,
     TResult Function(AppException appException)? exception,
     required TResult orElse(),
   }) =>
@@ -45,7 +45,7 @@ mixin _$SignUpSuccessState {
   TResult map<TResult extends Object?>({
     required TResult Function(SignUpSuccessInitial value) init,
     required TResult Function(LoadingState value) loading,
-    required TResult Function(SignUpSuccessReadyState value) ready,
+    required TResult Function(ResendEmailSuccess value) resendEmailSuccess,
     required TResult Function(SignUpSuccessExceptionState value) exception,
   }) =>
       throw _privateConstructorUsedError;
@@ -53,7 +53,7 @@ mixin _$SignUpSuccessState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(SignUpSuccessInitial value)? init,
     TResult? Function(LoadingState value)? loading,
-    TResult? Function(SignUpSuccessReadyState value)? ready,
+    TResult? Function(ResendEmailSuccess value)? resendEmailSuccess,
     TResult? Function(SignUpSuccessExceptionState value)? exception,
   }) =>
       throw _privateConstructorUsedError;
@@ -61,7 +61,7 @@ mixin _$SignUpSuccessState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SignUpSuccessInitial value)? init,
     TResult Function(LoadingState value)? loading,
-    TResult Function(SignUpSuccessReadyState value)? ready,
+    TResult Function(ResendEmailSuccess value)? resendEmailSuccess,
     TResult Function(SignUpSuccessExceptionState value)? exception,
     required TResult orElse(),
   }) =>
@@ -125,8 +125,8 @@ class _$SignUpSuccessInitial implements SignUpSuccessInitial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(bool isLoading) loading,
-    required TResult Function() ready,
+    required TResult Function() loading,
+    required TResult Function() resendEmailSuccess,
     required TResult Function(AppException appException) exception,
   }) {
     return init();
@@ -136,8 +136,8 @@ class _$SignUpSuccessInitial implements SignUpSuccessInitial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
-    TResult? Function(bool isLoading)? loading,
-    TResult? Function()? ready,
+    TResult? Function()? loading,
+    TResult? Function()? resendEmailSuccess,
     TResult? Function(AppException appException)? exception,
   }) {
     return init?.call();
@@ -147,8 +147,8 @@ class _$SignUpSuccessInitial implements SignUpSuccessInitial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(bool isLoading)? loading,
-    TResult Function()? ready,
+    TResult Function()? loading,
+    TResult Function()? resendEmailSuccess,
     TResult Function(AppException appException)? exception,
     required TResult orElse(),
   }) {
@@ -163,7 +163,7 @@ class _$SignUpSuccessInitial implements SignUpSuccessInitial {
   TResult map<TResult extends Object?>({
     required TResult Function(SignUpSuccessInitial value) init,
     required TResult Function(LoadingState value) loading,
-    required TResult Function(SignUpSuccessReadyState value) ready,
+    required TResult Function(ResendEmailSuccess value) resendEmailSuccess,
     required TResult Function(SignUpSuccessExceptionState value) exception,
   }) {
     return init(this);
@@ -174,7 +174,7 @@ class _$SignUpSuccessInitial implements SignUpSuccessInitial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(SignUpSuccessInitial value)? init,
     TResult? Function(LoadingState value)? loading,
-    TResult? Function(SignUpSuccessReadyState value)? ready,
+    TResult? Function(ResendEmailSuccess value)? resendEmailSuccess,
     TResult? Function(SignUpSuccessExceptionState value)? exception,
   }) {
     return init?.call(this);
@@ -185,7 +185,7 @@ class _$SignUpSuccessInitial implements SignUpSuccessInitial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SignUpSuccessInitial value)? init,
     TResult Function(LoadingState value)? loading,
-    TResult Function(SignUpSuccessReadyState value)? ready,
+    TResult Function(ResendEmailSuccess value)? resendEmailSuccess,
     TResult Function(SignUpSuccessExceptionState value)? exception,
     required TResult orElse(),
   }) {
@@ -205,8 +205,6 @@ abstract class _$$LoadingStateCopyWith<$Res> {
   factory _$$LoadingStateCopyWith(
           _$LoadingState value, $Res Function(_$LoadingState) then) =
       __$$LoadingStateCopyWithImpl<$Res>;
-  @useResult
-  $Res call({bool isLoading});
 }
 
 /// @nodoc
@@ -216,85 +214,60 @@ class __$$LoadingStateCopyWithImpl<$Res>
   __$$LoadingStateCopyWithImpl(
       _$LoadingState _value, $Res Function(_$LoadingState) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? isLoading = null,
-  }) {
-    return _then(_$LoadingState(
-      null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$LoadingState implements LoadingState {
-  const _$LoadingState(this.isLoading);
-
-  @override
-  final bool isLoading;
+  const _$LoadingState();
 
   @override
   String toString() {
-    return 'SignUpSuccessState.loading(isLoading: $isLoading)';
+    return 'SignUpSuccessState.loading()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$LoadingState &&
-            (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading));
+        (other.runtimeType == runtimeType && other is _$LoadingState);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$LoadingStateCopyWith<_$LoadingState> get copyWith =>
-      __$$LoadingStateCopyWithImpl<_$LoadingState>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(bool isLoading) loading,
-    required TResult Function() ready,
+    required TResult Function() loading,
+    required TResult Function() resendEmailSuccess,
     required TResult Function(AppException appException) exception,
   }) {
-    return loading(isLoading);
+    return loading();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
-    TResult? Function(bool isLoading)? loading,
-    TResult? Function()? ready,
+    TResult? Function()? loading,
+    TResult? Function()? resendEmailSuccess,
     TResult? Function(AppException appException)? exception,
   }) {
-    return loading?.call(isLoading);
+    return loading?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(bool isLoading)? loading,
-    TResult Function()? ready,
+    TResult Function()? loading,
+    TResult Function()? resendEmailSuccess,
     TResult Function(AppException appException)? exception,
     required TResult orElse(),
   }) {
     if (loading != null) {
-      return loading(isLoading);
+      return loading();
     }
     return orElse();
   }
@@ -304,7 +277,7 @@ class _$LoadingState implements LoadingState {
   TResult map<TResult extends Object?>({
     required TResult Function(SignUpSuccessInitial value) init,
     required TResult Function(LoadingState value) loading,
-    required TResult Function(SignUpSuccessReadyState value) ready,
+    required TResult Function(ResendEmailSuccess value) resendEmailSuccess,
     required TResult Function(SignUpSuccessExceptionState value) exception,
   }) {
     return loading(this);
@@ -315,7 +288,7 @@ class _$LoadingState implements LoadingState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(SignUpSuccessInitial value)? init,
     TResult? Function(LoadingState value)? loading,
-    TResult? Function(SignUpSuccessReadyState value)? ready,
+    TResult? Function(ResendEmailSuccess value)? resendEmailSuccess,
     TResult? Function(SignUpSuccessExceptionState value)? exception,
   }) {
     return loading?.call(this);
@@ -326,7 +299,7 @@ class _$LoadingState implements LoadingState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SignUpSuccessInitial value)? init,
     TResult Function(LoadingState value)? loading,
-    TResult Function(SignUpSuccessReadyState value)? ready,
+    TResult Function(ResendEmailSuccess value)? resendEmailSuccess,
     TResult Function(SignUpSuccessExceptionState value)? exception,
     required TResult orElse(),
   }) {
@@ -338,45 +311,39 @@ class _$LoadingState implements LoadingState {
 }
 
 abstract class LoadingState implements SignUpSuccessState {
-  const factory LoadingState(final bool isLoading) = _$LoadingState;
-
-  bool get isLoading;
-  @JsonKey(ignore: true)
-  _$$LoadingStateCopyWith<_$LoadingState> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory LoadingState() = _$LoadingState;
 }
 
 /// @nodoc
-abstract class _$$SignUpSuccessReadyStateCopyWith<$Res> {
-  factory _$$SignUpSuccessReadyStateCopyWith(_$SignUpSuccessReadyState value,
-          $Res Function(_$SignUpSuccessReadyState) then) =
-      __$$SignUpSuccessReadyStateCopyWithImpl<$Res>;
+abstract class _$$ResendEmailSuccessCopyWith<$Res> {
+  factory _$$ResendEmailSuccessCopyWith(_$ResendEmailSuccess value,
+          $Res Function(_$ResendEmailSuccess) then) =
+      __$$ResendEmailSuccessCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$SignUpSuccessReadyStateCopyWithImpl<$Res>
-    extends _$SignUpSuccessStateCopyWithImpl<$Res, _$SignUpSuccessReadyState>
-    implements _$$SignUpSuccessReadyStateCopyWith<$Res> {
-  __$$SignUpSuccessReadyStateCopyWithImpl(_$SignUpSuccessReadyState _value,
-      $Res Function(_$SignUpSuccessReadyState) _then)
+class __$$ResendEmailSuccessCopyWithImpl<$Res>
+    extends _$SignUpSuccessStateCopyWithImpl<$Res, _$ResendEmailSuccess>
+    implements _$$ResendEmailSuccessCopyWith<$Res> {
+  __$$ResendEmailSuccessCopyWithImpl(
+      _$ResendEmailSuccess _value, $Res Function(_$ResendEmailSuccess) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$SignUpSuccessReadyState implements SignUpSuccessReadyState {
-  const _$SignUpSuccessReadyState();
+class _$ResendEmailSuccess implements ResendEmailSuccess {
+  const _$ResendEmailSuccess();
 
   @override
   String toString() {
-    return 'SignUpSuccessState.ready()';
+    return 'SignUpSuccessState.resendEmailSuccess()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$SignUpSuccessReadyState);
+        (other.runtimeType == runtimeType && other is _$ResendEmailSuccess);
   }
 
   @override
@@ -386,35 +353,35 @@ class _$SignUpSuccessReadyState implements SignUpSuccessReadyState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(bool isLoading) loading,
-    required TResult Function() ready,
+    required TResult Function() loading,
+    required TResult Function() resendEmailSuccess,
     required TResult Function(AppException appException) exception,
   }) {
-    return ready();
+    return resendEmailSuccess();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
-    TResult? Function(bool isLoading)? loading,
-    TResult? Function()? ready,
+    TResult? Function()? loading,
+    TResult? Function()? resendEmailSuccess,
     TResult? Function(AppException appException)? exception,
   }) {
-    return ready?.call();
+    return resendEmailSuccess?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(bool isLoading)? loading,
-    TResult Function()? ready,
+    TResult Function()? loading,
+    TResult Function()? resendEmailSuccess,
     TResult Function(AppException appException)? exception,
     required TResult orElse(),
   }) {
-    if (ready != null) {
-      return ready();
+    if (resendEmailSuccess != null) {
+      return resendEmailSuccess();
     }
     return orElse();
   }
@@ -424,10 +391,10 @@ class _$SignUpSuccessReadyState implements SignUpSuccessReadyState {
   TResult map<TResult extends Object?>({
     required TResult Function(SignUpSuccessInitial value) init,
     required TResult Function(LoadingState value) loading,
-    required TResult Function(SignUpSuccessReadyState value) ready,
+    required TResult Function(ResendEmailSuccess value) resendEmailSuccess,
     required TResult Function(SignUpSuccessExceptionState value) exception,
   }) {
-    return ready(this);
+    return resendEmailSuccess(this);
   }
 
   @override
@@ -435,10 +402,10 @@ class _$SignUpSuccessReadyState implements SignUpSuccessReadyState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(SignUpSuccessInitial value)? init,
     TResult? Function(LoadingState value)? loading,
-    TResult? Function(SignUpSuccessReadyState value)? ready,
+    TResult? Function(ResendEmailSuccess value)? resendEmailSuccess,
     TResult? Function(SignUpSuccessExceptionState value)? exception,
   }) {
-    return ready?.call(this);
+    return resendEmailSuccess?.call(this);
   }
 
   @override
@@ -446,19 +413,19 @@ class _$SignUpSuccessReadyState implements SignUpSuccessReadyState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SignUpSuccessInitial value)? init,
     TResult Function(LoadingState value)? loading,
-    TResult Function(SignUpSuccessReadyState value)? ready,
+    TResult Function(ResendEmailSuccess value)? resendEmailSuccess,
     TResult Function(SignUpSuccessExceptionState value)? exception,
     required TResult orElse(),
   }) {
-    if (ready != null) {
-      return ready(this);
+    if (resendEmailSuccess != null) {
+      return resendEmailSuccess(this);
     }
     return orElse();
   }
 }
 
-abstract class SignUpSuccessReadyState implements SignUpSuccessState {
-  const factory SignUpSuccessReadyState() = _$SignUpSuccessReadyState;
+abstract class ResendEmailSuccess implements SignUpSuccessState {
+  const factory ResendEmailSuccess() = _$ResendEmailSuccess;
 }
 
 /// @nodoc
@@ -531,8 +498,8 @@ class _$SignUpSuccessExceptionState implements SignUpSuccessExceptionState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(bool isLoading) loading,
-    required TResult Function() ready,
+    required TResult Function() loading,
+    required TResult Function() resendEmailSuccess,
     required TResult Function(AppException appException) exception,
   }) {
     return exception(appException);
@@ -542,8 +509,8 @@ class _$SignUpSuccessExceptionState implements SignUpSuccessExceptionState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
-    TResult? Function(bool isLoading)? loading,
-    TResult? Function()? ready,
+    TResult? Function()? loading,
+    TResult? Function()? resendEmailSuccess,
     TResult? Function(AppException appException)? exception,
   }) {
     return exception?.call(appException);
@@ -553,8 +520,8 @@ class _$SignUpSuccessExceptionState implements SignUpSuccessExceptionState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(bool isLoading)? loading,
-    TResult Function()? ready,
+    TResult Function()? loading,
+    TResult Function()? resendEmailSuccess,
     TResult Function(AppException appException)? exception,
     required TResult orElse(),
   }) {
@@ -569,7 +536,7 @@ class _$SignUpSuccessExceptionState implements SignUpSuccessExceptionState {
   TResult map<TResult extends Object?>({
     required TResult Function(SignUpSuccessInitial value) init,
     required TResult Function(LoadingState value) loading,
-    required TResult Function(SignUpSuccessReadyState value) ready,
+    required TResult Function(ResendEmailSuccess value) resendEmailSuccess,
     required TResult Function(SignUpSuccessExceptionState value) exception,
   }) {
     return exception(this);
@@ -580,7 +547,7 @@ class _$SignUpSuccessExceptionState implements SignUpSuccessExceptionState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(SignUpSuccessInitial value)? init,
     TResult? Function(LoadingState value)? loading,
-    TResult? Function(SignUpSuccessReadyState value)? ready,
+    TResult? Function(ResendEmailSuccess value)? resendEmailSuccess,
     TResult? Function(SignUpSuccessExceptionState value)? exception,
   }) {
     return exception?.call(this);
@@ -591,7 +558,7 @@ class _$SignUpSuccessExceptionState implements SignUpSuccessExceptionState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SignUpSuccessInitial value)? init,
     TResult Function(LoadingState value)? loading,
-    TResult Function(SignUpSuccessReadyState value)? ready,
+    TResult Function(ResendEmailSuccess value)? resendEmailSuccess,
     TResult Function(SignUpSuccessExceptionState value)? exception,
     required TResult orElse(),
   }) {

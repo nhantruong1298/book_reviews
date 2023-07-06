@@ -2,12 +2,12 @@ import 'package:presentation/constants/book_type.dart';
 
 class BookSearchData {
   final String? text;
-  final List<String>? tags;
+  // final List<String>? tags;
   final BookType? type;
 
   BookSearchData({
     this.text,
-    this.tags,
+    //this.tags,
     this.type,
   });
 
@@ -18,7 +18,7 @@ class BookSearchData {
   }) {
     return BookSearchData(
       text: text ?? this.text,
-      tags: tags ?? this.tags,
+     // tags: tags ?? this.tags,
       type: type ?? this.type,
     );
   }

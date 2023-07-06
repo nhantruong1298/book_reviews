@@ -1,6 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUpWithEmailResult {
-  final UserCredential userCredential;
-  SignUpWithEmailResult(this.userCredential);
+  final String userId;
+  final String email;
+  SignUpWithEmailResult({
+   required this.userId,
+   required this.email, 
+  });
 }

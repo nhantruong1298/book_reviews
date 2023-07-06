@@ -10,4 +10,5 @@ abstract class FirebaseAuthRepository {
     String password,
   );
 
+  Future<void> sendEmailVerification(String userId);
 }

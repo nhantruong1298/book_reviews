@@ -41,8 +41,8 @@ class _BookEventScreenState extends BaseScreenState<BookEventScreen> {
       centerTitle: false,
       child: ListView.separated(
         physics: const BouncingScrollPhysics(),
-        padding: const EdgeInsets.symmetric(
-          vertical: AppDimensions.defaultPadding,
+        padding: const EdgeInsets.all(
+          AppDimensions.defaultPadding,
         ),
         shrinkWrap: true,
         itemCount: eventData.length,
