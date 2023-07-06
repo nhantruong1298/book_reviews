@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:presentation/app/route_builder.dart';
 import 'package:presentation/base/base_screen.dart';
 import 'package:presentation/feature/dashboard/cubit/dashboard_cubit.dart';
+import 'package:presentation/feature/menu/views/menu_screen.dart';
 import 'package:presentation/feature/profile/views/profile_screen.dart';
 import 'package:presentation/generated/assets.gen.dart';
 import 'package:presentation/generated/extension.dart';
@@ -56,7 +57,7 @@ class _DashboardScreenState extends BaseScreenState<DashboardScreen>
       HomeRoute.build(),
       const ProfileScreen(),
       BookEventRoute.build(),
-      MenuRoute.build(),
+      const MenuScreen(),
     ];
 
     _controller = TabController(

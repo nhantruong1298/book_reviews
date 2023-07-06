@@ -78,9 +78,6 @@ class $AssetsImagesGen {
   SvgGenImage get settingIcon =>
       const SvgGenImage('assets/images/setting-icon.svg');
 
-  /// File path: assets/images/tag-user.svg
-  SvgGenImage get tagUser => const SvgGenImage('assets/images/tag-user.svg');
-
   /// File path: assets/images/twitter-icon.svg
   SvgGenImage get twitterIcon =>
       const SvgGenImage('assets/images/twitter-icon.svg');
@@ -107,7 +104,6 @@ class $AssetsImagesGen {
         profileIcon,
         searchIcon,
         settingIcon,
-        tagUser,
         twitterIcon,
         userIcon
       ];

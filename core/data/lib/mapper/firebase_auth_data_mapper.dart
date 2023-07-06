@@ -6,7 +6,7 @@ import 'package:domain/model/authentication/sign_up_with_email.dart';
 class FirebaseAuthDataMapper {
   SignInWithEmailResult mapSignInWithEmailResponse(
       SignInWithEmailResponse response) {
-    return SignInWithEmailResult(userId: response.userId);
+    return SignInWithEmailResult(userId: response.userId, userName: response.userName);
   }
 
   SignUpWithEmailResult mapSignUpWithEmailResponse(
