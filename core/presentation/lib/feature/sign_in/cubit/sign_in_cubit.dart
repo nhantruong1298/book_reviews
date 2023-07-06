@@ -31,6 +31,7 @@ class SignInCubit extends Cubit<SignInState> {
     } catch (error, stackTrace) {
       final appException =
           _appExceptionHandler.map(error, stackTrace: stackTrace);
+      //TODO: Forgot emit SignInExceptionState
     }
   }
 }

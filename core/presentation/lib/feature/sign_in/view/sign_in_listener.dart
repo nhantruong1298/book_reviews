@@ -9,6 +9,7 @@ extension SignInListener on _SignInScreenState {
         },
         success: (email, userId) {
           toggleLoading(false);
+          //TODO: Forgot call onSinIn in authentication cubit
           DashboardRoute().go(context);
         },
         orElse: () {});
