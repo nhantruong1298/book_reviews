@@ -19,6 +19,8 @@ import 'package:presentation/feature/home/cubit/home_cubit.dart';
 import 'package:presentation/feature/home/views/home_screen.dart';
 import 'package:presentation/feature/menu/cubit/menu_cubit.dart';
 import 'package:presentation/feature/menu/views/menu_screen.dart';
+import 'package:presentation/feature/profile/cubit/profile_cubit.dart';
+import 'package:presentation/feature/profile/views/profile_screen.dart';
 import 'package:presentation/feature/sign_in/cubit/sign_in_cubit.dart';
 import 'package:presentation/feature/sign_in/view/sign_in_screen.dart';
 import 'package:presentation/feature/sign_up/cubit/sign_up_cubit.dart';
@@ -223,9 +225,19 @@ class MenuRoute {
   static Widget build() {
     return BlocProvider(
       create: (context) => MenuCubit(
-        BlocProvider.of<AuthenticationCubit>(context),
+        context.read<AuthenticationCubit>(),
       ),
       child: const MenuScreen(),
+    );
+  }
+}
+
+//********************** Profile ROUTE **********************
+class ProfileRoute {
+  static Widget build() {
+    return BlocProvider(
+      create: (context) => ProfileCubit(),
+      child: const ProfileScreen(),
     );
   }
 }

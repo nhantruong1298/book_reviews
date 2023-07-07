@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:data/entity/request/update_user_info_request.dart';
 import 'package:data/entity/response/load_book_response.dart';
+import 'package:data/entity/response/load_user_info_response.dart';
 import 'package:data/entity/response/sign_in_with_email_response.dart';
 import 'package:data/entity/response/sign_up_with_email_response.dart';
 import 'package:domain/exception/business_exception.dart';
@@ -103,9 +104,10 @@ class FireBaseService {
           id: params.id,
           surname: params.surname,
           name: params.name,
-          displayName: '${params.name} ${params.surname}',
+          displayName: params.displayName,
           email: params.email,
           photoURL: params.photoURL,
+          bio: params.bio,
         ).toJson());
   }
 
@@ -119,14 +121,15 @@ class FireBaseService {
     }
   }
 
-  Future<void> loadUserInfo(String userId) async {
-    final currentUserId = _firebaseAuth.currentUser?.uid;
-    if (currentUserId != null && currentUserId == userId) {
-      _firebaseAuth.currentUser!.sendEmailVerification();
-    } else {
-      throw BusinessException(
-          businessExceptionCode: BusinessExceptionCode.USER_NOT_FOUND);
+  Future<LoadUserInfoResponse?> loadUserInfo(String userId) async {
+    final snapshot = await _firestore
+        .collection(_firestorePath.collection.userInfo)
+        .doc(userId)
+        .get();
+    if (snapshot.data() != null) {
+      return LoadUserInfoResponse.fromJson(snapshot.data()!);
     }
+    return null;
   }
 
   Future<List<LoadBookResponse>> searchBooks(String bookName) async {
@@ -143,5 +146,11 @@ class FireBaseService {
     }
 
     return response;
+  }
+
+  Future<void> signOut() async {
+    if (_firebaseAuth.currentUser != null) {
+      await _firebaseAuth.signOut();
+    }
   }
 }

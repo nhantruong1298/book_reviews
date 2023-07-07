@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'sign_in_cubit.dart';
+part of 'profile_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,12 +15,12 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$SignInState {
+mixin _$ProfileState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function() loading,
-    required TResult Function(LoadUserInfoResult userInfo) success,
+    required TResult Function(LoadUserInfoResult userInfo) loaded,
     required TResult Function(AppException appException) exception,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +28,7 @@ mixin _$SignInState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
     TResult? Function()? loading,
-    TResult? Function(LoadUserInfoResult userInfo)? success,
+    TResult? Function(LoadUserInfoResult userInfo)? loaded,
     TResult? Function(AppException appException)? exception,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,49 +36,49 @@ mixin _$SignInState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(LoadUserInfoResult userInfo)? success,
+    TResult Function(LoadUserInfoResult userInfo)? loaded,
     TResult Function(AppException appException)? exception,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(SignInInitial value) init,
+    required TResult Function(ProfileInitial value) init,
     required TResult Function(LoadingState value) loading,
-    required TResult Function(SignInSuccessState value) success,
-    required TResult Function(SignInExceptionState value) exception,
+    required TResult Function(ProfileLoadedState value) loaded,
+    required TResult Function(ProfileExceptionState value) exception,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(SignInInitial value)? init,
+    TResult? Function(ProfileInitial value)? init,
     TResult? Function(LoadingState value)? loading,
-    TResult? Function(SignInSuccessState value)? success,
-    TResult? Function(SignInExceptionState value)? exception,
+    TResult? Function(ProfileLoadedState value)? loaded,
+    TResult? Function(ProfileExceptionState value)? exception,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(SignInInitial value)? init,
+    TResult Function(ProfileInitial value)? init,
     TResult Function(LoadingState value)? loading,
-    TResult Function(SignInSuccessState value)? success,
-    TResult Function(SignInExceptionState value)? exception,
+    TResult Function(ProfileLoadedState value)? loaded,
+    TResult Function(ProfileExceptionState value)? exception,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $SignInStateCopyWith<$Res> {
-  factory $SignInStateCopyWith(
-          SignInState value, $Res Function(SignInState) then) =
-      _$SignInStateCopyWithImpl<$Res, SignInState>;
+abstract class $ProfileStateCopyWith<$Res> {
+  factory $ProfileStateCopyWith(
+          ProfileState value, $Res Function(ProfileState) then) =
+      _$ProfileStateCopyWithImpl<$Res, ProfileState>;
 }
 
 /// @nodoc
-class _$SignInStateCopyWithImpl<$Res, $Val extends SignInState>
-    implements $SignInStateCopyWith<$Res> {
-  _$SignInStateCopyWithImpl(this._value, this._then);
+class _$ProfileStateCopyWithImpl<$Res, $Val extends ProfileState>
+    implements $ProfileStateCopyWith<$Res> {
+  _$ProfileStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -87,35 +87,35 @@ class _$SignInStateCopyWithImpl<$Res, $Val extends SignInState>
 }
 
 /// @nodoc
-abstract class _$$SignInInitialCopyWith<$Res> {
-  factory _$$SignInInitialCopyWith(
-          _$SignInInitial value, $Res Function(_$SignInInitial) then) =
-      __$$SignInInitialCopyWithImpl<$Res>;
+abstract class _$$ProfileInitialCopyWith<$Res> {
+  factory _$$ProfileInitialCopyWith(
+          _$ProfileInitial value, $Res Function(_$ProfileInitial) then) =
+      __$$ProfileInitialCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$SignInInitialCopyWithImpl<$Res>
-    extends _$SignInStateCopyWithImpl<$Res, _$SignInInitial>
-    implements _$$SignInInitialCopyWith<$Res> {
-  __$$SignInInitialCopyWithImpl(
-      _$SignInInitial _value, $Res Function(_$SignInInitial) _then)
+class __$$ProfileInitialCopyWithImpl<$Res>
+    extends _$ProfileStateCopyWithImpl<$Res, _$ProfileInitial>
+    implements _$$ProfileInitialCopyWith<$Res> {
+  __$$ProfileInitialCopyWithImpl(
+      _$ProfileInitial _value, $Res Function(_$ProfileInitial) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$SignInInitial implements SignInInitial {
-  const _$SignInInitial();
+class _$ProfileInitial implements ProfileInitial {
+  const _$ProfileInitial();
 
   @override
   String toString() {
-    return 'SignInState.init()';
+    return 'ProfileState.init()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$SignInInitial);
+        (other.runtimeType == runtimeType && other is _$ProfileInitial);
   }
 
   @override
@@ -126,7 +126,7 @@ class _$SignInInitial implements SignInInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function() loading,
-    required TResult Function(LoadUserInfoResult userInfo) success,
+    required TResult Function(LoadUserInfoResult userInfo) loaded,
     required TResult Function(AppException appException) exception,
   }) {
     return init();
@@ -137,7 +137,7 @@ class _$SignInInitial implements SignInInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
     TResult? Function()? loading,
-    TResult? Function(LoadUserInfoResult userInfo)? success,
+    TResult? Function(LoadUserInfoResult userInfo)? loaded,
     TResult? Function(AppException appException)? exception,
   }) {
     return init?.call();
@@ -148,7 +148,7 @@ class _$SignInInitial implements SignInInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(LoadUserInfoResult userInfo)? success,
+    TResult Function(LoadUserInfoResult userInfo)? loaded,
     TResult Function(AppException appException)? exception,
     required TResult orElse(),
   }) {
@@ -161,10 +161,10 @@ class _$SignInInitial implements SignInInitial {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(SignInInitial value) init,
+    required TResult Function(ProfileInitial value) init,
     required TResult Function(LoadingState value) loading,
-    required TResult Function(SignInSuccessState value) success,
-    required TResult Function(SignInExceptionState value) exception,
+    required TResult Function(ProfileLoadedState value) loaded,
+    required TResult Function(ProfileExceptionState value) exception,
   }) {
     return init(this);
   }
@@ -172,10 +172,10 @@ class _$SignInInitial implements SignInInitial {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(SignInInitial value)? init,
+    TResult? Function(ProfileInitial value)? init,
     TResult? Function(LoadingState value)? loading,
-    TResult? Function(SignInSuccessState value)? success,
-    TResult? Function(SignInExceptionState value)? exception,
+    TResult? Function(ProfileLoadedState value)? loaded,
+    TResult? Function(ProfileExceptionState value)? exception,
   }) {
     return init?.call(this);
   }
@@ -183,10 +183,10 @@ class _$SignInInitial implements SignInInitial {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(SignInInitial value)? init,
+    TResult Function(ProfileInitial value)? init,
     TResult Function(LoadingState value)? loading,
-    TResult Function(SignInSuccessState value)? success,
-    TResult Function(SignInExceptionState value)? exception,
+    TResult Function(ProfileLoadedState value)? loaded,
+    TResult Function(ProfileExceptionState value)? exception,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -196,8 +196,8 @@ class _$SignInInitial implements SignInInitial {
   }
 }
 
-abstract class SignInInitial implements SignInState {
-  const factory SignInInitial() = _$SignInInitial;
+abstract class ProfileInitial implements ProfileState {
+  const factory ProfileInitial() = _$ProfileInitial;
 }
 
 /// @nodoc
@@ -209,7 +209,7 @@ abstract class _$$LoadingStateCopyWith<$Res> {
 
 /// @nodoc
 class __$$LoadingStateCopyWithImpl<$Res>
-    extends _$SignInStateCopyWithImpl<$Res, _$LoadingState>
+    extends _$ProfileStateCopyWithImpl<$Res, _$LoadingState>
     implements _$$LoadingStateCopyWith<$Res> {
   __$$LoadingStateCopyWithImpl(
       _$LoadingState _value, $Res Function(_$LoadingState) _then)
@@ -223,7 +223,7 @@ class _$LoadingState implements LoadingState {
 
   @override
   String toString() {
-    return 'SignInState.loading()';
+    return 'ProfileState.loading()';
   }
 
   @override
@@ -240,7 +240,7 @@ class _$LoadingState implements LoadingState {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function() loading,
-    required TResult Function(LoadUserInfoResult userInfo) success,
+    required TResult Function(LoadUserInfoResult userInfo) loaded,
     required TResult Function(AppException appException) exception,
   }) {
     return loading();
@@ -251,7 +251,7 @@ class _$LoadingState implements LoadingState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
     TResult? Function()? loading,
-    TResult? Function(LoadUserInfoResult userInfo)? success,
+    TResult? Function(LoadUserInfoResult userInfo)? loaded,
     TResult? Function(AppException appException)? exception,
   }) {
     return loading?.call();
@@ -262,7 +262,7 @@ class _$LoadingState implements LoadingState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(LoadUserInfoResult userInfo)? success,
+    TResult Function(LoadUserInfoResult userInfo)? loaded,
     TResult Function(AppException appException)? exception,
     required TResult orElse(),
   }) {
@@ -275,10 +275,10 @@ class _$LoadingState implements LoadingState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(SignInInitial value) init,
+    required TResult Function(ProfileInitial value) init,
     required TResult Function(LoadingState value) loading,
-    required TResult Function(SignInSuccessState value) success,
-    required TResult Function(SignInExceptionState value) exception,
+    required TResult Function(ProfileLoadedState value) loaded,
+    required TResult Function(ProfileExceptionState value) exception,
   }) {
     return loading(this);
   }
@@ -286,10 +286,10 @@ class _$LoadingState implements LoadingState {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(SignInInitial value)? init,
+    TResult? Function(ProfileInitial value)? init,
     TResult? Function(LoadingState value)? loading,
-    TResult? Function(SignInSuccessState value)? success,
-    TResult? Function(SignInExceptionState value)? exception,
+    TResult? Function(ProfileLoadedState value)? loaded,
+    TResult? Function(ProfileExceptionState value)? exception,
   }) {
     return loading?.call(this);
   }
@@ -297,10 +297,10 @@ class _$LoadingState implements LoadingState {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(SignInInitial value)? init,
+    TResult Function(ProfileInitial value)? init,
     TResult Function(LoadingState value)? loading,
-    TResult Function(SignInSuccessState value)? success,
-    TResult Function(SignInExceptionState value)? exception,
+    TResult Function(ProfileLoadedState value)? loaded,
+    TResult Function(ProfileExceptionState value)? exception,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -310,25 +310,25 @@ class _$LoadingState implements LoadingState {
   }
 }
 
-abstract class LoadingState implements SignInState {
+abstract class LoadingState implements ProfileState {
   const factory LoadingState() = _$LoadingState;
 }
 
 /// @nodoc
-abstract class _$$SignInSuccessStateCopyWith<$Res> {
-  factory _$$SignInSuccessStateCopyWith(_$SignInSuccessState value,
-          $Res Function(_$SignInSuccessState) then) =
-      __$$SignInSuccessStateCopyWithImpl<$Res>;
+abstract class _$$ProfileLoadedStateCopyWith<$Res> {
+  factory _$$ProfileLoadedStateCopyWith(_$ProfileLoadedState value,
+          $Res Function(_$ProfileLoadedState) then) =
+      __$$ProfileLoadedStateCopyWithImpl<$Res>;
   @useResult
   $Res call({LoadUserInfoResult userInfo});
 }
 
 /// @nodoc
-class __$$SignInSuccessStateCopyWithImpl<$Res>
-    extends _$SignInStateCopyWithImpl<$Res, _$SignInSuccessState>
-    implements _$$SignInSuccessStateCopyWith<$Res> {
-  __$$SignInSuccessStateCopyWithImpl(
-      _$SignInSuccessState _value, $Res Function(_$SignInSuccessState) _then)
+class __$$ProfileLoadedStateCopyWithImpl<$Res>
+    extends _$ProfileStateCopyWithImpl<$Res, _$ProfileLoadedState>
+    implements _$$ProfileLoadedStateCopyWith<$Res> {
+  __$$ProfileLoadedStateCopyWithImpl(
+      _$ProfileLoadedState _value, $Res Function(_$ProfileLoadedState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -336,7 +336,7 @@ class __$$SignInSuccessStateCopyWithImpl<$Res>
   $Res call({
     Object? userInfo = null,
   }) {
-    return _then(_$SignInSuccessState(
+    return _then(_$ProfileLoadedState(
       null == userInfo
           ? _value.userInfo
           : userInfo // ignore: cast_nullable_to_non_nullable
@@ -347,22 +347,22 @@ class __$$SignInSuccessStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SignInSuccessState implements SignInSuccessState {
-  const _$SignInSuccessState(this.userInfo);
+class _$ProfileLoadedState implements ProfileLoadedState {
+  const _$ProfileLoadedState(this.userInfo);
 
   @override
   final LoadUserInfoResult userInfo;
 
   @override
   String toString() {
-    return 'SignInState.success(userInfo: $userInfo)';
+    return 'ProfileState.loaded(userInfo: $userInfo)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SignInSuccessState &&
+            other is _$ProfileLoadedState &&
             (identical(other.userInfo, userInfo) ||
                 other.userInfo == userInfo));
   }
@@ -373,8 +373,8 @@ class _$SignInSuccessState implements SignInSuccessState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SignInSuccessStateCopyWith<_$SignInSuccessState> get copyWith =>
-      __$$SignInSuccessStateCopyWithImpl<_$SignInSuccessState>(
+  _$$ProfileLoadedStateCopyWith<_$ProfileLoadedState> get copyWith =>
+      __$$ProfileLoadedStateCopyWithImpl<_$ProfileLoadedState>(
           this, _$identity);
 
   @override
@@ -382,10 +382,10 @@ class _$SignInSuccessState implements SignInSuccessState {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function() loading,
-    required TResult Function(LoadUserInfoResult userInfo) success,
+    required TResult Function(LoadUserInfoResult userInfo) loaded,
     required TResult Function(AppException appException) exception,
   }) {
-    return success(userInfo);
+    return loaded(userInfo);
   }
 
   @override
@@ -393,10 +393,10 @@ class _$SignInSuccessState implements SignInSuccessState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
     TResult? Function()? loading,
-    TResult? Function(LoadUserInfoResult userInfo)? success,
+    TResult? Function(LoadUserInfoResult userInfo)? loaded,
     TResult? Function(AppException appException)? exception,
   }) {
-    return success?.call(userInfo);
+    return loaded?.call(userInfo);
   }
 
   @override
@@ -404,12 +404,12 @@ class _$SignInSuccessState implements SignInSuccessState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(LoadUserInfoResult userInfo)? success,
+    TResult Function(LoadUserInfoResult userInfo)? loaded,
     TResult Function(AppException appException)? exception,
     required TResult orElse(),
   }) {
-    if (success != null) {
-      return success(userInfo);
+    if (loaded != null) {
+      return loaded(userInfo);
     }
     return orElse();
   }
@@ -417,66 +417,66 @@ class _$SignInSuccessState implements SignInSuccessState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(SignInInitial value) init,
+    required TResult Function(ProfileInitial value) init,
     required TResult Function(LoadingState value) loading,
-    required TResult Function(SignInSuccessState value) success,
-    required TResult Function(SignInExceptionState value) exception,
+    required TResult Function(ProfileLoadedState value) loaded,
+    required TResult Function(ProfileExceptionState value) exception,
   }) {
-    return success(this);
+    return loaded(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(SignInInitial value)? init,
+    TResult? Function(ProfileInitial value)? init,
     TResult? Function(LoadingState value)? loading,
-    TResult? Function(SignInSuccessState value)? success,
-    TResult? Function(SignInExceptionState value)? exception,
+    TResult? Function(ProfileLoadedState value)? loaded,
+    TResult? Function(ProfileExceptionState value)? exception,
   }) {
-    return success?.call(this);
+    return loaded?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(SignInInitial value)? init,
+    TResult Function(ProfileInitial value)? init,
     TResult Function(LoadingState value)? loading,
-    TResult Function(SignInSuccessState value)? success,
-    TResult Function(SignInExceptionState value)? exception,
+    TResult Function(ProfileLoadedState value)? loaded,
+    TResult Function(ProfileExceptionState value)? exception,
     required TResult orElse(),
   }) {
-    if (success != null) {
-      return success(this);
+    if (loaded != null) {
+      return loaded(this);
     }
     return orElse();
   }
 }
 
-abstract class SignInSuccessState implements SignInState {
-  const factory SignInSuccessState(final LoadUserInfoResult userInfo) =
-      _$SignInSuccessState;
+abstract class ProfileLoadedState implements ProfileState {
+  const factory ProfileLoadedState(final LoadUserInfoResult userInfo) =
+      _$ProfileLoadedState;
 
   LoadUserInfoResult get userInfo;
   @JsonKey(ignore: true)
-  _$$SignInSuccessStateCopyWith<_$SignInSuccessState> get copyWith =>
+  _$$ProfileLoadedStateCopyWith<_$ProfileLoadedState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$SignInExceptionStateCopyWith<$Res> {
-  factory _$$SignInExceptionStateCopyWith(_$SignInExceptionState value,
-          $Res Function(_$SignInExceptionState) then) =
-      __$$SignInExceptionStateCopyWithImpl<$Res>;
+abstract class _$$ProfileExceptionStateCopyWith<$Res> {
+  factory _$$ProfileExceptionStateCopyWith(_$ProfileExceptionState value,
+          $Res Function(_$ProfileExceptionState) then) =
+      __$$ProfileExceptionStateCopyWithImpl<$Res>;
   @useResult
   $Res call({AppException appException});
 }
 
 /// @nodoc
-class __$$SignInExceptionStateCopyWithImpl<$Res>
-    extends _$SignInStateCopyWithImpl<$Res, _$SignInExceptionState>
-    implements _$$SignInExceptionStateCopyWith<$Res> {
-  __$$SignInExceptionStateCopyWithImpl(_$SignInExceptionState _value,
-      $Res Function(_$SignInExceptionState) _then)
+class __$$ProfileExceptionStateCopyWithImpl<$Res>
+    extends _$ProfileStateCopyWithImpl<$Res, _$ProfileExceptionState>
+    implements _$$ProfileExceptionStateCopyWith<$Res> {
+  __$$ProfileExceptionStateCopyWithImpl(_$ProfileExceptionState _value,
+      $Res Function(_$ProfileExceptionState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -484,7 +484,7 @@ class __$$SignInExceptionStateCopyWithImpl<$Res>
   $Res call({
     Object? appException = null,
   }) {
-    return _then(_$SignInExceptionState(
+    return _then(_$ProfileExceptionState(
       null == appException
           ? _value.appException
           : appException // ignore: cast_nullable_to_non_nullable
@@ -495,22 +495,22 @@ class __$$SignInExceptionStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SignInExceptionState implements SignInExceptionState {
-  const _$SignInExceptionState(this.appException);
+class _$ProfileExceptionState implements ProfileExceptionState {
+  const _$ProfileExceptionState(this.appException);
 
   @override
   final AppException appException;
 
   @override
   String toString() {
-    return 'SignInState.exception(appException: $appException)';
+    return 'ProfileState.exception(appException: $appException)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SignInExceptionState &&
+            other is _$ProfileExceptionState &&
             (identical(other.appException, appException) ||
                 other.appException == appException));
   }
@@ -521,8 +521,8 @@ class _$SignInExceptionState implements SignInExceptionState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SignInExceptionStateCopyWith<_$SignInExceptionState> get copyWith =>
-      __$$SignInExceptionStateCopyWithImpl<_$SignInExceptionState>(
+  _$$ProfileExceptionStateCopyWith<_$ProfileExceptionState> get copyWith =>
+      __$$ProfileExceptionStateCopyWithImpl<_$ProfileExceptionState>(
           this, _$identity);
 
   @override
@@ -530,7 +530,7 @@ class _$SignInExceptionState implements SignInExceptionState {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function() loading,
-    required TResult Function(LoadUserInfoResult userInfo) success,
+    required TResult Function(LoadUserInfoResult userInfo) loaded,
     required TResult Function(AppException appException) exception,
   }) {
     return exception(appException);
@@ -541,7 +541,7 @@ class _$SignInExceptionState implements SignInExceptionState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
     TResult? Function()? loading,
-    TResult? Function(LoadUserInfoResult userInfo)? success,
+    TResult? Function(LoadUserInfoResult userInfo)? loaded,
     TResult? Function(AppException appException)? exception,
   }) {
     return exception?.call(appException);
@@ -552,7 +552,7 @@ class _$SignInExceptionState implements SignInExceptionState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(LoadUserInfoResult userInfo)? success,
+    TResult Function(LoadUserInfoResult userInfo)? loaded,
     TResult Function(AppException appException)? exception,
     required TResult orElse(),
   }) {
@@ -565,10 +565,10 @@ class _$SignInExceptionState implements SignInExceptionState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(SignInInitial value) init,
+    required TResult Function(ProfileInitial value) init,
     required TResult Function(LoadingState value) loading,
-    required TResult Function(SignInSuccessState value) success,
-    required TResult Function(SignInExceptionState value) exception,
+    required TResult Function(ProfileLoadedState value) loaded,
+    required TResult Function(ProfileExceptionState value) exception,
   }) {
     return exception(this);
   }
@@ -576,10 +576,10 @@ class _$SignInExceptionState implements SignInExceptionState {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(SignInInitial value)? init,
+    TResult? Function(ProfileInitial value)? init,
     TResult? Function(LoadingState value)? loading,
-    TResult? Function(SignInSuccessState value)? success,
-    TResult? Function(SignInExceptionState value)? exception,
+    TResult? Function(ProfileLoadedState value)? loaded,
+    TResult? Function(ProfileExceptionState value)? exception,
   }) {
     return exception?.call(this);
   }
@@ -587,10 +587,10 @@ class _$SignInExceptionState implements SignInExceptionState {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(SignInInitial value)? init,
+    TResult Function(ProfileInitial value)? init,
     TResult Function(LoadingState value)? loading,
-    TResult Function(SignInSuccessState value)? success,
-    TResult Function(SignInExceptionState value)? exception,
+    TResult Function(ProfileLoadedState value)? loaded,
+    TResult Function(ProfileExceptionState value)? exception,
     required TResult orElse(),
   }) {
     if (exception != null) {
@@ -600,12 +600,12 @@ class _$SignInExceptionState implements SignInExceptionState {
   }
 }
 
-abstract class SignInExceptionState implements SignInState {
-  const factory SignInExceptionState(final AppException appException) =
-      _$SignInExceptionState;
+abstract class ProfileExceptionState implements ProfileState {
+  const factory ProfileExceptionState(final AppException appException) =
+      _$ProfileExceptionState;
 
   AppException get appException;
   @JsonKey(ignore: true)
-  _$$SignInExceptionStateCopyWith<_$SignInExceptionState> get copyWith =>
+  _$$ProfileExceptionStateCopyWith<_$ProfileExceptionState> get copyWith =>
       throw _privateConstructorUsedError;
 }

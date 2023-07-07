@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:domain/model/user/user_info.dart';
 import 'package:domain/repository/firebase_auth_repository.dart';
 import 'package:domain/repository/user_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -25,13 +26,14 @@ class SignInCubit extends Cubit<SignInState> {
     try {
       final signInResult = await _firebaseAuthRepository
           .signInWithEmailAndPassword(email, password);
-      await _userRepository.loadUserInfo(signInResult.userId);
-      print(signInResult);
-      emit(SignInSuccessState(signInResult.userName, signInResult.userId));
+      final userInfo = await _userRepository.loadUserInfo(signInResult.userId);
+      if(userInfo != null){
+         emit(SignInSuccessState(userInfo));
+      }
     } catch (error, stackTrace) {
       final appException =
           _appExceptionHandler.map(error, stackTrace: stackTrace);
-      //TODO: Forgot emit SignInExceptionState
+      emit(SignInExceptionState(appException));
     }
   }
 }

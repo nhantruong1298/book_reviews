@@ -9,6 +9,7 @@ class LoadUserInfoResponse {
   final String? surname;
   final String? name;
   final String? photoURL;
+  final String? bio;
 
   factory LoadUserInfoResponse.fromJson(Map<String, dynamic> json) =>
       _$LoadUserInfoResponseFromJson(json);
@@ -20,6 +21,7 @@ class LoadUserInfoResponse {
     this.surname,
     this.name,
     this.photoURL,
+    this.bio,
   });
 
   Map<String, dynamic> toJson() => _$LoadUserInfoResponseToJson(this);

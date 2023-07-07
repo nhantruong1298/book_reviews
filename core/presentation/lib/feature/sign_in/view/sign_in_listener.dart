@@ -7,9 +7,9 @@ extension SignInListener on _SignInScreenState {
         exception: (appException) {
           showErrorDialogByAppException(appException);
         },
-        success: (email, userId) {
+        success: (userInfo) {
           toggleLoading(false);
-          //TODO: Forgot call onSinIn in authentication cubit
+          context.read<AuthenticationCubit>().onSignInSuccess(userInfo);
           DashboardRoute().go(context);
         },
         orElse: () {});

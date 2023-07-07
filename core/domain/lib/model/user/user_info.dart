@@ -1,17 +1,19 @@
 class LoadUserInfoResult {
-  final String id;
-  final String email;
-  final String displayName;
-  final String surname;
-  final String name;
-  final String photoURL;
-
+  final String? id;
+  final String? email;
+  final String? displayName;
+  final String? surname;
+  final String? name;
+  final String? photoURL;
+  final String? bio;
+  
   LoadUserInfoResult({
-    required this.id,
-    required this.email,
-    required this.displayName,
-    required this.surname,
-    required this.name,
-    required this.photoURL,
+     this.id,
+     this.email,
+     this.displayName,
+     this.surname,
+     this.name,
+     this.photoURL,
+     this.bio,
   });
 }

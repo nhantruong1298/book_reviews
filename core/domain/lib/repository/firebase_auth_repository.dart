@@ -11,4 +11,6 @@ abstract class FirebaseAuthRepository {
   );
 
   Future<void> sendEmailVerification(String userId);
+
+  Future<void> signOut();
 }

@@ -9,12 +9,13 @@ part of 'update_user_info_request.dart';
 UpdateUserInfoRequest _$UpdateUserInfoRequestFromJson(
         Map<String, dynamic> json) =>
     UpdateUserInfoRequest(
-      id: json['id'] as String,
-      displayName: json['displayName'] as String,
-      email: json['email'] as String,
-      photoURL: json['photoURL'] as String,
-      name: json['name'] as String,
-      surname: json['surname'] as String,
+      id: json['id'] as String?,
+      displayName: json['displayName'] as String?,
+      email: json['email'] as String?,
+      photoURL: json['photoURL'] as String?,
+      name: json['name'] as String?,
+      surname: json['surname'] as String?,
+      bio: json['bio'] as String?,
     );
 
 Map<String, dynamic> _$UpdateUserInfoRequestToJson(
@@ -26,4 +27,5 @@ Map<String, dynamic> _$UpdateUserInfoRequestToJson(
       'photoURL': instance.photoURL,
       'surname': instance.surname,
       'name': instance.name,
+      'bio': instance.bio,
     };
