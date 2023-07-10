@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lottie/lottie.dart';
+import 'package:presentation/app/route_builder.dart';
 import 'package:presentation/base/base_screen.dart';
 import 'package:presentation/feature/authentication/cubit/authentication_cubit.dart';
-import 'package:presentation/feature/edit_profile/views/edit_profile_screen.dart';
 import 'package:presentation/feature/profile/cubit/profile_cubit.dart';
 import 'package:presentation/generated/assets.gen.dart';
 import 'package:presentation/generated/extension.dart';
@@ -16,6 +16,8 @@ import 'package:presentation/utils/size_config.dart';
 import 'package:presentation/widgets/commons/spacing.dart';
 import 'package:presentation/widgets/commons/typography/body_text.dart';
 import 'package:presentation/widgets/commons/typography/heading_text.dart';
+
+part 'profile_listener.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -43,7 +45,8 @@ class _ProfileScreenState extends BaseScreenState<ProfileScreen> {
   Widget builder(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: BlocBuilder<ProfileCubit, ProfileState>(
+        child: BlocConsumer<ProfileCubit, ProfileState>(
+          listener: listener,
           builder: (context, state) {
             return state.maybeWhen(
                 loaded: (userInfo) {
@@ -60,12 +63,10 @@ class _ProfileScreenState extends BaseScreenState<ProfileScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Row(
-                                children: [
-                                  _buildUserName(userInfo),
-                                  _buildEditButton()
-                                ],
-                              ),
+                              Row(children: [
+                                _buildUserName(userInfo),
+                                _buildEditButton()
+                              ]),
                               const Spacing(1),
                               BodyLText(
                                 "...",
@@ -110,11 +111,6 @@ class _ProfileScreenState extends BaseScreenState<ProfileScreen> {
                                   _SocialIconButton(
                                     icon: Assets.images.twitterIcon.path,
                                   ),
-                                  // const Spacing(.5,
-                                  //     direction: SpacingDirection.Horizontal),
-                                  // _SocialIconButton(
-                                  //   icon: Assets.images.linkedInIcon.path,
-                                  // )
                                 ],
                               ),
                               const Spacing(1.5),
@@ -125,13 +121,12 @@ class _ProfileScreenState extends BaseScreenState<ProfileScreen> {
                                 style: BodyXLText.defaultStyle.copyWith(
                                   color: AppColors.textGreyColor,
                                   fontWeight: FontWeight.w700,
-                                  //fontFamily: FontFamily.Playfair,
                                 ),
                               ),
                               Lottie.asset(
                                 AssetsGen.getRawString(
                                     Assets.raws.emptyAnimation),
-                                repeat: true,
+                                repeat: false,
                                 width: double.infinity,
                                 height: SizeConfig.screenHeight * 0.3,
                               ),
@@ -163,8 +158,7 @@ class _ProfileScreenState extends BaseScreenState<ProfileScreen> {
       child: InkWell(
           borderRadius: BorderRadius.circular(AppDimensions.roundedRadius),
           onTap: () {
-            final userInfo = 
-            profileCubit.onEditProfilePressed();
+            EditProfileRoute().go(context);
           },
           child: const Padding(
             padding: EdgeInsets.all(AppDimensions.defaultSPadding),
@@ -174,11 +168,6 @@ class _ProfileScreenState extends BaseScreenState<ProfileScreen> {
             ),
           )),
     );
-  }
-
-  void _goToEditProfileScreen() async {
-    final result = await Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => EditProfileScreen()));
   }
 
   Widget get _divider => const SizedBox(

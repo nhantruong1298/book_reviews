@@ -4,6 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:presentation/app/route_builder.dart';
 import 'package:presentation/base/base_screen.dart';
 import 'package:presentation/feature/dashboard/cubit/dashboard_cubit.dart';
+import 'package:presentation/feature/profile/cubit/profile_cubit.dart';
+import 'package:presentation/feature/profile/views/profile_screen.dart';
 import 'package:presentation/generated/assets.gen.dart';
 import 'package:presentation/generated/extension.dart';
 import 'package:presentation/resources/app_colors.dart';
@@ -52,10 +54,11 @@ class _DashboardScreenState extends BaseScreenState<DashboardScreen>
   void initState() {
     super.initState();
     _screens = [
-      HomeRoute.build(),
-      ProfileRoute.build(),
-      BookEventRoute.build(),
-      MenuRoute.build(),
+     // HomeRoute.build(),
+      //ProfileRoute.build(),
+      ProfileScreen(),
+      // BookEventRoute.build(),
+       MenuRoute.build(),
     ];
 
     _controller = TabController(
@@ -73,10 +76,10 @@ class _DashboardScreenState extends BaseScreenState<DashboardScreen>
 
     final navBarsItems = <FABBottomAppBarItem>[];
     final Map<String, String> titlesAndIcons = {
-      'Home': Assets.images.homeIcon.path,
+     // 'Home': Assets.images.homeIcon.path,
       'Profile': Assets.images.profileIcon.path,
-      'Event': Assets.images.eventIcon.path,
-      'Menu': Assets.images.menuIcon.path,
+      // 'Event': Assets.images.eventIcon.path,
+       'Menu': Assets.images.menuIcon.path,
     };
 
     titlesAndIcons

@@ -13,7 +13,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     emit(ProfileLoadedState(userInfo));
   }
 
-  void onEditProfilePressed() {
-    
+  void onUserInfoChanged(LoadUserInfoResult userInfo) {
+    emit(ProfileLoadedState(userInfo));
   }
 }

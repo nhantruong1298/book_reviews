@@ -5,7 +5,6 @@ import 'package:presentation/resources/app_colors.dart';
 import 'package:presentation/resources/app_theme.dart';
 import 'package:presentation/widgets/commons/inputs/types.dart';
 
-
 class TextInputField extends StatefulWidget {
   final bool readOnly;
   final String name;
@@ -30,6 +29,9 @@ class TextInputField extends StatefulWidget {
   final FormValidator<String?>? validator;
   final AutovalidateMode? autovalidateMode;
   final TextCapitalization? textCapitalization;
+  final int? maxLines;
+  final bool autofocus;
+  final InputDecoration? decoration;
 
   const TextInputField({
     Key? key,
@@ -56,6 +58,9 @@ class TextInputField extends StatefulWidget {
     this.markRequired = false,
     this.autovalidateMode,
     this.textCapitalization,
+    this.maxLines,
+    this.autofocus = false,
+    this.decoration,
   }) : super(key: key);
 
   @override
@@ -92,8 +97,10 @@ class _TextInputFieldState extends State<TextInputField> {
         onTap: widget.onTap,
         autocorrect: widget.autocorrect,
         focusNode: _focusNode,
+        maxLines: widget.maxLines,
         keyboardType: widget.keyboardType,
         textInputAction: widget.textInputAction,
+        autofocus: widget.autofocus,
         inputFormatters: widget.inputFormatters,
         style: widget.disable
             ? widget.textStyle?.copyWith(color: AppColors.textGreyColor)
@@ -104,7 +111,7 @@ class _TextInputFieldState extends State<TextInputField> {
         onChanged: widget.onChanged,
         textCapitalization:
             widget.textCapitalization ?? TextCapitalization.none,
-        decoration: AppThemeStyle.inputDecoration(
+        decoration: widget.decoration ?? AppThemeStyle.inputDecoration(
           contentPadding: widget.contentPadding,
           suffixIcon: widget.suffixIcon,
           hintText: widget.hintText,
