@@ -1,7 +1,7 @@
-part of '../../sign_in/view/sign_in_screen.dart';
+part of 'edit_profile_screen.dart';
 
-extension SignInListener on _SignInScreenState {
-  void listener(BuildContext context, SignInState state) {
+extension EditProfileListener on _EditProfileScreenState {
+  void listener(BuildContext _, EditProfileState state) {
     state.maybeWhen(
         loading: () => toggleLoading(true, showSpinner: true),
         exception: (appException) {
@@ -9,8 +9,7 @@ extension SignInListener on _SignInScreenState {
         },
         success: (userInfo) {
           toggleLoading(false);
-          context.read<AuthenticationCubit>().onSignInSuccess(userInfo);
-          DashboardRoute().go(context);
+          context.pop(true);
         },
         orElse: () {});
   }

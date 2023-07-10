@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:data/data_source/data_storage.dart';
 import 'package:data/entity/response/load_book_response.dart';
+import 'package:data/entity/response/load_user_info_response.dart';
 import 'package:data/entity/response/sign_in_with_email_response.dart';
 import 'package:data/entity/response/sign_up_with_email_response.dart';
 import 'package:data/networking/firebase_service/firebase_service.dart';
@@ -70,11 +71,15 @@ class ServiceManager {
     return _fireBaseService.sendEmailVerification(userId);
   }
 
-  Future<void> loadUserInfo(String userId) {
+  Future<LoadUserInfoResponse?> loadUserInfo(String userId) {
     return _fireBaseService.loadUserInfo(userId);
   }
 
   Future<List<LoadBookResponse>> searchBooks(String searchText) {
     return _fireBaseService.searchBooks(searchText);
+  }
+
+  Future<void> signOut() {
+    return _fireBaseService.signOut();
   }
 }

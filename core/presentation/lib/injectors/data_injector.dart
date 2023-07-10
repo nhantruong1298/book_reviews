@@ -1,6 +1,7 @@
 import 'package:data/data_source/data_storage.dart';
 import 'package:data/mapper/book_data_mapper.dart';
 import 'package:data/mapper/firebase_auth_data_mapper.dart';
+import 'package:data/mapper/user_data_mapper.dart';
 import 'package:data/networking/service_manager.dart';
 import 'package:data/repository/book_repository_impl.dart';
 import 'package:data/repository/firebase_auth_repository_impl.dart';
@@ -34,6 +35,8 @@ class DataInjector {
         () => FirebaseAuthDataMapper());
 
     getIt.registerLazySingleton<BookDataMapper>(() => BookDataMapper());
+
+    getIt.registerLazySingleton<UserDataMapper>(() => UserDataMapper());
   }
 
   static void _configureRepository(GetIt getIt) {
@@ -48,6 +51,7 @@ class DataInjector {
 
     getIt.registerLazySingleton<UserRepository>(() => UserRepositoryImpl(
           getIt<ServiceManager>(),
+          getIt<UserDataMapper>(),
         ));
   }
 }

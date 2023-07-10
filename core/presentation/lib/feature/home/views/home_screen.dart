@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:presentation/app/route_builder.dart';
 import 'package:presentation/base/base_screen.dart';
+import 'package:presentation/feature/authentication/cubit/authentication_cubit.dart';
 import 'package:presentation/feature/home/cubit/home_cubit.dart';
 import 'package:presentation/feature/home/views/list_book_item.dart';
 import 'package:presentation/generated/assets.gen.dart';
@@ -40,9 +41,11 @@ class _HomeScreenState extends BaseScreenState<HomeScreen> {
 
   @override
   Widget builder(BuildContext context) {
+    final userInfo = context.read<AuthenticationCubit>().state.userInfo!;
+
     return BasicLayout(
         headerActions: _buildAppBarActions(),
-        title: _buildAppBarTitle(),
+        title: _buildAppBarTitle(userInfo.displayName ?? ''),
         centerTitle: false,
         child: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
@@ -85,20 +88,18 @@ class _HomeScreenState extends BaseScreenState<HomeScreen> {
     ];
   }
 
-  Widget _buildAppBarTitle() {
+  Widget _buildAppBarTitle(String displayName) {
     return Row(
       children: [
         BodyLText(
-          'Welcome, ',
+          'Xin chào, ',
           style: BodyLText.defaultStyle.copyWith(
-            //fontFamily: FontFamily.Playfair,
             fontWeight: FontWeight.bold,
           ),
         ),
         BodyLText(
-          'User name',
+          displayName,
           style: BodyLText.defaultStyle.copyWith(
-            //fontFamily: FontFamily.Playfair,
             fontWeight: FontWeight.bold,
           ),
         ),

@@ -15,6 +15,10 @@ LoadUserInfoResponse _$LoadUserInfoResponseFromJson(
       surname: json['surname'] as String?,
       name: json['name'] as String?,
       photoURL: json['photoURL'] as String?,
+      bio: json['bio'] as String?,
+      website: json['website'] as String?,
+      facebookURL: json['facebookURL'] as String?,
+      twitterURL: json['twitterURL'] as String?,
     );
 
 Map<String, dynamic> _$LoadUserInfoResponseToJson(
@@ -26,4 +30,8 @@ Map<String, dynamic> _$LoadUserInfoResponseToJson(
       'surname': instance.surname,
       'name': instance.name,
       'photoURL': instance.photoURL,
+      'bio': instance.bio,
+      'website': instance.website,
+      'facebookURL': instance.facebookURL,
+      'twitterURL': instance.twitterURL,
     };

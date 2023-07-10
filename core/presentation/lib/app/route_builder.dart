@@ -15,10 +15,14 @@ import 'package:presentation/feature/book_search/cubit/book_search_cubit.dart';
 import 'package:presentation/feature/book_search/views/book_search_screen.dart';
 import 'package:presentation/feature/dashboard/cubit/dashboard_cubit.dart';
 import 'package:presentation/feature/dashboard/views/dashboard_screen.dart';
+import 'package:presentation/feature/edit_profile/cubit/edit_profile_cubit.dart';
+import 'package:presentation/feature/edit_profile/views/edit_profile_screen.dart';
 import 'package:presentation/feature/home/cubit/home_cubit.dart';
 import 'package:presentation/feature/home/views/home_screen.dart';
 import 'package:presentation/feature/menu/cubit/menu_cubit.dart';
 import 'package:presentation/feature/menu/views/menu_screen.dart';
+import 'package:presentation/feature/profile/cubit/profile_cubit.dart';
+import 'package:presentation/feature/profile/views/profile_screen.dart';
 import 'package:presentation/feature/sign_in/cubit/sign_in_cubit.dart';
 import 'package:presentation/feature/sign_in/view/sign_in_screen.dart';
 import 'package:presentation/feature/sign_up/cubit/sign_up_cubit.dart';
@@ -120,6 +124,9 @@ class SignUpSuccessRoute extends GoRouteData {
       TypedGoRoute<BookEventDetailRoute>(
         path: 'book-event-detail/:bookEventID',
       ),
+      TypedGoRoute<EditProfileRoute>(
+        path: 'edit-profile',
+      ),
     ])
 class DashboardRoute extends GoRouteData {
   @override
@@ -130,14 +137,14 @@ class DashboardRoute extends GoRouteData {
     );
   }
 
-  // @override
-  // FutureOr<String?> redirect(BuildContext context, GoRouterState state) {
-  //   if (BlocProvider.of<AuthenticationCubit>(context).state
-  //       is! AuthorizedState) {
-  //     return '/sign-in';
-  //   }
-  //   return null;
-  // }
+  @override
+  FutureOr<String?> redirect(BuildContext context, GoRouterState state) {
+    if (BlocProvider.of<AuthenticationCubit>(context).state
+        is! AuthorizedState) {
+      return '/sign-in';
+    }
+    return null;
+  }
 }
 
 //********************** HOME ROUTE **********************
@@ -223,9 +230,34 @@ class MenuRoute {
   static Widget build() {
     return BlocProvider(
       create: (context) => MenuCubit(
-        BlocProvider.of<AuthenticationCubit>(context),
+        context.read<AuthenticationCubit>(),
       ),
       child: const MenuScreen(),
+    );
+  }
+}
+
+//********************** PROFILE ROUTE **********************
+class ProfileRoute {
+  static Widget build() {
+    return BlocProvider(
+      create: (context) => ProfileCubit(
+        context.read<AuthenticationCubit>()
+      ),
+      child: const ProfileScreen(),
+    );
+  }
+}
+
+//********************** EDIT PROFILE ROUTE **********************
+class EditProfileRoute extends GoRouteData {
+  EditProfileRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return BlocProvider(
+      create: (context) => EditProfileCubit(),
+      child: const EditProfileScreen(),
     );
   }
 }

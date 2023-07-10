@@ -127,12 +127,16 @@ class $AssetsMockDataGen {
 class $AssetsRawsGen {
   const $AssetsRawsGen();
 
+  /// File path: assets/raws/empty_animation.json
+  String get emptyAnimation =>
+      'packages/presentation/assets/raws/empty_animation.json';
+
   /// File path: assets/raws/success_animation.json
   String get successAnimation =>
       'packages/presentation/assets/raws/success_animation.json';
 
   /// List of all assets
-  List<String> get values => [successAnimation];
+  List<String> get values => [emptyAnimation, successAnimation];
 }
 
 class Assets {
@@ -257,7 +261,7 @@ class SvgGenImage {
       semanticsLabel: semanticsLabel,
       excludeFromSemantics: excludeFromSemantics,
       theme: theme,
-      // colorFilter: colorFilter,
+      //colorFilter: colorFilter,
       color: color,
       colorBlendMode: colorBlendMode,
       clipBehavior: clipBehavior,
