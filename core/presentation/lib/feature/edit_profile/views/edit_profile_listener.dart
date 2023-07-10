@@ -9,8 +9,7 @@ extension EditProfileListener on _EditProfileScreenState {
         },
         success: (userInfo) {
           toggleLoading(false);
-          context.read<ProfileCubit>().onUserInfoChanged(userInfo);
-          DashboardRoute().go(context);
+          context.pop(true);
         },
         orElse: () {});
   }

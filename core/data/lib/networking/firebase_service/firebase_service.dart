@@ -108,6 +108,9 @@ class FireBaseService {
           email: params.email,
           photoURL: params.photoURL,
           bio: params.bio,
+          website: params.website,
+          facebookURL: params.facebookURL,
+          twitterURL: params.twitterURL,
         ).toJson());
   }
 

@@ -6,6 +6,9 @@ class UpdateUserInfoParams {
   final String? surname;
   final String? name;
   final String? bio;
+  final String? website;
+  final String? facebookURL;
+  final String? twitterURL;
 
   UpdateUserInfoParams({
     this.id,
@@ -15,5 +18,8 @@ class UpdateUserInfoParams {
     this.surname,
     this.name,
     this.bio,
+    this.website,
+    this.facebookURL,
+    this.twitterURL,
   });
 }

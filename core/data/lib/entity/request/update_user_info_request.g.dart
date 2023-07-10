@@ -16,6 +16,9 @@ UpdateUserInfoRequest _$UpdateUserInfoRequestFromJson(
       name: json['name'] as String?,
       surname: json['surname'] as String?,
       bio: json['bio'] as String?,
+      website: json['website'] as String?,
+      facebookURL: json['facebookURL'] as String?,
+      twitterURL: json['twitterURL'] as String?,
     );
 
 Map<String, dynamic> _$UpdateUserInfoRequestToJson(
@@ -28,4 +31,7 @@ Map<String, dynamic> _$UpdateUserInfoRequestToJson(
       'surname': instance.surname,
       'name': instance.name,
       'bio': instance.bio,
+      'website': instance.website,
+      'facebookURL': instance.facebookURL,
+      'twitterURL': instance.twitterURL,
     };

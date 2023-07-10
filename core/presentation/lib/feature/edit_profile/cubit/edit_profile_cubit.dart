@@ -19,8 +19,8 @@ class EditProfileCubit extends Cubit<EditProfileState> {
     _appExceptionHandler = getIt<AppExceptionHandler>();
   }
 
-  Future<void> onSaveButtonPressed(
-      LoadUserInfoResult userInfo, String newBio) async {
+  Future<void> onSaveButtonPressed(LoadUserInfoResult userInfo, String newBio,
+      String newWebsite, String newFacebookURL, String newTwitterURL) async {
     emit(const EditProfileLoadingState());
     try {
       await _userRepository.updateUserInfo(UpdateUserInfoParams(
@@ -31,6 +31,9 @@ class EditProfileCubit extends Cubit<EditProfileState> {
         name: userInfo.name,
         photoURL: userInfo.photoURL,
         surname: userInfo.surname,
+        website: newWebsite,
+        facebookURL: newFacebookURL,
+        twitterURL: newTwitterURL,
       ));
 
       final newUserInfo = await _userRepository.loadUserInfo(userInfo.id ?? '');

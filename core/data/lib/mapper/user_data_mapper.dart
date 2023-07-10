@@ -12,6 +12,9 @@ class UserDataMapper {
         surname: response.surname,
         photoURL: response.photoURL,
         bio: response.bio,
+        website: response.website,
+        facebookURL: response.facebookURL,
+        twitterURL: response.twitterURL,
       );
     }
     return null;

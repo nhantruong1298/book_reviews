@@ -131,18 +131,9 @@ class SignUpSuccessRoute extends GoRouteData {
 class DashboardRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-        create: (context) => DashboardCubit(),
-        
-      ),
-      BlocProvider(
-        lazy: false,
-        create: (context) => ProfileCubit(),
-      )
-      ],
-      child: const DashboardScreen() ,
+    return BlocProvider(
+      create: (context) => DashboardCubit(),
+      child: const DashboardScreen(),
     );
   }
 
@@ -250,7 +241,9 @@ class MenuRoute {
 class ProfileRoute {
   static Widget build() {
     return BlocProvider(
-      create: (context) => ProfileCubit(),
+      create: (context) => ProfileCubit(
+        context.read<AuthenticationCubit>()
+      ),
       child: const ProfileScreen(),
     );
   }

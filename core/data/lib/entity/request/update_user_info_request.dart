@@ -10,18 +10,24 @@ class UpdateUserInfoRequest {
   final String? surname;
   final String? name;
   final String? bio;
+  final String? website;
+  final String? facebookURL;
+  final String? twitterURL;
 
   factory UpdateUserInfoRequest.fromJson(Map<String, dynamic> json) =>
       _$UpdateUserInfoRequestFromJson(json);
 
   UpdateUserInfoRequest({
-    required this.id,
-    required this.displayName,
-    required this.email,
-    required this.photoURL,
-    required this.name,
-    required this.surname,
-    required this.bio,
+     this.id,
+     this.displayName,
+     this.email,
+     this.photoURL,
+     this.name,
+     this.surname,
+     this.bio,
+     this.website,
+     this.facebookURL,
+     this.twitterURL,
   });
 
   Map<String, dynamic> toJson() => _$UpdateUserInfoRequestToJson(this);

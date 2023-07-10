@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:presentation/app/route_builder.dart';
+import 'package:go_router/go_router.dart';
 import 'package:presentation/base/base_screen.dart';
 import 'package:presentation/feature/authentication/cubit/authentication_cubit.dart';
 import 'package:presentation/feature/edit_profile/cubit/edit_profile_cubit.dart';
-import 'package:presentation/feature/profile/cubit/profile_cubit.dart';
 import 'package:presentation/generated/assets.gen.dart';
 import 'package:presentation/generated/extension.dart';
 import 'package:presentation/resources/app_colors.dart';
@@ -39,8 +38,7 @@ class _EditProfileScreenState extends BaseScreenState<EditProfileScreen> {
   @override
   Widget builder(BuildContext context) {
     final userInfo = context.read<AuthenticationCubit>().state.userInfo;
-    final x = context.read<ProfileCubit>();
-    
+
     return BasicLayout(
       automaticallyImplyLeading: true,
       resizeToAvoidBottomInset: true,
@@ -49,7 +47,15 @@ class _EditProfileScreenState extends BaseScreenState<EditProfileScreen> {
         onPressed: () {
           final newBio =
               _formKey.currentState?.fields[BIO_FIELD]?.value as String;
-          editProfileCubit.onSaveButtonPressed(userInfo!, newBio);
+          final newWebsite =
+              _formKey.currentState?.fields[WEBSITE_FIELD]?.value as String;
+          final newFacebookURL =
+              _formKey.currentState?.fields[FACEBOOK_FIELD]?.value as String;
+
+          final newTwitterURL =
+              _formKey.currentState?.fields[TWITTER_FIELD]?.value as String;
+          editProfileCubit.onSaveButtonPressed(
+              userInfo!, newBio, newWebsite, newFacebookURL, newTwitterURL);
         },
         text: "Xác nhận",
         textColor: AppColors.textLightColor,
@@ -87,101 +93,20 @@ class _EditProfileScreenState extends BaseScreenState<EditProfileScreen> {
             const Spacing(2),
             BodyLText("Tài khoản xã hội"),
             const Spacing(1),
-            Row(
-              children: [
-                SvgPicture.asset(
-                  AssetsGen.getRawString(Assets.images.linkIcon.path),
-                  width: 20,
-                  height: 20,
-                  fit: BoxFit.scaleDown,
-                ),
-                const Spacing(1, direction: SpacingDirection.Horizontal),
-                Expanded(
-                  child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: AppColors.primaryDarkColor),
-                        borderRadius:
-                            BorderRadius.circular(AppDimensions.defaultRadius),
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: AppDimensions.defaultPadding),
-                      child: TextInputField(
-                        name: WEBSITE_FIELD,
-                        maxLength: 100,
-                        textInputAction: TextInputAction.done,
-                        decoration: const InputDecoration(
-                            counterText: "",
-                            border: InputBorder.none,
-                            enabledBorder: InputBorder.none,
-                            focusedBorder: InputBorder.none),
-                      )),
-                ),
-              ],
-            ),
+            _SocialLinkTextField(
+                name: WEBSITE_FIELD,
+                initValue: userInfo?.website,
+                icon: Assets.images.linkIcon.path),
             const Spacing(1),
-            Row(
-              children: [
-                SvgPicture.asset(
-                  AssetsGen.getRawString(Assets.images.facebookIcon.path),
-                  width: 20,
-                  height: 20,
-                  fit: BoxFit.scaleDown,
-                ),
-                const Spacing(1, direction: SpacingDirection.Horizontal),
-                Expanded(
-                  child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: AppColors.primaryDarkColor),
-                        borderRadius:
-                            BorderRadius.circular(AppDimensions.defaultRadius),
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: AppDimensions.defaultPadding),
-                      child: TextInputField(
-                        name: FACEBOOK_FIELD,
-                        maxLength: 100,
-                        textInputAction: TextInputAction.done,
-                        decoration: const InputDecoration(
-                            counterText: "",
-                            border: InputBorder.none,
-                            enabledBorder: InputBorder.none,
-                            focusedBorder: InputBorder.none),
-                      )),
-                ),
-              ],
-            ),
+            _SocialLinkTextField(
+                name: FACEBOOK_FIELD,
+                initValue: userInfo?.facebookURL,
+                icon: Assets.images.facebookIcon.path),
             const Spacing(1),
-            Row(
-              children: [
-                SvgPicture.asset(
-                  AssetsGen.getRawString(Assets.images.twitterIcon.path),
-                  width: 20,
-                  height: 20,
-                  fit: BoxFit.scaleDown,
-                ),
-                const Spacing(1, direction: SpacingDirection.Horizontal),
-                Expanded(
-                  child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: AppColors.primaryDarkColor),
-                        borderRadius:
-                            BorderRadius.circular(AppDimensions.defaultRadius),
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: AppDimensions.defaultPadding),
-                      child: TextInputField(
-                        name: TWITTER_FIELD,
-                        maxLength: 100,
-                        textInputAction: TextInputAction.done,
-                        decoration: const InputDecoration(
-                            counterText: "",
-                            border: InputBorder.none,
-                            enabledBorder: InputBorder.none,
-                            focusedBorder: InputBorder.none),
-                      )),
-                ),
-              ],
-            ),
+            _SocialLinkTextField(
+                name: TWITTER_FIELD,
+                initValue: userInfo?.twitterURL,
+                icon: Assets.images.twitterIcon.path),
             BlocListener<EditProfileCubit, EditProfileState>(
               listener: listener,
               child: const SizedBox.shrink(),
@@ -189,6 +114,48 @@ class _EditProfileScreenState extends BaseScreenState<EditProfileScreen> {
           ]),
         ),
       ),
+    );
+  }
+}
+
+class _SocialLinkTextField extends StatelessWidget {
+  final String? initValue;
+  final String? icon;
+  final String name;
+  // ignore: unused_element
+  const _SocialLinkTextField({this.icon, this.initValue, required this.name});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        SvgPicture.asset(AssetsGen.getRawString(icon!),
+            width: AppDimensions.defaultIconSizeSmall,
+            height: AppDimensions.defaultIconSizeSmall,
+            fit: BoxFit.scaleDown),
+        const Spacing(1, direction: SpacingDirection.Horizontal),
+        Expanded(
+          child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: AppColors.primaryDarkColor),
+                borderRadius:
+                    BorderRadius.circular(AppDimensions.defaultRadius),
+              ),
+              padding: const EdgeInsets.symmetric(
+                  horizontal: AppDimensions.defaultPadding),
+              child: TextInputField(
+                initialValue: initValue ?? '',
+                name: name,
+                maxLength: 100,
+                textInputAction: TextInputAction.done,
+                decoration: const InputDecoration(
+                    counterText: "",
+                    border: InputBorder.none,
+                    enabledBorder: InputBorder.none,
+                    focusedBorder: InputBorder.none),
+              )),
+        ),
+      ],
     );
   }
 }

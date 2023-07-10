@@ -3,10 +3,10 @@ import 'package:domain/model/user/user_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 import 'package:presentation/app/route_builder.dart';
 import 'package:presentation/base/base_screen.dart';
-import 'package:presentation/feature/authentication/cubit/authentication_cubit.dart';
 import 'package:presentation/feature/profile/cubit/profile_cubit.dart';
 import 'package:presentation/generated/assets.gen.dart';
 import 'package:presentation/generated/extension.dart';
@@ -30,14 +30,16 @@ class _ProfileScreenState extends BaseScreenState<ProfileScreen> {
   @override
   bool get wantKeepAlive => true;
 
-  ProfileCubit get profileCubit => BlocProvider.of<ProfileCubit>(context);
+  ProfileCubit get profileCubit => context.read<ProfileCubit>();
+
+  @override
+  RefreshCallback? get onScreenRefresh => profileCubit.onScreenRefresh;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final userInfo = context.read<AuthenticationCubit>().state.userInfo!;
-      profileCubit.onScreenInit(userInfo);
+      profileCubit.onScreenInit();
     });
   }
 
@@ -50,6 +52,9 @@ class _ProfileScreenState extends BaseScreenState<ProfileScreen> {
           builder: (context, state) {
             return state.maybeWhen(
                 loaded: (userInfo) {
+                  final bio = (userInfo.bio == null || userInfo.bio!.isEmpty)
+                      ? '...'
+                      : userInfo.bio;
                   return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -68,10 +73,7 @@ class _ProfileScreenState extends BaseScreenState<ProfileScreen> {
                                 _buildEditButton()
                               ]),
                               const Spacing(1),
-                              BodyLText(
-                                "...",
-                                style: BodyLText.defaultStyle.copyWith(),
-                              ),
+                              BodyLText(bio),
                               const Spacing(1),
                               _divider,
                               const Spacing(1),
@@ -158,7 +160,11 @@ class _ProfileScreenState extends BaseScreenState<ProfileScreen> {
       child: InkWell(
           borderRadius: BorderRadius.circular(AppDimensions.roundedRadius),
           onTap: () {
-            EditProfileRoute().go(context);
+            context.push(EditProfileRoute().location).then((updated) {
+              if (updated == true) {
+                profileCubit.onScreenRefresh();
+              }
+            });
           },
           child: const Padding(
             padding: EdgeInsets.all(AppDimensions.defaultSPadding),
@@ -183,25 +189,33 @@ class _ProfileScreenState extends BaseScreenState<ProfileScreen> {
 class _SocialIconButton extends StatelessWidget {
   final String? icon;
   final Color? color;
+  final VoidCallback? onTap;
   // ignore: unused_element
-  const _SocialIconButton({this.icon, this.color});
+  const _SocialIconButton({
+    this.icon,
+    this.color,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(AppDimensions.defaultSPadding),
-      child: SvgPicture.asset(
-        AssetsGen.getRawString(icon ?? ''),
-        width: AppDimensions.defaultIconSizeXS,
-        height: AppDimensions.defaultIconSizeXS,
-        color: AppColors.primaryLightColor,
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.all(AppDimensions.defaultSPadding),
+        child: SvgPicture.asset(
+          AssetsGen.getRawString(icon ?? ''),
+          width: AppDimensions.defaultIconSizeXS,
+          height: AppDimensions.defaultIconSizeXS,
+          color: AppColors.primaryLightColor,
+        ),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(AppDimensions.defaultXSPadding),
+            color: AppColors.greyColor700,
+            border: Border.all(
+              color: AppColors.primaryLightColor,
+            )),
       ),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(AppDimensions.defaultXSPadding),
-          color: AppColors.greyColor700,
-          border: Border.all(
-            color: AppColors.primaryLightColor,
-          )),
     );
   }
 }
