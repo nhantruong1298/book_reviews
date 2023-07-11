@@ -49,17 +49,23 @@ class _ProfileScreenState extends BaseScreenState<ProfileScreen> {
       body: SingleChildScrollView(
         child: BlocConsumer<ProfileCubit, ProfileState>(
           listener: listener,
+          buildWhen: (previous, current) =>
+              (current is ProfileLoadedState || current is LoadingState),
           builder: (context, state) {
             return state.maybeWhen(
                 loaded: (userInfo) {
                   final bio = (userInfo.bio == null || userInfo.bio!.isEmpty)
                       ? '...'
                       : userInfo.bio;
+
                   return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         _Avatar(
-                          onTap: () {},
+                          photoUrl: userInfo.photoURL,
+                          onTap: () {
+                            profileCubit.onUploadImage();
+                          },
                         ),
                         const Spacing(1),
                         Padding(
@@ -102,16 +108,25 @@ class _ProfileScreenState extends BaseScreenState<ProfileScreen> {
                                 children: [
                                   _SocialIconButton(
                                     icon: Assets.images.linkIcon.path,
+                                    onTap: () => profileCubit
+                                        .onSocialLinkTap(userInfo.website),
+                                    isHidden: userInfo.website == null,
                                   ),
                                   const Spacing(.5,
                                       direction: SpacingDirection.Horizontal),
                                   _SocialIconButton(
                                     icon: Assets.images.facebookIcon.path,
+                                    isHidden: userInfo.facebookURL == null,
+                                    onTap: () => profileCubit
+                                        .onSocialLinkTap(userInfo.facebookURL),
                                   ),
                                   const Spacing(.5,
                                       direction: SpacingDirection.Horizontal),
                                   _SocialIconButton(
                                     icon: Assets.images.twitterIcon.path,
+                                    isHidden: userInfo.twitterURL == null,
+                                    onTap: () => profileCubit
+                                        .onSocialLinkTap(userInfo.twitterURL),
                                   ),
                                 ],
                               ),
@@ -168,10 +183,7 @@ class _ProfileScreenState extends BaseScreenState<ProfileScreen> {
           },
           child: const Padding(
             padding: EdgeInsets.all(AppDimensions.defaultSPadding),
-            child: Icon(
-              Icons.create,
-              size: AppDimensions.defaultIconSizeSmall,
-            ),
+            child: Icon(Icons.create, size: AppDimensions.defaultIconSizeSmall),
           )),
     );
   }
@@ -189,34 +201,38 @@ class _ProfileScreenState extends BaseScreenState<ProfileScreen> {
 class _SocialIconButton extends StatelessWidget {
   final String? icon;
   final Color? color;
+  final bool isHidden;
   final VoidCallback? onTap;
+
   // ignore: unused_element
   const _SocialIconButton({
     this.icon,
     this.color,
     this.onTap,
+    required this.isHidden,
   });
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.all(AppDimensions.defaultSPadding),
-        child: SvgPicture.asset(
-          AssetsGen.getRawString(icon ?? ''),
-          width: AppDimensions.defaultIconSizeXS,
-          height: AppDimensions.defaultIconSizeXS,
-          color: AppColors.primaryLightColor,
-        ),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(AppDimensions.defaultXSPadding),
-            color: AppColors.greyColor700,
-            border: Border.all(
-              color: AppColors.primaryLightColor,
-            )),
-      ),
-    );
+    return (isHidden)
+        ? const SizedBox.shrink()
+        : InkWell(
+            onTap: onTap,
+            child: Container(
+              padding: const EdgeInsets.all(AppDimensions.defaultSPadding),
+              child: SvgPicture.asset(
+                AssetsGen.getRawString(icon ?? ''),
+                width: AppDimensions.defaultIconSizeXS,
+                height: AppDimensions.defaultIconSizeXS,
+                color: AppColors.primaryLightColor,
+              ),
+              decoration: BoxDecoration(
+                  borderRadius:
+                      BorderRadius.circular(AppDimensions.defaultXSPadding),
+                  color: AppColors.greyColor700,
+                  border: Border.all(color: AppColors.primaryLightColor)),
+            ),
+          );
   }
 }
 
@@ -247,7 +263,6 @@ class _Avatar extends StatelessWidget {
               child: Container(
                   width: SizeConfig.getProportionateScreenWidth(120),
                   height: SizeConfig.getProportionateScreenWidth(120),
-                  padding: const EdgeInsets.all(AppDimensions.defaultPadding),
                   decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color: AppColors.greyColor400,
@@ -255,11 +270,16 @@ class _Avatar extends StatelessWidget {
                         width: 5,
                         color: Colors.white,
                       )),
-                  child: (photoUrl != null)
-                      ? CachedNetworkImage(
-                          imageUrl: photoUrl!,
-                          fit: BoxFit.fill,
-                          errorWidget: (_, __, ___) => const SizedBox.shrink(),
+                  child: (photoUrl != null && photoUrl?.isNotEmpty == true)
+                      ? ClipRRect(
+                          borderRadius: BorderRadius.circular(
+                              AppDimensions.roundedRadius),
+                          child: CachedNetworkImage(
+                            imageUrl: photoUrl!,
+                            fit: BoxFit.fill,
+                            errorWidget: (_, __, ___) =>
+                                const SizedBox.shrink(),
+                          ),
                         )
                       : Icon(
                           Icons.add_a_photo,
@@ -268,22 +288,6 @@ class _Avatar extends StatelessWidget {
                         )),
             ),
           ),
-          Positioned(
-            bottom: 0,
-            left: AppDimensions.defaultPadding,
-            child: Container(
-              width: SizeConfig.getProportionateScreenWidth(120),
-              height: SizeConfig.getProportionateScreenWidth(120),
-              padding: const EdgeInsets.all(AppDimensions.defaultPadding),
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.transparent,
-                  border: Border.all(
-                    width: 5,
-                    color: Colors.white,
-                  )),
-            ),
-          )
         ],
       ),
     );

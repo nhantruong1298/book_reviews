@@ -22,4 +22,30 @@ class LoadUserInfoResult {
     this.facebookURL,
     this.twitterURL,
   });
+
+  LoadUserInfoResult copyWith({
+    String? id,
+    String? email,
+    String? displayName,
+    String? surname,
+    String? name,
+    String? photoURL,
+    String? bio,
+    String? website,
+    String? facebookURL,
+    String? twitterURL,
+  }) {
+    return LoadUserInfoResult(
+      id: id ?? this.id,
+      email: email ?? this.email,
+      bio: bio ?? this.bio,
+      displayName: displayName ?? this.displayName,
+      facebookURL: facebookURL ?? this.facebookURL,
+      name: name ?? this.name,
+      photoURL: photoURL ?? this.photoURL,
+      surname: surname ?? this.surname,
+      twitterURL: twitterURL ?? this.twitterURL,
+      website: website ?? this.website,
+    );
+  }
 }

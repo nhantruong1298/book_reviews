@@ -31,9 +31,9 @@ class EditProfileCubit extends Cubit<EditProfileState> {
         name: userInfo.name,
         photoURL: userInfo.photoURL,
         surname: userInfo.surname,
-        website: newWebsite,
-        facebookURL: newFacebookURL,
-        twitterURL: newTwitterURL,
+        website: newWebsite.isEmpty ? null : newWebsite,
+        facebookURL: newFacebookURL.isEmpty ? null : newFacebookURL,
+        twitterURL: newTwitterURL.isEmpty ? null : newTwitterURL,
       ));
 
       final newUserInfo = await _userRepository.loadUserInfo(userInfo.id ?? '');
