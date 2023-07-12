@@ -136,7 +136,8 @@ class FireBaseService {
     if (snapshot.data() != null) {
       return LoadUserInfoResponse.fromJson(snapshot.data()!);
     }
-    return null;
+    throw BusinessException(
+        businessExceptionCode: BusinessExceptionCode.USER_NOT_FOUND);
   }
 
   Future<List<LoadBookResponse>> searchBooks(String bookName) async {

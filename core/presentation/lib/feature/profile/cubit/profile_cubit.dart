@@ -59,12 +59,11 @@ class ProfileCubit extends Cubit<ProfileState> {
     }
   }
 
-  Future<void> onUploadImage() async {
+  Future<void> onUploadImage(ImageSource source) async {
     try {
       final userInfo = _authenticationCubit.state.userInfo!;
 
-      final XFile? xFile =
-          await ImagePicker().pickImage(source: ImageSource.camera);
+      final XFile? xFile = await ImagePicker().pickImage(source: source);
 
       if (xFile == null) return;
 

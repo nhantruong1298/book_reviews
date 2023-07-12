@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
 import 'package:presentation/app/route_builder.dart';
 import 'package:presentation/base/base_screen.dart';
@@ -64,7 +65,44 @@ class _ProfileScreenState extends BaseScreenState<ProfileScreen> {
                         _Avatar(
                           photoUrl: userInfo.photoURL,
                           onTap: () {
-                            profileCubit.onUploadImage();
+                            showModalBottomSheet(
+                              context: context,
+                              builder: (context) {
+                                return Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    ListTile(
+                                      leading: BodyLText(
+                                        "Chọn ảnh từ camera",
+                                      ),
+                                      contentPadding:
+                                          const EdgeInsets.symmetric(
+                                              horizontal:
+                                                  AppDimensions.defaultPadding),
+                                      onTap: () {
+                                        Navigator.of(context).pop();
+                                        profileCubit
+                                            .onUploadImage(ImageSource.camera);
+                                      },
+                                    ),
+                                    ListTile(
+                                      leading:
+                                          BodyLText("Chọn ảnh từ thư viện"),
+                                      contentPadding:
+                                          const EdgeInsets.symmetric(
+                                              horizontal:
+                                                  AppDimensions.defaultPadding),
+                                      onTap: () {
+                                        Navigator.of(context).pop();
+                                        profileCubit
+                                            .onUploadImage(ImageSource.gallery);
+                                      },
+                                    )
+                                  ],
+                                );
+                              },
+                            );
                           },
                         ),
                         const Spacing(1),
