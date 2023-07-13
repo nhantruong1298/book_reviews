@@ -5,7 +5,7 @@
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
-// ignore_for_file: directives_ordering,unnecessary_import,implicit_dynamic_list_literal
+// ignore_for_file: directives_ordering,unnecessary_import,implicit_dynamic_list_literal,deprecated_member_use
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -18,24 +18,132 @@ class $AssetsImagesGen {
   SvgGenImage get accountIcon =>
       const SvgGenImage('assets/images/account-icon.svg');
 
+  /// File path: assets/images/dac-nhan-tam.png
+  AssetGenImage get dacNhanTam =>
+      const AssetGenImage('assets/images/dac-nhan-tam.png');
+
+  /// File path: assets/images/email-icon.svg
+  SvgGenImage get emailIcon =>
+      const SvgGenImage('assets/images/email-icon.svg');
+
+  /// File path: assets/images/event-icon.svg
+  SvgGenImage get eventIcon =>
+      const SvgGenImage('assets/images/event-icon.svg');
+
+  /// File path: assets/images/facebook-icon.svg
+  SvgGenImage get facebookIcon =>
+      const SvgGenImage('assets/images/facebook-icon.svg');
+
+  /// File path: assets/images/home-icon.svg
+  SvgGenImage get homeIcon => const SvgGenImage('assets/images/home-icon.svg');
+
+  /// File path: assets/images/information-icon.svg
+  SvgGenImage get informationIcon =>
+      const SvgGenImage('assets/images/information-icon.svg');
+
+  /// File path: assets/images/link-icon.svg
+  SvgGenImage get linkIcon => const SvgGenImage('assets/images/link-icon.svg');
+
+  /// File path: assets/images/linked-in-icon.svg
+  SvgGenImage get linkedInIcon =>
+      const SvgGenImage('assets/images/linked-in-icon.svg');
+
+  /// File path: assets/images/logout-icon.svg
+  SvgGenImage get logoutIcon =>
+      const SvgGenImage('assets/images/logout-icon.svg');
+
+  /// File path: assets/images/menu-icon.svg
+  SvgGenImage get menuIcon => const SvgGenImage('assets/images/menu-icon.svg');
+
+  /// File path: assets/images/moon-icon.svg
+  SvgGenImage get moonIcon => const SvgGenImage('assets/images/moon-icon.svg');
+
+  /// File path: assets/images/notification-icon.svg
+  SvgGenImage get notificationIcon =>
+      const SvgGenImage('assets/images/notification-icon.svg');
+
+  /// File path: assets/images/order-icon.svg
+  SvgGenImage get orderIcon =>
+      const SvgGenImage('assets/images/order-icon.svg');
+
+  /// File path: assets/images/profile-icon.svg
+  SvgGenImage get profileIcon =>
+      const SvgGenImage('assets/images/profile-icon.svg');
+
+  /// File path: assets/images/search-icon.svg
+  SvgGenImage get searchIcon =>
+      const SvgGenImage('assets/images/search-icon.svg');
+
+  /// File path: assets/images/setting-icon.svg
+  SvgGenImage get settingIcon =>
+      const SvgGenImage('assets/images/setting-icon.svg');
+
+  /// File path: assets/images/twitter-icon.svg
+  SvgGenImage get twitterIcon =>
+      const SvgGenImage('assets/images/twitter-icon.svg');
+
+  /// File path: assets/images/user-icon.svg
+  SvgGenImage get userIcon => const SvgGenImage('assets/images/user-icon.svg');
+
   /// List of all assets
-  List<SvgGenImage> get values => [accountIcon];
+  List<dynamic> get values => [
+        accountIcon,
+        dacNhanTam,
+        emailIcon,
+        eventIcon,
+        facebookIcon,
+        homeIcon,
+        informationIcon,
+        linkIcon,
+        linkedInIcon,
+        logoutIcon,
+        menuIcon,
+        moonIcon,
+        notificationIcon,
+        orderIcon,
+        profileIcon,
+        searchIcon,
+        settingIcon,
+        twitterIcon,
+        userIcon
+      ];
+}
+
+class $AssetsMockDataGen {
+  const $AssetsMockDataGen();
+
+  /// File path: assets/mock_data/books_data.json
+  String get booksData =>
+      'packages/presentation/assets/mock_data/books_data.json';
+
+  /// File path: assets/mock_data/events_data.json
+  String get eventsData =>
+      'packages/presentation/assets/mock_data/events_data.json';
+
+  /// List of all assets
+  List<String> get values => [booksData, eventsData];
 }
 
 class $AssetsRawsGen {
   const $AssetsRawsGen();
 
+  /// File path: assets/raws/empty_animation.json
+  String get emptyAnimation =>
+      'packages/presentation/assets/raws/empty_animation.json';
+
   /// File path: assets/raws/success_animation.json
-  String get successAnimation => 'assets/raws/success_animation.json';
+  String get successAnimation =>
+      'packages/presentation/assets/raws/success_animation.json';
 
   /// List of all assets
-  List<String> get values => [successAnimation];
+  List<String> get values => [emptyAnimation, successAnimation];
 }
 
 class Assets {
   Assets._();
 
   static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const $AssetsMockDataGen mockData = $AssetsMockDataGen();
   static const $AssetsRawsGen raws = $AssetsRawsGen();
 }
 
@@ -64,7 +172,7 @@ class AssetGenImage {
     bool matchTextDirection = false,
     bool gaplessPlayback = false,
     bool isAntiAlias = false,
-    String? package,
+    String? package = 'presentation',
     FilterQuality filterQuality = FilterQuality.low,
     int? cacheWidth,
     int? cacheHeight,
@@ -97,11 +205,20 @@ class AssetGenImage {
     );
   }
 
-  ImageProvider provider() => AssetImage(_assetName);
+  ImageProvider provider({
+    AssetBundle? bundle,
+    String? package = 'presentation',
+  }) {
+    return AssetImage(
+      _assetName,
+      bundle: bundle,
+      package: package,
+    );
+  }
 
   String get path => _assetName;
 
-  String get keyName => _assetName;
+  String get keyName => 'packages/presentation/$_assetName';
 }
 
 class SvgGenImage {
@@ -113,20 +230,21 @@ class SvgGenImage {
     Key? key,
     bool matchTextDirection = false,
     AssetBundle? bundle,
-    String? package,
+    String? package = 'presentation',
     double? width,
     double? height,
     BoxFit fit = BoxFit.contain,
     AlignmentGeometry alignment = Alignment.center,
     bool allowDrawingOutsideViewBox = false,
     WidgetBuilder? placeholderBuilder,
-    Color? color,
-    BlendMode colorBlendMode = BlendMode.srcIn,
     String? semanticsLabel,
     bool excludeFromSemantics = false,
+    SvgTheme theme = const SvgTheme(),
+    ColorFilter? colorFilter,
     Clip clipBehavior = Clip.hardEdge,
-    bool cacheColorFilter = false,
-    SvgTheme? theme,
+    @deprecated Color? color,
+    @deprecated BlendMode colorBlendMode = BlendMode.srcIn,
+    @deprecated bool cacheColorFilter = false,
   }) {
     return SvgPicture.asset(
       _assetName,
@@ -140,15 +258,18 @@ class SvgGenImage {
       alignment: alignment,
       allowDrawingOutsideViewBox: allowDrawingOutsideViewBox,
       placeholderBuilder: placeholderBuilder,
-      color: color,
-      colorBlendMode: colorBlendMode,
       semanticsLabel: semanticsLabel,
       excludeFromSemantics: excludeFromSemantics,
+      theme: theme,
+    //  colorFilter: colorFilter,
+      color: color,
+      colorBlendMode: colorBlendMode,
       clipBehavior: clipBehavior,
       cacheColorFilter: cacheColorFilter,
-      theme: theme,
     );
   }
 
   String get path => _assetName;
+
+  String get keyName => 'packages/presentation/$_assetName';
 }

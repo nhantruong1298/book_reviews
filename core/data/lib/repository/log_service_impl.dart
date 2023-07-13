@@ -1,7 +1,7 @@
-import 'package:flutter/foundation.dart';
 // ignore: depend_on_referenced_packages
 
 import 'package:domain/repository/log_service.dart';
+import 'package:flutter/foundation.dart';
 import 'package:logger/logger.dart';
 
 class LogServiceImpl implements LogService {

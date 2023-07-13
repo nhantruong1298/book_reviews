@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:presentation/resources/app_colors.dart';
-import 'package:presentation/resources/app_theme.dart';
+import 'package:presentation/resources/app_dimensions.dart';
 import 'package:presentation/utils/debouncer.dart';
 
 class SearchLayout extends StatefulWidget {
@@ -30,7 +30,7 @@ class SearchLayout extends StatefulWidget {
       this.color,
       this.headerColor,
       this.automaticallyImplyLeading = false,
-      this.debounceDuration = 300,
+      this.debounceDuration = 1000,
       this.focusNode,
       this.headerLeading,
       this.darkMode = false,
@@ -51,22 +51,26 @@ class _SearchLayoutState extends State<SearchLayout> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       bottomNavigationBar: widget.bottomNavigationBar,
+      backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
-          leading: widget.headerLeading ?? getDefaultLeading(context),
-          title: _SearchBar(
+          backgroundColor: AppColors.backgroundColor,
+          leadingWidth: 0,
+          elevation: 0.0,
+          title: SearchBarView(
             autoFocus: widget.autoFocus,
-            placeHolder:
-                widget.searchHint ??"Search",
+            placeHolder: widget.searchHint ?? "Tìm kiếm",
             controller: widget.searchController,
             onSubmitted: widget.onSubmitted,
             debounceDuration: widget.debounceDuration,
             focusNode: widget.focusNode,
           ),
+          actions: [_buildBackButton()],
           automaticallyImplyLeading: widget.automaticallyImplyLeading),
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        color: widget.color ?? AppColors.backgroundGreyColor,
+        padding: const EdgeInsets.all(AppDimensions.defaultPadding),
+        color: widget.color ?? AppColors.backgroundColor,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -99,7 +103,6 @@ class _SearchLayoutState extends State<SearchLayout> {
     return Container(
         height: 56,
         width: double.infinity,
-        // padding: EdgeInsets.all(padding),
         decoration: BoxDecoration(
           border: const Border(
               top: BorderSide(width: 1, color: AppColors.greyColor400)),
@@ -116,37 +119,35 @@ class _SearchLayoutState extends State<SearchLayout> {
             )));
   }
 
-  Widget? getDefaultLeading(BuildContext context) {
-    if (widget.automaticallyImplyLeading == true) {
-      final ModalRoute<dynamic>? parentRoute = ModalRoute.of(context);
-      final bool canPop = parentRoute?.canPop ?? false;
-
-      if (canPop) {
-        return IconButton(
-          icon:  const Icon(
-              Icons.arrow_back,
-              color: Colors.black,
-              size: 24,
-            ),
-          tooltip: MaterialLocalizations.of(context).backButtonTooltip,
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        );
-      }
-    }
-    return null;
+  Widget _buildBackButton() {
+    return InkWell(
+      onTap: () {
+        if (Navigator.of(context).canPop()) {
+          Navigator.of(context).pop();
+        }
+      },
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      child: Container(
+        alignment: Alignment.center,
+        margin: const EdgeInsets.only(right: AppDimensions.defaultPadding),
+        child: const Icon(
+          Icons.cancel_sharp,
+          color: AppColors.textGreyColor,
+        ),
+      ),
+    );
   }
 }
 
-class _SearchBar extends StatefulWidget {
+class SearchBarView extends StatefulWidget {
   final String? placeHolder;
   final TextEditingController? controller;
   final int? debounceDuration;
   final Function(String value)? onSubmitted;
   final FocusNode? focusNode;
   final bool autoFocus;
-  const _SearchBar({
+  const SearchBarView({
     Key? key,
     this.placeHolder,
     this.controller,
@@ -157,10 +158,10 @@ class _SearchBar extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  __SearchBarState createState() => __SearchBarState();
+  _SearchBarViewState createState() => _SearchBarViewState();
 }
 
-class __SearchBarState extends State<_SearchBar> {
+class _SearchBarViewState extends State<SearchBarView> {
   late Debouncer _debouncer;
 
   @override
@@ -171,16 +172,38 @@ class __SearchBarState extends State<_SearchBar> {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      focusNode: widget.focusNode,
-      controller: widget.controller,
-      decoration: AppThemeStyle.searchHeaderDecoration
-          .copyWith(hintText: widget.placeHolder),
-      autofocus: widget.autoFocus,
-      keyboardType: TextInputType.text,
-      textInputAction: TextInputAction.search,
-      onChanged: onSearchTextChanged,
-      onSubmitted: onSearchTextChanged,
+    return SizedBox(
+      height: AppDimensions.defaultIconSizeLarge,
+      child: TextField(
+        focusNode: widget.focusNode,
+        controller: widget.controller,
+        textAlignVertical: TextAlignVertical.bottom,
+        style: const TextStyle(
+          color: AppColors.greyColor900,
+        ),
+        decoration: InputDecoration(
+          prefixIcon: const Icon(
+            Icons.search,
+            color: AppColors.greyColor700,
+          ),
+          hintText: widget.placeHolder,
+          filled: true,
+          fillColor: const Color(0xffF6F6F6),
+          focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: AppColors.greyColor600),
+            borderRadius: BorderRadius.circular(AppDimensions.defaultSRadius),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: AppColors.greyColor600),
+            borderRadius: BorderRadius.circular(AppDimensions.defaultSRadius),
+          ),
+        ),
+        autofocus: widget.autoFocus,
+        keyboardType: TextInputType.text,
+        textInputAction: TextInputAction.search,
+        onChanged: onSearchTextChanged,
+        onSubmitted: onSearchTextChanged,
+      ),
     );
   }
 

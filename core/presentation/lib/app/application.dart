@@ -1,10 +1,11 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:go_router/go_router.dart';
 import 'package:presentation/app/route_builder.dart';
+import 'package:presentation/feature/_global_app/cubit/global_app_cubit.dart';
 import 'package:presentation/feature/authentication/cubit/authentication_cubit.dart';
 import 'package:presentation/generated/l10n.dart';
 
@@ -23,6 +24,7 @@ class _ApplicationState extends State<Application> {
       _setupPlatformService();
     });
 
+    RouteBuilder.init();
   }
 
   void _setupPlatformService() async {
@@ -41,10 +43,11 @@ class _ApplicationState extends State<Application> {
       //* Only allow Global app state and Authenticate state here
       providers: [
         BlocProvider(create: (_) => AuthenticationCubit()),
+        BlocProvider(create: (_) => GlobalAppCubit()),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
-        routerConfig: GoRouter(routes: $appRoutes),
+        routerConfig: RouteBuilder.router,
         localizationsDelegates: const [
           S.delegate,
           GlobalMaterialLocalizations.delegate,

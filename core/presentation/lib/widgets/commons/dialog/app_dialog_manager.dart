@@ -5,13 +5,11 @@ import 'package:presentation/widgets/commons/dialog/alert_dialog_builder.dart';
 import 'package:presentation/widgets/commons/dialog/components/confirm_dialog.dart';
 import 'package:presentation/widgets/commons/dialog/components/input_dialog.dart';
 
-
 class AppDialogManager {
   AppDialogBuilder? _currentDialogBuilder;
   OverlayEntry? _dialogOverlay;
 
-  final GlobalKey _dialogKey =
-      GlobalKey();
+  final GlobalKey _dialogKey = GlobalKey();
 
   AppDialogManager._internal();
 

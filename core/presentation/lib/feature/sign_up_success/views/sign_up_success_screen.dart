@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
+import 'package:presentation/app/route_builder.dart';
 import 'package:presentation/base/base_screen.dart';
 import 'package:presentation/feature/sign_up_success/cubit/sign_up_success_cubit.dart';
 import 'package:presentation/generated/assets.gen.dart';
@@ -20,11 +21,17 @@ import 'package:timer_count_down/timer_controller.dart';
 
 part 'sign_up_success_listener.dart';
 
+class SignUpSuccessScreenExtra {
+  final String email;
+  final String userId;
+  SignUpSuccessScreenExtra(this.userId, this.email);
+}
+
 class SignUpSuccessScreen extends StatefulWidget {
-  final String userName;
+  final SignUpSuccessScreenExtra extra;
   const SignUpSuccessScreen({
     super.key,
-    required this.userName,
+    required this.extra,
   });
 
   @override
@@ -46,6 +53,14 @@ class _SignUpSuccessScreenState extends BaseScreenState<SignUpSuccessScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      cubit.onScreenInit(widget.extra);
+    });
+  }
+
+  @override
   void dispose() {
     _resendButtonValue.dispose();
     _timerValue.dispose();
@@ -54,10 +69,11 @@ class _SignUpSuccessScreenState extends BaseScreenState<SignUpSuccessScreen> {
 
   @override
   Widget builder(BuildContext context) {
+    final email = widget.extra.email;
     return BlocListener<SignUpSuccessCubit, SignUpSuccessState>(
       listener: listener,
       child: BasicLayout(
-        bottomNavigationBar: _buildButtonBack(),
+        bottomNavigationBar: _buildSignInButton(),
         padding: const EdgeInsets.all(AppDimensions.defaultPadding),
         child: SizedBox(
           width: double.infinity,
@@ -75,7 +91,7 @@ class _SignUpSuccessScreenState extends BaseScreenState<SignUpSuccessScreen> {
                   BodyXLText.defaultStyle.copyWith(fontWeight: FontWeight.w700),
             ),
             const Spacing(.5),
-            _buildDescription(widget.userName),
+            _buildDescription(email),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -101,11 +117,13 @@ class _SignUpSuccessScreenState extends BaseScreenState<SignUpSuccessScreen> {
     );
   }
 
-  Widget _buildButtonBack() {
+  Widget _buildSignInButton() {
     return Container(
       padding: AppDimensions.defaultBottomBarPadding,
       child: AppButton(
-          onPressed: onButtonBackPressed,
+          onPressed: () {
+            SignInRoute().go(context);
+          },
           type: AppButtonType.Primary,
           block: true,
           text: S.current.SIGN_UP_SUCCESS__BACK_TO_SIGN_IN),
@@ -119,7 +137,7 @@ class _SignUpSuccessScreenState extends BaseScreenState<SignUpSuccessScreen> {
           return TextButton(
               onPressed: value
                   ? () {
-                      cubit.onResendPressed(widget.userName);
+                      cubit.onResendPressed();
                     }
                   : null,
               child: BodyMText(

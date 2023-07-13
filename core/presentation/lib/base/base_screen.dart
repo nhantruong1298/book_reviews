@@ -1,9 +1,10 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart' hide ModalBottomSheetRoute;
 import 'package:flutter/services.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:presentation/exception/app.exception_handler.dart';
 import 'package:presentation/exception/app_exception.dart';
+import 'package:presentation/exception/app_exception_handler.dart';
 import 'package:presentation/injectors/all.dart';
 import 'package:presentation/resources/app_colors.dart';
 import 'package:presentation/resources/app_constants.dart';
@@ -86,12 +87,20 @@ abstract class BaseScreenState<T extends StatefulWidget> extends State<T>
     return Future.value(onPhysicalBackPress());
   }
 
+  RefreshCallback? get onScreenRefresh => null;
+
   @override
   // ignore: must_call_super
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: onWillPop,
-      child: builder(context),
+      child: (onScreenRefresh != null)
+          ? RefreshIndicator(
+              color: Colors.black,
+              backgroundColor: Colors.white,
+              onRefresh: onScreenRefresh!,
+              child: builder(context))
+          : builder(context),
     );
   }
 

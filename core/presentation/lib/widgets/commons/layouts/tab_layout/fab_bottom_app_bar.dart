@@ -1,28 +1,24 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:presentation/resources/app_colors.dart';
-import 'package:presentation/resources/app_dimensions.dart';
-import 'package:presentation/widgets/commons/spacing.dart';
+import 'package:presentation/resources/app_constants.dart';
 import 'package:presentation/widgets/commons/typography/body_text.dart';
 
+import '../../Spacing.dart';
 
-class FABBottomAppBarItem {
-  FABBottomAppBarItem({
-    this.icon,
-    this.title,
-    this.activeIcon,
-    this.disabled = false,
-  });
-  final Widget? icon;
-  final Widget? activeIcon;
-  final String? title;
-  final bool disabled;
+abstract class FABBottomAppBarItem {
+  double get inActiveIconSize => 22;
+  double get activeIconSize => 24;
+  bool get disabled => false;
+
+  Widget? icon;
+  Widget? activeIcon;
+  String? title;
 }
 
 class FABBottomAppBar extends StatefulWidget {
-  FABBottomAppBar({
-    Key? key,
-    this.items,
+  const FABBottomAppBar({
+    super.key,
+    this.items = const [],
     this.centerItemText,
     this.height = 60.0,
     this.iconSize = 24.0,
@@ -32,11 +28,10 @@ class FABBottomAppBar extends StatefulWidget {
     this.notchedShape,
     this.onTabSelected,
     this.index = 0,
-  }) : super(key: key) {
-    assert(items!.length > 1);
-  }
+  }) : assert(items.length > 1);
+
   final int index;
-  final List<FABBottomAppBarItem>? items;
+  final List<FABBottomAppBarItem> items;
   final String? centerItemText;
   final double height;
   final double iconSize;
@@ -57,9 +52,9 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> items = List.generate(widget.items!.length, (int index) {
+    List<Widget> items = List.generate(widget.items.length, (int index) {
       return _buildTabItem(
-        item: widget.items![index],
+        item: widget.items[index],
         index: index,
         onPressed: _updateIndex,
       );
@@ -75,7 +70,7 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: items,
       ),
-      color: widget.backgroundColor,
+      elevation: 0.0,
     );
   }
 
@@ -104,7 +99,7 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
     ValueChanged<int?>? onPressed,
   }) {
     final isSelected = widget.index == index;
-    Color? color = isSelected ? widget.selectedColor : widget.color;
+    Color? titleColor = isSelected ? widget.selectedColor : widget.color;
     final currentIcon = isSelected ? item.activeIcon! : item.icon!;
 
     return Expanded(
@@ -124,7 +119,7 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
                     left: 5,
                     right: 5,
                     child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 200),
+                      duration: AppConstants.defaultDuration,
                       height: isSelected ? 4 : 0,
                       width: double.infinity,
                       decoration: const BoxDecoration(
@@ -139,15 +134,11 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     currentIcon,
-                    const Spacing(.3),
+                    const Spacing(.1),
                     Flexible(
-                      child: AutoSizeText(
+                      child: BodyXXSText(
                         item.title ?? '',
-                        style: BodyXXSText.defaultStyle.copyWith(
-                          color: color,
-                        ),
-                        maxFontSize: AppDimensions.bodyXXSFontSize,
-                        minFontSize: AppDimensions.bodyXXXSFontSize,
+                        color: titleColor,
                         textAlign: TextAlign.center,
                         maxLines: 1,
                         overflow: TextOverflow.visible,

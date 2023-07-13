@@ -8,7 +8,6 @@ part 'icon_button.dart';
 part 'link_button.dart';
 part 'outlined_button.dart';
 
-
 class AppButton extends StatelessWidget {
   const AppButton({
     Key? key,
@@ -64,6 +63,8 @@ class AppButton extends StatelessWidget {
     Color color = AppColors.textLightColor;
     switch (type) {
       case AppButtonType.Primary:
+        color = AppColors.textLightColor;
+        break;
       case AppButtonType.Assertive:
       case AppButtonType.Information:
         color = AppColors.primaryLightColor;
