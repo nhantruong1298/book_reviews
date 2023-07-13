@@ -245,6 +245,7 @@ class _SocialIconButton extends StatelessWidget {
   // ignore: unused_element
   const _SocialIconButton({
     this.icon,
+    // ignore: unused_element
     this.color,
     this.onTap,
     required this.isHidden,

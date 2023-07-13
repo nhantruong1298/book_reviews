@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
-import 'package:data/networking/service_manager.dart';
 import 'package:domain/model/user/update_user_info.dart';
 import 'package:domain/model/user/user_info.dart';
 import 'package:domain/repository/user_repository.dart';
@@ -19,11 +18,11 @@ class ProfileCubit extends Cubit<ProfileState> {
   final AuthenticationCubit _authenticationCubit;
   late final UserRepository _userRepository;
   late final AppExceptionHandler _appExceptionHandler;
-  late final ServiceManager _serviceManager;
+  //late final ServiceManager _serviceManager;
   ProfileCubit(this._authenticationCubit) : super(const ProfileInitial()) {
     _userRepository = getIt<UserRepository>();
     _appExceptionHandler = getIt<AppExceptionHandler>();
-    _serviceManager = getIt<ServiceManager>();
+    //_serviceManager = getIt<ServiceManager>();
   }
 
   void onScreenInit() {

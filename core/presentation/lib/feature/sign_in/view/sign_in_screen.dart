@@ -36,10 +36,6 @@ class _SignInScreenState extends BaseScreenState<SignInScreen> {
 
   SignInCubit get signInCubit => BlocProvider.of<SignInCubit>(context);
 
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget builder(BuildContext context) {

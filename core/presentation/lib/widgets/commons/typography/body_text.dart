@@ -19,9 +19,10 @@ class BodyText extends StatelessWidget {
       this.textAlign = TextAlign.left,
       this.overflow,
       this.maxLines,
-      this.fallbackStyle}) : super(key: key);
+      this.fallbackStyle})
+      : super(key: key);
 
-  static  TextStyle get defaultStyle => const TextStyle(
+  static TextStyle get defaultStyle => const TextStyle(
       color: AppColors.textColor,
       fontSize: AppDimensions.bodyMFontSize,
       height: 1.5);

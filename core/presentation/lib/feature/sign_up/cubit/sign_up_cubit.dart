@@ -29,7 +29,7 @@ class SignUpCubit extends Cubit<SignUpState> {
 
       await _userRepository.updateUserInfo(UpdateUserInfoParams(
         id: signUpResult.userId,
-        displayName: '${surname} ${name}',
+        displayName: '$surname $name',
         email: signUpResult.email,
         surname: surname,
         name: name,

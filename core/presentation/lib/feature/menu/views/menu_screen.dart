@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:presentation/app/route_builder.dart';
 import 'package:presentation/base/base_screen.dart';
+import 'package:presentation/feature/dashboard/cubit/dashboard_cubit.dart';
+import 'package:presentation/feature/dashboard/views/dashboard_tab_item.dart';
 import 'package:presentation/feature/menu/cubit/menu_cubit.dart';
 import 'package:presentation/feature/menu/views/menu_item.dart';
 import 'package:presentation/generated/assets.gen.dart';
@@ -21,6 +23,8 @@ class MenuScreen extends StatefulWidget {
 class MenuScreenState extends BaseScreenState<MenuScreen> {
   MenuCubit get menuCubit => BlocProvider.of<MenuCubit>(context);
 
+  DashboardCubit get dashboardCubit => context.read<DashboardCubit>();
+
   @override
   Widget builder(BuildContext context) {
     return Scaffold(
@@ -31,18 +35,20 @@ class MenuScreenState extends BaseScreenState<MenuScreen> {
         elevation: 0,
         backgroundColor: AppColors.backgroundColor,
         leading: _ShowProfileButton(
-          onTap: () {},
+          onTap: () {
+            dashboardCubit.onIndexChanged(DashboardProfileTabItem.index);
+          },
         ),
       ),
       body: SafeArea(
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           const Spacing(.5),
-          MenuItem(
-            onTap: () {},
-            icon: Assets.images.orderIcon.path,
-            name: 'Nhận xét của bạn',
-          ),
-          const Spacing(1),
+          // MenuItem(
+          //   onTap: () {},
+          //   icon: Assets.images.orderIcon.path,
+          //   name: 'Nhận xét của bạn',
+          // ),
+          // const Spacing(1),
           MenuItem(
             onTap: () {},
             icon: Assets.images.emailIcon.path,
@@ -132,7 +138,7 @@ class _ShowProfileButton extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               BodyLText(
-                'Maya Maya',
+                '...',
                 style: BodyLText.defaultStyle.copyWith(
                   fontWeight: FontWeight.bold,
                   height: 1,

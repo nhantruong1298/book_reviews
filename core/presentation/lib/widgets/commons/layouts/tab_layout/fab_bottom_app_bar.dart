@@ -5,17 +5,14 @@ import 'package:presentation/widgets/commons/typography/body_text.dart';
 
 import '../../Spacing.dart';
 
-class FABBottomAppBarItem {
-  FABBottomAppBarItem({
-    this.icon,
-    this.title,
-    this.activeIcon,
-    this.disabled = false,
-  });
-  final Widget? icon;
-  final Widget? activeIcon;
-  final String? title;
-  final bool disabled;
+abstract class FABBottomAppBarItem {
+  double get inActiveIconSize => 22;
+  double get activeIconSize => 24;
+  bool get disabled => false;
+
+  Widget? icon;
+  Widget? activeIcon;
+  String? title;
 }
 
 class FABBottomAppBar extends StatefulWidget {
