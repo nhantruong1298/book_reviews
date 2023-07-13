@@ -87,7 +87,6 @@ class _ListBookItem extends StatelessWidget {
   final String? bookImage;
 
   const _ListBookItem({
-    super.key,
     required this.onTap,
     required this.bookName,
     required this.bookImage,

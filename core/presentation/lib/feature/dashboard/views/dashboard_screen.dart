@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:presentation/app/route_builder.dart';
 import 'package:presentation/base/base_screen.dart';
 import 'package:presentation/feature/dashboard/cubit/dashboard_cubit.dart';
-import 'package:presentation/generated/assets.gen.dart';
-import 'package:presentation/generated/extension.dart';
+import 'package:presentation/feature/dashboard/views/dashboard_tab_item.dart';
 import 'package:presentation/resources/app_colors.dart';
 import 'package:presentation/utils/size_config.dart';
 import 'package:presentation/widgets/commons/layouts/tab_layout/tab_layout.dart';
@@ -39,7 +37,7 @@ class _DashboardScreenState extends BaseScreenState<DashboardScreen>
     if (currentBackPressTime == null ||
         now.difference(currentBackPressTime!) > const Duration(seconds: 2)) {
       currentBackPressTime = now;
-      super.showSnackBar('',
+      showSnackBar('Nhấn lần nữa để thoát ứng dụng',
           textColor: AppColors.textLightColor,
           duration: const Duration(seconds: 2),
           color: AppColors.primaryColor500.withOpacity(.8));
@@ -63,38 +61,15 @@ class _DashboardScreenState extends BaseScreenState<DashboardScreen>
       vsync: this,
       initialIndex: 0,
     );
-
-    //WidgetsBinding.instance.addPostFrameCallback((_) {});
   }
 
   List<FABBottomAppBarItem> get _navBarsItems {
-    const double inActiveIconSize = 22;
-    const double activeIconSize = 24;
-
-    final navBarsItems = <FABBottomAppBarItem>[];
-    final Map<String, String> titlesAndIcons = {
-      'Home': Assets.images.homeIcon.path,
-      'Profile': Assets.images.profileIcon.path,
-      'Event': Assets.images.eventIcon.path,
-      'Menu': Assets.images.menuIcon.path,
-    };
-
-    titlesAndIcons
-        .forEach((title, icon) => navBarsItems.add(FABBottomAppBarItem(
-              icon: SvgPicture.asset(
-                AssetsGen.getRawString(icon),
-                width: inActiveIconSize,
-                height: inActiveIconSize,
-                color: AppColors.greyColor700,
-              ),
-              activeIcon: SvgPicture.asset(
-                AssetsGen.getRawString(icon),
-                width: activeIconSize,
-                height: activeIconSize,
-                color: AppColors.primaryColor500,
-              ),
-              title: title,
-            )));
+    final navBarsItems = <FABBottomAppBarItem>[
+      DashboardHomeTabItem(),
+      DashboardProfileTabItem(),
+      DashboardEventTabItem(),
+      DashboardMenuTabItem(),
+    ];
 
     return navBarsItems;
   }

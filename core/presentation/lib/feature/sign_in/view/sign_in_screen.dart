@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:presentation/app/route_builder.dart';
+import 'package:presentation/base/base_screen.dart';
 import 'package:presentation/feature/authentication/cubit/authentication_cubit.dart';
 import 'package:presentation/feature/sign_in/cubit/sign_in_cubit.dart';
 import 'package:presentation/generated/l10n.dart';
@@ -14,7 +15,6 @@ import 'package:presentation/widgets/commons/inputs/text_input_field.dart';
 import 'package:presentation/widgets/commons/layouts/basic_layout.dart';
 import 'package:presentation/widgets/commons/typography/body_text.dart';
 import 'package:presentation/widgets/commons/typography/heading_text.dart';
-import 'package:presentation/base/base_screen.dart';
 
 part 'sign_in_listener.dart';
 
@@ -36,10 +36,6 @@ class _SignInScreenState extends BaseScreenState<SignInScreen> {
 
   SignInCubit get signInCubit => BlocProvider.of<SignInCubit>(context);
 
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget builder(BuildContext context) {

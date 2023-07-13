@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:data/data_source/data_storage.dart';
 import 'package:data/entity/response/load_book_response.dart';
@@ -8,6 +10,7 @@ import 'package:data/networking/firebase_service/firebase_service.dart';
 import 'package:domain/repository/log_service.dart';
 import 'package:domain/model/user/update_user_info.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class ServiceManager {
   late final FireBaseService _fireBaseService;
@@ -30,6 +33,7 @@ class ServiceManager {
     _instance!._fireBaseService = FireBaseService(
       FirebaseAuth.instance,
       FirebaseFirestore.instance,
+      FirebaseStorage.instance,
       // _instance!._logService,
     );
 
@@ -81,5 +85,9 @@ class ServiceManager {
 
   Future<void> signOut() {
     return _fireBaseService.signOut();
+  }
+
+  Future<String> uploadUserImage(String userId,File file) {
+    return _fireBaseService.uploadUserImage(userId,file);
   }
 }

@@ -88,7 +88,6 @@ class _TabLayoutState extends State<TabLayout>
           }
           return SafeArea(
             top: false,
-            // maintainBottomViewPadding: false,
             child: TabBarView(
               controller: _tabController,
               children: widget.screens,
@@ -101,14 +100,11 @@ class _TabLayoutState extends State<TabLayout>
       ),
       bottomNavigationBar: _buildBottomNavigationBar(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      // floatingActionButton: _buildFab(snapshot,
-      // context), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 
   _onTabSelected(int index) {
     _tabController!.animateTo(index);
-    // _indexStream.add(index);
   }
 
   Widget _buildBottomNavigationBar() {

@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:data/entity/request/update_user_info_request.dart';
 import 'package:data/entity/response/load_book_response.dart';
@@ -9,14 +10,17 @@ import 'package:domain/exception/business_exception_code.dart';
 import 'package:domain/firestore_path/firestore_path.dart';
 import 'package:domain/model/user/update_user_info.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class FireBaseService {
   final FirebaseAuth _firebaseAuth;
-  final FirebaseFirestore _firestore;
+  final FirebaseFirestore _firebaseFirestore;
+  final FirebaseStorage _firebaseStorage;
 
   late final FirestorePath _firestorePath;
   //final LogService _logService;
-  FireBaseService(this._firebaseAuth, this._firestore) {
+  FireBaseService(
+      this._firebaseAuth, this._firebaseFirestore, this._firebaseStorage) {
     _firestorePath = FirestorePath();
   }
 
@@ -44,7 +48,7 @@ class FireBaseService {
   Future<List<LoadBookResponse>> loadBooks({required List<String> ids}) async {
     final result = <LoadBookResponse>[];
     for (final id in ids) {
-      final snapshot = await _firestore
+      final snapshot = await _firebaseFirestore
           .collection(_firestorePath.collection.books)
           .where(_firestorePath.book.id, isEqualTo: id)
           .get();
@@ -58,7 +62,7 @@ class FireBaseService {
 
   Future<List<LoadBookResponse>> loadTrendingBooks() async {
     final result = <LoadBookResponse>[];
-    final snapshot = await _firestore
+    final snapshot = await _firebaseFirestore
         .collection(_firestorePath.collection.books)
         .where(_firestorePath.book.trending, isEqualTo: true)
         .get();
@@ -72,7 +76,7 @@ class FireBaseService {
 
   Future<List<LoadBookResponse>> loadPopularBooks() async {
     final result = <LoadBookResponse>[];
-    final snapshot = await _firestore
+    final snapshot = await _firebaseFirestore
         .collection(_firestorePath.collection.books)
         .where(_firestorePath.book.popular, isEqualTo: true)
         .get();
@@ -85,7 +89,7 @@ class FireBaseService {
   }
 
   Future<LoadBookResponse?> loadBook(String id) async {
-    final snapshot = await _firestore
+    final snapshot = await _firebaseFirestore
         .collection(_firestorePath.collection.books)
         .where(_firestorePath.book.id, isEqualTo: id)
         .get();
@@ -97,7 +101,7 @@ class FireBaseService {
   }
 
   Future<void> updateUserInfo(UpdateUserInfoParams params) async {
-    await _firestore
+    await _firebaseFirestore
         .collection(_firestorePath.collection.userInfo)
         .doc(params.id)
         .set(UpdateUserInfoRequest(
@@ -125,20 +129,21 @@ class FireBaseService {
   }
 
   Future<LoadUserInfoResponse?> loadUserInfo(String userId) async {
-    final snapshot = await _firestore
+    final snapshot = await _firebaseFirestore
         .collection(_firestorePath.collection.userInfo)
         .doc(userId)
         .get();
     if (snapshot.data() != null) {
       return LoadUserInfoResponse.fromJson(snapshot.data()!);
     }
-    return null;
+    throw BusinessException(
+        businessExceptionCode: BusinessExceptionCode.USER_NOT_FOUND);
   }
 
   Future<List<LoadBookResponse>> searchBooks(String bookName) async {
     final response = <LoadBookResponse>[];
 
-    final snapshot = await _firestore
+    final snapshot = await _firebaseFirestore
         .collection(_firestorePath.collection.books)
         .where(_firestorePath.book.name, whereIn: [bookName]).get();
 
@@ -156,4 +161,32 @@ class FireBaseService {
       await _firebaseAuth.signOut();
     }
   }
+
+  Future<String> uploadUserImage(String userId, File file) async {
+    final currentUser = _firebaseAuth.currentUser;
+
+    if (currentUser != null && userId == currentUser.uid) {
+      final snapshot = await _firebaseStorage
+          .ref('user-image/')
+          .child('${_firebaseAuth.currentUser!.uid}/photo.jpg')
+          .putFile(file);
+
+      if (snapshot.state == TaskState.success) {
+        final downloadURL = await snapshot.ref.getDownloadURL();
+        return downloadURL;
+      }
+      throw BusinessException(
+          businessExceptionCode: BusinessExceptionCode.UNEXPECTED_ERROR);
+    }
+
+    throw BusinessException(
+        businessExceptionCode: BusinessExceptionCode.USER_NOT_FOUND);
+  }
+
+  // File changeFileNameOnlySync(File file, String newFileName) {
+  //   var path = file.path;
+  //   var lastSeparator = path.lastIndexOf(Platform.pathSeparator);
+  //   var newPath = path.substring(0, lastSeparator + 1) + newFileName;
+  //   return file.renameSync(newPath);
+  // }
 }

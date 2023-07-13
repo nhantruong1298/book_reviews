@@ -54,8 +54,14 @@ class _EditProfileScreenState extends BaseScreenState<EditProfileScreen> {
 
           final newTwitterURL =
               _formKey.currentState?.fields[TWITTER_FIELD]?.value as String;
+              
           editProfileCubit.onSaveButtonPressed(
-              userInfo!, newBio, newWebsite, newFacebookURL, newTwitterURL);
+            userInfo!,
+            newBio.trim(),
+            newWebsite.trim(),
+            newFacebookURL.trim(),
+            newTwitterURL.trim(),
+          );
         },
         text: "Xác nhận",
         textColor: AppColors.textLightColor,
