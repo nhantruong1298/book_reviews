@@ -1,13 +1,18 @@
 #!/bin/sh
 
 # The default execution directory of this script is the ci_scripts directory.
-cd $CI_WORKSPACE # change working directory to the root of your cloned repo.
+cd book_reviews # change working directory to the root of your cloned repo.
 
 # Install Flutter using git.
-git clone https://github.com/flutter/flutter.git --depth 1 -b stable $HOME/flutter
-export PATH="$PATH:$HOME/flutter/bin"
+#git clone https://github.com/flutter/flutter.git --depth 1 -b stable $HOME/flutter
+#export PATH="$PATH:$HOME/flutter/bin"
 
 # Install Flutter artifacts for iOS (--ios), or macOS (--macos) platforms.
+cd core/presentation && flutter pub get && cd ..
+cd data && flutter pub get && cd ..
+cd domain && flutter pub get && cd ..
+cd ../app &&
+
 flutter precache --ios
 
 # Install Flutter dependencies.
